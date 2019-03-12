@@ -1,0 +1,35 @@
+StoryLine:
+  ----Introduction Scene-----
+Traveler stumbles across an effective ghost town/village, can't seem to see in anyone else in town
+  ---Introduced via still images and text, plus ambient music---
+Traveler stumbles across small child with a companion (dog?) they are crying.
+
+  --Quest
+  Child sobbing explains that they were playing fetch with their pooch and the ball fell down the crumbling old well.
+  The child is afraid of the dark and wants you to go get it. Interact with well brings you to "start saferoom cell"
+  
+  --Cell Aesthetics (Well Bottom)
+    - Obscure 'glowing' barrel
+    - Starting weapon for pick up (basic melee)
+    - Flimsy Old interactable boards (interacting comments on their flimsiness, acts as a mob when weapon equipped. Can be hit to break         through)
+    
+  ---DUNGEON SCENE-----
+  Aiming to have a cell pool of randomly chosen dungeon rooms and 1 puzzle room before the Boss Arena
+  random dungeon 'battle rooms' have different mobs spawn aiming for around 6-8 per room depending possible??
+  
+  (Secondary Feature) If we have enough time, implement optional Mini Bosses for extra stats or P ups
+  
+  ---Puzzle Room-----
+  Three Pressure Plates needed to be put down to open door to Boss Battle Room, interactable environment exists within that
+  Safe Zone no mobs
+  
+  ---Boss Battle-----
+  Ball in centre of room, once Player is close, script scene and Frog swallows ball, player enters Boss Arena and doors close behind them
+  
+  Giant Irradiated Frog
+  with Attack Stages based around the Arena cell tbd
+  
+  On Death drops Ball and keycard which opens mechanical door to dungeon, on exit fade to black and 'open' to starting room to climb up the well.
+  
+  On handing in the ball, child comments on how it isn't their's. End
+  
