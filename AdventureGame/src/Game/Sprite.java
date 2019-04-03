@@ -11,7 +11,10 @@ public class Sprite {
 	protected int y_pos;
 	protected int width;
 	protected int height;
+	protected int right;
+	protected int bottom;
 	protected boolean visible;
+	
 	protected Image image;
 	
 	public Sprite(int x, int y) {
@@ -30,6 +33,8 @@ protected void loadImage(String imageName) {
 	protected void getImageDim() {
 		width = image.getWidth(null);
 		height = image.getHeight(null);
+		right = x_pos + width ;
+		bottom = y_pos + height ;
 	}
 	public Image getImage() {
 		return image;
@@ -40,6 +45,12 @@ protected void loadImage(String imageName) {
 	}
 	public int gety_pos() {
 		return y_pos;
+	}
+	public int getright() {
+		return right;
+	}
+	public int getbottom() {
+		return bottom;
 	}
 	public boolean isVisible() {
 		return visible;

@@ -17,8 +17,8 @@ public class GameUI extends JPanel implements ActionListener {
 	
 	private Timer timer;
 	private int DELAY = 10;
-	private int Start_X = 40;
-	private int Start_Y = 60;
+	private int Start_X = 240;
+	private int Start_Y = 300;
 	private int AnimCount = 1;
 	private PC pC;
 	private Collision_Obj ob;
@@ -65,14 +65,12 @@ public class GameUI extends JPanel implements ActionListener {
 		updatepC();
 		repaint();
 	}
-	public boolean checkCollision() {
+	public void checkCollision() {
 		Rectangle r1 = pC.getBoundary();
 		Rectangle r2 = ob.getBoundary();
 		if (r1.intersects(r2)) {
-			return true;
-		} else {
-			return false;
-		}
+			pC.CollisionProcess(ob.gety_pos(),ob.getbottom(),ob.getx_pos(),ob.getright());
+		} 
 	}
 	private void updatepC() {
 		if(AnimCount < 21) {
@@ -80,11 +78,9 @@ public class GameUI extends JPanel implements ActionListener {
 			}else {
 				AnimCount = 0;
 			}
+
+		checkCollision();
 		pC.move(AnimCount);
-		if (checkCollision()) {
-			pC.CollisionBlock();
-		}
-		
 	}
 	private class TAdapter extends KeyAdapter{
 		@Override

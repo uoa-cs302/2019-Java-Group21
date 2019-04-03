@@ -15,7 +15,9 @@ public class Entity extends Sprite{
 	protected boolean dirchange;
 	protected int dx;
 	protected int dy;
-	private boolean collision;
+	protected int dx_temp;
+	protected int dy_temp;
+	protected boolean collision;
 	private List<String> sprite;
 	
 	public Entity(int x, int y) {
@@ -121,9 +123,37 @@ public class Entity extends Sprite{
 				
 			}
 		//else moving
-		
+		//collision handling
+
 		x_pos += dx;
+		right = x_pos + width;
 		y_pos += dy;
+		bottom = y_pos + height;
+		
+		dx = dx_temp;
+		dy  =dy_temp;
+		
 	}
+	protected int check_collisiondir_Hoz(int left2,int right2 ) {
+
+		if (this.x_pos == right2 - 4) {
+			return 1;
+		} else if (this.right == left2 + 4) {
+			return 2;
+		} else {
+			return 0;
+		}
+	}
+	protected int check_collisiondir_Vert(int top2,int bottom2 ) {
+
+		if (this.y_pos == bottom2 -4) {
+			return 1;
+		} else if (this.bottom == top2 + 4) {
+			return 2;
+		} else {
+			return 0;
+		}
+	}
+	
 
 }
