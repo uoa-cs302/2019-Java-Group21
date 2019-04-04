@@ -18,10 +18,22 @@ public class Entity extends Sprite{
 	protected int dx_temp;
 	protected int dy_temp;
 	protected boolean collision;
-	private List<String> sprite;
+	protected String down0;
+	protected String down1;
+	protected String down2;
+	protected String left0;
+	protected String left1;
+	protected String left2;
+	protected String right0;
+	protected String right1;
+	protected String right2;
+	protected String up0;
+	protected String up1;
+	protected String up2;
 	
 	public Entity(int x, int y) {
 	super(x,y);
+	
 	}
 	
 	
@@ -41,16 +53,16 @@ public class Entity extends Sprite{
 		if (moving == false) {
 			switch (direction) {
 			case 0:
-				loadImage("src/Image/tile001.png");
+				loadImage(down1);
 				break;
 			case 1:
-				loadImage("src/Image/tile004.png");
+				loadImage(left1);
 				break;
 			case 2:
-				loadImage("src/Image/tile007.png");
+				loadImage(right1);
 				break;
 			case 3:
-				loadImage("src/Image/tile010.png");
+				loadImage(up1);
 				break;
 				}
 			} else {
@@ -58,64 +70,64 @@ public class Entity extends Sprite{
 				case 0:
 					switch(frame_count % 21) {
 					case 21:
-						loadImage("src/Image/tile000.png");
+						loadImage(down0);
 					break;
 					case 14:
-						loadImage("src/Image/tile001.png");
+						loadImage(down1);
 						break;
 					case 7:
-						loadImage("src/Image/tile002.png");
+						loadImage(down2);
 						break;
 					case 0:
-						loadImage("src/Image/tile001.png");
+						loadImage(down1);
 						break;
 					}
 					break;
 				case 1:
 					switch(frame_count % 21) {
 					case 21:
-						loadImage("src/Image/tile003.png");
+						loadImage(left0);
 					break;
 					case 14:
-						loadImage("src/Image/tile004.png");
+						loadImage(left1);
 						break;
 					case 7:
-						loadImage("src/Image/tile005.png");
+						loadImage(left2);
 						break;
 					case 0:
-						loadImage("src/Image/tile004.png");
+						loadImage(left1);
 						break;
 					}
 					break;
 				case 2:
 					switch(frame_count % 21) {
 					case 21:
-						loadImage("src/Image/tile006.png");
+						loadImage(right0);
 					break;
 					case 14:
-						loadImage("src/Image/tile007.png");
+						loadImage(right1);
 						break;
 					case 7:
-						loadImage("src/Image/tile008.png");
+						loadImage(right2);
 						break;
 					case 0:
-						loadImage("src/Image/tile007.png");
+						loadImage(right1);
 						break;
 					}
 					break;
 				case 3:
 					switch(frame_count % 21) {
 					case 21:
-						loadImage("src/Image/tile009.png");
+						loadImage(up0);
 					break;
 					case 14:
-						loadImage("src/Image/tile010.png");
+						loadImage(up1);
 						break;
 					case 7:
-						loadImage("src/Image/tile011.png");
+						loadImage(up2);
 						break;
 					case 0:
-						loadImage("src/Image/tile010.png");
+						loadImage(up1);
 						break;
 					}
 					break;

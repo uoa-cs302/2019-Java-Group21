@@ -29,6 +29,10 @@ protected void loadImage(String imageName) {
 		ImageIcon ii = new ImageIcon(imageName) ;
 		image = ii.getImage();
 	}
+protected void loadImage(Image imageName) {
+	
+	image = imageName;
+}
 	
 	protected void getImageDim() {
 		width = image.getWidth(null);

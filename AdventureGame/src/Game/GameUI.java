@@ -22,6 +22,9 @@ public class GameUI extends JPanel implements ActionListener {
 	private int AnimCount = 1;
 	private PC pC;
 	private Collision_Obj ob;
+	private Giant_Rat rat1;
+	private Giant_Rat rat2;
+	private Giant_Rat rat3;
 	
 	public GameUI() {
 		initTestmap();
@@ -35,6 +38,9 @@ public class GameUI extends JPanel implements ActionListener {
 		
 		pC = new PC(Start_X,Start_Y);
 		ob = new Collision_Obj(300,300,"src/Image/tile001.png");
+		rat1 = new Giant_Rat(1000,800);
+		rat2 = new Giant_Rat(1000,50);
+		rat3 = new Giant_Rat(1000,200);
 		timer = new Timer(DELAY,this);
 		timer.start();
 	}
@@ -42,29 +48,32 @@ public class GameUI extends JPanel implements ActionListener {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		doObjDrawing(g);
-		dopCDrawing(g);
+		doEntityDrawing(g,pC);
+		doEntityDrawing(g,rat1);
+		doEntityDrawing(g,rat2);
+		doEntityDrawing(g,rat3);
 		
 		
 		Toolkit.getDefaultToolkit().sync();
 	}
 	
-	private void dopCDrawing(Graphics g) {
+	private void doEntityDrawing(Graphics g,Entity x) {
 		Graphics2D g2d = (Graphics2D) g;
 		
-		g2d.drawImage(pC.getImage(), pC.getx_pos(), pC.gety_pos(), this);
+		g2d.drawImage(x.getImage(), x.getx_pos(), x.gety_pos(), this);
 	}
 	
-	private void doObjDrawing(Graphics g) {
-		Graphics2D g2d = (Graphics2D) g;
-	
-		g2d.drawImage(ob.getImage(), ob.getx_pos(), ob.gety_pos(), this);
-	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		updatepC();
+		updateEntity(pC);
+		updateEntityAi(rat1);
+		updateEntityAi(rat2);
+		updateEntityAi(rat3);
 		repaint();
 	}
+	
+	//need to pass in two objects so we can loop all collision checks or make a separate
+	//method for ai etc.
 	public void checkCollision() {
 		Rectangle r1 = pC.getBoundary();
 		Rectangle r2 = ob.getBoundary();
@@ -72,7 +81,7 @@ public class GameUI extends JPanel implements ActionListener {
 			pC.CollisionProcess(ob.gety_pos(),ob.getbottom(),ob.getx_pos(),ob.getright());
 		} 
 	}
-	private void updatepC() {
+	private void updateEntity(Entity x) {
 		if(AnimCount < 21) {
 			AnimCount++;
 			}else {
@@ -80,7 +89,18 @@ public class GameUI extends JPanel implements ActionListener {
 			}
 
 		checkCollision();
-		pC.move(AnimCount);
+		x.move(AnimCount);
+	}
+	private void updateEntityAi(Giant_Rat x) {
+		if(AnimCount < 21) {
+			AnimCount++;
+			}else {
+				AnimCount = 0;
+			}
+
+		x.AiUpdate(pC);
+		
+		x.move(AnimCount);
 	}
 	private class TAdapter extends KeyAdapter{
 		@Override
