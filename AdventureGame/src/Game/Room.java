@@ -9,6 +9,10 @@ public class Room {
 	private List<Entity> entityList= new ArrayList<Entity>();
 	private List<Sprite> spriteList= new ArrayList<Sprite>();
 	
+	public Room(int number) {
+		this.roomNumber = number;
+	}
+	
 	public void addEntityList(Entity entity) {
 		this.entityList.add(entity);
 	}
@@ -16,14 +20,5 @@ public class Room {
 	public void addSpriteList(Sprite sprite) {
 		this.spriteList.add(sprite);
 	}
-	
-	public int getRoomNumber() {
-		return roomNumber;
-	}
-	public void setRoomNumber(int roomNumber) {
-		this.roomNumber = roomNumber;
-	}
-	
-	
 	
 }
