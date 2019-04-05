@@ -1,10 +1,10 @@
 package Game;
 
-public class Giant_Rat extends Entity {
+public class GiantRat extends Entity {
 	
 
 	
-	public Giant_Rat(int x,int y){
+	public GiantRat(int x,int y){
 		super(x,y);
 			
 		initRat();
