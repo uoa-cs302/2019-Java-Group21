@@ -10,13 +10,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 
-public class GameController extends JPanel implements ActionListener {
+public class GameController extends JPanel  implements ActionListener {
 	
 	private Timer timer;
 	private int DELAY = 10;
@@ -24,45 +25,34 @@ public class GameController extends JPanel implements ActionListener {
 	private int Start_Y = 300;
 	private int AnimCount = 1;
 	private PC pC;
-	private ArrayList<Entity> EntityList = new ArrayList<Entity>();
-	private ArrayList<Sprite> SpriteList = new ArrayList<Sprite>();
 	private Dungeon GameInst = new Dungeon();
+	private GameView gameView;
+	private int State = 0;
 	
 	public GameController() {
+		gameView = new GameView();
+		
+		InitGame();
+		
+	}
+	public void SetState() {
+		State = 0;
+		
+	}
+	
+	private void InitGame() {
+		
 		GameInst.generateDungeon();
-
-	}
-	
-	private void initTestmap() {
-		
-		addKeyListener(new TAdapter());
-		setBackground(Color.BLACK);
-		setFocusable(true);
-		
-		pC = new PC(Start_X,Start_Y);
-		timer = new Timer(DELAY,this);
+		this.timer = new Timer(DELAY,this);
 		timer.start();
+		gameView.addKeyListener(new TAdapter());
 	}
 	
-	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		doEntityDrawing(g,pC);
-		
-		
-		Toolkit.getDefaultToolkit().sync();
-	}
-	
-	private void doEntityDrawing(Graphics g,Sprite x) {
-		Graphics2D g2d = (Graphics2D) g;
-		
-		g2d.drawImage(x.getImage(), x.getx_pos(), x.gety_pos(), this);
-	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		updateEntity(pC);
-		repaint();
+		gameView.repaint();
 	}
 	
 	//need to pass in two objects so we can loop all collision checks or make a separate
@@ -81,10 +71,9 @@ public class GameController extends JPanel implements ActionListener {
 				AnimCount = 0;
 			}
 
-		checkCollision();
 		x.move(AnimCount);
 	}
-	private void updateEntityAi(Giant_Rat x) {
+	private void updateEntityAi(Entity x) {
 		if(AnimCount < 21) {
 			AnimCount++;
 			}else {
@@ -96,6 +85,7 @@ public class GameController extends JPanel implements ActionListener {
 		x.move(AnimCount);
 	}
 	private class TAdapter extends KeyAdapter{
+
 		@Override
 		public void keyReleased(KeyEvent e) {
 			pC.keyReleased(e);

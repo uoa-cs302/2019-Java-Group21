@@ -12,7 +12,7 @@ public class Gameexec extends JFrame {
     
     private void initUI() {
         
-        add(new GameUI());
+        add(new GameController());
         
         setSize(1400, 768);
         setResizable(false);

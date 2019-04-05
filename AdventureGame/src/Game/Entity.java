@@ -198,5 +198,34 @@ public void CollisionProcess(int top,int bottom,int left, int right) {
 		}
 	}
 	
+	public void AiUpdate(Entity target) {
+		int xdiff;
+		int ydiff;
+		
+		xdiff = target.getx_pos() - this.x_pos;
+		ydiff = target.gety_pos() - this.y_pos;
+		moving = true;
+
+			
+		if(ydiff>0) {
+			direction = 0;
+			dirchange = true;
+			dy = 1;
+		}else {
+			direction = 3;
+			dirchange = true;
+			dy = -1;
+		}
+		if (xdiff>0) {
+			direction = 2;
+			dirchange = true;
+			dx = 1;
+		}else {
+			direction = 1;
+			dirchange = true;
+			dx = -1;
+		}
+	}
+	
 
 }
