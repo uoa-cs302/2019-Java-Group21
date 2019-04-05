@@ -121,35 +121,6 @@ public class PC extends Entity {
 	public void setCollided(boolean a) {
 		collision = a;
 	}
-	public void CollisionProcess(int top,int bottom,int left, int right) {
-		
-		switch (this.check_collisiondir_Hoz(left, right)) {
-		case 1:
-			if(dx < 0) {
-				dx = 0;
-			}
-			break;
-		case 2:
-			if(dx > 0) {
-				dx = 0;
-			}
-			break;
-		}
-		switch(this.check_collisiondir_Vert( top, bottom)) {
-		case 1:
-			if(dy < 0) {
-				dx_temp = dy;
-				dy = 0;
-			}
-			break;
-		case 2:
-			if(dy > 0) {
-				dx_temp = dy;
-				dy = 0;
-			}
-			break;
-		}
-
-	}
+	
 
 }

@@ -146,6 +146,37 @@ public class Entity extends Sprite{
 		dy  =dy_temp;
 		
 	}
+	
+public void CollisionProcess(int top,int bottom,int left, int right) {
+		
+		switch (this.check_collisiondir_Hoz(left, right)) {
+		case 1:
+			if(dx < 0) {
+				dx = 0;
+			}
+			break;
+		case 2:
+			if(dx > 0) {
+				dx = 0;
+			}
+			break;
+		}
+		switch(this.check_collisiondir_Vert( top, bottom)) {
+		case 1:
+			if(dy < 0) {
+				dx_temp = dy;
+				dy = 0;
+			}
+			break;
+		case 2:
+			if(dy > 0) {
+				dx_temp = dy;
+				dy = 0;
+			}
+			break;
+		}
+
+	}
 	protected int check_collisiondir_Hoz(int left2,int right2 ) {
 
 		if (this.x_pos == right2 - 4) {
