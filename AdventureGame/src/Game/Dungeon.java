@@ -19,10 +19,6 @@ public class Dungeon {
 		room1.addEntityList(player);
 	}
 	
-	
-	
-	
-	
 	public List<Room> getRoomList() {
 		return this.rooms;
 	}
