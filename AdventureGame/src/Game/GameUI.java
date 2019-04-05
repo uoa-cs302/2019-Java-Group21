@@ -3,12 +3,15 @@ package Game;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.List;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -21,10 +24,8 @@ public class GameUI extends JPanel implements ActionListener {
 	private int Start_Y = 300;
 	private int AnimCount = 1;
 	private PC pC;
-	//private Collision_Obj ob;
-	//private Giant_Rat rat1;
-	//private Giant_Rat rat2;
-	//private Giant_Rat rat3;
+	private ArrayList<Entity> EntityList = new ArrayList<Entity>();
+	private ArrayList<Sprite> SpriteList = new ArrayList<Sprite>();
 	
 	public GameUI() {
 		initTestmap();
@@ -37,10 +38,6 @@ public class GameUI extends JPanel implements ActionListener {
 		setFocusable(true);
 		
 		pC = new PC(Start_X,Start_Y);
-		//ob = new Collision_Obj(300,300,"src/Image/tile001.png");
-		//rat1 = new Giant_Rat(1000,800);
-		//rat2 = new Giant_Rat(1000,50);
-		//rat3 = new Giant_Rat(1000,200);
 		timer = new Timer(DELAY,this);
 		timer.start();
 	}
@@ -49,9 +46,6 @@ public class GameUI extends JPanel implements ActionListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		doEntityDrawing(g,pC);
-		//doEntityDrawing(g,rat1);
-		//doEntityDrawing(g,rat2);
-		//doEntityDrawing(g,rat3);
 		
 		
 		Toolkit.getDefaultToolkit().sync();
@@ -66,9 +60,6 @@ public class GameUI extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		updateEntity(pC);
-		//updateEntityAi(rat1);
-		//updateEntityAi(rat2);
-		//updateEntityAi(rat3);
 		repaint();
 	}
 	
