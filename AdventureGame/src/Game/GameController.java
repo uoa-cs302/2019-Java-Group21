@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 
-public class GameUI extends JPanel implements ActionListener {
+public class GameController extends JPanel implements ActionListener {
 	
 	private Timer timer;
 	private int DELAY = 10;
@@ -26,9 +26,11 @@ public class GameUI extends JPanel implements ActionListener {
 	private PC pC;
 	private ArrayList<Entity> EntityList = new ArrayList<Entity>();
 	private ArrayList<Sprite> SpriteList = new ArrayList<Sprite>();
+	private Dungeon GameInst = new Dungeon();
 	
-	public GameUI() {
-		initTestmap();
+	public GameController() {
+		GameInst.generateDungeon();
+
 	}
 	
 	private void initTestmap() {
