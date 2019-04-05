@@ -59,10 +59,10 @@ protected void loadImage(Image imageName) {
 	public boolean isVisible() {
 		return visible;
 		}
-		public void setVisible(boolean visible) {
-			this.visible = visible;
-		}
-		protected Rectangle getBoundary() {
-			return new Rectangle(x_pos,y_pos,width,height);
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+		}	
+	protected Rectangle getBoundary() {
+		return new Rectangle(x_pos,y_pos,width,height);
 		}
 }

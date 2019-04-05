@@ -21,10 +21,10 @@ public class GameUI extends JPanel implements ActionListener {
 	private int Start_Y = 300;
 	private int AnimCount = 1;
 	private PC pC;
-	private Collision_Obj ob;
-	private Giant_Rat rat1;
-	private Giant_Rat rat2;
-	private Giant_Rat rat3;
+	//private Collision_Obj ob;
+	//private Giant_Rat rat1;
+	//private Giant_Rat rat2;
+	//private Giant_Rat rat3;
 	
 	public GameUI() {
 		initTestmap();
@@ -37,10 +37,10 @@ public class GameUI extends JPanel implements ActionListener {
 		setFocusable(true);
 		
 		pC = new PC(Start_X,Start_Y);
-		ob = new Collision_Obj(300,300,"src/Image/tile001.png");
-		rat1 = new Giant_Rat(1000,800);
-		rat2 = new Giant_Rat(1000,50);
-		rat3 = new Giant_Rat(1000,200);
+		//ob = new Collision_Obj(300,300,"src/Image/tile001.png");
+		//rat1 = new Giant_Rat(1000,800);
+		//rat2 = new Giant_Rat(1000,50);
+		//rat3 = new Giant_Rat(1000,200);
 		timer = new Timer(DELAY,this);
 		timer.start();
 	}
@@ -49,15 +49,15 @@ public class GameUI extends JPanel implements ActionListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		doEntityDrawing(g,pC);
-		doEntityDrawing(g,rat1);
-		doEntityDrawing(g,rat2);
-		doEntityDrawing(g,rat3);
+		//doEntityDrawing(g,rat1);
+		//doEntityDrawing(g,rat2);
+		//doEntityDrawing(g,rat3);
 		
 		
 		Toolkit.getDefaultToolkit().sync();
 	}
 	
-	private void doEntityDrawing(Graphics g,Entity x) {
+	private void doEntityDrawing(Graphics g,Sprite x) {
 		Graphics2D g2d = (Graphics2D) g;
 		
 		g2d.drawImage(x.getImage(), x.getx_pos(), x.gety_pos(), this);
@@ -66,19 +66,19 @@ public class GameUI extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		updateEntity(pC);
-		updateEntityAi(rat1);
-		updateEntityAi(rat2);
-		updateEntityAi(rat3);
+		//updateEntityAi(rat1);
+		//updateEntityAi(rat2);
+		//updateEntityAi(rat3);
 		repaint();
 	}
 	
 	//need to pass in two objects so we can loop all collision checks or make a separate
 	//method for ai etc.
-	public void checkCollision() {
-		Rectangle r1 = pC.getBoundary();
-		Rectangle r2 = ob.getBoundary();
+	public void checkCollision(Entity sp1,Sprite sp2) {
+		Rectangle r1 = sp1.getBoundary();
+		Rectangle r2 = sp2.getBoundary();
 		if (r1.intersects(r2)) {
-			pC.CollisionProcess(ob.gety_pos(),ob.getbottom(),ob.getx_pos(),ob.getright());
+			sp1.CollisionProcess(sp2.gety_pos(),sp2.getbottom(),sp2.getx_pos(),sp2.getright());
 		} 
 	}
 	private void updateEntity(Entity x) {
