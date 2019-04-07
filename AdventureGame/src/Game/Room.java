@@ -20,5 +20,9 @@ public class Room {
 	public void addSpriteList(Sprite sprite) {
 		this.spriteList.add(sprite);
 	}
+
+	public int getRoomNumber() {
+		return roomNumber;
+	}
 	
 }

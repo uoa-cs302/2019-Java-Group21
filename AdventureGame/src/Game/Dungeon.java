@@ -24,6 +24,7 @@ public class Dungeon {
 		Room tutorial = new Room(0);
 		PC player = new PC(500, 600);
 		tutorial.addEntityList(player);
+		rooms.add(tutorial);
 	}
 	
 	private void createRoomWell(){
@@ -31,7 +32,11 @@ public class Dungeon {
 		PC player = new PC(500, 600);
 		well.addEntityList(player);
 		Door door = new Door(700, 500);
-		rooms.add(room1);
+		door.setSpawnX(300);
+		door.setSpawnY(400);
+		door.setRoom(2);
+		well.addSpriteList(door);
+		rooms.add(well);
 	}
 	
 	private void createRoomOne(){
@@ -41,10 +46,10 @@ public class Dungeon {
 		rooms.add(room1);
 	}
 	
-	private void createHallwayOne(){
+	private void createLeftHallway(){
 		switch(difficulty) {
 		  case 0:// Easy difficulty
-			  roomOne = new Room(3);
+			  Room leftRoomOne = new Room(3);
 			  
 			  break;
 		  case 1:// Medium difficulty
@@ -56,7 +61,7 @@ public class Dungeon {
 		}
 	}
 	
-	private void createHallwayTwo(){
+	private void createRightHallway(){
 		
 	}
 	

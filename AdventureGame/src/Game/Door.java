@@ -5,18 +5,18 @@ public class Door extends Sprite{
 	
 	private int spawnX;
 	private int spawnY;
-	private Room load;
+	private int room;
 	
 	public Door (int x, int y) {
 		super(x,y);
 	}
-
-	public Room getRoom() {
-		return load;
+	
+	public int getRoom() {
+		return room;
 	}
 
-	public void setRoom(Room newRoom) {
-		this.load = newRoom;
+	public void setRoom(int room) {
+		this.room = room;
 	}
 	
 	public int getSpawnY() {
