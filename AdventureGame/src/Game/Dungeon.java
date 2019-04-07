@@ -897,17 +897,17 @@ public class Dungeon {
 		room.addEntityList(spider1);
 		GiantSpider spider2 = new GiantSpider(300, 400);
 		room.addEntityList(spider2);
-		GiantSpider spider2 = new GiantSpider(300, 400);
-		room.addEntityList(spider2);
+		GiantSpider spider3 = new GiantSpider(300, 400);
+		room.addEntityList(spider3);
 	}
 
 	private void createRoomRightThree(Room room){
 		GiantRat rat1 = new GiantRat(240, 300);
 		room.addEntityList(rat1);
-		GiantRat rat1 = new GiantRat(240, 300);
-		room.addEntityList(rat1);
-		GiantRat rat1 = new GiantRat(240, 300);
-		room.addEntityList(rat1);
+		GiantRat rat2 = new GiantRat(240, 300);
+		room.addEntityList(rat2);
+		GiantRat rat3 = new GiantRat(240, 300);
+		room.addEntityList(rat3);
 	}
 
 	private void createRoomPuzzle(){
@@ -926,7 +926,7 @@ public class Dungeon {
 	}
 
 	private void createRoomBoss(){
-		Room roomBoss = new Room();
+		Room roomBoss = new Room(7 + 2*difficulty);
 		rooms.add(roomBoss);
 	}
 
