@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 
 
 
-public class GameView extends JPanel implements ActionListener {
+public class GameView extends JPanel {
 	
 	public GameView() {
 		
@@ -43,10 +43,5 @@ public class GameView extends JPanel implements ActionListener {
 		Graphics2D g2d = (Graphics2D) g;
 		
 		g2d.drawImage(x.getImage(), x.getx_pos(), x.gety_pos(), this);
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent st) {
-		
 	}
 }
