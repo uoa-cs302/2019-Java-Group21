@@ -21,23 +21,17 @@ public class GameController implements ActionListener {
 	private PC pC;
 	private Dungeon GameInst;
 	private GameView gameView;
-	private int State = 0;
+	private GameModel gameModel;
 	
 	public GameController(GameModel model, GameView view) {
-		
+		this.gameModel = model;
+		this.gameView = view;
 		InitGame();
 		
 	}
 	
-	public void SetState() {
-		State = 0;
-		
-	}
-	
 	private void InitGame() {
-
 		
-		GameInst.generateDungeon();
 		this.timer = new Timer(DELAY,this);
 		timer.start();
 		gameView.addKeyListener(new TAdapter());
