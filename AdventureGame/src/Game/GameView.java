@@ -22,11 +22,6 @@ public class GameView extends JPanel {
 	}
 	
 	private void initStartMenu() {
-		JButton Start = new JButton("Start");
-		JLabel Title = new JLabel("Well of Opportunity");
-		
-		add(Title);
-		add(Start);
 		
 	}
 	
