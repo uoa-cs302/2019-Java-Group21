@@ -1,5 +1,6 @@
 package Game;
 
+import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,11 +23,29 @@ public class GameController implements ActionListener {
 	private Dungeon GameInst;
 	private GameView gameView;
 	private GameModel gameModel;
+	private Graphics g;
 	
 	public GameController(GameModel model, GameView view) {
 		this.gameModel = model;
 		this.gameView = view;
-		InitGame();
+		
+		gameView.getStartScreen().setButtonListener(new ScreenListener() {
+			public void actionPerformed() {
+				InitGame();
+				gameView.drawGameMenu();
+				gameView.addKeyListener(new KeyAdapter() {
+					
+					public void keyReleased(KeyEvent e) {
+						pC.keyReleased(e);
+					}
+
+					public void keyPressed(KeyEvent e){
+						pC.keyPressed(e);
+					}
+				});
+			}
+		});
+
 		
 	}
 	
@@ -34,14 +53,16 @@ public class GameController implements ActionListener {
 		
 		this.timer = new Timer(DELAY,this);
 		timer.start();
-		gameView.addKeyListener(new TAdapter());
+		gameView.getGameScreen().addKeyListener(new TAdapter());
+		// for testing
+		pC = new PC(Start_X,Start_Y);
 	}
 	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		updateEntity(pC);
-		gameView.repaint();
+		gameView.getGameScreen().setDrawTarget(pC);
 	}
 	
 	//need to pass in two objects so we can loop all collision checks or make a separate
@@ -75,14 +96,7 @@ public class GameController implements ActionListener {
 	}
 	private class TAdapter extends KeyAdapter{
 
-		@Override
-		public void keyReleased(KeyEvent e) {
-			pC.keyReleased(e);
-		}
-		@Override
-		public void keyPressed(KeyEvent e) {
-			pC.keyPressed(e);
-		}
+		
 	}
 
 }
