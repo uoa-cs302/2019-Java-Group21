@@ -53,7 +53,6 @@ public class GameController implements ActionListener {
 		
 		this.timer = new Timer(DELAY,this);
 		timer.start();
-		gameView.getGameScreen().addKeyListener(new TAdapter());
 		// for testing
 		pC = new PC(Start_X,Start_Y);
 	}
