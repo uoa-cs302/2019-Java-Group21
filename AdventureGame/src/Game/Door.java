@@ -2,7 +2,6 @@ package Game;
 
 public class Door extends Sprite{
 
-	
 	private int spawnX;
 	private int spawnY;
 	private int room;

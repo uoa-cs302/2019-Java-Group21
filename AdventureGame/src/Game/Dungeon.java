@@ -12,7 +12,11 @@ public class Dungeon {
 	}
 
 	int difficulty;
-	public List<Room> rooms = new ArrayList<Room>();
+	private List<Room> rooms = new ArrayList<Room>();
+	
+	public Room getDungeonIndex(int index) {
+		return this.rooms.get(index);
+	}
 
 	public void generateDungeon() {
 		createRoomTutorial();

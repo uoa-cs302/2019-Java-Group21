@@ -13,6 +13,10 @@ public class Room {
 		this.roomNumber = number;
 	}
 	
+	public List<Sprite> getSpriteList(){
+		return this.spriteList;
+	}
+	
 	public void addEntityList(Entity entity) {
 		this.entityList.add(entity);
 	}

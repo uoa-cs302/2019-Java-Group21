@@ -7,43 +7,43 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Timer;
 
 
 public class GameController implements ActionListener {
-	
+
 	private Timer timer;
 	private int DELAY = 10;
 	private int Start_X = 240;
 	private int Start_Y = 300;
 	private int AnimCount = 1;
 	private PC pC;
-	private Dungeon GameInst;
 	private GameView gameView;
 	private GameModel gameModel;
-	
+
 	public GameController(GameModel model, GameView view) {
 		this.gameModel = model;
 		this.gameView = view;
 		InitGame();
-		
+
 	}
-	
+
 	private void InitGame() {
-		
+
 		this.timer = new Timer(DELAY,this);
 		timer.start();
 		gameView.addKeyListener(new TAdapter());
 	}
-	
+
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		updateEntity(pC);
 		gameView.repaint();
 	}
-	
+
 	//need to pass in two objects so we can loop all collision checks or make a separate
 	//method for ai etc.
 	public void checkCollision(Entity sp1,Sprite sp2) {
@@ -53,24 +53,46 @@ public class GameController implements ActionListener {
 			sp1.CollisionProcess(sp2.gety_pos(),sp2.getbottom(),sp2.getx_pos(),sp2.getright());
 		} 
 	}
+
+	public void checkPlayerCollision() {
+		Room currentRoom = gameModel.getCurrentRoom();
+		List<Sprite> sprites = currentRoom.getSpriteList();
+		Rectangle r1 = pC.getBoundary();
+		for (Sprite sprite : sprites) {
+			Rectangle r2 = sprite.getBoundary();
+			if (r1.intersects(r2)) {
+				if (sprite instanceof Door) {
+					Door door = (Door) sprite;
+					gameModel.loadRoom(gameModel.getDungeonIndex(door.getRoom())); 
+					pC.setx_pos(door.getSpawnX());
+					pC.sety_pos(door.getSpawnY());
+				}
+			}
+		}
+	}
+	
+	public void checkEntityCollision() {
+		
+	}
+
 	private void updateEntity(Entity x) {
 		if(AnimCount < 21) {
 			AnimCount++;
-			}else {
-				AnimCount = 0;
-			}
+		}else {
+			AnimCount = 0;
+		}
 
 		x.move(AnimCount);
 	}
 	private void updateEntityAi(Entity x) {
 		if(AnimCount < 21) {
 			AnimCount++;
-			}else {
-				AnimCount = 0;
-			}
+		}else {
+			AnimCount = 0;
+		}
 
 		x.AiUpdate(pC);
-		
+
 		x.move(AnimCount);
 	}
 	private class TAdapter extends KeyAdapter{
