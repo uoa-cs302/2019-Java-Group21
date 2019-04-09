@@ -71,6 +71,7 @@ public class GameController implements ActionListener {
 		} 
 	}
 
+	
 	public void checkPlayerCollision() {
 		Room currentRoom = gameModel.getCurrentRoom();
 		List<Sprite> sprites = currentRoom.getSpriteList();
