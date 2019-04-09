@@ -25,12 +25,17 @@ public class GameController implements ActionListener {
 	private Graphics g;
 
 	public GameController(GameModel model, GameView view) {
+		//set game model and game view Jframe to Controller variables
 		this.gameModel = model;
 		this.gameView = view;
+		//Sets the button listener on to check for button press on StartScreen
 		gameView.getStartScreen().setButtonListener(new ScreenListener() {
 			public void actionPerformed() {
+				//Initialise Game on button press
 				InitGame();
+				//draw the gamescreen
 				gameView.drawGameMenu();
+				//sets a key listener for player movement and intereaction
 				gameView.addKeyListener(new KeyAdapter() {
 					
 					public void keyReleased(KeyEvent e) {
@@ -47,7 +52,7 @@ public class GameController implements ActionListener {
 	}
 
 	private void InitGame() {
-
+		//initialise timer with delay value 10ms
 		this.timer = new Timer(DELAY,this);
 		timer.start();
 		// for testing
@@ -56,13 +61,13 @@ public class GameController implements ActionListener {
 
 
 	@Override
+	//method runs when timer ticks
 	public void actionPerformed(ActionEvent e) {
 		updateEntity(pC);
 		gameView.getGameScreen().setDrawTarget(pC);
 	}
 
-	//need to pass in two objects so we can loop all collision checks or make a separate
-	//method for ai etc.
+	//checks collision of an Entity and a Sprite
 	public void checkCollision(Entity sp1,Sprite sp2) {
 		Rectangle r1 = sp1.getBoundary();
 		Rectangle r2 = sp2.getBoundary();
@@ -71,7 +76,7 @@ public class GameController implements ActionListener {
 		} 
 	}
 
-	
+	//checks collision of Player with all Obj
 	public void checkPlayerCollision() {
 		Room currentRoom = gameModel.getCurrentRoom();
 		List<Sprite> sprites = currentRoom.getSpriteList();
@@ -89,10 +94,11 @@ public class GameController implements ActionListener {
 		}
 	}
 	
+
 	public void checkEntityCollision() {
 		
 	}
-
+//updateEntity Location
 	private void updateEntity(Entity x) {
 		if(AnimCount < 21) {
 			AnimCount++;
@@ -102,6 +108,7 @@ public class GameController implements ActionListener {
 
 		x.move(AnimCount);
 	}
+	//update EntityAi Overridden from Entity in each class
 	private void updateEntityAi(Entity x) {
 		if(AnimCount < 21) {
 			AnimCount++;

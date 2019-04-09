@@ -31,6 +31,7 @@ public class GameView extends JFrame {
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setFocusable(true);
 		
+		//sets up the cardLayout which will hold the Game Panels/States
 		cardLayout = new CardLayout();
 		gameScreen = new GameScreen();
 		startScreen = new StartScreen();

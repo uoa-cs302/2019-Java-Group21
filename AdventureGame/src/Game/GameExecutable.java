@@ -15,9 +15,12 @@ public class GameExecutable {
     }
     
     private void initGame() {
-    	GameView view = new GameView();
     	
+    	//create Gameview Obj
+    	GameView view = new GameView();
+    	//Creat Game model obj
     	GameModel model = new GameModel();
+    	//Create Controller
     	GameController controller = new GameController(model, view);
     }
 

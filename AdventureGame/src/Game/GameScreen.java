@@ -10,12 +10,16 @@ import java.awt.event.KeyEvent;
 import javax.swing.JPanel;
 
 public class GameScreen extends JPanel {
+	//sprite can be changed into ArrayList or other later
 	private Sprite sprites;
 	@SuppressWarnings("unused")
 	private KeypressListener key;
 	
 	public GameScreen() {
+		
 		setBackground(Color.black);
+		//sets KeyListner which calls interface methods described in Controller
+		//Not used currently
 		addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
 				key.keyPressed(e);
@@ -26,6 +30,7 @@ public class GameScreen extends JPanel {
 		});
 		
 	}
+	//paints Sprites
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		doEntityDrawing(g);
@@ -34,6 +39,7 @@ public class GameScreen extends JPanel {
 		Toolkit.getDefaultToolkit().sync();
 		repaint();
 	}
+	//draws image
 	public void doEntityDrawing(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		
@@ -43,6 +49,7 @@ public class GameScreen extends JPanel {
 		
 		this.sprites = sprites;
 	}
+	//may not be used atm
 	public void setKeyListener(KeypressListener key) {
 		this.key = key;
 	}
