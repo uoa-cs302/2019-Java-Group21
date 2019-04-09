@@ -1,8 +1,11 @@
 package Game;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridBagLayout;
+import java.awt.LayoutManager;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,27 +17,47 @@ import javax.swing.JPanel;
 
 
 
-public class GameView extends JPanel {
+public class GameView extends JFrame {
+	
+	private GameScreen gameScreen;
+	private StartScreen startScreen;
+	private CardLayout cardLayout;
 	
 	public GameView() {
+		super.setTitle("A Well of Opportunity");
+		super.setSize(1024,768);
+		super.setResizable(false);
+		super.setVisible(true);
+		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setFocusable(true);
-		initStartMenu();
+		
+		cardLayout = new CardLayout();
+		gameScreen = new GameScreen();
+		startScreen = new StartScreen();
+		setLayout(cardLayout);
+		
+		add(startScreen, "start");
+		add(gameScreen,"gamescr");
+		
+			cardLayout.show(this.getContentPane(),"start");
 	}
+		
+	public void drawGameMenu() {
+		cardLayout.show(this.getContentPane(), "gamescr");
+		
+	}
+
+	public StartScreen getStartScreen() {
+		return startScreen;
+	}
+
+	public GameScreen getGameScreen() {
+		return gameScreen;
+	}
+	public CardLayout getcardLayout() {
+		return cardLayout;
+	}
+
+
 	
-	private void initStartMenu() {
-		
-	}
-	
-	public void paintComponent(Graphics g,Sprite x) {
-		super.paintComponent(g);
-		doEntityDrawing(g,x);
-		
-		
-		Toolkit.getDefaultToolkit().sync();
-	}
-	public void doEntityDrawing(Graphics g,Sprite x) {
-		Graphics2D g2d = (Graphics2D) g;
-		
-		g2d.drawImage(x.getImage(), x.getx_pos(), x.gety_pos(), this);
-	}
 }
