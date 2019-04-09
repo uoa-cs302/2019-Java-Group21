@@ -113,9 +113,5 @@ public class GameController implements ActionListener {
 
 		x.move(AnimCount);
 	}
-	private class TAdapter extends KeyAdapter{
-
-		
-	}
 
 }
