@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 
 public class Sprite {
 	
+	public enum Direction {UP, DOWN, LEFT, RIGHT};
 	protected int x_pos;
 	protected int y_pos;
 	protected int width;

@@ -18,18 +18,6 @@ public class Entity extends Sprite{
 	protected int dx_temp;
 	protected int dy_temp;
 	protected boolean collision;
-	protected String down0;
-	protected String down1;
-	protected String down2;
-	protected String left0;
-	protected String left1;
-	protected String left2;
-	protected String right0;
-	protected String right1;
-	protected String right2;
-	protected String up0;
-	protected String up1;
-	protected String up2;
 	
 	protected int EntityID;
 	/*EntityID values as follows
@@ -52,12 +40,19 @@ public class Entity extends Sprite{
 		return this.EntityID;
 	}
 	
-	
 	public int getdy() {
 		return dy;
 	}
 	public int getdx() {
 		return dx;
+	}
+	
+	public void setdy(int dy) {
+		this.dy = dy;
+	}
+	
+	public void setdx(int dx) {
+		this.dx = dx;
 	}
 	
 	public void move(int frame_count) {

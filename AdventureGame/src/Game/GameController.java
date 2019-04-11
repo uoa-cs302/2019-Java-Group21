@@ -93,7 +93,21 @@ public class GameController implements ActionListener {
 						pC.sety_pos(door.getSpawnY());
 					}
 					else if (sprite instanceof Wall) {
-						
+						Wall wall = (Wall) sprite;
+						switch(wall.getDirection()) {
+							case UP:
+								if (pC.getdy() > 0)
+									pC.setdy(0);
+							case DOWN:
+								if (pC.getdy() < 0)
+									pC.setdy(0);
+							case LEFT: 
+								if (pC.getdx() > 0)
+									pC.setdx(0);
+							case RIGHT: 
+								if (pC.getdx() < 0)
+									pC.setdx(0);
+						}
 					}
 				}
 			}
