@@ -41,21 +41,23 @@ public class Sprite {
 		
 		sheetW = this.SpriteSheet.getWidth() / TILE_SIZE;
 		sheetH = this.SpriteSheet.getHeight() / TILE_SIZE;
+		
+		loadSprites();
 	
 	}
 	
 	
 	private BufferedImage loadSheet(String sheet) {
-		BufferedImage sheetImage = null;
-		File fsheet = new File(sheet);
+		BufferedImage sheetIm = null;
 		
 		try {
-			sheetImage = ImageIO.read(fsheet);
+			sheetIm = ImageIO.read(getClass().getResourceAsStream(sheet));
 		} catch (IOException e) {
-			// TODO Auto-generated catch bloc
-		
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return sheetImage;
+
+		return sheetIm;
 	}
 	
 
@@ -67,12 +69,13 @@ public class Sprite {
 			for (int j = 0; j<sheetW;j++ ) {
 				
 				this.sprites[i][j] = ExtractSprites(i,j);
+				System.out.println(i +" "+j);
 			}
 		}
 		
 	}
 	private BufferedImage ExtractSprites(int x,int y) {
-		BufferedImage targ_sprite = SpriteSheet.getSubimage(x*TILE_SIZE, y*TILE_SIZE, TILE_SIZE, TILE_SIZE);
+		BufferedImage targ_sprite = SpriteSheet.getSubimage(y*TILE_SIZE, x*TILE_SIZE, TILE_SIZE, TILE_SIZE);
 		return targ_sprite;
 	}
 
