@@ -62,6 +62,7 @@ public class GameController implements ActionListener {
 
 	@Override
 	//method runs when timer ticks
+	//should include update, and draw.
 	public void actionPerformed(ActionEvent e) {
 		updateEntity(pC);
 		gameView.getGameScreen().setDrawTarget(pC);
