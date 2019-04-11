@@ -19,7 +19,8 @@ public class StartScreen extends JPanel {
 		gbl.rowWeights = new double[] {0.0,0.0};
 		this.setLayout(gbl);
 	
-		JButton start = new JButton("Start");
+		JButton start;
+		start = new JButton("Start");
 		
 		this.add(start);
 		start.addActionListener(new ActionListener() {
