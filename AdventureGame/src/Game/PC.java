@@ -58,6 +58,7 @@ public class PC extends Entity {
 			right = true;
 			this.direction = 2;
 		}
+		if(moving) {
 		switch (direction) {
 		case 0:
 			dy = 2;
@@ -73,8 +74,10 @@ public class PC extends Entity {
 			dy = -2;
 			break;
 		}
+		
 		dy_temp = dy;
 		dx_temp = dx;
+		}
 		
 	}
 	public void keyReleased(KeyEvent e) {
@@ -84,27 +87,27 @@ public class PC extends Entity {
 			dy = 0;
 			dy_temp =0;
 			up =false;
-			if (down) {dy_temp = 2;}
+			if (down) {dy_temp = 2;direction = 0;}
 		}
 		if (key == KeyEvent.VK_S) {
 			dy = 0;
 			dy_temp =0;
 			down = false;
-			if (up) {dy_temp = -2;}
+			if (up) {dy_temp = -2;direction = 3;}
 		}
 		if (key == KeyEvent.VK_A) {
 			dx = 0;
 			dx_temp =0;
 			left = false;
-			if (right) {dx_temp = 2;}
+			if (right) {dx_temp = 2; direction = 2;}
 		}
 		if (key == KeyEvent.VK_D) {
 			dx = 0;
 			dx_temp =0;
 			right = false;
-			if (left) {dx_temp = -2;}
+			if (left) {dx_temp = -2; direction = 1;}
 		}
-		if (dx == 0 && dy == 0 ) {
+		if (!(right || left || up || down) ) {
 			this.moving = false;
 		} 
 		if(dx < 0) {
