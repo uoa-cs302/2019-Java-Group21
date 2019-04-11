@@ -12,21 +12,8 @@ public class PC extends Entity {
 	}
 	
 	private void initPC() {
-		loadImage("src/Image/tile001.png");
-		getImageDim();
-		
-		down0 = "src/Image/tile000.png";
-		down1 = "src/Image/tile001.png";
-		down2 = "src/Image/tile002.png";
-		left0 = "src/Image/tile003.png";
-		left1 = "src/Image/tile004.png";
-		left2 = "src/Image/tile005.png";
-		right0 = "src/Image/tile006.png";
-		right1 = "src/Image/tile007.png";
-		right2 = "src/Image/tile008.png";
-		up0 = "src/Image/tile009.png";
-		up1 = "src/Image/tile010.png";
-		up2 = "src/Image/tile011.png";
+		LoadSprites("/Image/ExampleCharacter.png");
+		loadImage(0,0);
 	}
 	
 	public void keyPressed(KeyEvent e) {

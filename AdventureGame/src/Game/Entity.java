@@ -31,9 +31,25 @@ public class Entity extends Sprite{
 	protected String up1;
 	protected String up2;
 	
+	protected int EntityID;
+	/*EntityID values as follows
+	 * 
+	 * 0 = PC 
+	 * 1 = GiantRat
+	 * 2 = GiantSpider
+	 * 3 = Skeleton
+	 * 4 = Dog
+	 * 5 = Child
+	 * 
+	 * EntityID Values are initialized on the subclass construction 
+	
+	*/
 	public Entity(int x, int y) {
 		super(x,y);
 		super.setCollidable(true);
+	}
+	public int getEntityID() {
+		return this.EntityID;
 	}
 	
 	
@@ -53,16 +69,16 @@ public class Entity extends Sprite{
 		if (moving == false) {
 			switch (direction) {
 			case 0:
-				loadImage(down1);
+				loadImage(0,2);
 				break;
 			case 1:
-				loadImage(left1);
+				loadImage(1,2);
 				break;
 			case 2:
-				loadImage(right1);
+				loadImage(2,2);
 				break;
 			case 3:
-				loadImage(up1);
+				loadImage(3,2);
 				break;
 				}
 			} else {
@@ -70,64 +86,64 @@ public class Entity extends Sprite{
 				case 0:
 					switch(frame_count % 21) {
 					case 21:
-						loadImage(down0);
+						loadImage(0,0);
 					break;
 					case 14:
-						loadImage(down1);
+						loadImage(0,1);
 						break;
 					case 7:
-						loadImage(down2);
+						loadImage(0,2);
 						break;
 					case 0:
-						loadImage(down1);
+						loadImage(0,1);
 						break;
 					}
 					break;
 				case 1:
 					switch(frame_count % 21) {
 					case 21:
-						loadImage(left0);
+						loadImage(1,0);
 					break;
 					case 14:
-						loadImage(left1);
+						loadImage(1,1);
 						break;
 					case 7:
-						loadImage(left2);
+						loadImage(1,2);
 						break;
 					case 0:
-						loadImage(left1);
+						loadImage(1,1);
 						break;
 					}
 					break;
 				case 2:
 					switch(frame_count % 21) {
 					case 21:
-						loadImage(right0);
+						loadImage(2,0);
 					break;
 					case 14:
-						loadImage(right1);
+						loadImage(2,1);
 						break;
 					case 7:
-						loadImage(right2);
+						loadImage(2,2);
 						break;
 					case 0:
-						loadImage(right1);
+						loadImage(2,1);
 						break;
 					}
 					break;
 				case 3:
 					switch(frame_count % 21) {
 					case 21:
-						loadImage(up0);
+						loadImage(3,0);
 					break;
 					case 14:
-						loadImage(up1);
+						loadImage(3,1);
 						break;
 					case 7:
-						loadImage(up2);
+						loadImage(3,2);
 						break;
 					case 0:
-						loadImage(up1);
+						loadImage(3,1);
 						break;
 					}
 					break;
