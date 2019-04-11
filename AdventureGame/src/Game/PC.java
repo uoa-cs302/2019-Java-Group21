@@ -3,6 +3,11 @@ package Game;
 import java.awt.event.KeyEvent;
 
 public class PC extends Entity {
+	
+	private boolean up = false;
+	private boolean down = false;
+	private boolean left = false;
+	private boolean right = false;
 
 	
 	public PC(int x,int y) {
@@ -23,6 +28,7 @@ public class PC extends Entity {
 			if(direction != 3) {
 				dirchange = true;
 			}
+			up = true;
 
 			this.moving = true;
 			this.direction = 3;
@@ -31,6 +37,7 @@ public class PC extends Entity {
 			if(direction != 0) {
 				dirchange = true;
 			}
+			down = true;
 			this.moving = true;
 			this.direction = 0;
 		}
@@ -40,6 +47,7 @@ public class PC extends Entity {
 			if(direction != 1) {
 				dirchange = true;
 			}
+			left =true;
 			this.direction = 1;
 		}
 		if (key == KeyEvent.VK_D) {
@@ -47,6 +55,7 @@ public class PC extends Entity {
 			if(direction != 2) {
 				dirchange = true;
 			}
+			right = true;
 			this.direction = 2;
 		}
 		switch (direction) {
@@ -74,18 +83,26 @@ public class PC extends Entity {
 		if (key == KeyEvent.VK_W) {
 			dy = 0;
 			dy_temp =0;
+			up =false;
+			if (down) {dy_temp = 2;}
 		}
 		if (key == KeyEvent.VK_S) {
 			dy = 0;
 			dy_temp =0;
+			down = false;
+			if (up) {dy_temp = -2;}
 		}
 		if (key == KeyEvent.VK_A) {
 			dx = 0;
 			dx_temp =0;
+			left = false;
+			if (right) {dx_temp = 2;}
 		}
 		if (key == KeyEvent.VK_D) {
 			dx = 0;
 			dx_temp =0;
+			right = false;
+			if (left) {dx_temp = -2;}
 		}
 		if (dx == 0 && dy == 0 ) {
 			this.moving = false;

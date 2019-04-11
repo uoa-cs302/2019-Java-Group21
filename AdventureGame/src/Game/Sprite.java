@@ -18,7 +18,6 @@ public class Sprite {
 	protected int right;
 	protected int bottom;
 	protected boolean visible;
-	private int id;
 	private boolean collidable = false;
 	private int sheetW;
 	private int sheetH;
