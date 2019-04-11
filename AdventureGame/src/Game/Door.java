@@ -15,6 +15,7 @@ public class Door extends Sprite{
 	
 	public Door (int x, int y) {
 		super(x,y);
+		super.setCollidable(true);
 	}
 	
 	// Getter and setter for the room variable

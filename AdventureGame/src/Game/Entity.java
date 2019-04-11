@@ -32,8 +32,8 @@ public class Entity extends Sprite{
 	protected String up2;
 	
 	public Entity(int x, int y) {
-	super(x,y);
-	
+		super(x,y);
+		super.setCollidable(true);
 	}
 	
 	

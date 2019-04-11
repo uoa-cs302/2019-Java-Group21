@@ -15,6 +15,7 @@ public class Sprite {
 	protected int bottom;
 	protected boolean visible;
 	private int id;
+	private boolean collidable = false;
 	
 	protected Image image;
 	
@@ -76,4 +77,12 @@ protected void loadImage(Image imageName) {
 	protected Rectangle getBoundary() {
 		return new Rectangle(x_pos,y_pos,width,height);
 		}
+
+	public boolean isCollidable() {
+		return collidable;
+	}
+
+	public void setCollidable(boolean collidable) {
+		this.collidable = collidable;
+	}
 }

@@ -462,19 +462,15 @@ public class Dungeon {
 	}
 
 	private void createRoomLeftOne(Room room){
-		GiantRat rat1 = new GiantRat(240, 300);
-		room.addEntityList(rat1);
 		GiantSpider spider1 = new GiantSpider(300, 400);
 		room.addEntityList(spider1);
 	}
 
 	private void createRoomLeftTwo(Room room){
+		GiantRat rat1 = new GiantRat(240, 300);
+		room.addEntityList(rat1);
 		GiantSpider spider1 = new GiantSpider(300, 400);
 		room.addEntityList(spider1);
-		GiantSpider spider2 = new GiantSpider(300, 400);
-		room.addEntityList(spider2);
-		GiantSpider spider3 = new GiantSpider(300, 400);
-		room.addEntityList(spider3);
 	}
 
 	private void createRoomLeftThree(Room room){
@@ -894,6 +890,8 @@ public class Dungeon {
 	private void createRoomRightOne(Room room){
 		GiantRat rat1 = new GiantRat(240, 300);
 		room.addEntityList(rat1);
+		GiantRat rat2 = new GiantRat(240, 300);
+		room.addEntityList(rat2);
 		GiantSpider spider1 = new GiantSpider(300, 400);
 		room.addEntityList(spider1);
 	}

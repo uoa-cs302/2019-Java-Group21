@@ -37,7 +37,7 @@ public class GameController implements ActionListener {
 				gameView.drawGameMenu();
 				//sets a key listener for player movement and intereaction
 				gameView.addKeyListener(new KeyAdapter() {
-					
+
 					public void keyReleased(KeyEvent e) {
 						pC.keyReleased(e);
 					}
@@ -84,21 +84,26 @@ public class GameController implements ActionListener {
 		for (Sprite sprite : sprites) {
 			Rectangle r2 = sprite.getBoundary();
 			if (r1.intersects(r2)) {
-				if (sprite instanceof Door) {
-					Door door = (Door) sprite;
-					gameModel.loadRoom(gameModel.getDungeonIndex(door.getRoom())); 
-					pC.setx_pos(door.getSpawnX());
-					pC.sety_pos(door.getSpawnY());
+				if (sprite.isCollidable() == true) {
+					if (sprite instanceof Door) {
+						Door door = (Door) sprite;
+						gameModel.loadRoom(gameModel.getDungeonIndex(door.getRoom())); 
+						pC.setx_pos(door.getSpawnX());
+						pC.sety_pos(door.getSpawnY());
+					}
+					else if (sprite instanceof Wall) {
+						
+					}
 				}
 			}
 		}
 	}
-	
+
 
 	public void checkEntityCollision() {
-		
+
 	}
-//updateEntity Location
+	//updateEntity Location
 	private void updateEntity(Entity x) {
 		if(AnimCount < 21) {
 			AnimCount++;
