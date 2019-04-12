@@ -10,8 +10,11 @@ public class GameModel {
 	public GameModel() {
 		currentRoom = new Room(0);
 		Wall wall = new Wall(240, 200);
+		Wall wall1 = new Wall (400,600);
 		wall.setDirection(Direction.UP);
+		wall1.setDirection(Direction.UP);
 		currentRoom.addSpriteList(wall);
+		currentRoom.addSpriteList(wall1);
 	}
 
 	public Room getCurrentRoom() {

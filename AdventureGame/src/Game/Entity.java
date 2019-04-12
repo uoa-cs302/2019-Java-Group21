@@ -161,17 +161,22 @@ public class Entity extends Sprite{
 	public void wallCollide(Direction direction) {
 		switch(direction) {
 			case UP:
-				if (this.getdy() < 0)
+				if (this.getdy() < 0) {
 					this.setdy(0);
+				}
+					
 			case DOWN:
-				if (this.getdy() > 0)
+				if (this.getdy() > 0) {
 					this.setdy(0);
+				}
 			case LEFT: 
-				if (this.getdx() < 0)
-					this.setdx(0);
+				if (this.getdx() < 0) {
+				this.setdx(0);
+				}
 			case RIGHT: 
-				if (this.getdx() < 0)
+				if (this.getdx() > 0) {
 					this.setdx(0);
+				}
 		}
 	}
 	

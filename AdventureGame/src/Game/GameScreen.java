@@ -4,15 +4,17 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.util.List;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
 public class GameScreen extends JPanel {
 	//sprite can be changed into ArrayList or other later
-	private Sprite sprites;
+	private List<Sprite> sprites;
 	@SuppressWarnings("unused")
 	private KeypressListener key;
 	
@@ -43,11 +45,14 @@ public class GameScreen extends JPanel {
 	//draws image
 	public void doEntityDrawing(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
-		if (sprites != null)
-			g2d.drawImage(sprites.getImage(), sprites.getx_pos(), sprites.gety_pos(), this);
+		for (Sprite sprite : sprites) {
+			if(sprite.isVisible()) {
+			g2d.drawImage(sprite.getImage(), sprite.getx_pos(), sprite.gety_pos(),this);
+			}
 		}
+	}
 	
-	public void setDrawTarget(Sprite sprites) {
+	public void setDrawTarget(List<Sprite> sprites) {
 		
 		this.sprites = sprites;
 	}

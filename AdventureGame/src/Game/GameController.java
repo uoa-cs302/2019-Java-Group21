@@ -30,7 +30,6 @@ public class GameController implements ActionListener {
 		this.gameView = view;
 		//Sets the button listener on to check for button press on StartScreen
 		gameView.getStartScreen().setButtonListener(new ScreenListener() {
-			@Override
 			public void actionPerformed() {
 				//Initialise Game on button press
 				System.out.println("x");
@@ -38,7 +37,12 @@ public class GameController implements ActionListener {
 		
 				//draw the gamescreen
 				gameView.drawGameMenu();
-				
+				addKeyListen();
+			}
+			});
+}
+			
+	private void addKeyListen() {
 				//sets a key listener for player movement and intereaction
 				gameView.addKeyListener(new KeyAdapter() {
 
@@ -50,11 +54,8 @@ public class GameController implements ActionListener {
 						pC.keyPressed(e);
 					}
 				});
-			}
-		});
-
 	}
-
+				
 	private void InitGame() {
 		//initialise timer with delay value 10ms
 		this.timer = new Timer(DELAY,this);
@@ -71,12 +72,10 @@ public class GameController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		updateEntity(pC);
 		List<Sprite> sprites = gameModel.getCurrentRoom().getSpriteList();
-		gameView.getGameScreen().setDrawTarget(pC);
+		sprites.add(pC);
 		//System.out.println(sprites.size());
-		for (Sprite sprite : sprites) {
-			if(sprite.isVisible())
-				gameView.getGameScreen().setDrawTarget(sprite);
-		}
+				gameView.getGameScreen().setDrawTarget(sprites);
+		
 
 		gameView.getGameScreen().repaint();
 	}
@@ -125,7 +124,7 @@ public class GameController implements ActionListener {
 		}else {
 			AnimCount = 0;
 		}
-
+		checkPlayerCollision();
 		x.move(AnimCount);
 	}
 	//update EntityAi Overridden from Entity in each class

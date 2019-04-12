@@ -95,7 +95,7 @@ protected void loadImage(int x,int y) {
 		right = x_pos + width ;
 		bottom = y_pos + height ;
 	}
-	public Image getImage() {
+	public BufferedImage getImage() {
 		return image;
 	}
 	
