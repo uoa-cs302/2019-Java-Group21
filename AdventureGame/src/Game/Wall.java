@@ -7,8 +7,10 @@ public class Wall extends Sprite{
 	public Wall(int x, int y) {
 		super(x,y);
 		super.setCollidable(true);
+		LoadSprites("/Image/wall0.png");
+		loadImage(0,0);
 	}
-
+	
 	public Direction getDirection() {
 		return direction;
 	}

@@ -45,6 +45,7 @@ public class GameView extends JFrame {
 		
 	public void drawGameMenu() {
 		cardLayout.show(this.getContentPane(), "gamescr");
+
 		
 	}
 

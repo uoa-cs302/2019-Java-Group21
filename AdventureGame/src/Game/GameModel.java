@@ -1,12 +1,17 @@
 package Game;
 
+import Game.Sprite.Direction;
+
 public class GameModel {
 
 	private Dungeon dungeon;
 	private Room currentRoom;
 	
 	public GameModel() {
-		
+		currentRoom = new Room(0);
+		Wall wall = new Wall(240, 200);
+		wall.setDirection(Direction.UP);
+		currentRoom.addSpriteList(wall);
 	}
 
 	public Room getCurrentRoom() {
