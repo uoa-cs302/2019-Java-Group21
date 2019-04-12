@@ -34,4 +34,4 @@ public class StartScreen extends JPanel {
 	public void setButtonListener(ScreenListener sl) {
 		this.ButtonListener = sl;
 	}
-	}
+}

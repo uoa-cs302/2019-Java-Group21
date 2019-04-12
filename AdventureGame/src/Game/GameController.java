@@ -130,7 +130,7 @@ public class GameController implements ActionListener {
 	}
 	//update EntityAi Overridden from Entity in each class
 	private void updateEntityAi(Entity x) {
-		if(AnimCount < 21) {
+		if(AnimCount < 28) {
 			AnimCount++;
 		}else {
 			AnimCount = 0;
