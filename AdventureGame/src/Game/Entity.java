@@ -79,7 +79,7 @@ public class Entity extends Sprite{
 			} else {
 				switch(direction) {
 				case 0:
-					switch(frame_count % 21) {
+					switch(frame_count % 28) {
 					case 21:
 						loadImage(0,0);
 					break;
@@ -89,13 +89,13 @@ public class Entity extends Sprite{
 					case 7:
 						loadImage(0,2);
 						break;
-					case 0:
+					case 6:
 						loadImage(0,1);
 						break;
 					}
 					break;
 				case 1:
-					switch(frame_count % 21) {
+					switch(frame_count % 28) {
 					case 21:
 						loadImage(1,0);
 					break;
@@ -105,13 +105,13 @@ public class Entity extends Sprite{
 					case 7:
 						loadImage(1,2);
 						break;
-					case 0:
+					case 6:
 						loadImage(1,1);
 						break;
 					}
 					break;
 				case 2:
-					switch(frame_count % 21) {
+					switch(frame_count % 28) {
 					case 21:
 						loadImage(2,0);
 					break;
@@ -121,13 +121,13 @@ public class Entity extends Sprite{
 					case 7:
 						loadImage(2,2);
 						break;
-					case 0:
+					case 6:
 						loadImage(2,1);
 						break;
 					}
 					break;
 				case 3:
-					switch(frame_count % 21) {
+					switch(frame_count % 28) {
 					case 21:
 						loadImage(3,0);
 					break;
@@ -137,7 +137,7 @@ public class Entity extends Sprite{
 					case 7:
 						loadImage(3,2);
 						break;
-					case 0:
+					case 6:
 						loadImage(3,1);
 						break;
 					}

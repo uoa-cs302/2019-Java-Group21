@@ -38,6 +38,7 @@ public class GameController implements ActionListener {
 		
 				//draw the gamescreen
 				gameView.drawGameMenu();
+				
 				//sets a key listener for player movement and intereaction
 				gameView.addKeyListener(new KeyAdapter() {
 
@@ -57,6 +58,7 @@ public class GameController implements ActionListener {
 	private void InitGame() {
 		//initialise timer with delay value 10ms
 		this.timer = new Timer(DELAY,this);
+
 		timer.start();
 		// for testing
 		pC = new PC(Start_X,Start_Y);
@@ -70,10 +72,13 @@ public class GameController implements ActionListener {
 		updateEntity(pC);
 		List<Sprite> sprites = gameModel.getCurrentRoom().getSpriteList();
 		gameView.getGameScreen().setDrawTarget(pC);
+		//System.out.println(sprites.size());
 		for (Sprite sprite : sprites) {
 			if(sprite.isVisible())
 				gameView.getGameScreen().setDrawTarget(sprite);
 		}
+
+		gameView.getGameScreen().repaint();
 	}
 
 	//checks collision of an Entity and a Sprite
@@ -125,7 +130,7 @@ public class GameController implements ActionListener {
 	}
 	//update EntityAi Overridden from Entity in each class
 	private void updateEntityAi(Entity x) {
-		if(AnimCount < 21) {
+		if(AnimCount < 28) {
 			AnimCount++;
 		}else {
 			AnimCount = 0;
