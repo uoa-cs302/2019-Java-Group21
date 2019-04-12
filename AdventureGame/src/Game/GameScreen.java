@@ -3,6 +3,7 @@ package Game;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -37,14 +38,15 @@ public class GameScreen extends JPanel {
 		
 		
 		Toolkit.getDefaultToolkit().sync();
-		repaint();
+
 	}
 	//draws image
 	public void doEntityDrawing(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
-		
-		g2d.drawImage(sprites.getImage(), sprites.getx_pos(), sprites.gety_pos(), this);
-	}
+		if (sprites != null)
+			g2d.drawImage(sprites.getImage(), sprites.getx_pos(), sprites.gety_pos(), this);
+		}
+	
 	public void setDrawTarget(Sprite sprites) {
 		
 		this.sprites = sprites;
@@ -52,6 +54,9 @@ public class GameScreen extends JPanel {
 	//may not be used atm
 	public void setKeyListener(KeypressListener key) {
 		this.key = key;
+	}
+	public void updateScreen() {
+		repaint();
 	}
 
 

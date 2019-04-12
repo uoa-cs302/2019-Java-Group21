@@ -30,11 +30,14 @@ public class GameController implements ActionListener {
 		this.gameView = view;
 		//Sets the button listener on to check for button press on StartScreen
 		gameView.getStartScreen().setButtonListener(new ScreenListener() {
+			@Override
 			public void actionPerformed() {
 				//Initialise Game on button press
 				InitGame();
+		
 				//draw the gamescreen
 				gameView.drawGameMenu();
+				
 				//sets a key listener for player movement and intereaction
 				gameView.addKeyListener(new KeyAdapter() {
 
@@ -54,6 +57,7 @@ public class GameController implements ActionListener {
 	private void InitGame() {
 		//initialise timer with delay value 10ms
 		this.timer = new Timer(DELAY,this);
+
 		timer.start();
 		// for testing
 		pC = new PC(Start_X,Start_Y);
@@ -65,7 +69,17 @@ public class GameController implements ActionListener {
 	//should include update, and draw.
 	public void actionPerformed(ActionEvent e) {
 		updateEntity(pC);
+		List<Sprite> sprites = gameModel.getCurrentRoom().getSpriteList();
 		gameView.getGameScreen().setDrawTarget(pC);
+
+
+		//System.out.println(sprites.size());
+		for (Sprite sprite : sprites) {
+			if(sprite.isVisible())
+				gameView.getGameScreen().setDrawTarget(sprite);
+		}
+
+		gameView.getGameScreen().repaint();
 	}
 
 	//checks collision of an Entity and a Sprite
@@ -94,20 +108,7 @@ public class GameController implements ActionListener {
 					}
 					else if (sprite instanceof Wall) {
 						Wall wall = (Wall) sprite;
-						switch(wall.getDirection()) {
-							case UP:
-								if (pC.getdy() > 0)
-									pC.setdy(0);
-							case DOWN:
-								if (pC.getdy() < 0)
-									pC.setdy(0);
-							case LEFT: 
-								if (pC.getdx() > 0)
-									pC.setdx(0);
-							case RIGHT: 
-								if (pC.getdx() < 0)
-									pC.setdx(0);
-						}
+						pC.wallCollide(wall.getDirection());
 					}
 				}
 			}

@@ -75,6 +75,7 @@ public class Sprite {
 			}
 		}
 		
+		
 	}
 	private BufferedImage ExtractSprites(int x,int y) {
 		BufferedImage targ_sprite = SpriteSheet.getSubimage(y*TILE_SIZE, x*TILE_SIZE, TILE_SIZE, TILE_SIZE);
