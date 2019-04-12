@@ -158,6 +158,23 @@ public class Entity extends Sprite{
 		
 	}
 	
+	public void wallCollide(Direction direction) {
+		switch(direction) {
+			case UP:
+				if (this.getdy() < 0)
+					this.setdy(0);
+			case DOWN:
+				if (this.getdy() > 0)
+					this.setdy(0);
+			case LEFT: 
+				if (this.getdx() < 0)
+					this.setdx(0);
+			case RIGHT: 
+				if (this.getdx() < 0)
+					this.setdx(0);
+		}
+	}
+	
 public void CollisionProcess(int top,int bottom,int left, int right) {
 		
 		switch (this.check_collisiondir_Hoz(left, right)) {

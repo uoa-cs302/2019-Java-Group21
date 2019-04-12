@@ -30,9 +30,12 @@ public class GameController implements ActionListener {
 		this.gameView = view;
 		//Sets the button listener on to check for button press on StartScreen
 		gameView.getStartScreen().setButtonListener(new ScreenListener() {
+			@Override
 			public void actionPerformed() {
 				//Initialise Game on button press
+				System.out.println("x");
 				InitGame();
+		
 				//draw the gamescreen
 				gameView.drawGameMenu();
 				//sets a key listener for player movement and intereaction
@@ -65,7 +68,12 @@ public class GameController implements ActionListener {
 	//should include update, and draw.
 	public void actionPerformed(ActionEvent e) {
 		updateEntity(pC);
+		List<Sprite> sprites = gameModel.getCurrentRoom().getSpriteList();
 		gameView.getGameScreen().setDrawTarget(pC);
+		for (Sprite sprite : sprites) {
+			if(sprite.isVisible())
+				gameView.getGameScreen().setDrawTarget(sprite);
+		}
 	}
 
 	//checks collision of an Entity and a Sprite
@@ -94,20 +102,7 @@ public class GameController implements ActionListener {
 					}
 					else if (sprite instanceof Wall) {
 						Wall wall = (Wall) sprite;
-						switch(wall.getDirection()) {
-							case UP:
-								if (pC.getdy() > 0)
-									pC.setdy(0);
-							case DOWN:
-								if (pC.getdy() < 0)
-									pC.setdy(0);
-							case LEFT: 
-								if (pC.getdx() > 0)
-									pC.setdx(0);
-							case RIGHT: 
-								if (pC.getdx() < 0)
-									pC.setdx(0);
-						}
+						pC.wallCollide(wall.getDirection());
 					}
 				}
 			}
