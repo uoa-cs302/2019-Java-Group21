@@ -164,19 +164,23 @@ public class Entity extends Sprite{
 				if (this.getdy() < 0) {
 					this.setdy(0);
 				}
+				break;
 					
 			case DOWN:
 				if (this.getdy() > 0) {
 					this.setdy(0);
 				}
+				break;
 			case LEFT: 
 				if (this.getdx() < 0) {
 				this.setdx(0);
 				}
+				break;
 			case RIGHT: 
 				if (this.getdx() > 0) {
 					this.setdx(0);
 				}
+				break;
 		}
 	}
 	
