@@ -66,6 +66,8 @@ public class PC extends Entity {
 		if (key == KeyEvent.VK_RIGHT) {
 			inventory.incrementIndex();
 		}
+		// Temporary
+		// Used to add sword to inventory for testing
 		if (key == KeyEvent.VK_UP) {
 			Sword sword = new Sword(0,0);
 			inventory.addItem(sword);
