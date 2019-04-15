@@ -8,13 +8,22 @@ public class GameModel {
 	private Room currentRoom;
 	
 	public GameModel() {
+
+		System.out.println("GameModel constructor init");
 		currentRoom = new Room(0);
+		System.out.println("GameModel constructor 1");
 		Wall wall = new Wall(240, 200);
+		System.out.println("GameModel constructor 2");
 		Wall wall1 = new Wall (400,600);
+		System.out.println("GameModel constructor 3");
 		wall.setDirection(Direction.UP);
+		System.out.println("GameModel constructor 4");
 		wall1.setDirection(Direction.UP);
+		System.out.println("GameModel constructor 5");
 		currentRoom.addSpriteList(wall);
+		System.out.println("GameModel constructor 6");
 		currentRoom.addSpriteList(wall1);
+		System.out.println("GameModel constructor complete");
 	}
 
 	public Room getCurrentRoom() {

@@ -22,14 +22,18 @@ public class StartScreen extends JPanel {
 		JButton start;
 		start = new JButton("Start");
 		
-		this.add(start);
-		start.addActionListener(new ActionListener() {
-			 public void actionPerformed(ActionEvent e) {
-				if(ButtonListener != null) {
+		
+		ActionListener startButtonActionListener = new ActionListener() {
+			@Override 
+			public void actionPerformed(ActionEvent e) {
+				//if(ButtonListener != null) {
 					ButtonListener.actionPerformed();
-				}
+				//}
 			}
-		});
+		};
+		start.addActionListener(startButtonActionListener);
+		System.out.println("StartScreen action listener exists: " + startButtonActionListener);
+		this.add(start);
 		}
 	public void setButtonListener(ScreenListener sl) {
 		this.ButtonListener = sl;

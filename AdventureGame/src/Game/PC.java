@@ -17,7 +17,7 @@ public class PC extends Entity {
 	}
 	
 	private void initPC() {
-		LoadSprites("/Image/ExampleCharacter.png");
+		LoadSprites("src/Image/ExampleCharacter.png");
 		loadImage(0,0);
 	}
 	

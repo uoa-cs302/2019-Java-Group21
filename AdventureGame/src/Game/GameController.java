@@ -29,7 +29,8 @@ public class GameController implements ActionListener {
 		this.gameModel = model;
 		this.gameView = view;
 		//Sets the button listener on to check for button press on StartScreen
-		gameView.getStartScreen().setButtonListener(new ScreenListener() {
+		ScreenListener gameControllerScreenListener = new ScreenListener() {
+			@Override
 			public void actionPerformed() {
 				//Initialise Game on button press
 				System.out.println("x");
@@ -39,21 +40,23 @@ public class GameController implements ActionListener {
 				gameView.drawGameMenu();
 				addKeyListen();
 			}
-			});
+		};
+		System.out.println("ScreenListener exists: " + gameControllerScreenListener);
+		gameView.getStartScreen().setButtonListener(gameControllerScreenListener);
 }
 			
 	private void addKeyListen() {
-				//sets a key listener for player movement and intereaction
-				gameView.addKeyListener(new KeyAdapter() {
+		//sets a key listener for player movement and intereaction
+		gameView.addKeyListener(new KeyAdapter() {
 
-					public void keyReleased(KeyEvent e) {
-						pC.keyReleased(e);
-					}
+			public void keyReleased(KeyEvent e) {
+				pC.keyReleased(e);
+			}
 
-					public void keyPressed(KeyEvent e){
-						pC.keyPressed(e);
-					}
-				});
+			public void keyPressed(KeyEvent e){
+				pC.keyPressed(e);
+			}
+		});
 	}
 				
 	private void InitGame() {
