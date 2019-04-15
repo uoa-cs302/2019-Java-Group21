@@ -17,6 +17,10 @@ public class Room {
 		return this.spriteList;
 	}
 	
+	public List<Entity> getEntityList(){
+		return this.entityList;
+	}
+	
 	public void addEntityList(Entity entity) {
 		this.entityList.add(entity);
 	}

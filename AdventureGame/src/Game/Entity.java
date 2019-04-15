@@ -18,6 +18,9 @@ public class Entity extends Sprite{
 	protected int dx_temp;
 	protected int dy_temp;
 	protected boolean collision;
+	protected int damage;
+	
+	protected int health;
 	
 	protected int EntityID;
 	/*EntityID values as follows
@@ -64,16 +67,16 @@ public class Entity extends Sprite{
 		if (moving == false) {
 			switch (direction) {
 			case 0:
-				loadImage(0,2);
+				loadImage(0,1);
 				break;
 			case 1:
-				loadImage(1,2);
+				loadImage(1,1);
 				break;
 			case 2:
-				loadImage(2,2);
+				loadImage(2,1);
 				break;
 			case 3:
-				loadImage(3,2);
+				loadImage(3,1);
 				break;
 				}
 			} else {
@@ -162,23 +165,27 @@ public class Entity extends Sprite{
 		switch(direction) {
 			case UP:
 				if (this.getdy() < 0) {
-					this.setdy(0);
+					this.y_pos = y_pos + 4;
+					
 				}
 				break;
 					
 			case DOWN:
 				if (this.getdy() > 0) {
-					this.setdy(0);
+					this.y_pos = y_pos - 4;
+					
 				}
 				break;
 			case LEFT: 
 				if (this.getdx() < 0) {
-				this.setdx(0);
+					this.x_pos = x_pos + 4;
+					
 				}
 				break;
 			case RIGHT: 
 				if (this.getdx() > 0) {
-					this.setdx(0);
+					this.x_pos = x_pos - 4;
+					
 				}
 				break;
 		}
@@ -201,19 +208,49 @@ public void CollisionProcess(int top,int bottom,int left, int right) {
 		switch(this.check_collisiondir_Vert( top, bottom)) {
 		case 1:
 			if(dy < 0) {
-				dx_temp = dy;
+				
 				dy = 0;
 			}
 			break;
 		case 2:
 			if(dy > 0) {
-				dx_temp = dy;
 				dy = 0;
 			}
 			break;
 		}
 
 	}
+
+ protected void hitBy(Entity e) {
+	 this.health = health - e.getDamage();
+	 if(health < 0) {
+		 this.visible = false;
+		 this.setCollidable(false);
+	 }
+	 
+	 switch (e.getDirection()) {
+	 case 0:
+		 this.dx = 0;
+		 this.dy = 32;
+		 this.move(0);
+		 break;
+	 case 1:
+		 this.dx = -32;
+		 this.dy = 0;
+		 this.move(0);
+		 break;
+	 case 2:
+		 this.dx = 32;
+		 this.dy = 0;
+		 this.move(0);
+		 break;
+	 case 3:
+		 this.dx = 0;
+		 this.dy = -32;
+		 this.move(0);
+		 break;
+	 }
+ }
 	protected int check_collisiondir_Hoz(int left2,int right2 ) {
 
 		if (this.x_pos == right2 - 4) {
@@ -236,6 +273,11 @@ public void CollisionProcess(int top,int bottom,int left, int right) {
 	}
 	
 	public void AiUpdate(Entity target) {
+		if (target == null) {
+			dx = 0;
+			dy = 0;
+			
+		}else {
 		int xdiff;
 		int ydiff;
 		
@@ -244,25 +286,41 @@ public void CollisionProcess(int top,int bottom,int left, int right) {
 		moving = true;
 
 			
-		if(ydiff>0) {
+		if(ydiff>0 ) {
 			direction = 0;
 			dirchange = true;
 			dy = 1;
-		}else {
+		}else if (ydiff<0 ) {
 			direction = 3;
 			dirchange = true;
 			dy = -1;
+		} else {
+			dirchange = true;
+			dy=0;
 		}
 		if (xdiff>0) {
 			direction = 2;
 			dirchange = true;
 			dx = 1;
-		}else {
+		}else if (xdiff<0) {
 			direction = 1;
 			dirchange = true;
 			dx = -1;
+		} else {
+			dx = 0;
+		}
+		
 		}
 	}
 	
+	public int getHealth() {
+		return health;
+	}
+	public int getDamage() {
+		return damage;
+	}
+	public int getDirection() {
+		return direction;
+	}
 
 }

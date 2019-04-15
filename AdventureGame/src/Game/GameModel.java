@@ -16,10 +16,13 @@ public class GameModel {
 		System.out.println("GameModel constructor 2");
 		Wall wall1 = new Wall (400,600);
 		System.out.println("GameModel constructor 3");
+		GiantRat rat1 = new GiantRat(700,400);
 		wall.setDirection(Direction.UP);
 		System.out.println("GameModel constructor 4");
 		wall1.setDirection(Direction.UP);
 		System.out.println("GameModel constructor 5");
+		currentRoom.addSpriteList(rat1);
+		currentRoom.addEntityList(rat1);
 		currentRoom.addSpriteList(wall);
 		System.out.println("GameModel constructor 6");
 		currentRoom.addSpriteList(wall1);

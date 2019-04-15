@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -27,8 +28,9 @@ public class Sprite {
 	private int sheetH;
 
 	protected BufferedImage SpriteSheet;
+	private static AtomicInteger ID_GENERATOR = new AtomicInteger(1000);
 	protected BufferedImage[][] sprites;
-
+	protected int ID;
 	private final int TILE_SIZE = 32;
 
 	protected BufferedImage image;
@@ -37,6 +39,7 @@ public class Sprite {
 		this.x_pos = x;
 		this.y_pos = y;
 		visible = true;
+		ID = ID_GENERATOR.getAndIncrement();
 
 	}
 
@@ -54,10 +57,10 @@ public class Sprite {
 	private BufferedImage loadSheet(String sheet) {
 		BufferedImage sheetIm = null;
 		System.out.println("Sprite.loadSheet");
+		File f = new File(sheet);
 		try {
 			System.out.println("Trying to read sprite resource");
 			// sheetIm = ImageIO.read(getClass().getResourceAsStream(sheet));
-			File f = new File(sheet); // image file path
 			sheetIm = ImageIO.read(f);
 			System.out.println("Read sprite resource ok!");
 		} catch (IOException e) {
@@ -148,5 +151,8 @@ public class Sprite {
 
 	public void setCollidable(boolean collidable) {
 		this.collidable = collidable;
+	}
+	public int getID() {
+		return ID;
 	}
 }

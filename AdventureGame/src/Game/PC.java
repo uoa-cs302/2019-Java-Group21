@@ -12,6 +12,7 @@ public class PC extends Entity {
 	
 	public PC(int x,int y) {
 		super(x,y);
+		this.health = 6;
 		
 		initPC();
 	}
