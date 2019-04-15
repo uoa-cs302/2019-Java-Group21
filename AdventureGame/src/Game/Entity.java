@@ -168,22 +168,26 @@ public class Entity extends Sprite{
 					this.y_pos = y_pos + 4;
 					
 				}
+				break;
 					
 			case DOWN:
 				if (this.getdy() > 0) {
 					this.y_pos = y_pos - 4;
 					
 				}
+				break;
 			case LEFT: 
 				if (this.getdx() < 0) {
 					this.x_pos = x_pos + 4;
 					
 				}
+				break;
 			case RIGHT: 
 				if (this.getdx() > 0) {
 					this.x_pos = x_pos - 4;
 					
 				}
+				break;
 		}
 	}
 	
