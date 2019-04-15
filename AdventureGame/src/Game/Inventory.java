@@ -11,23 +11,27 @@ public class Inventory {
 
 	private List<Item> items = new ArrayList<Item>();
 	private int index = 0;
-	private BufferedImage img;
+	private List<BufferedImage> images = new ArrayList<BufferedImage>();
 	
 	public Inventory(){
-		File f = new File("src/Image/Untitled.png");
-		try {
-			this.img = ImageIO.read(f);
-			System.out.println("inventory loaded!");
-		} catch (IOException e) {
+		File f;
+		for (int i = 0; i < 8; i++) {
 
-			System.out.println("inventory failed :(");
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			f = new File("src/Image/inv" + i + ".png");
+			try {
+				this.images.add(ImageIO.read(f));
+				System.out.println("read inv" + i + ".png");
+			} catch (IOException e) {
+
+				System.out.println("inventory failed :(");
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
 	public BufferedImage getImage() {
-		return this.img;
+		return this.images.get(index);
 	}
 	
 	public Item getItem() {
@@ -39,11 +43,17 @@ public class Inventory {
 	}
 	
 	public void incrementIndex() {
-		this.index++;
+		if (index == 7)
+			this.index = 0;
+		else
+			this.index++;
 	}
 	
 	public void decrementIndex() {
-		this.index++;
+		if (index == 0)
+			this.index = 7;
+		else
+			this.index--;
 	}
 	
 	public void setIndex(int index) {

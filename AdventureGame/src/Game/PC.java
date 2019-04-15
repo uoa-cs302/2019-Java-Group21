@@ -5,13 +5,11 @@ import java.util.List;
 
 public class PC extends Entity {
 	
-
-	private boolean UP = false;
-	private boolean DOWN = false;
-	private boolean LEFT = false;
-	private boolean RIGHT = false;
+	private boolean up = false;
+	private boolean down = false;
+	private boolean left = false;
+	private boolean right = false;
 	private Inventory inventory;
-
 	
 	public PC(int x,int y) {
 		super(x,y);
@@ -32,7 +30,7 @@ public class PC extends Entity {
 			if(direction != 3) {
 				dirchange = true;
 			}
-			UP = true;
+			up = true;
 
 			this.moving = true;
 			this.direction = 3;
@@ -41,7 +39,7 @@ public class PC extends Entity {
 			if(direction != 0) {
 				dirchange = true;
 			}
-			DOWN = true;
+			down = true;
 			this.moving = true;
 			this.direction = 0;
 		}
@@ -51,7 +49,7 @@ public class PC extends Entity {
 			if(direction != 1) {
 				dirchange = true;
 			}
-			LEFT =true;
+			left =true;
 			this.direction = 1;
 		}
 		if (key == KeyEvent.VK_D) {
@@ -59,8 +57,14 @@ public class PC extends Entity {
 			if(direction != 2) {
 				dirchange = true;
 			}
-			RIGHT = true;
+			right = true;
 			this.direction = 2;
+		}
+		if (key == KeyEvent.VK_LEFT) {
+			inventory.decrementIndex();
+		}
+		if (key == KeyEvent.VK_RIGHT) {
+			inventory.incrementIndex();
 		}
 		if(moving) {
 		switch (direction) {
@@ -90,28 +94,28 @@ public class PC extends Entity {
 		if (key == KeyEvent.VK_W) {
 			dy = 0;
 			dy_temp =0;
-			UP =false;
-			if (DOWN) {dy_temp = 2;direction = 0;}
+			up =false;
+			if (down) {dy_temp = 2;direction = 0;}
 		}
 		if (key == KeyEvent.VK_S) {
 			dy = 0;
 			dy_temp =0;
-			DOWN = false;
-			if (UP) {dy_temp = -2;direction = 3;}
+			down = false;
+			if (up) {dy_temp = -2;direction = 3;}
 		}
 		if (key == KeyEvent.VK_A) {
 			dx = 0;
 			dx_temp =0;
-			LEFT = false;
-			if (RIGHT) {dx_temp = 2; direction = 2;}
+			left = false;
+			if (right) {dx_temp = 2; direction = 2;}
 		}
 		if (key == KeyEvent.VK_D) {
 			dx = 0;
 			dx_temp =0;
-			RIGHT = false;
-			if (LEFT) {dx_temp = -2; direction = 1;}
+			right = false;
+			if (left) {dx_temp = -2; direction = 1;}
 		}
-		if (!(RIGHT || LEFT || UP || DOWN) ) {
+		if (!(right || left || up || down) ) {
 			this.moving = false;
 		} 
 		if(dx < 0) {
@@ -131,110 +135,6 @@ public class PC extends Entity {
 	}
 	public void setCollided(boolean a) {
 		collision = a;
-	}
-	
-	public void move(int frame_count) {
-		if (dirchange) {
-			frame_count = 0;
-			dirchange = false;
-		}
-		
-		if (moving == false) {
-			switch (direction) {
-			case 0:
-				loadImage(0,1);
-				break;
-			case 1:
-				loadImage(1,1);
-				break;
-			case 2:
-				loadImage(2,1);
-				break;
-			case 3:
-				loadImage(3,1);
-				break;
-				}
-			} else {
-				switch(direction) {
-				case 0:
-					switch(frame_count % 28) {
-					case 21:
-						loadImage(0,0);
-					break;
-					case 14:
-						loadImage(0,1);
-						break;
-					case 7:
-						loadImage(0,2);
-						break;
-					case 6:
-						loadImage(0,1);
-						break;
-					}
-					break;
-				case 1:
-					switch(frame_count % 28) {
-					case 21:
-						loadImage(1,0);
-					break;
-					case 14:
-						loadImage(1,1);
-						break;
-					case 7:
-						loadImage(1,2);
-						break;
-					case 6:
-						loadImage(1,1);
-						break;
-					}
-					break;
-				case 2:
-					switch(frame_count % 28) {
-					case 21:
-						loadImage(2,0);
-					break;
-					case 14:
-						loadImage(2,1);
-						break;
-					case 7:
-						loadImage(2,2);
-						break;
-					case 6:
-						loadImage(2,1);
-						break;
-					}
-					break;
-				case 3:
-					switch(frame_count % 28) {
-					case 21:
-						loadImage(3,0);
-					break;
-					case 14:
-						loadImage(3,1);
-						break;
-					case 7:
-						loadImage(3,2);
-						break;
-					case 6:
-						loadImage(3,1);
-						break;
-					}
-					break;
-				}
-				
-			}
-		//else moving
-		//collision handling
-
-
-		x_pos += dx;
-		right = x_pos + width;
-		y_pos += dy;
-		bottom = y_pos + height;
-		
-		dx = dx_temp;
-		dy  =dy_temp;
-		
 	}
 	
 
