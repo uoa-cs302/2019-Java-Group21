@@ -67,19 +67,18 @@ public class GameController implements ActionListener {
 	private void InitGame() {
 		//initialise timer with delay value 10ms
 		this.timer = new Timer(DELAY,this);
-
-		timer.start();
-		// for testing
 		pC = new PC(Start_X,Start_Y);
 		sprites.add(pC);
 		entities.add(pC);
+		timer.start();
+		// for testing
+		
 	}
 	
 	public void RoomLoad() {
 		if (sprites.isEmpty()==false || sprites != null) {
 	sprites.clear();
 		}
-		System.out.println("y");
 	sprites = gameModel.getCurrentRoom().getSpriteList();
 	sprites.add(pC);
 	}

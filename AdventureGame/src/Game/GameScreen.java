@@ -34,6 +34,8 @@ public class GameScreen extends JPanel {
 		
 	}
 	//paints Sprites
+	@Override
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		doEntityDrawing(g);
@@ -46,8 +48,10 @@ public class GameScreen extends JPanel {
 	public void doEntityDrawing(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		for (Sprite sprite : sprites) {
+			if(sprite != null) {
 			if(sprite.isVisible()) {
 			g2d.drawImage(sprite.getImage(), sprite.getx_pos(), sprite.gety_pos(),this);
+			}
 			}
 		}
 	}
