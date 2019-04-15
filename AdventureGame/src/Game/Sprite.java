@@ -97,13 +97,14 @@ public class Sprite {
 		getImageDim();
 	}
 	
-	protected void loadSpecificImage(String address) {
+	protected BufferedImage loadSpecificImage(String address) {
 		File f = new File(address);
 		try {
-			this.image = ImageIO.read(f);
+			return ImageIO.read(f);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 	protected void getImageDim() {
