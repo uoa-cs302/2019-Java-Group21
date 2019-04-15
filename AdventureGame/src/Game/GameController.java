@@ -51,7 +51,7 @@ public class GameController implements ActionListener {
 }
 			
 	private void addKeyListen() {
-		//sets a key listener for player movement and intereaction
+		//sets a key listener for player movement and interaction
 		gameView.addKeyListener(new KeyAdapter() {
 
 			public void keyReleased(KeyEvent e) {
@@ -68,6 +68,7 @@ public class GameController implements ActionListener {
 		//initialise timer with delay value 10ms
 		this.timer = new Timer(DELAY,this);
 		pC = new PC(Start_X,Start_Y);
+		System.out.println("Player constructed");
 		sprites.add(pC);
 		entities.add(pC);
 		timer.start();
@@ -96,9 +97,8 @@ public class GameController implements ActionListener {
 			}
 		}
 		//System.out.println(sprites.size());
-				gameView.getGameScreen().setDrawTarget(sprites);
-		
-
+		gameView.getGameScreen().setDrawTarget(sprites);
+		gameView.getGameScreen().setDrawUI(pC.getInventory());
 		gameView.getGameScreen().repaint();
 	}
 
@@ -123,6 +123,7 @@ public class GameController implements ActionListener {
 						gameModel.loadRoom(gameModel.getDungeonIndex(door.getRoom())); 
 						pC.setx_pos(door.getSpawnX());
 						pC.sety_pos(door.getSpawnY());
+						RoomLoad();
 					}
 					else if (sprite instanceof Wall) {
 						Wall wall = (Wall) sprite;
@@ -139,13 +140,12 @@ public class GameController implements ActionListener {
 	
 	public void checkEntityCollision() {
 		for (Entity entity1 : entities) {
-
-		for (Sprite sprite : sprites) {
-			if (entity1.getID() != sprite.getID()) {
-			checkCollision(entity1,sprite);
+			for (Sprite sprite : sprites) {
+				if (entity1.getID() != sprite.getID()) {
+					checkCollision(entity1,sprite);
+				}
+			}
 		}
-		}
-	}
 	}
 	//updateEntity Location
 	private void updateEntity(Entity x) {
