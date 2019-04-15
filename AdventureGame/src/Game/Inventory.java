@@ -63,6 +63,8 @@ public class Inventory {
 	}
 	
 	public void dropItem() {
+		if (items.get(index) == placeholder)
+			return;
 		if (index == items.size()-1) {
 			droppedItems.add(getItem());
 			this.items.remove(this.index);
