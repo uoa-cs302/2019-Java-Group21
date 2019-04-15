@@ -12,6 +12,7 @@ public class Inventory {
 	private List<Item> items = new ArrayList<Item>();
 	private int index = 0;
 	private List<BufferedImage> images = new ArrayList<BufferedImage>();
+	private Item placeholder = new Item(0,0);
 	
 	public Inventory(){
 		File f;
@@ -47,8 +48,20 @@ public class Inventory {
 	}
 	
 	public void addItem(Item item) {
+		for (int i = 0; i < items.size(); i++)
+			if (items.get(i) == placeholder) {
+				items.set(i, item);
+				return;
+			}
 		if (items.size() != 8)
 			this.items.add(item);
+	}
+	
+	public void dropItem() {
+		if (index == items.size()-1)
+			this.items.remove(this.index);
+		else if (index < items.size()-1)
+			this.items.set(index, placeholder);
 	}
 	
 	public void incrementIndex() {

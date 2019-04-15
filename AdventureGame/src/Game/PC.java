@@ -72,6 +72,9 @@ public class PC extends Entity {
 			Sword sword = new Sword(0,0);
 			inventory.addItem(sword);
 		}
+		if (key == KeyEvent.VK_DOWN) {
+			inventory.dropItem();
+		}
 		if(moving) {
 		switch (direction) {
 		case 0:

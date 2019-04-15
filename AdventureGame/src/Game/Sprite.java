@@ -96,6 +96,15 @@ public class Sprite {
 
 		getImageDim();
 	}
+	
+	protected void loadSpecificImage(String address) {
+		File f = new File(address);
+		try {
+			this.image = ImageIO.read(f);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	protected void getImageDim() {
 		width = image.getWidth(null);

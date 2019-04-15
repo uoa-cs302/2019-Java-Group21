@@ -9,12 +9,7 @@ public class Sword extends Item {
 
 	public Sword(int x, int y) {
 		super(x, y);
-		File f = new File("src/Image/swrd0.png");
-		try {
-			this.image = ImageIO.read(f);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		super.loadSpecificImage("src/Image/swrd0.png");
 	}
 
 	
