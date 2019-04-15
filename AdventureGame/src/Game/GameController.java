@@ -23,6 +23,9 @@ public class GameController implements ActionListener {
 	private GameView gameView;
 	private GameModel gameModel;
 	private Graphics g;
+	
+	private List<Sprite> sprites;
+	private List<Entity> entities;
 
 	public GameController(GameModel model, GameView view) {
 		//set game model and game view Jframe to Controller variables
@@ -32,9 +35,11 @@ public class GameController implements ActionListener {
 		gameView.getStartScreen().setButtonListener(new ScreenListener() {
 			public void actionPerformed() {
 				//Initialise Game on button press
-				System.out.println("x");
+				sprites = gameModel.getCurrentRoom().getSpriteList();
+				entities = gameModel.getCurrentRoom().getEntityList();
+
 				InitGame();
-		
+				
 				//draw the gamescreen
 				gameView.drawGameMenu();
 				addKeyListen();
@@ -63,6 +68,17 @@ public class GameController implements ActionListener {
 		timer.start();
 		// for testing
 		pC = new PC(Start_X,Start_Y);
+		sprites.add(pC);
+		entities.add(pC);
+	}
+	
+	public void RoomLoad() {
+		if (sprites.isEmpty()==false || sprites != null) {
+	sprites.clear();
+		}
+		System.out.println("y");
+	sprites = gameModel.getCurrentRoom().getSpriteList();
+	sprites.add(pC);
 	}
 
 
@@ -70,9 +86,13 @@ public class GameController implements ActionListener {
 	//method runs when timer ticks
 	//should include update, and draw.
 	public void actionPerformed(ActionEvent e) {
-		updateEntity(pC);
-		List<Sprite> sprites = gameModel.getCurrentRoom().getSpriteList();
-		sprites.add(pC);
+		for (Entity entity : entities) {
+			if(entity instanceof PC) {
+					updateEntity(entity);
+			}else if (entity instanceof GiantRat) {
+				updateEntityAi(entity);
+			}
+		}
 		//System.out.println(sprites.size());
 				gameView.getGameScreen().setDrawTarget(sprites);
 		
@@ -91,8 +111,6 @@ public class GameController implements ActionListener {
 
 	//checks collision of Player with all Obj
 	public void checkPlayerCollision() {
-		Room currentRoom = gameModel.getCurrentRoom();
-		List<Sprite> sprites = currentRoom.getSpriteList();
 		Rectangle r1 = pC.getBoundary();
 		for (Sprite sprite : sprites) {
 			Rectangle r2 = sprite.getBoundary();
@@ -106,16 +124,26 @@ public class GameController implements ActionListener {
 					}
 					else if (sprite instanceof Wall) {
 						Wall wall = (Wall) sprite;
-						pC.wallCollide(wall.getDirection());
+						pC.CollisionProcess(wall.gety_pos(), wall.getbottom(), wall.getx_pos(), wall.getright());
+					}
+					else if (sprite instanceof GiantRat) {
+						GiantRat rat = (GiantRat) sprite;
+						pC.hitBy(rat);
 					}
 				}
 			}
 		}
 	}
-
-
+	
 	public void checkEntityCollision() {
+		for (Entity entity1 : entities) {
 
+		for (Sprite sprite : sprites) {
+			if (entity1.getID() != sprite.getID()) {
+			checkCollision(entity1,sprite);
+		}
+		}
+	}
 	}
 	//updateEntity Location
 	private void updateEntity(Entity x) {
@@ -129,14 +157,14 @@ public class GameController implements ActionListener {
 	}
 	//update EntityAi Overridden from Entity in each class
 	private void updateEntityAi(Entity x) {
-		if(AnimCount < 28) {
+		if(AnimCount < 21) {
 			AnimCount++;
 		}else {
 			AnimCount = 0;
 		}
 
 		x.AiUpdate(pC);
-
+		checkEntityCollision();
 		x.move(AnimCount);
 	}
 

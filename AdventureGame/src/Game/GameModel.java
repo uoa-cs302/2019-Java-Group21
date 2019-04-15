@@ -11,8 +11,11 @@ public class GameModel {
 		currentRoom = new Room(0);
 		Wall wall = new Wall(240, 200);
 		Wall wall1 = new Wall (400,600);
+		GiantRat rat1 = new GiantRat(700,400);
 		wall.setDirection(Direction.UP);
 		wall1.setDirection(Direction.UP);
+		currentRoom.addSpriteList(rat1);
+		currentRoom.addEntityList(rat1);
 		currentRoom.addSpriteList(wall);
 		currentRoom.addSpriteList(wall1);
 	}

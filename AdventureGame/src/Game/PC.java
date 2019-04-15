@@ -12,12 +12,13 @@ public class PC extends Entity {
 	
 	public PC(int x,int y) {
 		super(x,y);
+		this.health = 6;
 		
 		initPC();
 	}
 	
 	private void initPC() {
-		LoadSprites("/Image/ExampleCharacter.png");
+		LoadSprites("src/Image/ExampleCharacter.png");
 		loadImage(0,0);
 	}
 	

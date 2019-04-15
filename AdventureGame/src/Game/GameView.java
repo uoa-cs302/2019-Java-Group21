@@ -22,6 +22,7 @@ public class GameView extends JFrame {
 	private GameScreen gameScreen;
 	private StartScreen startScreen;
 	private CardLayout cardLayout;
+	protected Graphics g;
 	
 	public GameView() {
 		super.setTitle("A Well of Opportunity");
