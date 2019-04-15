@@ -25,6 +25,7 @@ public class GameController implements ActionListener {
 	private Graphics g;
 	
 	private List<Sprite> sprites;
+	private List<Sprite> deletedSprites = new ArrayList();
 	private List<Entity> entities;
 
 	public GameController(GameModel model, GameView view) {
@@ -46,7 +47,6 @@ public class GameController implements ActionListener {
 				addKeyListen();
 			}
 		};
-		System.out.println("ScreenListener exists: " + gameControllerScreenListener);
 		gameView.getStartScreen().setButtonListener(gameControllerScreenListener);
 }
 			
@@ -68,7 +68,6 @@ public class GameController implements ActionListener {
 		//initialise timer with delay value 10ms
 		this.timer = new Timer(DELAY,this);
 		pC = new PC(Start_X,Start_Y);
-		System.out.println("Player constructed");
 		sprites.add(pC);
 		entities.add(pC);
 		timer.start();
@@ -84,19 +83,27 @@ public class GameController implements ActionListener {
 	sprites.add(pC);
 	}
 
-
 	@Override
 	//method runs when timer ticks
 	//should include update, and draw.
 	public void actionPerformed(ActionEvent e) {
+		if (pC.getInventory().droppedItemsSize() != 0) {
+			for (Item item : pC.getInventory().getDroppedItems()) {
+				item.setx_pos(pC.getx_pos());
+				item.sety_pos(pC.gety_pos());
+				item.getImageDim();
+				gameModel.getCurrentRoom().addSpriteList(item);
+			}
+			pC.getInventory().clearDroppedItems();
+		}
+		
 		for (Entity entity : entities) {
 			if(entity instanceof PC) {
-					updateEntity(entity);
+				updateEntity(entity);
 			}else if (entity instanceof GiantRat) {
 				updateEntityAi(entity);
 			}
 		}
-		//System.out.println(sprites.size());
 		gameView.getGameScreen().setDrawTarget(sprites);
 		gameView.getGameScreen().setDrawUI(pC.getInventory());
 		gameView.getGameScreen().repaint();
@@ -133,19 +140,26 @@ public class GameController implements ActionListener {
 						GiantRat rat = (GiantRat) sprite;
 						pC.hitBy(rat);
 					}
+					else if (sprite instanceof Item) {
+						Item item = (Item) sprite;
+						if (pC.isItemPickUp()) {
+							if (pC.getInventory().addItem(item))
+								deletedSprites.add(sprite);
+						}
+					}
 				}
 			}
 		}
+		if (deletedSprites.size() != 0)
+			deleteSprites();
 	}
 	
-	public void checkEntityCollision() {
-		for (Entity entity1 : entities) {
+	public void checkEntityCollision(Entity x) {
 			for (Sprite sprite : sprites) {
-				if (entity1.getID() != sprite.getID()) {
-					checkCollision(entity1,sprite);
+				if (x.getID() != sprite.getID()) {
+					checkCollision(x,sprite);
 				}
 			}
-		}
 	}
 	//updateEntity Location
 	private void updateEntity(Entity x) {
@@ -166,9 +180,17 @@ public class GameController implements ActionListener {
 		}
 
 		x.AiUpdate(pC);
-		checkEntityCollision();
+		checkEntityCollision(x);
 		x.move(AnimCount);
 		
 	}
-
+	public void deleteSprites() {
+		for (int i = 0; i < sprites.size(); i++)
+			for (Sprite delete : this.deletedSprites)
+				if (sprites.get(i) == delete) {
+					sprites.remove(i);
+					i--;
+				}
+		deletedSprites.clear();
+	}
 }

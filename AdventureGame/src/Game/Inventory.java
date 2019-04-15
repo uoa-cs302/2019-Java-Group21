@@ -11,6 +11,7 @@ public class Inventory {
 
 	private List<Item> items = new ArrayList<Item>();
 	private int index = 0;
+	private List<Item> droppedItems = new ArrayList<Item>();
 	private List<BufferedImage> images = new ArrayList<BufferedImage>();
 	private Item placeholder = new Item(0,0);
 	
@@ -47,21 +48,29 @@ public class Inventory {
 		return this.items.get(this.index);
 	}
 	
-	public void addItem(Item item) {
+	public boolean addItem(Item item) {
 		for (int i = 0; i < items.size(); i++)
 			if (items.get(i) == placeholder) {
 				items.set(i, item);
-				return;
+				return true;
 			}
 		if (items.size() != 8)
 			this.items.add(item);
+		else
+			return false;
+		return true;
+		
 	}
 	
 	public void dropItem() {
-		if (index == items.size()-1)
+		if (index == items.size()-1) {
+			droppedItems.add(getItem());
 			this.items.remove(this.index);
-		else if (index < items.size()-1)
+		}
+		else if (index < items.size()-1) {
+			droppedItems.add(getItem());
 			this.items.set(index, placeholder);
+		}
 	}
 	
 	public void incrementIndex() {
@@ -80,5 +89,17 @@ public class Inventory {
 	
 	public void setIndex(int index) {
 		this.index = index;
+	}
+	
+	public int droppedItemsSize() {
+		return droppedItems.size();
+	}
+	
+	public List<Item> getDroppedItems() {
+		return droppedItems;
+	}
+	
+	public void clearDroppedItems() {
+		droppedItems.clear();
 	}
 }

@@ -28,6 +28,10 @@ public class Room {
 	public void addSpriteList(Sprite sprite) {
 		this.spriteList.add(sprite);
 	}
+	
+	public void addSpritesList(List<Sprite> sprites) {
+		this.spriteList.addAll(sprites);
+	}
 
 	public int getRoomNumber() {
 		return roomNumber;

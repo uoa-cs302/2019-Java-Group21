@@ -10,6 +10,7 @@ public class PC extends Entity {
 	private boolean left = false;
 	private boolean right = false;
 	private Inventory inventory;
+	private boolean itemPickUp = false;
 	
 	public PC(int x,int y) {
 		super(x,y);
@@ -66,14 +67,20 @@ public class PC extends Entity {
 		if (key == KeyEvent.VK_RIGHT) {
 			inventory.incrementIndex();
 		}
-		// Temporary
-		// Used to add sword to inventory for testing
 		if (key == KeyEvent.VK_UP) {
-			Sword sword = new Sword(0,0);
-			inventory.addItem(sword);
+			setItemPickUp(true);
+		}
+		else {
+			
 		}
 		if (key == KeyEvent.VK_DOWN) {
 			inventory.dropItem();
+		}
+		// Temporary
+		// Used to add sword to inventory for testing
+		if (key == KeyEvent.VK_L) {
+			Sword sword = new Sword(0,0);
+			inventory.addItem(sword);
 		}
 		if(moving) {
 		switch (direction) {
@@ -124,6 +131,9 @@ public class PC extends Entity {
 			right = false;
 			if (left) {dx_temp = -2; direction = 1;}
 		}
+		if (key == KeyEvent.VK_UP) {
+			setItemPickUp(false);
+		}
 		if (!(right || left || up || down) ) {
 			this.moving = false;
 		} 
@@ -149,5 +159,13 @@ public class PC extends Entity {
 
 	public Inventory getInventory(){
 		return this.inventory;
+	}
+
+	public boolean isItemPickUp() {
+		return itemPickUp;
+	}
+
+	public void setItemPickUp(boolean itemPickUp) {
+		this.itemPickUp = itemPickUp;
 	}
 }

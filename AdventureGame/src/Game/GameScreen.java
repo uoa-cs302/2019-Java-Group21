@@ -55,7 +55,6 @@ public class GameScreen extends JPanel {
 		}
 		if (sprites.size() != 0) {
 			g2d.drawImage(inventory.getImage(), 100, 600, this);
-			
 			for(int i = 0; i < inventory.inventorySize(); i++) {
 				g2d.drawImage(inventory.seeItem(i).getInventoryImage(), 113 + (96*i), 613, this);
 			}
