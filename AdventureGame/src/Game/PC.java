@@ -1,6 +1,7 @@
 package Game;
 
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 public class PC extends Entity {
 	
@@ -8,13 +9,13 @@ public class PC extends Entity {
 	private boolean down = false;
 	private boolean left = false;
 	private boolean right = false;
-
+	private Inventory inventory;
 	
 	public PC(int x,int y) {
 		super(x,y);
 		this.health = 6;
-		
 		initPC();
+		inventory = new Inventory();
 	}
 	
 	private void initPC() {
@@ -131,4 +132,7 @@ public class PC extends Entity {
 	}
 	
 
+	public Inventory getInventory(){
+		return this.inventory;
+	}
 }

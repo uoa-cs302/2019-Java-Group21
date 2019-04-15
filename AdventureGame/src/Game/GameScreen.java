@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 public class GameScreen extends JPanel {
 	//sprite can be changed into ArrayList or other later
 	private List<Sprite> sprites;
+	private Inventory inventory;
 	@SuppressWarnings("unused")
 	private KeypressListener key;
 	
@@ -37,8 +38,6 @@ public class GameScreen extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		doEntityDrawing(g);
-		
-		
 		Toolkit.getDefaultToolkit().sync();
 
 	}
@@ -50,10 +49,15 @@ public class GameScreen extends JPanel {
 			g2d.drawImage(sprite.getImage(), sprite.getx_pos(), sprite.gety_pos(),this);
 			}
 		}
+		if (sprites.size() != 0)
+			g2d.drawImage(inventory.getImage(), 100, 600, this);
+	}
+	
+	public void setDrawUI(Inventory inventory) {
+		this.inventory = inventory;
 	}
 	
 	public void setDrawTarget(List<Sprite> sprites) {
-		
 		this.sprites = sprites;
 	}
 	//may not be used atm

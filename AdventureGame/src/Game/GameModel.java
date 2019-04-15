@@ -14,13 +14,9 @@ public class GameModel {
 		System.out.println("GameModel constructor 1");
 		Wall wall = new Wall(240, 200);
 		System.out.println("GameModel constructor 2");
-		Wall wall1 = new Wall (400,600);
+		Wall wall1 = new Wall (400,400);
 		System.out.println("GameModel constructor 3");
 		GiantRat rat1 = new GiantRat(700,400);
-		wall.setDirection(Direction.UP);
-		System.out.println("GameModel constructor 4");
-		wall1.setDirection(Direction.UP);
-		System.out.println("GameModel constructor 5");
 		currentRoom.addSpriteList(rat1);
 		currentRoom.addEntityList(rat1);
 		currentRoom.addSpriteList(wall);
