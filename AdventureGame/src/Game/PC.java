@@ -66,6 +66,10 @@ public class PC extends Entity {
 		if (key == KeyEvent.VK_RIGHT) {
 			inventory.incrementIndex();
 		}
+		if (key == KeyEvent.VK_UP) {
+			Sword sword = new Sword(0,0);
+			inventory.addItem(sword);
+		}
 		if(moving) {
 		switch (direction) {
 		case 0:

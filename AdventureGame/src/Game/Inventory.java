@@ -34,12 +34,21 @@ public class Inventory {
 		return this.images.get(index);
 	}
 	
+	public int inventorySize() {
+		return items.size();
+	}
+	
+	public Item seeItem(int i) {
+		return this.items.get(i);
+	}
+	
 	public Item getItem() {
-		return this.items.get(index);
+		return this.items.get(this.index);
 	}
 	
 	public void addItem(Item item) {
-		this.items.add(item);
+		if (items.size() != 8)
+			this.items.add(item);
 	}
 	
 	public void incrementIndex() {
