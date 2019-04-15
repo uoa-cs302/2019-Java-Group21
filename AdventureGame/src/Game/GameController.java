@@ -166,6 +166,7 @@ public class GameController implements ActionListener {
 		x.AiUpdate(pC);
 		checkEntityCollision();
 		x.move(AnimCount);
+		
 	}
 
 }
