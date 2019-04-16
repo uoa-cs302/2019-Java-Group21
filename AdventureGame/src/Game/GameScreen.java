@@ -46,19 +46,20 @@ public class GameScreen extends JPanel {
 	//draws image
 	public void doEntityDrawing(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
+		if (sprites != null) {
 		for (Sprite sprite : sprites) {
-			if(sprite != null) {
+			
 				if(sprite.isVisible()) {
 					g2d.drawImage(sprite.getImage(), sprite.getx_pos(), sprite.gety_pos(),this);
 				}
 			}
 		}
-		if (sprites.size() != 0) {
+		if(inventory != null) {
 			g2d.drawImage(inventory.getImage(), 100, 600, this);
 			for(int i = 0; i < inventory.inventorySize(); i++) {
 				g2d.drawImage(inventory.seeItem(i).getInventoryImage(), 113 + (96*i), 613, this);
 			}
-		}
+		}	
 	}
 	
 	public void setDrawUI(Inventory inventory) {

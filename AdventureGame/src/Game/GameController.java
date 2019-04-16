@@ -39,11 +39,11 @@ public class GameController implements ActionListener {
 				//Initialise Game on button press
 				sprites = gameModel.getCurrentRoom().getSpriteList();
 				entities = gameModel.getCurrentRoom().getEntityList();
-
-				InitGame();
-				
 				//draw the gamescreen
 				gameView.drawGameMenu();
+				InitGame();
+				
+
 				addKeyListen();
 			}
 		};
