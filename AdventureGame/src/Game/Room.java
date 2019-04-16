@@ -8,11 +8,21 @@ public class Room {
 	private int roomNumber;
 	private List<Entity> entityList= new ArrayList<Entity>();
 	private List<Sprite> spriteList= new ArrayList<Sprite>();
+	Tile[][] level;
 	
 	public Room(int number) {
 		this.roomNumber = number;
+		level = new Tile[18][24];
 	}
 	
+	public Tile[][] getLevel() {
+		return level;
+	}
+
+	public void setLevel(Tile[][] level) {
+		this.level = level;
+	}
+
 	public List<Sprite> getSpriteList(){
 		return this.spriteList;
 	}
