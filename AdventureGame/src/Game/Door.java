@@ -3,7 +3,7 @@ package Game;
 
 // Class provides a sprite that when the player collides with it,
 // The door then passes the information needed to load the player into the next Room
-public class Door extends Sprite{
+public class Door extends Entity{
 
 	// Both are integers representing the position on screen the player will spawn
 	private int spawnX;

@@ -1,6 +1,7 @@
 package Game;
 
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.List;
@@ -10,20 +11,22 @@ import javax.swing.ImageIcon;
 
 import Game.Sprite.Direction;
 
-public class Entity extends Sprite{
+public class Entity extends Sprite {
 	
 	
 	protected Direction direction = Direction.IDLE;
-	protected boolean moving;
-	protected boolean dirchange;
 	protected int dx;
 	protected int dy;
+	private boolean collidable = false;
+	
+	
 	protected int dx_temp;
 	protected int dy_temp;
 	protected boolean collision;
 	protected int damage;
 	protected Animation ani;
 	protected Direction curAnim;
+	protected Sprite sprite;
 	
 	protected boolean Attack;
 	protected int AttackSpeed;
@@ -44,9 +47,9 @@ public class Entity extends Sprite{
 	 * EntityID Values are initialized on the subclass construction 
 	
 	*/
-	public Entity(int x, int y) {
+	public Entity(int x,int y){
 		super(x,y);
-		super.setCollidable(true);
+		setCollidable(true);
 		ani = new Animation();
 		direction = Direction.DOWN;
 		
@@ -60,6 +63,9 @@ public class Entity extends Sprite{
 	public int getDamage() {return damage;}
 	public Direction getDirection() {return direction;}
 	public Animation getAnimation() {return ani;}
+	public boolean isCollidable() {return collidable;}
+	public void setCollidable(boolean collidable) {this.collidable = collidable;}
+	public Rectangle getBoundary() {return new Rectangle(x_pos, y_pos, width, height);}
 	
 	public void setAnimation(Direction i,BufferedImage[] frames, int delay) {
 		curAnim = i;
@@ -97,6 +103,7 @@ public class Entity extends Sprite{
 	}
 	
 	public void update() {};
+	public void update(Entity target) {};
 	public void move() {}
 	
 	public void wallCollide(Direction direction) {
@@ -164,7 +171,7 @@ public void CollisionProcess(int top,int bottom,int left, int right) {
 	 if(health < 0) {
 		 this.visible = false;
 		 this.setCollidable(false);
-	 }
+	 
 	 
 	 switch (e.getDirection()) {
 	 case DOWN:
@@ -188,6 +195,7 @@ public void CollisionProcess(int top,int bottom,int left, int right) {
 		 this.move();
 		 break;
 	 }
+	 }
  }
 	protected int check_collisiondir_Hoz(int left2,int right2 ) {
 
@@ -209,47 +217,4 @@ public void CollisionProcess(int top,int bottom,int left, int right) {
 			return 0;
 		}
 	}
-	
-	public void AiUpdate(Entity target) {
-		if (target == null) {
-			dx = 0;
-			dy = 0;
-			
-		}else {
-		int xdiff;
-		int ydiff;
-		
-		xdiff = target.getx_pos() - this.x_pos;
-		ydiff = target.gety_pos() - this.y_pos;
-		moving = true;
-
-			
-		if(ydiff>0 ) {
-			direction = Direction.DOWN;
-			dirchange = true;
-			dy = 1;
-		}else if (ydiff<0 ) {
-			direction = Direction.UP;
-			dirchange = true;
-			dy = -1;
-		} else {
-			dirchange = true;
-			dy=0;
-		}
-		if (xdiff>0) {
-			direction = Direction.RIGHT;
-			dirchange = true;
-			dx = 1;
-		}else if (xdiff<0) {
-			direction = Direction.LEFT;
-			dirchange = true;
-			dx = -1;
-		} else {
-			dx = 0;
-		}
-		
-		}
-	}
-
-
 }

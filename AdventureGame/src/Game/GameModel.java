@@ -19,9 +19,9 @@ public class GameModel {
 		GiantRat rat1 = new GiantRat(700,400);
 		currentRoom.addSpriteList(rat1);
 		currentRoom.addEntityList(rat1);
-		currentRoom.addSpriteList(wall);
+		currentRoom.addEntityList(wall);
 		System.out.println("GameModel constructor 6");
-		currentRoom.addSpriteList(wall1);
+		currentRoom.addEntityList(wall1);
 		System.out.println("GameModel constructor complete");
 	}
 

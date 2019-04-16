@@ -15,21 +15,21 @@ public class Sprite {
 		UP, DOWN, LEFT, RIGHT, IDLE
 	};
 
-	protected int x_pos;
-	protected int y_pos;
-	protected int width;
+	protected int x_pos; // move to Entity
+	protected int y_pos;//move to En
+	protected int width;//make sure all these have getters
 	protected int height;
 	protected int right;
 	protected int bottom;
 	protected boolean visible;
-	private boolean collidable = false;
+
 	private int sheetW;
 	private int sheetH;
 
-	protected BufferedImage SpriteSheet;
+	private BufferedImage SpriteSheet;
 	private static AtomicInteger ID_GENERATOR = new AtomicInteger(1000);
-	protected BufferedImage[][] sprites;
-	protected int ID;
+	private BufferedImage[][] sprites;
+	private int ID;
 	private final int TILE_SIZE = 32;
 
 	protected BufferedImage image;
@@ -108,7 +108,7 @@ public class Sprite {
 		return null;
 	}
 
-	protected void getImageDim() {
+	void getImageDim() {
 		width = image.getWidth(null);
 		height = image.getHeight(null);
 		right = x_pos + width;
@@ -149,18 +149,6 @@ public class Sprite {
 
 	public void setVisible(boolean visible) {
 		this.visible = visible;
-	}
-
-	protected Rectangle getBoundary() {
-		return new Rectangle(x_pos, y_pos, width, height);
-	}
-
-	public boolean isCollidable() {
-		return collidable;
-	}
-
-	public void setCollidable(boolean collidable) {
-		this.collidable = collidable;
 	}
 	public int getID() {
 		return ID;
