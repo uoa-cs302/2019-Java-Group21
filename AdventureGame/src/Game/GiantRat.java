@@ -46,7 +46,7 @@ private boolean charging = false;
 		}else if (ydiff<0 ) {
 			direction = Direction.UP;
 			dy = -1;
-		} 
+		} else {dy =0;}
 		
 		if (xdiff>0) {
 			direction = Direction.RIGHT;
@@ -54,20 +54,20 @@ private boolean charging = false;
 		}else if (xdiff<0) {
 			direction = Direction.LEFT;
 			dx = -1;
-		}
-		if (distance <= 8 && charging == false) {
+		}else {dx=0;}
+		if (distance <= 5 && charging == false) {
 			charging = true;
 			count = 0;
-			dx = dx*4;
-			dy = dy*4;
+			dx = dx*3;
+			dy = dy*3;
 			dx_lock = dx;
 			dy_lock = dy;
 		
-		} else if(charging && count <100) {
+		} else if(charging && count <80) {
 			count++;
 			dx = dx_lock;
 			dy = dy_lock;
-		}else if (charging && count <600 && count>=100) {
+		}else if (charging && count <600 && count>=80) {
 			count++;
 		}else if (charging && count == 600) {
 		
