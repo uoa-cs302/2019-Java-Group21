@@ -1,14 +1,67 @@
 package Game;
 
-public class Floor {
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
-	private int x, y, width, height;
+public class Floor extends Sprite{
 
-	public Floor(int x, int y, int width, int height) {
+	private int x, y;
+	private BufferedImage texture;
+
+	enum Texture{
+		NORMALTILE0,
+		NORMALTILE1,
+		BIGTILE0,
+		BIGTILE1,
+		SMALLTILE0,
+		SMALLTILE1,
+		NORMALTILE2,
+		SMALLTILE2,
+		BIGTILE2,
+		BIGTILE3,
+		WIDETILE0,
+		WIDETILE1
+	}
+
+	public Floor(int x, int y) {
+		super(x,y);
 		this.x = x;
 		this.y = y;
-		this.width = width;
-		this.height = height;
+		LoadSprites("src/Image/dungeon0.png");
+	}
+
+	public void setTexture(int texture) {
+		switch (texture) {
+		case 0:
+			ExtractSprites(6, 7);
+		case 1:
+			ExtractSprites(6, 8);
+		case 2:
+			ExtractSprites(6, 9);
+		case 3:
+			ExtractSprites(6, 10);
+		case 4:
+			ExtractSprites(6, 11);
+		case 5:
+			ExtractSprites(6, 12);
+		case 6:
+			ExtractSprites(6, 13);
+		case 7:
+			ExtractSprites(7, 7);
+		case 8:
+			ExtractSprites(7, 8);
+		case 9:
+			ExtractSprites(7, 9);
+		case 10:
+			ExtractSprites(7, 10);
+		case 11:
+			ExtractSprites(7, 11);
+		case 12:
+			ExtractSprites(7, 12);
+		case 13:
+			ExtractSprites(7, 13);
+		}
 	}
 
 	public int getX() {

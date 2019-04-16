@@ -18,7 +18,6 @@ public class Inventory {
 	public Inventory(){
 		File f;
 		for (int i = 0; i < 8; i++) {
-
 			f = new File("src/Image/inv" + i + ".png");
 			try {
 				this.images.add(ImageIO.read(f));
