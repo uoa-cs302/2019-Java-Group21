@@ -1,6 +1,6 @@
 package Game;
 
-public class HeavyBlock extends Sprite {
+public class HeavyBlock extends Entity {
 	
 	HeavyBlock(int x, int y){
 		super(x,y);

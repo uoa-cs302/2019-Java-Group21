@@ -19,6 +19,10 @@ private boolean charging = false;
 		damage = 1;
 		
 	}
+	public void update(Entity target) {
+		AiUpdate(target);
+		this.move();
+	}
 
 
 	
@@ -36,24 +40,19 @@ private boolean charging = false;
 		int distance = (int) Math.hypot((double) xdiff/32,(double) ydiff/32);
 	
 		
-		moving = true;
 		if(ydiff>0 ) {
 			direction = Direction.DOWN;
-			dirchange = true;
 			dy = 1;
 		}else if (ydiff<0 ) {
 			direction = Direction.UP;
-			dirchange = true;
 			dy = -1;
 		} 
 		
 		if (xdiff>0) {
 			direction = Direction.RIGHT;
-			dirchange = true;
 			dx = 1;
 		}else if (xdiff<0) {
 			direction = Direction.LEFT;
-			dirchange = true;
 			dx = -1;
 		}
 		if (distance <= 8 && charging == false) {
@@ -75,8 +74,6 @@ private boolean charging = false;
 			charging = false;
 			count = 0;
 		}
-		System.out.println(dx);
-		System.out.println(dy);
 		
 			}	
 	}
@@ -88,9 +85,6 @@ private boolean charging = false;
 		right = x_pos + width;
 		y_pos += dy;
 		bottom = y_pos + height;
-		
-		dx_temp = dx;
-		dy_temp = dy;
 		
 	}
 

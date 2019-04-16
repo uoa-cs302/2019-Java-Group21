@@ -2,7 +2,7 @@ package Game;
 
 import java.awt.image.BufferedImage;
 
-public class Item extends Sprite{
+public class Item extends Entity{
 
 	BufferedImage inventoryImage;
 	
