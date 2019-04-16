@@ -34,33 +34,29 @@ public class Floor extends Sprite{
 	public void setTexture(int texture) {
 		switch (texture) {
 		case 0:
-			ExtractSprites(6, 7);
+			this.texture = ExtractSprites(6, 8);
 		case 1:
-			ExtractSprites(6, 8);
+			this.texture = ExtractSprites(6, 9);
 		case 2:
-			ExtractSprites(6, 9);
+			this.texture = ExtractSprites(6, 10);
 		case 3:
-			ExtractSprites(6, 10);
+			this.texture = ExtractSprites(6, 11);
 		case 4:
-			ExtractSprites(6, 11);
+			this.texture = ExtractSprites(6, 12);
 		case 5:
-			ExtractSprites(6, 12);
+			this.texture = ExtractSprites(6, 13);
 		case 6:
-			ExtractSprites(6, 13);
+			this.texture = ExtractSprites(7, 8);
 		case 7:
-			ExtractSprites(7, 7);
+			this.texture = ExtractSprites(7, 9);
 		case 8:
-			ExtractSprites(7, 8);
+			this.texture = ExtractSprites(7, 10);
 		case 9:
-			ExtractSprites(7, 9);
+			this.texture = ExtractSprites(7, 11);
 		case 10:
-			ExtractSprites(7, 10);
+			this.texture = ExtractSprites(7, 12);
 		case 11:
-			ExtractSprites(7, 11);
-		case 12:
-			ExtractSprites(7, 12);
-		case 13:
-			ExtractSprites(7, 13);
+			this.texture = ExtractSprites(7, 13);
 		}
 	}
 
