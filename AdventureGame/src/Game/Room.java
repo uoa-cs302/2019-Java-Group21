@@ -9,7 +9,7 @@ public class Room {
 	private List<Entity> entityList= new ArrayList<Entity>();
 	private List<Sprite> spriteList= new ArrayList<Sprite>();
 	Floor[][] level;
-
+	
 	public Room(int number) {
 		this.roomNumber = number;
 		level = new Floor[18][24];
