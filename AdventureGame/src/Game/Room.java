@@ -8,18 +8,18 @@ public class Room {
 	private int roomNumber;
 	private List<Entity> entityList= new ArrayList<Entity>();
 	private List<Sprite> spriteList= new ArrayList<Sprite>();
-	Tile[][] level;
+	Floor[][] level;
 	
 	public Room(int number) {
 		this.roomNumber = number;
-		level = new Tile[18][24];
+		level = new Floor[18][24];
 	}
 	
-	public Tile[][] getLevel() {
+	public Floor[][] getLevel() {
 		return level;
 	}
 
-	public void setLevel(Tile[][] level) {
+	public void setLevel(Floor[][] level) {
 		this.level = level;
 	}
 

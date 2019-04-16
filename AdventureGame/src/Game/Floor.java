@@ -1,10 +1,10 @@
 package Game;
 
-public class Tile {
+public class Floor {
 
 	private int x, y, width, height;
 
-	public Tile(int x, int y, int width, int height) {
+	public Floor(int x, int y, int width, int height) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
