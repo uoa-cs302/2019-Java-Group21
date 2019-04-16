@@ -49,12 +49,12 @@ public class Inventory {
 	}
 
 	public boolean addItem(Item item) {
-		for (int i = 0; i < items.size(); i++)
+		for (int i = 0; i < inventorySize(); i++)
 			if (items.get(i) == placeholder) {
 				items.set(i, item);
 				return true;
 			}
-		if (items.size() != 8)
+		if (inventorySize() != 8)
 			this.items.add(item);
 		else
 			return false;
@@ -63,17 +63,18 @@ public class Inventory {
 	}
 
 	public void dropItem() {
-		if (items.get(index) != placeholder) {
-			if (index == items.size()-1) {
-				droppedItems.add(getItem());
-				this.items.remove(this.index);
-			}
-			else if (index < items.size()-1) {
-				droppedItems.add(getItem());
-				this.items.set(index, placeholder);
+		if (index < inventorySize()) {
+			if (items.get(index) != placeholder) {
+				if (index == inventorySize()-1) {
+					droppedItems.add(getItem());
+					this.items.remove(this.index);
+				}
+				else if (index < inventorySize()-1) {
+					droppedItems.add(getItem());
+					this.items.set(index, placeholder);
+				}
 			}
 		}
-
 	}
 
 	public void incrementIndex() {

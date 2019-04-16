@@ -101,9 +101,6 @@ public class PC extends Entity {
 		if (key == KeyEvent.VK_UP) {
 			setItemPickUp(true);
 		}
-		else {
-			
-		}
 		if (key == KeyEvent.VK_DOWN) {
 			inventory.dropItem();
 		}
@@ -140,7 +137,6 @@ public class PC extends Entity {
 	public void setCollided(boolean a) {
 		collision = a;
 	}
-	
 
 	public Inventory getInventory(){
 		return this.inventory;
