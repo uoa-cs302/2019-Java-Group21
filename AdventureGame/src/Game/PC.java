@@ -117,7 +117,6 @@ public class PC extends Entity {
 	public void setCollided(boolean a) {
 		collision = a;
 	}
-	
 
 	public Inventory getInventory(){
 		return this.inventory;
