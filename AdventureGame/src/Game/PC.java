@@ -30,6 +30,29 @@ public class PC extends Entity {
 		x_pos +=dx;
 		y_pos += dy;
 	}
+	
+	public void move() {
+		if(up) {
+			dy = -2;
+		}else {
+			if (dy < 0) {dy =0;}
+		}if(left) {
+			dx = -2;
+		}else {
+			if (dx < 0) {dx =0;}
+		}if(down) {
+			dy = 2;
+		}else {
+			if (dy > 0) { dy =0;}
+		}if(right) {
+			dx = 2;
+		}else {
+			if (dx > 0) {dx =0;}
+		}
+		if (dx ==0 && dy ==0) {
+			this.direction = Direction.IDLE;
+		}
+	}
 	public void image() {
 		this.ani.update();
 		this.image = this.ani.getImage();

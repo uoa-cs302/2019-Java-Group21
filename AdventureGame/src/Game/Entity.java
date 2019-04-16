@@ -65,6 +65,7 @@ public class Entity extends Sprite{
 		curAnim = i;
 		ani.setFrames(frames);
 		ani.setDelay(delay);
+		ani.setFrame(1);
 	}
 	
 	public void animate() {
