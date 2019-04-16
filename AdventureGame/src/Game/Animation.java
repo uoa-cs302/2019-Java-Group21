@@ -42,7 +42,7 @@ public class Animation {
 			curFrame++;
 			count = 0;
 		}
-		if (curFrame == numFrame - 1) {
+		if (curFrame == numFrame) {
 			curFrame = 0;
 			timesPlayed++;
 		}
