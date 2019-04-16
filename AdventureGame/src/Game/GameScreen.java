@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 
 public class GameScreen extends JPanel {
 	//sprite can be changed into ArrayList or other later
-	private List<Entity> sprites;
+	private List<Sprite> sprites;
 	private Inventory inventory;
 	@SuppressWarnings("unused")
 	private KeypressListener key;
@@ -66,7 +66,7 @@ public class GameScreen extends JPanel {
 		this.inventory = inventory;
 	}
 	
-	public void setDrawTarget(List<Entity> sprites) {
+	public void setDrawTarget(List<Sprite> sprites) {
 		this.sprites = sprites;
 	}
 	//may not be used atm

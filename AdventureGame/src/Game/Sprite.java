@@ -40,7 +40,6 @@ public class Sprite {
 		this.y_pos = y;
 		visible = true;
 		ID = ID_GENERATOR.getAndIncrement();
-
 	}
 
 	protected void LoadSprites(String sheet) {
@@ -94,7 +93,6 @@ public class Sprite {
 	protected void loadImage(int x, int y) {
 
 		this.image = sprites[x][y];
-
 		getImageDim();
 	}
 	

@@ -52,7 +52,6 @@ public class Entity extends Sprite {
 		setCollidable(true);
 		ani = new Animation();
 		direction = Direction.DOWN;
-		
 	}
 	public int getEntityID() {return this.EntityID;}
 	public int getdy() {return dy;}
