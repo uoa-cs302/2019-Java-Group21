@@ -40,7 +40,6 @@ public class Sprite {
 		this.y_pos = y;
 		visible = true;
 		ID = ID_GENERATOR.getAndIncrement();
-
 	}
 
 	protected void LoadSprites(String sheet) {
@@ -86,7 +85,7 @@ public class Sprite {
 
 	}
 
-	private BufferedImage ExtractSprites(int x, int y) {
+	protected BufferedImage ExtractSprites(int x, int y) {
 		BufferedImage targ_sprite = SpriteSheet.getSubimage(y * TILE_SIZE, x * TILE_SIZE, TILE_SIZE, TILE_SIZE);
 		return targ_sprite;
 	}
@@ -94,7 +93,6 @@ public class Sprite {
 	protected void loadImage(int x, int y) {
 
 		this.image = sprites[x][y];
-
 		getImageDim();
 	}
 	

@@ -23,9 +23,9 @@ public class GameController implements ActionListener {
 	private GameView gameView;
 	private GameModel gameModel;
 	private Graphics g;
-	
+
 	private List<Sprite> sprites;
-	private List<Sprite> deletedSprites = new ArrayList();
+	private List<Entity> deletedEntities = new ArrayList<Entity>();
 	private List<Entity> entities;
 
 	public GameController(GameModel model, GameView view) {
@@ -42,14 +42,14 @@ public class GameController implements ActionListener {
 				//draw the gamescreen
 				gameView.drawGameMenu();
 				InitGame();
-				
+
 
 				addKeyListen();
 			}
 		};
 		gameView.getStartScreen().setButtonListener(gameControllerScreenListener);
-}
-			
+	}
+
 	private void addKeyListen() {
 		//sets a key listener for player movement and interaction
 		gameView.addKeyListener(new KeyAdapter() {
@@ -63,7 +63,7 @@ public class GameController implements ActionListener {
 			}
 		});
 	}
-				
+
 	private void InitGame() {
 		//initialise timer with delay value 10ms
 		this.timer = new Timer(DELAY,this);
@@ -72,15 +72,15 @@ public class GameController implements ActionListener {
 		entities.add(pC);
 		timer.start();
 		// for testing
-		
+
 	}
-	
+
 	public void RoomLoad() {
 		if (sprites.isEmpty()==false || sprites != null) {
-	sprites.clear();
+			sprites.clear();
 		}
-	sprites = gameModel.getCurrentRoom().getSpriteList();
-	sprites.add(pC);
+		sprites = gameModel.getCurrentRoom().getSpriteList();
+		sprites.add(pC);
 	}
 
 	@Override
@@ -92,11 +92,12 @@ public class GameController implements ActionListener {
 				item.setx_pos(pC.getx_pos());
 				item.sety_pos(pC.gety_pos());
 				item.getImageDim();
+				gameModel.getCurrentRoom().addEntityList(item);
 				gameModel.getCurrentRoom().addSpriteList(item);
 			}
 			pC.getInventory().clearDroppedItems();
 		}
-		
+
 		for (Entity entity : entities) {
 			if(entity instanceof PC) {
 				updateEntity(entity);
@@ -104,7 +105,7 @@ public class GameController implements ActionListener {
 				entity.update(pC);
 			}
 		}
-		gameView.getGameScreen().setDrawTarget(entities);
+		gameView.getGameScreen().setDrawTarget(sprites);
 		gameView.getGameScreen().setDrawUI(pC.getInventory());
 		gameView.getGameScreen().repaint();
 	}
@@ -123,63 +124,65 @@ public class GameController implements ActionListener {
 		Rectangle r1 = pC.getBoundary();
 		for (Entity e1 : entities) {
 			if(pC.getID() != e1.getID()) {
-			Rectangle r2 = e1.getBoundary();
-			if (r1.intersects(r2)) {
-				if (e1.isCollidable() == true) {
-					if (e1 instanceof Door) {
-						Door door = (Door) e1;
-						gameModel.loadRoom(gameModel.getDungeonIndex(door.getRoom())); 
-						pC.setx_pos(door.getSpawnX());
-						pC.sety_pos(door.getSpawnY());
-						RoomLoad();
-					}
-					else if (e1 instanceof Wall) {
-						Wall wall = (Wall) e1;
-						pC.CollisionProcess(wall.gety_pos(), wall.getbottom(), wall.getx_pos(), wall.getright());
-					}
-					else if (e1 instanceof GiantRat) {
-						GiantRat rat = (GiantRat) e1;
-						pC.hitBy(rat);
-					}
-					else if (e1 instanceof Item) {
-						Item item = (Item) e1;
-						if (pC.isItemPickUp()) {
-							if (pC.getInventory().addItem(item))
-								deletedSprites.add(e1);
+				Rectangle r2 = e1.getBoundary();
+				if (r1.intersects(r2)) {
+					System.out.println("collision detected");
+					if (e1.isCollidable() == true) {
+						if (e1 instanceof Door) {
+							Door door = (Door) e1;
+							gameModel.loadRoom(gameModel.getDungeonIndex(door.getRoom())); 
+							pC.setx_pos(door.getSpawnX());
+							pC.sety_pos(door.getSpawnY());
+							RoomLoad();
+						}
+						else if (e1 instanceof Wall) {
+							Wall wall = (Wall) e1;
+							pC.CollisionProcess(wall.gety_pos(), wall.getbottom(), wall.getx_pos(), wall.getright());
+						}
+						else if (e1 instanceof GiantRat) {
+							GiantRat rat = (GiantRat) e1;
+							pC.hitBy(rat);
+						}
+						else if (e1 instanceof Item) {
+							Item item = (Item) e1;
+							if (pC.isItemPickUp()) {
+								if (pC.getInventory().addItem(item))
+									deletedEntities.add(e1);
+							}
 						}
 					}
 				}
 			}
+		}
+		if (deletedEntities.size() != 0)
+			deleteEntities();
+	}
+
+	public void checkEntityCollision(Entity x) {
+		for (Entity e1 : entities) {
+			if (x.getID() != e1.getID()) {
+				checkCollision(x,e1);
 			}
 		}
-		if (deletedSprites.size() != 0)
-			deleteSprites();
-	}
-	
-	public void checkEntityCollision(Entity x) {
-			for (Entity e1 : entities) {
-				if (x.getID() != e1.getID()) {
-					checkCollision(x,e1);
-				}
-			}
 	}
 	//updateEntity Location
 	private void updateEntity(Entity x) {
-	checkPlayerCollision();
-	x.update();
-	
+		checkPlayerCollision();
+		x.update();
+
 	}
 	//update EntityAi Overridden from Entity in each class
 	private void updateEntityAi(Entity x) {
-	
+
 	}
-	public void deleteSprites() {
-		for (int i = 0; i < sprites.size(); i++)
-			for (Sprite delete : this.deletedSprites)
-				if (sprites.get(i) == delete) {
-					sprites.remove(i);
+	public void deleteEntities() {
+		for (int i = 0; i < entities.size(); i++)
+			for (Entity delete : this.deletedEntities)
+				if (entities.get(i) == delete) {
+					entities.remove(i);
+					sprites.remove(delete);
 					i--;
 				}
-		deletedSprites.clear();
+		deletedEntities.clear();
 	}
 }
