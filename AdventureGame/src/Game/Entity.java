@@ -171,30 +171,21 @@ public void CollisionProcess(int top,int bottom,int left, int right) {
 	 if(health < 0) {
 		 this.visible = false;
 		 this.setCollidable(false);
-	 
-	 
-	 switch (e.getDirection()) {
+	 }
+	 switch (e.getDirection()){
 	 case DOWN:
-		 this.dx = 0;
-		 this.dy = 32;
-		 this.move();
+		 this.y_pos += 48;
 		 break;
 	 case LEFT:
-		 this.dx = -32;
-		 this.dy = 0;
-		 this.move();
+		 this.x_pos += -48;
 		 break;
 	 case RIGHT:
-		 this.dx = 32;
-		 this.dy = 0;
-		 this.move();
+		 this.x_pos += 48;
 		 break;
 	 case UP:
-		 this.dx = 0;
-		 this.dy = -32;
-		 this.move();
+		this. y_pos += -48;
 		 break;
-	 }
+		 default:
 	 }
  }
 	protected int check_collisiondir_Hoz(int left2,int right2 ) {
