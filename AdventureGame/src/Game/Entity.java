@@ -1,16 +1,19 @@
 package Game;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.List;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
+import Game.Sprite.Direction;
+
 public class Entity extends Sprite{
 	
 	
-	protected int direction;
+	protected Direction direction = Direction.IDLE;
 	protected boolean moving;
 	protected boolean dirchange;
 	protected int dx;
@@ -19,6 +22,12 @@ public class Entity extends Sprite{
 	protected int dy_temp;
 	protected boolean collision;
 	protected int damage;
+	protected Animation ani;
+	protected Direction curAnim;
+	
+	protected boolean Attack;
+	protected int AttackSpeed;
+	protected int AttackDuration;
 	
 	protected int health;
 	
@@ -38,37 +47,56 @@ public class Entity extends Sprite{
 	public Entity(int x, int y) {
 		super(x,y);
 		super.setCollidable(true);
-	}
-	public int getEntityID() {
-		return this.EntityID;
-	}
-	
-	public int getdy() {
-		return dy;
-	}
-	public int getdx() {
-		return dx;
-	}
-	
-	public void setdy(int dy) {
-		this.dy = dy;
-	}
-	
-	public void setdx(int dx) {
-		this.dx = dx;
-	}
-	
-	public void move(int frame_count) {
-		
-		x_pos += dx;
-		right = x_pos + width;
-		y_pos += dy;
-		bottom = y_pos + height;
-		
-		dx = dx_temp;
-		dy  =dy_temp;
+		ani = new Animation();
+		direction = Direction.DOWN;
 		
 	}
+	public int getEntityID() {return this.EntityID;}
+	public int getdy() {return dy;}
+	public int getdx() {return dx;}
+	public void setdy(int dy) {this.dy = dy;}
+	public void setdx(int dx) {this.dx = dx;}	
+	public int getHealth() {return health;}
+	public int getDamage() {return damage;}
+	public Direction getDirection() {return direction;}
+	public Animation getAnimation() {return ani;}
+	
+	public void setAnimation(Direction i,BufferedImage[] frames, int delay) {
+		curAnim = i;
+		ani.setFrames(frames);
+		ani.setDelay(delay);
+	}
+	
+	public void animate() {
+		switch (this.direction) {
+		case UP:
+			if (curAnim != Direction.UP || ani.getDelay() == -1) {
+				setAnimation(Direction.UP,this.getSpriteArray(Direction.UP),15);
+			}
+			break;
+		case DOWN:
+			if (curAnim != Direction.DOWN || ani.getDelay() == -1) {
+				setAnimation(Direction.DOWN,this.getSpriteArray(Direction.DOWN),15);
+			}
+			break;
+		case LEFT:
+			if (curAnim != Direction.LEFT || ani.getDelay() == -1) {
+				setAnimation(Direction.LEFT,this.getSpriteArray(Direction.LEFT),15);
+			}
+			break;
+		case RIGHT:
+			if (curAnim != Direction.RIGHT || ani.getDelay() == -1) {
+				setAnimation(Direction.RIGHT,this.getSpriteArray(Direction.RIGHT),15);
+			}
+			break;
+		case IDLE:
+			setAnimation(curAnim,this.getSpriteArray(curAnim),-1);
+			break;
+		}
+	}
+	
+	public void update() {};
+	public void move() {}
 	
 	public void wallCollide(Direction direction) {
 		switch(direction) {
@@ -138,25 +166,25 @@ public void CollisionProcess(int top,int bottom,int left, int right) {
 	 }
 	 
 	 switch (e.getDirection()) {
-	 case 0:
+	 case DOWN:
 		 this.dx = 0;
 		 this.dy = 32;
-		 this.move(0);
+		 this.move();
 		 break;
-	 case 1:
+	 case LEFT:
 		 this.dx = -32;
 		 this.dy = 0;
-		 this.move(0);
+		 this.move();
 		 break;
-	 case 2:
+	 case RIGHT:
 		 this.dx = 32;
 		 this.dy = 0;
-		 this.move(0);
+		 this.move();
 		 break;
-	 case 3:
+	 case UP:
 		 this.dx = 0;
 		 this.dy = -32;
-		 this.move(0);
+		 this.move();
 		 break;
 	 }
  }
@@ -196,11 +224,11 @@ public void CollisionProcess(int top,int bottom,int left, int right) {
 
 			
 		if(ydiff>0 ) {
-			direction = 0;
+			direction = Direction.DOWN;
 			dirchange = true;
 			dy = 1;
 		}else if (ydiff<0 ) {
-			direction = 3;
+			direction = Direction.UP;
 			dirchange = true;
 			dy = -1;
 		} else {
@@ -208,11 +236,11 @@ public void CollisionProcess(int top,int bottom,int left, int right) {
 			dy=0;
 		}
 		if (xdiff>0) {
-			direction = 2;
+			direction = Direction.RIGHT;
 			dirchange = true;
 			dx = 1;
 		}else if (xdiff<0) {
-			direction = 1;
+			direction = Direction.LEFT;
 			dirchange = true;
 			dx = -1;
 		} else {
@@ -221,15 +249,6 @@ public void CollisionProcess(int top,int bottom,int left, int right) {
 		
 		}
 	}
-	
-	public int getHealth() {
-		return health;
-	}
-	public int getDamage() {
-		return damage;
-	}
-	public int getDirection() {
-		return direction;
-	}
+
 
 }

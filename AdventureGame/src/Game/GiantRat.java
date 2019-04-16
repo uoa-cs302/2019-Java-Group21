@@ -38,21 +38,21 @@ private boolean charging = false;
 		
 		moving = true;
 		if(ydiff>0 ) {
-			direction = 0;
+			direction = Direction.DOWN;
 			dirchange = true;
 			dy = 1;
 		}else if (ydiff<0 ) {
-			direction = 3;
+			direction = Direction.UP;
 			dirchange = true;
 			dy = -1;
 		} 
 		
 		if (xdiff>0) {
-			direction = 2;
+			direction = Direction.RIGHT;
 			dirchange = true;
 			dx = 1;
 		}else if (xdiff<0) {
-			direction = 1;
+			direction = Direction.LEFT;
 			dirchange = true;
 			dx = -1;
 		}

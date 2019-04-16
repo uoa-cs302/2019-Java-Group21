@@ -149,25 +149,10 @@ public class GameController implements ActionListener {
 	}
 	//updateEntity Location
 	private void updateEntity(Entity x) {
-		if(AnimCount < 21) {
-			AnimCount++;
-		}else {
-			AnimCount = 0;
-		}
-		checkPlayerCollision();
-		x.move(AnimCount);
+	x.update();
 	}
 	//update EntityAi Overridden from Entity in each class
 	private void updateEntityAi(Entity x) {
-		if(AnimCount < 21) {
-			AnimCount++;
-		}else {
-			AnimCount = 0;
-		}
-
-		x.AiUpdate(pC);
-		checkEntityCollision();
-		x.move(AnimCount);
 		
 	}
 

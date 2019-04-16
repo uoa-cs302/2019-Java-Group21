@@ -12,7 +12,7 @@ import javax.swing.ImageIcon;
 public class Sprite {
 
 	public enum Direction {
-		UP, DOWN, LEFT, RIGHT
+		UP, DOWN, LEFT, RIGHT, IDLE
 	};
 
 	protected int x_pos;
@@ -33,6 +33,7 @@ public class Sprite {
 	private final int TILE_SIZE = 32;
 
 	protected BufferedImage image;
+	
 
 	public Sprite(int x, int y) {
 		this.x_pos = x;
@@ -153,5 +154,26 @@ public class Sprite {
 	}
 	public int getID() {
 		return ID;
+	}
+	public BufferedImage[] getSpriteArray(Direction d) {
+		
+		if(d == null ) d = Direction.DOWN;
+		switch (d) {
+		case UP:
+		return this.sprites[3];
+
+		case LEFT:
+		return this.sprites[1];
+
+		case RIGHT:
+		return this.sprites[2];
+
+		case DOWN:
+		return this.sprites[0];
+		case IDLE:
+			return this.sprites[0];
+		default:
+			return this.sprites[0];
+		}
 	}
 }
