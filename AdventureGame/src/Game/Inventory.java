@@ -11,42 +11,98 @@ public class Inventory {
 
 	private List<Item> items = new ArrayList<Item>();
 	private int index = 0;
-	private BufferedImage img;
-	
-	public Inventory(){
-		File f = new File("src/Image/Untitled.png");
-		try {
-			this.img = ImageIO.read(f);
-			System.out.println("inventory loaded!");
-		} catch (IOException e) {
+	private List<Item> droppedItems = new ArrayList<Item>();
+	private List<BufferedImage> images = new ArrayList<BufferedImage>();
+	private Item placeholder = new Item(0,0);
 
-			System.out.println("inventory failed :(");
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public Inventory(){
+		File f;
+		for (int i = 0; i < 8; i++) {
+
+			f = new File("src/Image/inv" + i + ".png");
+			try {
+				this.images.add(ImageIO.read(f));
+				System.out.println("read inv" + i + ".png");
+			} catch (IOException e) {
+
+				System.out.println("inventory failed :(");
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
-	
+
 	public BufferedImage getImage() {
-		return this.img;
+		return this.images.get(index);
 	}
-	
+
+	public int inventorySize() {
+		return items.size();
+	}
+
+	public Item seeItem(int i) {
+		return this.items.get(i);
+	}
+
 	public Item getItem() {
-		return this.items.get(index);
+		return this.items.get(this.index);
 	}
-	
-	public void addItem(Item item) {
-		this.items.add(item);
+
+	public boolean addItem(Item item) {
+		for (int i = 0; i < items.size(); i++)
+			if (items.get(i) == placeholder) {
+				items.set(i, item);
+				return true;
+			}
+		if (items.size() != 8)
+			this.items.add(item);
+		else
+			return false;
+		return true;
+
 	}
-	
+
+	public void dropItem() {
+		if (items.get(index) != placeholder) {
+			if (index == items.size()-1) {
+				droppedItems.add(getItem());
+				this.items.remove(this.index);
+			}
+			else if (index < items.size()-1) {
+				droppedItems.add(getItem());
+				this.items.set(index, placeholder);
+			}
+		}
+
+	}
+
 	public void incrementIndex() {
-		this.index++;
+		if (index == 7)
+			this.index = 0;
+		else
+			this.index++;
 	}
-	
+
 	public void decrementIndex() {
-		this.index++;
+		if (index == 0)
+			this.index = 7;
+		else
+			this.index--;
 	}
-	
+
 	public void setIndex(int index) {
 		this.index = index;
+	}
+
+	public int droppedItemsSize() {
+		return droppedItems.size();
+	}
+
+	public List<Item> getDroppedItems() {
+		return droppedItems;
+	}
+
+	public void clearDroppedItems() {
+		droppedItems.clear();
 	}
 }

@@ -5,13 +5,12 @@ import java.util.List;
 
 public class PC extends Entity {
 	
-
-	private boolean UP = false;
-	private boolean DOWN = false;
-	private boolean LEFT = false;
-	private boolean RIGHT = false;
+	private boolean up = false;
+	private boolean down = false;
+	private boolean left = false;
+	private boolean right = false;
 	private Inventory inventory;
-
+	private boolean itemPickUp = false;
 	
 	public PC(int x,int y) {
 		super(x,y);
@@ -45,23 +44,52 @@ public class PC extends Entity {
 		int key = e.getKeyCode();
 		
 		if(key == KeyEvent.VK_W) {
-			UP = true;
+
+			up = true;
 			this.direction = Direction.UP;
+
 		}
 		if (key == KeyEvent.VK_S) {
 			
-			DOWN = true;
+			down = true;
 			this.direction = Direction.DOWN;
+
 		}
 		if (key == KeyEvent.VK_A) {
 
-			LEFT =true;
+
+			left =true;
 			this.direction = Direction.LEFT;
+
 		}
 		if (key == KeyEvent.VK_D) {
+
 			
-			RIGHT = true;
+			right = true;
 			this.direction = Direction.RIGHT;
+
+		}
+		if (key == KeyEvent.VK_LEFT) {
+			inventory.decrementIndex();
+		}
+		if (key == KeyEvent.VK_RIGHT) {
+			inventory.incrementIndex();
+		}
+		if (key == KeyEvent.VK_UP) {
+			setItemPickUp(true);
+		}
+		else {
+			
+		}
+		if (key == KeyEvent.VK_DOWN) {
+			inventory.dropItem();
+		}
+		// Temporary
+		// Used to add sword to inventory for testing
+		if (key == KeyEvent.VK_L) {
+			Sword sword = new Sword(0,0);
+			inventory.addItem(sword);
+		
 		}
 		
 	}
@@ -69,48 +97,37 @@ public class PC extends Entity {
 		int key = e.getKeyCode();
 		
 		if (key == KeyEvent.VK_W) {
-			UP =false;
+
+			up =false;
 		}
 		if (key == KeyEvent.VK_S) {
-			DOWN = false;
+			down = false;
 		}
 		if (key == KeyEvent.VK_A) {
-			LEFT = false;
+			left = false;
 		}
 		if (key == KeyEvent.VK_D) {
-			RIGHT = false;
+			right = false;
+		}
+
+		if (key == KeyEvent.VK_UP) {
+			setItemPickUp(false);
 		}
 	}
 	public void setCollided(boolean a) {
 		collision = a;
 	}
 	
-	public void move() {
-		if(UP) {
-			dy = -2;
-		}else {
-			if (dy < 0) {dy =0;}
-		}if(LEFT) {
-			dx = -2;
-		}else {
-			if (dx < 0) {dx =0;}
-		}if(DOWN) {
-			dy = 2;
-		}else {
-			if (dy > 0) { dy =0;}
-		}if(RIGHT) {
-			dx = 2;
-		}else {
-			if (dx > 0) {dx =0;}
-		}
-		
-		if (dx ==0 && dy ==0) {
-			this.direction = Direction.IDLE;
-		}
-	}
-	
 
 	public Inventory getInventory(){
 		return this.inventory;
+	}
+
+	public boolean isItemPickUp() {
+		return itemPickUp;
+	}
+
+	public void setItemPickUp(boolean itemPickUp) {
+		this.itemPickUp = itemPickUp;
 	}
 }
