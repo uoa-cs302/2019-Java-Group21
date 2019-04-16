@@ -18,6 +18,7 @@ public class Entity extends Sprite {
 	protected int dx;
 	protected int dy;
 	private boolean collidable = false;
+	protected int size;
 	
 	
 	protected int dx_temp;
@@ -27,6 +28,8 @@ public class Entity extends Sprite {
 	protected Animation ani;
 	protected Direction curAnim;
 	protected Sprite sprite;
+	protected Collision Bounds;
+	protected Collision Hitbounds;
 	
 	protected boolean Attack;
 	protected int AttackSpeed;
@@ -52,11 +55,14 @@ public class Entity extends Sprite {
 		setCollidable(true);
 		ani = new Animation();
 		direction = Direction.DOWN;
+		size = 32;
 		
 	}
 	public int getEntityID() {return this.EntityID;}
 	public int getdy() {return dy;}
 	public int getdx() {return dx;}
+	public int getsize() {return size;}
+	public void setsize(int s) {this.size = s;}
 	public void setdy(int dy) {this.dy = dy;}
 	public void setdx(int dx) {this.dx = dx;}	
 	public int getHealth() {return health;}
