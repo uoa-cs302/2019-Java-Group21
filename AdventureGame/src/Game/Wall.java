@@ -13,7 +13,6 @@ public class Wall extends Entity{
 	public void setTexture(int texture) {
 		switch (texture) {
 		case 0:
-			
 			break;
 		case 1:
 			loadImage(0, 4);
