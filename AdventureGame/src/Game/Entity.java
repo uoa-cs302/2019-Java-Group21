@@ -136,7 +136,7 @@ public class Entity extends Sprite {
 	}
 	
 public void CollisionProcess(int top,int bottom,int left, int right) {
-		
+		System.out.println("collision attempting");
 		switch (this.check_collisiondir_Hoz(left, right)) {
 		case 1:
 			if(dx < 0) {

@@ -9,6 +9,7 @@ public class Room {
 	private List<Entity> entityList= new ArrayList<Entity>();
 	private List<Sprite> spriteList= new ArrayList<Sprite>();
 	Floor[][] level;
+	Wall[][] walls;
 	
 	public Room(int number) {
 		this.roomNumber = number;
@@ -23,14 +24,16 @@ public class Room {
 		this.level = level;
 	}
 
-	public void createLevel(int[][] floor) {
+	public void createFloor(int[][] floor, int x, int y) {
 		for(int i = 0; i < 18; i++) {
 			for(int j = 0; j < 24; j++) {
+				level[i][j]= new Floor((32*j)+x, (32*i)+y);
 				level[i][j].setTexture(floor[i][j]);
+				spriteList.add(level[i][j]);
 			}
 		}
 	}
-
+	
 	public List<Sprite> getSpriteList(){
 		return this.spriteList;
 	}

@@ -7,7 +7,6 @@ import java.util.List;
 public class Floor extends Sprite{
 
 	private int x, y;
-	private BufferedImage texture;
 
 	enum Texture{
 		NORMALTILE0,
@@ -34,29 +33,41 @@ public class Floor extends Sprite{
 	public void setTexture(int texture) {
 		switch (texture) {
 		case 0:
-			this.texture = ExtractSprites(6, 8);
+			loadImage(5, 8);
+			break;
 		case 1:
-			this.texture = ExtractSprites(6, 9);
+			loadImage(5, 9);
+			break;
 		case 2:
-			this.texture = ExtractSprites(6, 10);
+			loadImage(5, 10);
+			break;
 		case 3:
-			this.texture = ExtractSprites(6, 11);
+			loadImage(5, 11);
+			break;
 		case 4:
-			this.texture = ExtractSprites(6, 12);
+			loadImage(5, 12);
+			break;
 		case 5:
-			this.texture = ExtractSprites(6, 13);
+			loadImage(5, 13);
+			break;
 		case 6:
-			this.texture = ExtractSprites(7, 8);
+			loadImage(6, 8);
+			break;
 		case 7:
-			this.texture = ExtractSprites(7, 9);
+			loadImage(6, 9);
+			break;
 		case 8:
-			this.texture = ExtractSprites(7, 10);
+			loadImage(6, 10);
+			break;
 		case 9:
-			this.texture = ExtractSprites(7, 11);
+			loadImage(6, 11);
+			break;
 		case 10:
-			this.texture = ExtractSprites(7, 12);
+			loadImage(6, 12);
+			break;
 		case 11:
-			this.texture = ExtractSprites(7, 13);
+			loadImage(6, 13);
+			break;
 		}
 	}
 

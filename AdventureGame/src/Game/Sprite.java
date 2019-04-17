@@ -15,8 +15,8 @@ public class Sprite {
 		UP, DOWN, LEFT, RIGHT, IDLE
 	};
 
-	protected int x_pos; // move to Entity
-	protected int y_pos;//move to En
+	protected int x_pos;
+	protected int y_pos;
 	protected int width;//make sure all these have getters
 	protected int height;
 	protected int right;
@@ -93,6 +93,7 @@ public class Sprite {
 	protected void loadImage(int x, int y) {
 
 		this.image = sprites[x][y];
+		System.out.println("printing" + x + "and" + y);
 		getImageDim();
 	}
 	
@@ -148,11 +149,12 @@ public class Sprite {
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
+	
 	public int getID() {
 		return ID;
 	}
-	public BufferedImage[] getSpriteArray(Direction d) {
-		
+	
+	public BufferedImage[] getSpriteArray(Direction d) {	
 		if(d == null ) d = Direction.DOWN;
 		switch (d) {
 		case UP:

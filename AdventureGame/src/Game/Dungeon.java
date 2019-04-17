@@ -72,7 +72,7 @@ public class Dungeon {
 				{0,1,1,7,1,0,0,1,1,4,1,0,0,1,1,0,1,0,0,1,1,6,1,0},
 				{0,1,1,0,1,0,0,1,1,4,1,0,0,1,1,0,1,0,0,1,1,0,1,0}
 			};
-		room1.createLevel(floor);
+		room1.createFloor(floor, 128, 12);
 		GiantRat rat1 = new GiantRat(240, 300);
 		room1.addEntityList(rat1);
 		Door door = new Door(700, 500);

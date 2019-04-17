@@ -115,7 +115,12 @@ public class GameController implements ActionListener {
 		Rectangle r1 = sp1.getBoundary();
 		Rectangle r2 = sp2.getBoundary();
 		if (r1.intersects(r2)) {
-			sp1.CollisionProcess(sp2.gety_pos(),sp2.getbottom(),sp2.getx_pos(),sp2.getright());
+			if (sp2 instanceof Wall)
+				System.out.println("collide with wall");
+				//sp1.wallCollide(sp1.getDirection());
+			else
+				System.out.println("collide with something else");
+				//sp1.CollisionProcess(sp2.gety_pos(),sp2.getbottom(),sp2.getx_pos(),sp2.getright());
 		} 
 	}
 
@@ -137,7 +142,8 @@ public class GameController implements ActionListener {
 						}
 						else if (e1 instanceof Wall) {
 							Wall wall = (Wall) e1;
-							pC.CollisionProcess(wall.gety_pos(), wall.getbottom(), wall.getx_pos(), wall.getright());
+							pC.wallCollide(pC.getDirection());
+							//pC.CollisionProcess(wall.gety_pos(), wall.getbottom(), wall.getx_pos(), wall.getright());
 						}
 						else if (e1 instanceof GiantRat) {
 							GiantRat rat = (GiantRat) e1;
@@ -176,13 +182,14 @@ public class GameController implements ActionListener {
 
 	}
 	public void deleteEntities() {
-		for (int i = 0; i < entities.size(); i++)
+		for (int i = 0; i < entities.size(); i++) {
 			for (Entity delete : this.deletedEntities)
 				if (entities.get(i) == delete) {
 					entities.remove(i);
 					sprites.remove(delete);
 					i--;
 				}
+		}
 		deletedEntities.clear();
 	}
 }
