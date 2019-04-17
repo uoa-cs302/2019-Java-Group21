@@ -30,7 +30,7 @@ public class Sprite {
 	private static AtomicInteger ID_GENERATOR = new AtomicInteger(1000);
 	private BufferedImage[][] sprites;
 	private int ID;
-	private final int TILE_SIZE = 32;
+	protected final int TILE_SIZE = 32;
 
 	protected BufferedImage image;
 	
@@ -58,16 +58,12 @@ public class Sprite {
 		System.out.println("Sprite.loadSheet");
 		File f = new File(sheet);
 		try {
-			System.out.println("Trying to read sprite resource");
 			// sheetIm = ImageIO.read(getClass().getResourceAsStream(sheet));
 			sheetIm = ImageIO.read(f);
-			System.out.println("Read sprite resource ok!");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Couldn't read sprite resource :-(");
 			e.printStackTrace();
 		}
-		System.out.println("Sprite.loadSheet resource read");
 		return sheetIm;
 	}
 
@@ -107,8 +103,8 @@ public class Sprite {
 	}
 
 	void getImageDim() {
-		width = image.getWidth(null);
-		height = image.getHeight(null);
+		width = image.getWidth();
+		height = image.getHeight();
 		right = x_pos + width;
 		bottom = y_pos + height;
 	}
@@ -152,7 +148,7 @@ public class Sprite {
 		return ID;
 	}
 	public BufferedImage[] getSpriteArray(Direction d) {
-		
+		if(sprites.length < 4) {return this.sprites[0];}
 		if(d == null ) d = Direction.DOWN;
 		switch (d) {
 		case UP:

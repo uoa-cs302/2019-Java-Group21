@@ -102,7 +102,10 @@ public class GameController implements ActionListener {
 			if(entity instanceof PC) {
 				updateEntity(entity);
 			}else if (entity instanceof GiantRat) {
+				checkEntityCollision(entity);
 				entity.update(pC);
+				checkEntityCollision(entity);
+				entity.update();
 			}
 		}
 		gameView.getGameScreen().setDrawTarget(sprites);
@@ -112,9 +115,8 @@ public class GameController implements ActionListener {
 
 	//checks collision of an Entity and a Sprite
 	public void checkCollision(Entity sp1,Entity sp2) {
-		Rectangle r1 = sp1.getBoundary();
-		Rectangle r2 = sp2.getBoundary();
-		if (r1.intersects(r2)) {
+		
+		if (sp1.getBounds().collisionWith(sp2.getBounds())) {
 			sp1.CollisionProcess(sp2.gety_pos(),sp2.getbottom(),sp2.getx_pos(),sp2.getright());
 		} 
 	}
@@ -124,33 +126,41 @@ public class GameController implements ActionListener {
 		Rectangle r1 = pC.getBoundary();
 		for (Entity e1 : entities) {
 			if(pC.getID() != e1.getID()) {
-				Rectangle r2 = e1.getBoundary();
-				if (r1.intersects(r2)) {
-					System.out.println("collision detected");
+
 					if (e1.isCollidable() == true) {
 						if (e1 instanceof Door) {
 							Door door = (Door) e1;
+							if(pC.getBounds().collisionWith(door.getBounds())) {
 							gameModel.loadRoom(gameModel.getDungeonIndex(door.getRoom())); 
 							pC.setx_pos(door.getSpawnX());
 							pC.sety_pos(door.getSpawnY());
 							RoomLoad();
+							}
 						}
 						else if (e1 instanceof Wall) {
+							
 							Wall wall = (Wall) e1;
+							if(pC.getBounds().collisionWith(wall.getBounds())) {
 							pC.CollisionProcess(wall.gety_pos(), wall.getbottom(), wall.getx_pos(), wall.getright());
+							}
 						}
 						else if (e1 instanceof GiantRat) {
 							GiantRat rat = (GiantRat) e1;
+							if(pC.getBounds().collisionWith(rat.getHitBounds())) {
+								
 							pC.hitBy(rat);
+							}
 						}
 						else if (e1 instanceof Item) {
 							Item item = (Item) e1;
+							if(pC.getBounds().collisionWith(item.getBounds())) {
 							if (pC.isItemPickUp()) {
 								if (pC.getInventory().addItem(item))
 									deletedEntities.add(e1);
 							}
+							}
 						}
-					}
+					
 				}
 			}
 		}
@@ -167,14 +177,16 @@ public class GameController implements ActionListener {
 	}
 	//updateEntity Location
 	private void updateEntity(Entity x) {
-		checkPlayerCollision();
-		x.update();
+		if(!(x instanceof PC)) {
+		checkEntityCollision(x);
+		x.update(pC);
+		} else {
+			checkPlayerCollision();
 
+			x.update();
+		}
 	}
 	//update EntityAi Overridden from Entity in each class
-	private void updateEntityAi(Entity x) {
-
-	}
 	public void deleteEntities() {
 		for (int i = 0; i < entities.size(); i++)
 			for (Entity delete : this.deletedEntities)

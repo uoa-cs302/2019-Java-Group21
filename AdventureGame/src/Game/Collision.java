@@ -6,21 +6,21 @@ package Game;
 
 public class Collision {
 
-	private int x_pos;
-	private int y_pos;
-	private float width;
-	private float height;
+	private int x_pos = 0;
+	private int y_pos = 0;
+	private float width= 0;
+	private float height = 0;
 	private int size;
 	private float radius;
-	private float xOff;
-	private float yOff;
+	private float xOff = 0;
+	private float yOff = 0;
 	private Entity e;
 	
 	public Collision(int x,int y, int width, int height) {
-		this.x_pos = x;
-		this.y_pos = y;
-		this.width = width;
-		this.height = height;
+		this.x_pos =  x;
+		this.y_pos = (int) y;
+		this.width = (float) width;
+		this.height = (float) height;
 		
 		size = Math.max(width, height);
 	}
@@ -62,10 +62,12 @@ public class Collision {
 	public void setyOff(float f) {this.yOff = f;}
 	
 	public boolean collisionWith(Collision b) {
-		float ax_pos = this.x_pos + this.xOff + (this.width/2);
-		float ay_pos = this.y_pos + this.yOff + (this.height/2);
-		float bx_pos = b.getX() + b.getyOff() + (b.getwidth()/2);
-		float by_pos = b.getY() + b.getyOff() + (b.getheight()/2);
+		
+		float ax_pos =	 this.x_pos + this.xOff + (this.width/2);
+		float ay_pos =  this.y_pos + this.yOff + (this.height/2);
+		
+		float bx_pos =  b.getX() + b.getxOff() + (b.getwidth()/2);
+		float by_pos =  b.getY() + b.getyOff() + (b.getheight()/2);
 		
 		if(Math.abs(ax_pos-bx_pos)< (this.width/2) + (b.getwidth()/2)) {
 			if(Math.abs(ay_pos-by_pos)< (this.height/2) + (b.getheight()/2)) {
@@ -88,4 +90,5 @@ public class Collision {
 		}
 		return false;
 	}
+	
 }

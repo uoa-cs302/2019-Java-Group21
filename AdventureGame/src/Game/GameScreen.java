@@ -51,6 +51,11 @@ public class GameScreen extends JPanel {
 			
 				if(sprite.isVisible()) {
 					g2d.drawImage(sprite.getImage(), sprite.getx_pos(), sprite.gety_pos(),this);
+					
+				}
+				if(sprite instanceof Entity) {
+					Entity x = (Entity) sprite;
+					g2d.drawRect(x.getBounds().getX(), x.getBounds().getY(), (int) x.getBounds().getwidth(),(int) x.getBounds().getheight());
 				}
 			}
 		}

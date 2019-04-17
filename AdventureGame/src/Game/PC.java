@@ -20,15 +20,11 @@ public class PC extends Entity {
 		this.ani.setFrames(this.getSpriteArray(Direction.DOWN));
 		this.ani.setFrame(1);
 		this.ani.setDelay(-1);
-	}
-	@Override
-	public void update() {
-
-		move();
-		animate();
-		image();
-		x_pos +=dx;
-		y_pos += dy;
+		
+		//initital base intialisation
+		Bounds = new Collision(this.x_pos,this.y_pos,this.width,this.height);
+		Hitbounds = new Collision(this.x_pos,this.y_pos,this.width,this.height );
+		
 	}
 	
 	public void move() {
@@ -53,10 +49,7 @@ public class PC extends Entity {
 			this.direction = Direction.IDLE;
 		}
 	}
-	public void image() {
-		this.ani.update();
-		this.image = this.ani.getImage();
-	}
+
 	
 	private void initPC() {
 		LoadSprites("src/Image/ExampleCharacter.png");
