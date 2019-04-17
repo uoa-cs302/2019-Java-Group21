@@ -30,10 +30,10 @@ public class Sprite {
 	private static AtomicInteger ID_GENERATOR = new AtomicInteger(1000);
 	private BufferedImage[][] sprites;
 	private int ID;
-	private final int TILE_SIZE = 32;
+	protected final int TILE_SIZE = 32;
 
 	protected BufferedImage image;
-	
+
 
 	public Sprite(int x, int y) {
 		this.x_pos = x;
@@ -58,16 +58,12 @@ public class Sprite {
 		System.out.println("Sprite.loadSheet");
 		File f = new File(sheet);
 		try {
-			System.out.println("Trying to read sprite resource");
 			// sheetIm = ImageIO.read(getClass().getResourceAsStream(sheet));
 			sheetIm = ImageIO.read(f);
-			System.out.println("Read sprite resource ok!");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Couldn't read sprite resource :-(");
 			e.printStackTrace();
 		}
-		System.out.println("Sprite.loadSheet resource read");
 		return sheetIm;
 	}
 
@@ -96,7 +92,7 @@ public class Sprite {
 		System.out.println("printing" + x + "and" + y);
 		getImageDim();
 	}
-	
+
 	protected BufferedImage loadSpecificImage(String address) {
 		File f = new File(address);
 		try {
@@ -108,8 +104,8 @@ public class Sprite {
 	}
 
 	void getImageDim() {
-		width = image.getWidth(null);
-		height = image.getHeight(null);
+		width = image.getWidth();
+		height = image.getHeight();
 		right = x_pos + width;
 		bottom = y_pos + height;
 	}
@@ -149,25 +145,26 @@ public class Sprite {
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
-	
+
 	public int getID() {
 		return ID;
 	}
-	
-	public BufferedImage[] getSpriteArray(Direction d) {	
+	public BufferedImage[] getSpriteArray(Direction d) {
+		if(sprites.length < 4) 
+			return this.sprites[0];
 		if(d == null ) d = Direction.DOWN;
 		switch (d) {
 		case UP:
-		return this.sprites[3];
+			return this.sprites[3];
 
 		case LEFT:
-		return this.sprites[1];
+			return this.sprites[1];
 
 		case RIGHT:
-		return this.sprites[2];
+			return this.sprites[2];
 
 		case DOWN:
-		return this.sprites[0];
+			return this.sprites[0];
 		case IDLE:
 			return this.sprites[0];
 		default:

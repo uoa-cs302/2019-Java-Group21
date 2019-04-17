@@ -10,18 +10,24 @@ private boolean charging = false;
 	
 	public GiantRat(int x,int y){
 		super(x,y);
-			
+		
 		initRat();
+
 	}
 	private void initRat() {
 		LoadSprites("src/Image/rat_0.png");
 		loadImage(0,0);
 		damage = 1;
 		
+		//initital base intialisation
+		Bounds = new Collision(this.x_pos,this.y_pos,this.width,this.height/2);
+		Bounds.setyOff(32);
+		Hitbounds = new Collision(this.x_pos,this.y_pos +(this.height/2),this.width,this.height );
+		
 	}
 	public void update(Entity target) {
+		
 		AiUpdate(target);
-		this.move();
 	}
 
 
@@ -78,15 +84,6 @@ private boolean charging = false;
 			}	
 	}
 		
-	
-	public void move() {
-		
-		x_pos += dx;
-		right = x_pos + width;
-		y_pos += dy;
-		bottom = y_pos + height;
-		
-	}
 
 	}
 

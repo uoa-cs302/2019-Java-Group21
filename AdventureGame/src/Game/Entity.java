@@ -18,6 +18,7 @@ public class Entity extends Sprite {
 	protected int dx;
 	protected int dy;
 	private boolean collidable = false;
+	protected int size;
 	
 	
 	protected int dx_temp;
@@ -27,6 +28,8 @@ public class Entity extends Sprite {
 	protected Animation ani;
 	protected Direction curAnim;
 	protected Sprite sprite;
+	protected Collision Bounds;
+	protected Collision Hitbounds;
 	
 	protected boolean Attack;
 	protected int AttackSpeed;
@@ -52,10 +55,15 @@ public class Entity extends Sprite {
 		setCollidable(true);
 		ani = new Animation();
 		direction = Direction.DOWN;
+		size = 32;
+
+
 	}
 	public int getEntityID() {return this.EntityID;}
 	public int getdy() {return dy;}
 	public int getdx() {return dx;}
+	public int getsize() {return size;}
+	public void setsize(int s) {this.size = s;}
 	public void setdy(int dy) {this.dy = dy;}
 	public void setdx(int dx) {this.dx = dx;}	
 	public int getHealth() {return health;}
@@ -64,6 +72,11 @@ public class Entity extends Sprite {
 	public Animation getAnimation() {return ani;}
 	public boolean isCollidable() {return collidable;}
 	public void setCollidable(boolean collidable) {this.collidable = collidable;}
+	public Collision getBounds() {return Bounds;}
+	public Collision getHitBounds() {return Hitbounds;}
+	
+	
+	//may be obselete
 	public Rectangle getBoundary() {return new Rectangle(x_pos, y_pos, width, height);}
 	
 	public void setAnimation(Direction i,BufferedImage[] frames, int delay) {
@@ -72,6 +85,8 @@ public class Entity extends Sprite {
 		ani.setDelay(delay);
 		ani.setFrame(1);
 	}
+	public void setBounds(Collision c) {this.Bounds = c;}
+	public void setHitBounds(Collision c) {this.Bounds = c;}
 	
 	public void animate() {
 		switch (this.direction) {
@@ -101,9 +116,48 @@ public class Entity extends Sprite {
 		}
 	}
 	
-	public void update() {};
-	public void update(Entity target) {};
+	public void update() {
+	
+		animate();
+		image();
+		setHitboxDirection();
+		
+		Bounds.setBox(this.x_pos, this.y_pos, (int)Bounds.getwidth(),(int) Bounds.getheight());
+		Hitbounds.setBox(this.x_pos, this.y_pos, (int) Hitbounds.getwidth(),(int) Hitbounds.getheight());
+		x_pos += dx;
+		right = x_pos + width;
+		y_pos += dy;
+		bottom = y_pos + height;
+		move();
+
+		}
+	
+
+	public void update(Entity target) {
+		update();
+	};
 	public void move() {}
+	public void image() {
+		this.ani.update();
+		this.image = this.ani.getImage();
+	}
+	
+	public void setHitboxDirection() {
+		switch(this.direction) {
+		case UP:
+			this.Hitbounds.setxOff(0);
+			this.Hitbounds.setyOff(-size);
+		case DOWN:
+			this.Hitbounds.setxOff(0);
+			this.Hitbounds.setyOff(0);
+		case LEFT:
+			this.Hitbounds.setxOff(-size/2);
+			this.Hitbounds.setyOff(-size/2);
+		case RIGHT:
+			this.Hitbounds.setxOff(size/2);
+			this.Hitbounds.setyOff(-size/2);
+		}
+	}
 	
 	public void wallCollide(Direction direction) {
 		switch(direction) {

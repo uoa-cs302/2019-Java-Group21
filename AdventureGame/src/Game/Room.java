@@ -8,32 +8,39 @@ public class Room {
 	private int roomNumber;
 	private List<Entity> entityList= new ArrayList<Entity>();
 	private List<Sprite> spriteList= new ArrayList<Sprite>();
-	Floor[][] level;
+	Floor[][] floors;
 	Wall[][] walls;
-	
+
 	public Room(int number) {
 		this.roomNumber = number;
-		level = new Floor[18][24];
+		floors = new Floor[18][24];
+		walls = new Wall[18][24];
 	}
 
-	public Floor[][] getLevel() {
-		return level;
+	public Floor[][] getFloor() {
+		return floors;
 	}
 
-	public void setLevel(Floor[][] level) {
-		this.level = level;
+	public void setFloor(Floor[][] floor) {
+		this.floors = floor;
 	}
 
-	public void createFloor(int[][] floor, int x, int y) {
+	public void createLevel(int[][] floor, int[][] wall, int x, int y) {
 		for(int i = 0; i < 18; i++) {
 			for(int j = 0; j < 24; j++) {
-				level[i][j]= new Floor((32*j)+x, (32*i)+y);
-				level[i][j].setTexture(floor[i][j]);
-				spriteList.add(level[i][j]);
+				floors[i][j]= new Floor((32*j)+x, (32*i)+y);
+				floors[i][j].setTexture(floor[i][j]);
+				spriteList.add(floors[i][j]);
+				if (wall[i][j] != 0) {
+					walls[i][j]= new Wall((32*j)+x, (32*i)+y);
+					walls[i][j].setTexture(wall[i][j]);
+					spriteList.add(walls[i][j]);
+					entityList.add(walls[i][j]);
+				}
 			}
 		}
 	}
-	
+
 	public List<Sprite> getSpriteList(){
 		return this.spriteList;
 	}

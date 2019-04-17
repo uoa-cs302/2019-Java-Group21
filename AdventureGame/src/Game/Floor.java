@@ -8,21 +8,6 @@ public class Floor extends Sprite{
 
 	private int x, y;
 
-	enum Texture{
-		NORMALTILE0,
-		NORMALTILE1,
-		BIGTILE0,
-		BIGTILE1,
-		SMALLTILE0,
-		SMALLTILE1,
-		NORMALTILE2,
-		SMALLTILE2,
-		BIGTILE2,
-		BIGTILE3,
-		WIDETILE0,
-		WIDETILE1
-	}
-
 	public Floor(int x, int y) {
 		super(x,y);
 		this.x = x;
