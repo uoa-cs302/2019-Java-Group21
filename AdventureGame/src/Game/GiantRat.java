@@ -15,7 +15,6 @@ private boolean charging = false;
 
 	}
 	private void initRat() {
-		LoadSprites("src/Image/rat_0.png");
 		loadImage(0,0);
 		damage = 1;
 		
