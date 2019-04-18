@@ -35,8 +35,6 @@ public class Dungeon {
 
 	private void createRoomTutorial(){
 		Room tutorial = new Room(0);
-		PC player = new PC(500, 600);
-		tutorial.addEntityList(player);
 		rooms.add(tutorial);
 	}
 
@@ -82,7 +80,7 @@ public class Dungeon {
 				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
 				{51,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,53}
 			};
-		well.createLevel(floor, wall, 128, 12);
+		well.createLevel(floor, wall, 128, 12, assets);
 		Door door = new Door(700, 500);
 		door.setSpawnX(300);
 		door.setSpawnY(400);
@@ -133,7 +131,7 @@ public class Dungeon {
 				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
 				{51,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,53}
 			};
-		room1.createLevel(floor, wall, 128, 12);
+		room1.createLevel(floor, wall, 128, 12, assets);
 		GiantRat rat1 = new GiantRat(240, 300);
 		room1.addToRoom(rat1);
 		Door door = new Door(400, 500);

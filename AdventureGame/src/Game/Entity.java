@@ -20,7 +20,6 @@ public class Entity extends Sprite {
 	private boolean collidable = false;
 	protected int size;
 	
-	
 	protected int dx_temp;
 	protected int dy_temp;
 	protected boolean collision;
@@ -56,9 +55,8 @@ public class Entity extends Sprite {
 		ani = new Animation();
 		direction = Direction.DOWN;
 		size = 32;
-
-
 	}
+	
 	public int getEntityID() {return this.EntityID;}
 	public int getdy() {return dy;}
 	public int getdx() {return dx;}
@@ -75,45 +73,47 @@ public class Entity extends Sprite {
 	public Collision getBounds() {return Bounds;}
 	public Collision getHitBounds() {return Hitbounds;}
 	
-
-	
-	
 	//may be obselete
 	public Rectangle getBoundary() {return new Rectangle(x_pos, y_pos, width, height);}
 	
-	public void setAnimation(Direction i,BufferedImage[] frames, int delay) {
+	public void setAnimation(Direction i,List<BufferedImage> frames, int delay) {
 		curAnim = i;
+		System.out.println("setting up frames");
 		ani.setFrames(frames);
+		System.out.println("setting up delay");
 		ani.setDelay(delay);
 		ani.setFrame(1);
 	}
+	
 	public void setBounds(Collision c) {this.Bounds = c;}
+	
 	public void setHitBounds(Collision c) {this.Bounds = c;}
 	
 	public void animate() {
 		switch (this.direction) {
 		case UP:
 			if (curAnim != Direction.UP || ani.getDelay() == -1) {
-				setAnimation(Direction.UP,this.getSpriteArray(Direction.UP),15);
+				System.out.println("loading up animation");
+				setAnimation(Direction.UP,this.getFromImages(9, 11),15);
 			}
 			break;
 		case DOWN:
 			if (curAnim != Direction.DOWN || ani.getDelay() == -1) {
-				setAnimation(Direction.DOWN,this.getSpriteArray(Direction.DOWN),15);
+				setAnimation(Direction.DOWN,this.getFromImages(0, 2),15);
 			}
 			break;
 		case LEFT:
 			if (curAnim != Direction.LEFT || ani.getDelay() == -1) {
-				setAnimation(Direction.LEFT,this.getSpriteArray(Direction.LEFT),15);
+				setAnimation(Direction.LEFT,this.getFromImages(3, 5),15);
 			}
 			break;
 		case RIGHT:
 			if (curAnim != Direction.RIGHT || ani.getDelay() == -1) {
-				setAnimation(Direction.RIGHT,this.getSpriteArray(Direction.RIGHT),15);
+				setAnimation(Direction.RIGHT,this.getFromImages(6, 8),15);
 			}
 			break;
 		case IDLE:
-			setAnimation(curAnim,this.getSpriteArray(curAnim),-1);
+			//setAnimation(curAnim,this.getSpriteArray(curAnim),-1);
 			break;
 		}
 	}
@@ -134,14 +134,13 @@ public class Entity extends Sprite {
 
 		}
 	
-
 	public void update(Entity target) {
 		update();
 	};
 	public void move() {}
 	public void image() {
 		this.ani.update();
-		this.image = this.ani.getImage();
+		this.setImage(this.ani.getImage());
 	}
 	
 	public void setHitboxDirection() {

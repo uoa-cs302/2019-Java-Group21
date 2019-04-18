@@ -12,21 +12,6 @@ public class Floor extends Sprite{
 		super(x,y);
 		this.x = x;
 		this.y = y;
-		LoadSprites("src/Image/dungeon0.png");
-	}
-
-	public void setTexture(int texture) {
-		switch (texture) {
-		case 23:
-			loadImage(1, 7);
-			break;
-		case 24:
-			loadImage(1, 8);
-			break;
-		case 88:
-			loadImage(5, 8);
-			break;
-		}
 	}
 
 	public int getX() {

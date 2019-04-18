@@ -13,22 +13,20 @@ public class PC extends Entity {
 	private Inventory inventory;
 	private boolean itemPickUp = false;
 	
-	
-	public PC(int x,int y) {
+	public PC(int x,int y, List<BufferedImage> images) {
 		super(x,y);
+		setImages(images);
 		this.health = 6;
-		initPC();
 		inventory = new Inventory();
-		this.ani.setFrames(this.getSpriteArray(Direction.DOWN));
+		System.out.println("setting frames in player class");
+		this.ani.setFrames(this.getImages());
+		System.out.println("setting frame in player class");
 		this.ani.setFrame(1);
 		this.ani.setDelay(-1);
 		
 		//initital base intialisation
 		Bounds = new Collision(this.x_pos,this.y_pos,this.width,this.height);
 		Hitbounds = new Collision(this.x_pos,this.y_pos,this.width,this.height );
-		
-	}
-	public void setList() {
 		
 	}
 	
@@ -53,12 +51,6 @@ public class PC extends Entity {
 		if (dx ==0 && dy ==0) {
 			this.direction = Direction.IDLE;
 		}
-	}
-
-	
-	private void initPC() {
-		LoadSprites("src/Image/ExampleCharacter.png");
-		loadImage(0,0);
 	}
 	
 	public void keyPressed(KeyEvent e) {
@@ -114,8 +106,7 @@ public class PC extends Entity {
 		int key = e.getKeyCode();
 		
 		if (key == KeyEvent.VK_W) {
-
-			up =false;
+			up = false;
 		}
 		if (key == KeyEvent.VK_S) {
 			down = false;

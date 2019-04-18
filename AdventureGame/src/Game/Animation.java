@@ -1,10 +1,11 @@
 package Game;
 
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 public class Animation {
 	
-	private BufferedImage[] frames;
+	private List<BufferedImage> frames;
 	private int count;
 	private int DELAY;
 	
@@ -13,21 +14,22 @@ public class Animation {
 	
 	private int timesPlayed;
 	
-	
-	public Animation(BufferedImage[] frames) {
+	public Animation(List<BufferedImage> frames) {
 		timesPlayed = 0;
 		setFrames(frames);
 	}
 	public Animation() {
 		timesPlayed=0;
 	}
-	public void setFrames(BufferedImage[] frames) {
+	public void setFrames(List<BufferedImage> frames) {
 		this.frames = frames;
-		curFrame = 0;
-		count = 0;
-		DELAY = 5;
-		numFrame =frames.length;
-		timesPlayed = 0;
+		this.curFrame = 0;
+		this.count = 0;
+		this.DELAY = 5;
+		System.out.println("size = " + frames.size());
+		this.numFrame = frames.size();
+		this.timesPlayed = 0;
+		System.out.println("set up finished!");
 	}
 	public void setDelay(int delay) {this.DELAY = delay;}
 	public void setFrame(int i) {this.curFrame = i;}
@@ -53,7 +55,7 @@ public class Animation {
 	public int getDelay() {return DELAY;}
 	public int getFrame() {return curFrame;}
 	public int getCount() {return count;}
-	public BufferedImage getImage() {return frames[curFrame];}
+	public BufferedImage getImage() {return frames.get(curFrame);}
 	public boolean PlayedOnce() {return timesPlayed > 0;}
 	public boolean Played(int i) {return timesPlayed == i;}
 

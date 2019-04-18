@@ -1,5 +1,8 @@
 package Game;
 
+import java.awt.image.BufferedImage;
+import java.util.List;
+
 import Game.Sprite.Direction;
 
 public class GameModel {
@@ -15,6 +18,10 @@ public class GameModel {
 		System.out.println("GameModel constructor complete");
 	}
 
+	public List<BufferedImage> getPlayerAssets(){
+		return assets.getPlayer();
+	}
+	
 	public Room getCurrentRoom() {
 		return currentRoom;
 	}

@@ -22,7 +22,6 @@ public class GameController implements ActionListener {
 	private PC pC;
 	private GameView gameView;
 	private GameModel gameModel;
-	public SpriteSheet spriteSheet;
 	private Graphics g;
 
 	private List<Sprite> sprites;
@@ -34,7 +33,6 @@ public class GameController implements ActionListener {
 		//set game model and game view Jframe to Controller variables
 		this.gameModel = model;
 		this.gameView = view;
-		this.spriteSheet = new SpriteSheet();
 		
 		//Sets the button listener on to check for button press on StartScreen
 		ScreenListener gameControllerScreenListener = new ScreenListener() {
@@ -46,8 +44,6 @@ public class GameController implements ActionListener {
 				//draw the gamescreen
 				gameView.drawGameMenu();
 				InitGame();
-
-
 				addKeyListen();
 			}
 		};
@@ -71,7 +67,7 @@ public class GameController implements ActionListener {
 	private void InitGame() {
 		//initialise timer with delay value 10ms
 		this.timer = new Timer(DELAY,this);
-		pC = new PC(Start_X,Start_Y);
+		pC = new PC(Start_X,Start_Y,gameModel.getPlayerAssets());
 		sprites.add(pC);
 		entities.add(pC);
 		timer.start();

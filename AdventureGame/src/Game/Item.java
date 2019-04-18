@@ -9,12 +9,13 @@ public class Item extends Entity{
 	public Item(int x, int y) {
 		super(x, y);
 		super.setCollidable(true);
-		this.inventoryImage = loadSpecificImage("src/Image/blank.png");
 	}
 
 	public BufferedImage getInventoryImage() {
 		return this.inventoryImage;
 	}
 	
-	
+	public void setInventoryImage(BufferedImage image) {
+		this.inventoryImage = image;
+	}
 }

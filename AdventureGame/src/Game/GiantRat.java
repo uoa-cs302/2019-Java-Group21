@@ -15,7 +15,6 @@ private boolean charging = false;
 
 	}
 	private void initRat() {
-		loadImage(0,0);
 		damage = 1;
 		
 		//initital base intialisation

@@ -25,8 +25,8 @@ public class Sprite {
 	protected boolean visible;
 	private static AtomicInteger ID_GENERATOR = new AtomicInteger(1000);
 	private int ID;
-	protected final int TILE_SIZE = 32;
-	protected List<BufferedImage> images;
+	private List<BufferedImage> images;
+	private BufferedImage image;
 
 	public Sprite(int x, int y) {
 		this.x_pos = x;
@@ -34,17 +34,36 @@ public class Sprite {
 		visible = true;
 		ID = ID_GENERATOR.getAndIncrement();
 	}
+
+	public BufferedImage getImage() {
+		return image;
+	}
+
+	public void setImage(BufferedImage image) {
+		this.image = image;
+	}
 	
+	public void setImages(List<BufferedImage> images) {
+		this.images = images;
+		System.out.println("setting image!" + images.size());
+	}
+	
+	public List<BufferedImage> getImages(){
+		return this.images;
+	}
+	
+	public List<BufferedImage> getFromImages(int start, int end){
+		if (start > 0 && end < images.size())
+			return this.images.subList(start, end);
+		else
+			return null;
+	}
 
 	void getImageDim() {
 		width = image.getWidth();
 		height = image.getHeight();
 		right = x_pos + width;
 		bottom = y_pos + height;
-	}
-
-	public BufferedImage getImage() {
-		return image;
 	}
 
 	public int getx_pos() {
