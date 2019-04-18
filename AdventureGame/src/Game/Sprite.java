@@ -25,7 +25,7 @@ public class Sprite {
 	protected boolean visible;
 	private static AtomicInteger ID_GENERATOR = new AtomicInteger(1000);
 	private int ID;
-	private List<BufferedImage> images;
+	protected List<BufferedImage> images;
 	private BufferedImage image;
 
 	public Sprite(int x, int y) {
@@ -53,8 +53,8 @@ public class Sprite {
 	}
 	
 	public List<BufferedImage> getFromImages(int start, int end){
-		if (start > 0 && end < images.size())
-			return this.images.subList(start, end);
+		if (start >= 0 && end < images.size())
+			return this.images.subList(start, end +1);
 		else
 			return null;
 	}

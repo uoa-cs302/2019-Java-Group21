@@ -56,6 +56,7 @@ public class Animation {
 	public int getFrame() {return curFrame;}
 	public int getCount() {return count;}
 	public BufferedImage getImage() {return frames.get(curFrame);}
+	public List<BufferedImage> getframes() {return frames;}
 	public boolean PlayedOnce() {return timesPlayed > 0;}
 	public boolean Played(int i) {return timesPlayed == i;}
 
