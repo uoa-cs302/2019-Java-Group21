@@ -21,6 +21,7 @@ public class Animation {
 	public Animation() {
 		timesPlayed=0;
 	}
+	
 	public void setFrames(List<BufferedImage> frames) {
 		this.frames = frames;
 		this.curFrame = 0;
@@ -31,6 +32,7 @@ public class Animation {
 		this.timesPlayed = 0;
 		System.out.println("set up finished!");
 	}
+	
 	public void setDelay(int delay) {this.DELAY = delay;}
 	public void setFrame(int i) {this.curFrame = i;}
 	public void setFrameNum(int i) {this.numFrame = i;}
