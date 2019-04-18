@@ -6,12 +6,14 @@ import java.util.Random;
 
 public class Dungeon {
 
-	int difficulty;
+	private int difficulty;
 	private List<Room> rooms = new ArrayList<Room>();
+	private Image assets;
 	
 	// Difficulty determines the number of rooms in the dungeon
-	public Dungeon(int difficulty) {
+	public Dungeon(int difficulty, Image assets) {
 		this.difficulty = difficulty;
+		this.assets = assets;
 		generateDungeon();
 	}
 	

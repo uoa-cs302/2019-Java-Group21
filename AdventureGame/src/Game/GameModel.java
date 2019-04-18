@@ -6,9 +6,11 @@ public class GameModel {
 
 	private Dungeon dungeon;
 	private Room currentRoom;
+	private Image assets;
 	
 	public GameModel() {
-		dungeon = new Dungeon(0);
+		assets = new Image();
+		dungeon = new Dungeon(0, assets);
 		currentRoom = dungeon.getDungeonIndex(2);
 		System.out.println("GameModel constructor complete");
 	}

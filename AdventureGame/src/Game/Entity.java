@@ -75,6 +75,8 @@ public class Entity extends Sprite {
 	public Collision getBounds() {return Bounds;}
 	public Collision getHitBounds() {return Hitbounds;}
 	
+
+	
 	
 	//may be obselete
 	public Rectangle getBoundary() {return new Rectangle(x_pos, y_pos, width, height);}

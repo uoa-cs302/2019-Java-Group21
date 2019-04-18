@@ -22,6 +22,7 @@ public class GameController implements ActionListener {
 	private PC pC;
 	private GameView gameView;
 	private GameModel gameModel;
+	public SpriteSheet spriteSheet;
 	private Graphics g;
 
 	private List<Sprite> sprites;
@@ -33,6 +34,8 @@ public class GameController implements ActionListener {
 		//set game model and game view Jframe to Controller variables
 		this.gameModel = model;
 		this.gameView = view;
+		this.spriteSheet = new SpriteSheet();
+		
 		//Sets the button listener on to check for button press on StartScreen
 		ScreenListener gameControllerScreenListener = new ScreenListener() {
 			@Override
