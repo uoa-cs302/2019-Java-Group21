@@ -29,6 +29,7 @@ public class Entity extends Sprite {
 	protected Sprite sprite;
 	protected Collision Bounds;
 	protected Collision Hitbounds;
+	protected List<BufferedImage> idlesprites;
 	
 	protected boolean Attack;
 	protected int AttackSpeed;
@@ -79,6 +80,7 @@ public class Entity extends Sprite {
 	public void setAnimation(Direction i,List<BufferedImage> frames, int delay) {
 		curAnim = i;
 		System.out.println("setting up frames");
+		System.out.println(frames.size());
 		ani.setFrames(frames);
 		System.out.println("setting up delay");
 		ani.setDelay(delay);
@@ -99,6 +101,7 @@ public class Entity extends Sprite {
 			break;
 		case DOWN:
 			if (curAnim != Direction.DOWN || ani.getDelay() == -1) {
+				
 				setAnimation(Direction.DOWN,this.getFromImages(0, 2),15);
 			}
 			break;
@@ -113,7 +116,9 @@ public class Entity extends Sprite {
 			}
 			break;
 		case IDLE:
-			//setAnimation(curAnim,this.getSpriteArray(curAnim),-1);
+			
+			setAnimation(curAnim,ani.getframes(),-1);
+			
 			break;
 		}
 	}

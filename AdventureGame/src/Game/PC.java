@@ -19,7 +19,7 @@ public class PC extends Entity {
 		this.health = 6;
 		inventory = new Inventory();
 		System.out.println("setting frames in player class");
-		this.ani.setFrames(this.getImages());
+		this.ani.setFrames(this.getImages().subList(0, 3));
 		System.out.println("setting frame in player class");
 		this.ani.setFrame(1);
 		this.ani.setDelay(-1);
