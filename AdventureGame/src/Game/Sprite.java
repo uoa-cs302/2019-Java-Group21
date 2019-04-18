@@ -26,9 +26,7 @@ public class Sprite {
 	private static AtomicInteger ID_GENERATOR = new AtomicInteger(1000);
 	private int ID;
 	protected final int TILE_SIZE = 32;
-
-	protected BufferedImage image;
-
+	protected List<BufferedImage> images;
 
 	public Sprite(int x, int y) {
 		this.x_pos = x;
