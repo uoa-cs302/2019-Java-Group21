@@ -16,6 +16,7 @@ public class Sprite {
 		UP, DOWN, LEFT, RIGHT, IDLE
 	};
 	protected List<BufferedImage> sprites;
+	protected SpriteSheet spriteSheet;
 	protected int x_pos; // move to Entity
 	protected int y_pos;//move to En
 	protected int width;//make sure all these have getters
@@ -92,4 +93,5 @@ public class Sprite {
 	public int getID() {
 		return ID;
 	}
+
 }

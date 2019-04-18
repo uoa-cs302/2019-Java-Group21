@@ -1,6 +1,7 @@
 package Game;
 
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 public class PC extends Entity {
@@ -11,6 +12,7 @@ public class PC extends Entity {
 	private boolean right = false;
 	private Inventory inventory;
 	private boolean itemPickUp = false;
+	
 	
 	public PC(int x,int y) {
 		super(x,y);
@@ -24,6 +26,9 @@ public class PC extends Entity {
 		//initital base intialisation
 		Bounds = new Collision(this.x_pos,this.y_pos,this.width,this.height);
 		Hitbounds = new Collision(this.x_pos,this.y_pos,this.width,this.height );
+		
+	}
+	public void setList() {
 		
 	}
 	
