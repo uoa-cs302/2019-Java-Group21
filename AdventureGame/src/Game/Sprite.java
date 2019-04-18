@@ -87,7 +87,6 @@ public class Sprite {
 	}
 
 	protected void loadImage(int x, int y) {
-
 		this.image = sprites[x][y];
 		System.out.println("printing" + x + "and" + y);
 		getImageDim();

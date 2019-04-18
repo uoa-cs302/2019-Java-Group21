@@ -20,8 +20,8 @@ public class GameScreen extends JPanel {
 	private KeypressListener key;
 	
 	public GameScreen() {
-		
-		setBackground(Color.black);
+		Color color = new Color(47,47,48);
+		setBackground(color);
 		//sets KeyListner which calls interface methods described in Controller
 		//Not used currently
 		addKeyListener(new KeyAdapter() {
@@ -51,7 +51,6 @@ public class GameScreen extends JPanel {
 			
 				if(sprite.isVisible()) {
 					g2d.drawImage(sprite.getImage(), sprite.getx_pos(), sprite.gety_pos(),this);
-					
 				}
 				//if(sprite instanceof Entity) {
 				//	Entity x = (Entity) sprite;
@@ -60,9 +59,9 @@ public class GameScreen extends JPanel {
 			}
 		}
 		if(inventory != null) {
-			g2d.drawImage(inventory.getImage(), 100, 600, this);
+			g2d.drawImage(inventory.getImage(), 128, 600, this);
 			for(int i = 0; i < inventory.inventorySize(); i++) {
-				g2d.drawImage(inventory.seeItem(i).getInventoryImage(), 113 + (96*i), 613, this);
+				g2d.drawImage(inventory.seeItem(i).getInventoryImage(), 138 + (96*i), 613, this);
 			}
 		}	
 	}

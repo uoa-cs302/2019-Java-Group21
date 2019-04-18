@@ -102,7 +102,6 @@ public class PC extends Entity {
 		if (key == KeyEvent.VK_L) {
 			Sword sword = new Sword(0,0);
 			inventory.addItem(sword);
-		
 		}
 		
 	}

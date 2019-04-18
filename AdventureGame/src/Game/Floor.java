@@ -17,41 +17,14 @@ public class Floor extends Sprite{
 
 	public void setTexture(int texture) {
 		switch (texture) {
-		case 0:
+		case 23:
+			loadImage(1, 7);
+			break;
+		case 24:
+			loadImage(1, 8);
+			break;
+		case 88:
 			loadImage(5, 8);
-			break;
-		case 1:
-			loadImage(5, 9);
-			break;
-		case 2:
-			loadImage(5, 10);
-			break;
-		case 3:
-			loadImage(5, 11);
-			break;
-		case 4:
-			loadImage(5, 12);
-			break;
-		case 5:
-			loadImage(5, 13);
-			break;
-		case 6:
-			loadImage(6, 8);
-			break;
-		case 7:
-			loadImage(6, 9);
-			break;
-		case 8:
-			loadImage(6, 10);
-			break;
-		case 9:
-			loadImage(6, 11);
-			break;
-		case 10:
-			loadImage(6, 12);
-			break;
-		case 11:
-			loadImage(6, 13);
 			break;
 		}
 	}

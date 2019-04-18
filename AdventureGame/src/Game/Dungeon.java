@@ -40,76 +40,115 @@ public class Dungeon {
 
 	private void createRoomWell(){
 		Room well = new Room(1);
-		PC player = new PC(500, 600);
-		well.addEntityList(player);
+		int[][] floor = {
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,88,23,24,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+			};
+		int[][] wall = {
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,64, 4, 4,67,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,19,-1,-1,21,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{ 3, 4, 4, 4, 4, 4, 4, 4, 4, 4,65,-1,-1,66, 4, 4, 4, 4, 4, 4, 4, 4, 4,5},
+				{19,20,20,20,20,20,20,20,20,20,81,-1,-1,82,20,20,20,20,20,20,20,20,20,21},
+				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{51,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,53}
+			};
+		well.createLevel(floor, wall, 128, 12);
 		Door door = new Door(700, 500);
 		door.setSpawnX(300);
 		door.setSpawnY(400);
 		door.setRoom(2);
-		well.addSpriteList(door);
+		well.addToRoom(door);
 		rooms.add(well);
 	}
 
 	private void createRoomOne(){
 		Room room1 = new Room(2);
 		int[][] floor = {
-				{0,1,1,0,1,0,0,1,1,4,1,0,0,1,1,0,1,0,0,1,1,0,1,0},
-				{0,1,1,0,1,0,0,1,1,4,1,0,0,1,1,0,1,0,0,1,1,0,1,0},
-				{0,1,1,0,1,0,0,1,1,4,1,0,0,1,1,0,1,0,0,1,1,0,1,0},
-				{0,1,1,0,1,0,0,1,1,4,1,0,0,1,1,0,1,0,0,1,1,0,1,0},
-				{0,1,1,0,1,6,0,1,1,4,1,0,0,1,1,0,1,7,0,6,1,0,1,0},
-				{0,1,1,0,1,0,0,1,1,4,1,0,0,1,1,0,1,0,0,1,1,0,1,0},
-				{0,1,1,0,1,0,0,1,1,4,1,0,0,1,1,0,1,7,0,1,1,0,1,0},
-				{0,1,1,0,1,0,0,1,1,4,1,0,0,1,1,0,1,0,0,1,1,0,1,0},
-				{0,1,6,0,1,0,0,1,1,4,1,0,0,2,3,0,1,0,0,1,1,0,1,0},
-				{0,1,1,0,1,0,0,1,1,4,1,0,0,8,9,0,1,0,0,1,1,0,1,0},
-				{0,1,1,0,1,0,0,1,1,4,1,0,0,1,1,0,1,0,0,1,1,0,6,0},
-				{0,1,1,0,1,0,0,1,1,4,1,0,0,1,1,0,1,0,0,1,1,0,1,0},
-				{0,1,1,0,10,11,0,1,1,4,1,0,0,1,1,0,1,0,0,1,1,0,1,0},
-				{0,1,1,0,1,0,0,1,1,4,1,0,0,1,1,0,1,0,0,1,1,0,1,0},
-				{0,1,1,0,1,0,0,1,1,4,1,0,0,1,1,0,1,0,0,1,1,0,1,0},
-				{0,1,1,0,1,0,0,1,1,4,1,0,0,1,1,0,1,0,0,1,1,0,1,0},
-				{0,1,1,7,1,0,0,1,1,4,1,0,0,1,1,0,1,0,0,1,1,6,1,0},
-				{0,1,1,0,1,0,0,1,1,4,1,0,0,1,1,0,1,0,0,1,1,0,1,0}
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,88,23,24,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
 			};
 		int[][] wall = {
-				{0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2},
-				{3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,5},
-				{6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8},
-				{6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8},
-				{6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8},
-				{6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8},
-				{6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8},
-				{6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8},
-				{6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8},
-				{6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8},
-				{6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8},
-				{6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8},
-				{6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8},
-				{6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8},
-				{6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8},
-				{6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8},
-				{6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8},
-				{9,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,11}
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,64, 4, 4,67,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,19,-1,-1,21,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{ 3, 4, 4, 4, 4, 4, 4, 4, 4, 4,65,-1,-1,66, 4, 4, 4, 4, 4, 4, 4, 4, 4,5},
+				{19,20,20,20,20,20,20,20,20,20,81,-1,-1,82,20,20,20,20,20,20,20,20,20,21},
+				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{51,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,53}
 			};
 		room1.createLevel(floor, wall, 128, 12);
 		GiantRat rat1 = new GiantRat(240, 300);
-		room1.addEntityList(rat1);
-		Door door = new Door(700, 500);
+		room1.addToRoom(rat1);
+		Door door = new Door(400, 500);
 		door.setSpawnX(300);
 		door.setSpawnY(400);
 		door.setRoom(1);
-		room1.addSpriteList(door);
-		Door door1 = new Door(700, 500);
+		room1.addToRoom(door);
+		Door door1 = new Door(496, 44);
 		door1.setSpawnX(300);
 		door1.setSpawnY(400);
 		door1.setRoom(3);
-		room1.addSpriteList(door1);
+		room1.addToRoom(door1);
 		Door door2 = new Door(700, 500);
 		door2.setSpawnX(300);
 		door2.setSpawnY(400);
 		door2.setRoom(7 + difficulty);
-		room1.addSpriteList(door2);
+		room1.addToRoom(door2);
 		rooms.add(room1);
 	}
 
@@ -127,12 +166,12 @@ public class Dungeon {
 				door.setSpawnX(300);
 				door.setSpawnY(400);
 				door.setRoom(2);
-				leftRoomOne.addSpriteList(door);
+				leftRoomOne.addToRoom(door);
 				Door door1 = new Door(700, 500);
 				door1.setSpawnX(300);
 				door1.setSpawnY(400);
 				door1.setRoom(4);
-				leftRoomOne.addSpriteList(door1);
+				leftRoomOne.addToRoom(door1);
 			}
 			else if (n == 1) {
 				createRoomLeftTwo(leftRoomOne);
@@ -140,12 +179,12 @@ public class Dungeon {
 				door.setSpawnX(300);
 				door.setSpawnY(400);
 				door.setRoom(2);
-				leftRoomOne.addSpriteList(door);
+				leftRoomOne.addToRoom(door);
 				Door door1 = new Door(700, 500);
 				door1.setSpawnX(300);
 				door1.setSpawnY(400);
 				door1.setRoom(4);
-				leftRoomOne.addSpriteList(door1);
+				leftRoomOne.addToRoom(door1);
 			}
 			else {
 				createRoomLeftThree(leftRoomOne);
@@ -153,12 +192,12 @@ public class Dungeon {
 				door.setSpawnX(300);
 				door.setSpawnY(400);
 				door.setRoom(2);
-				leftRoomOne.addSpriteList(door);
+				leftRoomOne.addToRoom(door);
 				Door door1 = new Door(700, 500);
 				door1.setSpawnX(300);
 				door1.setSpawnY(400);
 				door1.setRoom(4);
-				leftRoomOne.addSpriteList(door1);
+				leftRoomOne.addToRoom(door1);
 			}
 			rooms.add(leftRoomOne);
 			break;
@@ -170,24 +209,24 @@ public class Dungeon {
 				door.setSpawnX(300);
 				door.setSpawnY(400);
 				door.setRoom(2);
-				leftRoomOne.addSpriteList(door);
+				leftRoomOne.addToRoom(door);
 				Door door1 = new Door(700, 500);
 				door1.setSpawnX(300);
 				door1.setSpawnY(400);
 				door1.setRoom(4);
-				leftRoomOne.addSpriteList(door1);
+				leftRoomOne.addToRoom(door1);
 				if (m == 0) {
 					createRoomLeftTwo(leftRoomTwo);
 					Door door2 = new Door(700, 500);
 					door2.setSpawnX(300);
 					door2.setSpawnY(400);
 					door2.setRoom(3);
-					leftRoomTwo.addSpriteList(door2);
+					leftRoomTwo.addToRoom(door2);
 					Door door3 = new Door(700, 500);
 					door3.setSpawnX(300);
 					door3.setSpawnY(400);
 					door3.setRoom(5);
-					leftRoomTwo.addSpriteList(door3);
+					leftRoomTwo.addToRoom(door3);
 				}
 				else {
 					createRoomLeftThree(leftRoomTwo);
@@ -195,12 +234,12 @@ public class Dungeon {
 					door2.setSpawnX(300);
 					door2.setSpawnY(400);
 					door2.setRoom(3);
-					leftRoomTwo.addSpriteList(door2);
+					leftRoomTwo.addToRoom(door2);
 					Door door3 = new Door(700, 500);
 					door3.setSpawnX(300);
 					door3.setSpawnY(400);
 					door3.setRoom(5);
-					leftRoomTwo.addSpriteList(door3);
+					leftRoomTwo.addToRoom(door3);
 				}
 			}
 			else if (n == 1){
@@ -209,23 +248,23 @@ public class Dungeon {
 				door.setSpawnX(300);
 				door.setSpawnY(400);
 				door.setRoom(2);
-				leftRoomOne.addSpriteList(door);
+				leftRoomOne.addToRoom(door);
 				Door door1 = new Door(700, 500);
 				door1.setSpawnX(300);
 				door1.setSpawnY(400);
 				door1.setRoom(4);
-				leftRoomOne.addSpriteList(door1);
+				leftRoomOne.addToRoom(door1);
 				if (m == 0) {
 					Door door2 = new Door(700, 500);
 					door2.setSpawnX(300);
 					door2.setSpawnY(400);
 					door2.setRoom(3);
-					leftRoomTwo.addSpriteList(door2);
+					leftRoomTwo.addToRoom(door2);
 					Door door3 = new Door(700, 500);
 					door3.setSpawnX(300);
 					door3.setSpawnY(400);
 					door3.setRoom(5);
-					leftRoomTwo.addSpriteList(door3);
+					leftRoomTwo.addToRoom(door3);
 				}
 				else {
 					createRoomLeftThree(leftRoomTwo);
@@ -233,12 +272,12 @@ public class Dungeon {
 					door2.setSpawnX(300);
 					door2.setSpawnY(400);
 					door2.setRoom(3);
-					leftRoomTwo.addSpriteList(door2);
+					leftRoomTwo.addToRoom(door2);
 					Door door3 = new Door(700, 500);
 					door3.setSpawnX(300);
 					door3.setSpawnY(400);
 					door3.setRoom(5);
-					leftRoomTwo.addSpriteList(door3);
+					leftRoomTwo.addToRoom(door3);
 				}
 			}
 			else{
@@ -247,24 +286,24 @@ public class Dungeon {
 				door.setSpawnX(300);
 				door.setSpawnY(400);
 				door.setRoom(2);
-				leftRoomOne.addSpriteList(door);
+				leftRoomOne.addToRoom(door);
 				Door door1 = new Door(700, 500);
 				door1.setSpawnX(300);
 				door1.setSpawnY(400);
 				door1.setRoom(4);
-				leftRoomOne.addSpriteList(door1);
+				leftRoomOne.addToRoom(door1);
 				if (m == 0) {
 					createRoomLeftOne(leftRoomTwo);
 					Door door2 = new Door(700, 500);
 					door2.setSpawnX(300);
 					door2.setSpawnY(400);
 					door2.setRoom(3);
-					leftRoomTwo.addSpriteList(door2);
+					leftRoomTwo.addToRoom(door2);
 					Door door3 = new Door(700, 500);
 					door3.setSpawnX(300);
 					door3.setSpawnY(400);
 					door3.setRoom(5);
-					leftRoomTwo.addSpriteList(door3);
+					leftRoomTwo.addToRoom(door3);
 				}
 				else {
 					createRoomLeftTwo(leftRoomTwo);
@@ -272,12 +311,12 @@ public class Dungeon {
 					door2.setSpawnX(300);
 					door2.setSpawnY(400);
 					door2.setRoom(3);
-					leftRoomTwo.addSpriteList(door2);
+					leftRoomTwo.addToRoom(door2);
 					Door door3 = new Door(700, 500);
 					door3.setSpawnX(300);
 					door3.setSpawnY(400);
 					door3.setRoom(5);
-					leftRoomTwo.addSpriteList(door3);
+					leftRoomTwo.addToRoom(door3);
 				}
 			}
 			rooms.add(leftRoomOne);
@@ -293,32 +332,32 @@ public class Dungeon {
 				door.setSpawnX(300);
 				door.setSpawnY(400);
 				door.setRoom(2);
-				leftRoomOne.addSpriteList(door);
+				leftRoomOne.addToRoom(door);
 				Door door1 = new Door(700, 500);
 				door1.setSpawnX(300);
 				door1.setSpawnY(400);
 				door1.setRoom(4);
-				leftRoomOne.addSpriteList(door1);
+				leftRoomOne.addToRoom(door1);
 				Door door2 = new Door(700, 500);
 				door2.setSpawnX(300);
 				door2.setSpawnY(400);
 				door2.setRoom(3);
-				leftRoomTwo.addSpriteList(door2);
+				leftRoomTwo.addToRoom(door2);
 				Door door3 = new Door(700, 500);
 				door3.setSpawnX(300);
 				door3.setSpawnY(400);
 				door3.setRoom(5);
-				leftRoomTwo.addSpriteList(door3);
+				leftRoomTwo.addToRoom(door3);
 				Door door4 = new Door(700, 500);
 				door4.setSpawnX(300);
 				door4.setSpawnY(400);
 				door4.setRoom(4);
-				leftRoomTwo.addSpriteList(door4);
+				leftRoomTwo.addToRoom(door4);
 				Door door5 = new Door(700, 500);
 				door5.setSpawnX(300);
 				door5.setSpawnY(400);
 				door5.setRoom(6);
-				leftRoomTwo.addSpriteList(door5);
+				leftRoomTwo.addToRoom(door5);
 			}
 			else if (n == 1) {
 				createRoomLeftOne(leftRoomOne);
@@ -328,32 +367,32 @@ public class Dungeon {
 				door.setSpawnX(300);
 				door.setSpawnY(400);
 				door.setRoom(2);
-				leftRoomOne.addSpriteList(door);
+				leftRoomOne.addToRoom(door);
 				Door door1 = new Door(700, 500);
 				door1.setSpawnX(300);
 				door1.setSpawnY(400);
 				door1.setRoom(4);
-				leftRoomOne.addSpriteList(door1);
+				leftRoomOne.addToRoom(door1);
 				Door door2 = new Door(700, 500);
 				door2.setSpawnX(300);
 				door2.setSpawnY(400);
 				door2.setRoom(3);
-				leftRoomTwo.addSpriteList(door2);
+				leftRoomTwo.addToRoom(door2);
 				Door door3 = new Door(700, 500);
 				door3.setSpawnX(300);
 				door3.setSpawnY(400);
 				door3.setRoom(5);
-				leftRoomTwo.addSpriteList(door3);
+				leftRoomTwo.addToRoom(door3);
 				Door door4 = new Door(700, 500);
 				door4.setSpawnX(300);
 				door4.setSpawnY(400);
 				door4.setRoom(4);
-				leftRoomTwo.addSpriteList(door4);
+				leftRoomTwo.addToRoom(door4);
 				Door door5 = new Door(700, 500);
 				door5.setSpawnX(300);
 				door5.setSpawnY(400);
 				door5.setRoom(6);
-				leftRoomTwo.addSpriteList(door5);
+				leftRoomTwo.addToRoom(door5);
 			}
 			else if (n == 2) {
 				createRoomLeftOne(leftRoomTwo);
@@ -363,32 +402,32 @@ public class Dungeon {
 				door.setSpawnX(300);
 				door.setSpawnY(400);
 				door.setRoom(2);
-				leftRoomOne.addSpriteList(door);
+				leftRoomOne.addToRoom(door);
 				Door door1 = new Door(700, 500);
 				door1.setSpawnX(300);
 				door1.setSpawnY(400);
 				door1.setRoom(4);
-				leftRoomOne.addSpriteList(door1);
+				leftRoomOne.addToRoom(door1);
 				Door door2 = new Door(700, 500);
 				door2.setSpawnX(300);
 				door2.setSpawnY(400);
 				door2.setRoom(3);
-				leftRoomTwo.addSpriteList(door2);
+				leftRoomTwo.addToRoom(door2);
 				Door door3 = new Door(700, 500);
 				door3.setSpawnX(300);
 				door3.setSpawnY(400);
 				door3.setRoom(5);
-				leftRoomTwo.addSpriteList(door3);
+				leftRoomTwo.addToRoom(door3);
 				Door door4 = new Door(700, 500);
 				door4.setSpawnX(300);
 				door4.setSpawnY(400);
 				door4.setRoom(4);
-				leftRoomTwo.addSpriteList(door4);
+				leftRoomTwo.addToRoom(door4);
 				Door door5 = new Door(700, 500);
 				door5.setSpawnX(300);
 				door5.setSpawnY(400);
 				door5.setRoom(6);
-				leftRoomTwo.addSpriteList(door5);
+				leftRoomTwo.addToRoom(door5);
 			}
 			else if (n == 3) {
 				createRoomLeftOne(leftRoomTwo);
@@ -398,32 +437,32 @@ public class Dungeon {
 				door.setSpawnX(300);
 				door.setSpawnY(400);
 				door.setRoom(2);
-				leftRoomOne.addSpriteList(door);
+				leftRoomOne.addToRoom(door);
 				Door door1 = new Door(700, 500);
 				door1.setSpawnX(300);
 				door1.setSpawnY(400);
 				door1.setRoom(4);
-				leftRoomOne.addSpriteList(door1);
+				leftRoomOne.addToRoom(door1);
 				Door door2 = new Door(700, 500);
 				door2.setSpawnX(300);
 				door2.setSpawnY(400);
 				door2.setRoom(3);
-				leftRoomTwo.addSpriteList(door2);
+				leftRoomTwo.addToRoom(door2);
 				Door door3 = new Door(700, 500);
 				door3.setSpawnX(300);
 				door3.setSpawnY(400);
 				door3.setRoom(5);
-				leftRoomTwo.addSpriteList(door3);
+				leftRoomTwo.addToRoom(door3);
 				Door door4 = new Door(700, 500);
 				door4.setSpawnX(300);
 				door4.setSpawnY(400);
 				door4.setRoom(4);
-				leftRoomTwo.addSpriteList(door4);
+				leftRoomTwo.addToRoom(door4);
 				Door door5 = new Door(700, 500);
 				door5.setSpawnX(300);
 				door5.setSpawnY(400);
 				door5.setRoom(6);
-				leftRoomTwo.addSpriteList(door5);
+				leftRoomTwo.addToRoom(door5);
 			}
 			else if (n == 4) {
 				createRoomLeftOne(leftRoomThree);
@@ -433,32 +472,32 @@ public class Dungeon {
 				door.setSpawnX(300);
 				door.setSpawnY(400);
 				door.setRoom(2);
-				leftRoomOne.addSpriteList(door);
+				leftRoomOne.addToRoom(door);
 				Door door1 = new Door(700, 500);
 				door1.setSpawnX(300);
 				door1.setSpawnY(400);
 				door1.setRoom(4);
-				leftRoomOne.addSpriteList(door1);
+				leftRoomOne.addToRoom(door1);
 				Door door2 = new Door(700, 500);
 				door2.setSpawnX(300);
 				door2.setSpawnY(400);
 				door2.setRoom(3);
-				leftRoomTwo.addSpriteList(door2);
+				leftRoomTwo.addToRoom(door2);
 				Door door3 = new Door(700, 500);
 				door3.setSpawnX(300);
 				door3.setSpawnY(400);
 				door3.setRoom(5);
-				leftRoomTwo.addSpriteList(door3);
+				leftRoomTwo.addToRoom(door3);
 				Door door4 = new Door(700, 500);
 				door4.setSpawnX(300);
 				door4.setSpawnY(400);
 				door4.setRoom(4);
-				leftRoomTwo.addSpriteList(door4);
+				leftRoomTwo.addToRoom(door4);
 				Door door5 = new Door(700, 500);
 				door5.setSpawnX(300);
 				door5.setSpawnY(400);
 				door5.setRoom(6);
-				leftRoomTwo.addSpriteList(door5);
+				leftRoomTwo.addToRoom(door5);
 			}
 			else {
 				createRoomLeftOne(leftRoomThree);
@@ -468,32 +507,32 @@ public class Dungeon {
 				door.setSpawnX(300);
 				door.setSpawnY(400);
 				door.setRoom(2);
-				leftRoomOne.addSpriteList(door);
+				leftRoomOne.addToRoom(door);
 				Door door1 = new Door(700, 500);
 				door1.setSpawnX(300);
 				door1.setSpawnY(400);
 				door1.setRoom(4);
-				leftRoomOne.addSpriteList(door1);
+				leftRoomOne.addToRoom(door1);
 				Door door2 = new Door(700, 500);
 				door2.setSpawnX(300);
 				door2.setSpawnY(400);
 				door2.setRoom(3);
-				leftRoomTwo.addSpriteList(door2);
+				leftRoomTwo.addToRoom(door2);
 				Door door3 = new Door(700, 500);
 				door3.setSpawnX(300);
 				door3.setSpawnY(400);
 				door3.setRoom(5);
-				leftRoomTwo.addSpriteList(door3);
+				leftRoomTwo.addToRoom(door3);
 				Door door4 = new Door(700, 500);
 				door4.setSpawnX(300);
 				door4.setSpawnY(400);
 				door4.setRoom(4);
-				leftRoomTwo.addSpriteList(door4);
+				leftRoomTwo.addToRoom(door4);
 				Door door5 = new Door(700, 500);
 				door5.setSpawnX(300);
 				door5.setSpawnY(400);
 				door5.setRoom(6);
-				leftRoomTwo.addSpriteList(door5);
+				leftRoomTwo.addToRoom(door5);
 			}
 			rooms.add(leftRoomOne);
 			rooms.add(leftRoomTwo);
@@ -526,17 +565,12 @@ public class Dungeon {
 	private void createRoomSkeleton(){
 		Room roomSkeleton = new Room(4 + difficulty);
 		Skeleton skeleton = new Skeleton(300, 300);
-		roomSkeleton.addSpriteList(skeleton);
+		roomSkeleton.addToRoom(skeleton);
 		Door door = new Door(700, 500);
 		door.setSpawnX(300);
 		door.setSpawnY(400);
-		door.setRoom(2);
-		roomSkeleton.addSpriteList(door);
-		Door door1 = new Door(700, 500);
-		door1.setSpawnX(300);
-		door1.setSpawnY(400);
-		door1.setRoom(4);
-		roomSkeleton.addSpriteList(door1);
+		door.setRoom(6-(3-difficulty));
+		roomSkeleton.addToRoom(door);
 		rooms.add(roomSkeleton);
 	}
 	private void createRightHallway(){
@@ -553,12 +587,12 @@ public class Dungeon {
 				door.setSpawnX(300);
 				door.setSpawnY(400);
 				door.setRoom(2);
-				rightRoomOne.addSpriteList(door);
+				rightRoomOne.addToRoom(door);
 				Door door1 = new Door(700, 500);
 				door1.setSpawnX(300);
 				door1.setSpawnY(400);
 				door1.setRoom(6);
-				rightRoomOne.addSpriteList(door1);
+				rightRoomOne.addToRoom(door1);
 			}
 			else if (n == 1) {
 				createRoomRightTwo(rightRoomOne);
@@ -566,12 +600,12 @@ public class Dungeon {
 				door.setSpawnX(300);
 				door.setSpawnY(400);
 				door.setRoom(2);
-				rightRoomOne.addSpriteList(door);
+				rightRoomOne.addToRoom(door);
 				Door door1 = new Door(700, 500);
 				door1.setSpawnX(300);
 				door1.setSpawnY(400);
 				door1.setRoom(6);
-				rightRoomOne.addSpriteList(door1);
+				rightRoomOne.addToRoom(door1);
 			}
 			else {
 				createRoomLeftThree(rightRoomOne);
@@ -579,12 +613,12 @@ public class Dungeon {
 				door.setSpawnX(300);
 				door.setSpawnY(400);
 				door.setRoom(2);
-				rightRoomOne.addSpriteList(door);
+				rightRoomOne.addToRoom(door);
 				Door door1 = new Door(700, 500);
 				door1.setSpawnX(300);
 				door1.setSpawnY(400);
 				door1.setRoom(6);
-				rightRoomOne.addSpriteList(door1);
+				rightRoomOne.addToRoom(door1);
 			}
 			rooms.add(rightRoomOne);
 			break;
@@ -596,24 +630,24 @@ public class Dungeon {
 				door.setSpawnX(300);
 				door.setSpawnY(400);
 				door.setRoom(2);
-				rightRoomOne.addSpriteList(door);
+				rightRoomOne.addToRoom(door);
 				Door door1 = new Door(700, 500);
 				door1.setSpawnX(300);
 				door1.setSpawnY(400);
 				door1.setRoom(7);
-				rightRoomOne.addSpriteList(door1);
+				rightRoomOne.addToRoom(door1);
 				if (m == 0) {
 					createRoomRightTwo(rightRoomTwo);
 					Door door2 = new Door(700, 500);
 					door2.setSpawnX(300);
 					door2.setSpawnY(400);
 					door2.setRoom(6);
-					rightRoomTwo.addSpriteList(door2);
+					rightRoomTwo.addToRoom(door2);
 					Door door3 = new Door(700, 500);
 					door3.setSpawnX(300);
 					door3.setSpawnY(400);
 					door3.setRoom(8);
-					rightRoomTwo.addSpriteList(door3);
+					rightRoomTwo.addToRoom(door3);
 				}
 				else {
 					createRoomRightThree(rightRoomTwo);
@@ -621,12 +655,12 @@ public class Dungeon {
 					door2.setSpawnX(300);
 					door2.setSpawnY(400);
 					door2.setRoom(6);
-					rightRoomTwo.addSpriteList(door2);
+					rightRoomTwo.addToRoom(door2);
 					Door door3 = new Door(700, 500);
 					door3.setSpawnX(300);
 					door3.setSpawnY(400);
 					door3.setRoom(8);
-					rightRoomTwo.addSpriteList(door3);
+					rightRoomTwo.addToRoom(door3);
 				}
 			}
 			else if (n == 1){
@@ -635,23 +669,23 @@ public class Dungeon {
 				door.setSpawnX(300);
 				door.setSpawnY(400);
 				door.setRoom(2);
-				rightRoomOne.addSpriteList(door);
+				rightRoomOne.addToRoom(door);
 				Door door1 = new Door(700, 500);
 				door1.setSpawnX(300);
 				door1.setSpawnY(400);
 				door1.setRoom(7);
-				rightRoomOne.addSpriteList(door1);
+				rightRoomOne.addToRoom(door1);
 				if (m == 0) {
 					Door door2 = new Door(700, 500);
 					door2.setSpawnX(300);
 					door2.setSpawnY(400);
 					door2.setRoom(6);
-					rightRoomTwo.addSpriteList(door2);
+					rightRoomTwo.addToRoom(door2);
 					Door door3 = new Door(700, 500);
 					door3.setSpawnX(300);
 					door3.setSpawnY(400);
 					door3.setRoom(8);
-					rightRoomTwo.addSpriteList(door3);
+					rightRoomTwo.addToRoom(door3);
 				}
 				else {
 					createRoomRightThree(rightRoomTwo);
@@ -659,12 +693,12 @@ public class Dungeon {
 					door2.setSpawnX(300);
 					door2.setSpawnY(400);
 					door2.setRoom(6);
-					rightRoomTwo.addSpriteList(door2);
+					rightRoomTwo.addToRoom(door2);
 					Door door3 = new Door(700, 500);
 					door3.setSpawnX(300);
 					door3.setSpawnY(400);
 					door3.setRoom(8);
-					rightRoomTwo.addSpriteList(door3);
+					rightRoomTwo.addToRoom(door3);
 				}
 			}
 			else{
@@ -673,24 +707,24 @@ public class Dungeon {
 				door.setSpawnX(300);
 				door.setSpawnY(400);
 				door.setRoom(2);
-				rightRoomOne.addSpriteList(door);
+				rightRoomOne.addToRoom(door);
 				Door door1 = new Door(700, 500);
 				door1.setSpawnX(300);
 				door1.setSpawnY(400);
 				door1.setRoom(7);
-				rightRoomOne.addSpriteList(door1);
+				rightRoomOne.addToRoom(door1);
 				if (m == 0) {
 					createRoomRightOne(rightRoomTwo);
 					Door door2 = new Door(700, 500);
 					door2.setSpawnX(300);
 					door2.setSpawnY(400);
 					door2.setRoom(6);
-					rightRoomTwo.addSpriteList(door2);
+					rightRoomTwo.addToRoom(door2);
 					Door door3 = new Door(700, 500);
 					door3.setSpawnX(300);
 					door3.setSpawnY(400);
 					door3.setRoom(8);
-					rightRoomTwo.addSpriteList(door3);
+					rightRoomTwo.addToRoom(door3);
 				}
 				else {
 					createRoomRightTwo(rightRoomTwo);
@@ -698,12 +732,12 @@ public class Dungeon {
 					door2.setSpawnX(300);
 					door2.setSpawnY(400);
 					door2.setRoom(6);
-					rightRoomTwo.addSpriteList(door2);
+					rightRoomTwo.addToRoom(door2);
 					Door door3 = new Door(700, 500);
 					door3.setSpawnX(300);
 					door3.setSpawnY(400);
 					door3.setRoom(8);
-					rightRoomTwo.addSpriteList(door3);
+					rightRoomTwo.addToRoom(door3);
 				}
 			}
 			rooms.add(rightRoomOne);
@@ -719,32 +753,32 @@ public class Dungeon {
 				door.setSpawnX(300);
 				door.setSpawnY(400);
 				door.setRoom(2);
-				rightRoomOne.addSpriteList(door);
+				rightRoomOne.addToRoom(door);
 				Door door1 = new Door(700, 500);
 				door1.setSpawnX(300);
 				door1.setSpawnY(400);
 				door1.setRoom(8);
-				rightRoomOne.addSpriteList(door1);
+				rightRoomOne.addToRoom(door1);
 				Door door2 = new Door(700, 500);
 				door2.setSpawnX(300);
 				door2.setSpawnY(400);
 				door2.setRoom(7);
-				rightRoomTwo.addSpriteList(door2);
+				rightRoomTwo.addToRoom(door2);
 				Door door3 = new Door(700, 500);
 				door3.setSpawnX(300);
 				door3.setSpawnY(400);
 				door3.setRoom(9);
-				rightRoomTwo.addSpriteList(door3);
+				rightRoomTwo.addToRoom(door3);
 				Door door4 = new Door(700, 500);
 				door4.setSpawnX(300);
 				door4.setSpawnY(400);
 				door4.setRoom(8);
-				rightRoomTwo.addSpriteList(door4);
+				rightRoomTwo.addToRoom(door4);
 				Door door5 = new Door(700, 500);
 				door5.setSpawnX(300);
 				door5.setSpawnY(400);
 				door5.setRoom(10);
-				rightRoomTwo.addSpriteList(door5);
+				rightRoomTwo.addToRoom(door5);
 			}
 			else if (n == 1) {
 				createRoomRightOne(rightRoomOne);
@@ -754,32 +788,32 @@ public class Dungeon {
 				door.setSpawnX(300);
 				door.setSpawnY(400);
 				door.setRoom(2);
-				rightRoomOne.addSpriteList(door);
+				rightRoomOne.addToRoom(door);
 				Door door1 = new Door(700, 500);
 				door1.setSpawnX(300);
 				door1.setSpawnY(400);
 				door1.setRoom(8);
-				rightRoomOne.addSpriteList(door1);
+				rightRoomOne.addToRoom(door1);
 				Door door2 = new Door(700, 500);
 				door2.setSpawnX(300);
 				door2.setSpawnY(400);
 				door2.setRoom(7);
-				rightRoomTwo.addSpriteList(door2);
+				rightRoomTwo.addToRoom(door2);
 				Door door3 = new Door(700, 500);
 				door3.setSpawnX(300);
 				door3.setSpawnY(400);
 				door3.setRoom(9);
-				rightRoomTwo.addSpriteList(door3);
+				rightRoomTwo.addToRoom(door3);
 				Door door4 = new Door(700, 500);
 				door4.setSpawnX(300);
 				door4.setSpawnY(400);
 				door4.setRoom(8);
-				rightRoomTwo.addSpriteList(door4);
+				rightRoomTwo.addToRoom(door4);
 				Door door5 = new Door(700, 500);
 				door5.setSpawnX(300);
 				door5.setSpawnY(400);
 				door5.setRoom(10);
-				rightRoomTwo.addSpriteList(door5);
+				rightRoomTwo.addToRoom(door5);
 			}
 			else if (n == 2) {
 				createRoomRightOne(rightRoomTwo);
@@ -789,32 +823,32 @@ public class Dungeon {
 				door.setSpawnX(300);
 				door.setSpawnY(400);
 				door.setRoom(2);
-				rightRoomOne.addSpriteList(door);
+				rightRoomOne.addToRoom(door);
 				Door door1 = new Door(700, 500);
 				door1.setSpawnX(300);
 				door1.setSpawnY(400);
 				door1.setRoom(8);
-				rightRoomOne.addSpriteList(door1);
+				rightRoomOne.addToRoom(door1);
 				Door door2 = new Door(700, 500);
 				door2.setSpawnX(300);
 				door2.setSpawnY(400);
 				door2.setRoom(7);
-				rightRoomTwo.addSpriteList(door2);
+				rightRoomTwo.addToRoom(door2);
 				Door door3 = new Door(700, 500);
 				door3.setSpawnX(300);
 				door3.setSpawnY(400);
 				door3.setRoom(9);
-				rightRoomTwo.addSpriteList(door3);
+				rightRoomTwo.addToRoom(door3);
 				Door door4 = new Door(700, 500);
 				door4.setSpawnX(300);
 				door4.setSpawnY(400);
 				door4.setRoom(8);
-				rightRoomTwo.addSpriteList(door4);
+				rightRoomTwo.addToRoom(door4);
 				Door door5 = new Door(700, 500);
 				door5.setSpawnX(300);
 				door5.setSpawnY(400);
 				door5.setRoom(10);
-				rightRoomTwo.addSpriteList(door5);
+				rightRoomTwo.addToRoom(door5);
 			}
 			else if (n == 3) {
 				createRoomRightOne(rightRoomTwo);
@@ -824,32 +858,32 @@ public class Dungeon {
 				door.setSpawnX(300);
 				door.setSpawnY(400);
 				door.setRoom(2);
-				rightRoomOne.addSpriteList(door);
+				rightRoomOne.addToRoom(door);
 				Door door1 = new Door(700, 500);
 				door1.setSpawnX(300);
 				door1.setSpawnY(400);
 				door1.setRoom(8);
-				rightRoomOne.addSpriteList(door1);
+				rightRoomOne.addToRoom(door1);
 				Door door2 = new Door(700, 500);
 				door2.setSpawnX(300);
 				door2.setSpawnY(400);
 				door2.setRoom(7);
-				rightRoomTwo.addSpriteList(door2);
+				rightRoomTwo.addToRoom(door2);
 				Door door3 = new Door(700, 500);
 				door3.setSpawnX(300);
 				door3.setSpawnY(400);
 				door3.setRoom(9);
-				rightRoomTwo.addSpriteList(door3);
+				rightRoomTwo.addToRoom(door3);
 				Door door4 = new Door(700, 500);
 				door4.setSpawnX(300);
 				door4.setSpawnY(400);
 				door4.setRoom(8);
-				rightRoomTwo.addSpriteList(door4);
+				rightRoomTwo.addToRoom(door4);
 				Door door5 = new Door(700, 500);
 				door5.setSpawnX(300);
 				door5.setSpawnY(400);
 				door5.setRoom(10);
-				rightRoomTwo.addSpriteList(door5);
+				rightRoomTwo.addToRoom(door5);
 			}
 			else if (n == 4) {
 				createRoomRightOne(rightRoomThree);
@@ -859,32 +893,32 @@ public class Dungeon {
 				door.setSpawnX(300);
 				door.setSpawnY(400);
 				door.setRoom(2);
-				rightRoomOne.addSpriteList(door);
+				rightRoomOne.addToRoom(door);
 				Door door1 = new Door(700, 500);
 				door1.setSpawnX(300);
 				door1.setSpawnY(400);
 				door1.setRoom(8);
-				rightRoomOne.addSpriteList(door1);
+				rightRoomOne.addToRoom(door1);
 				Door door2 = new Door(700, 500);
 				door2.setSpawnX(300);
 				door2.setSpawnY(400);
 				door2.setRoom(7);
-				rightRoomTwo.addSpriteList(door2);
+				rightRoomTwo.addToRoom(door2);
 				Door door3 = new Door(700, 500);
 				door3.setSpawnX(300);
 				door3.setSpawnY(400);
 				door3.setRoom(9);
-				rightRoomTwo.addSpriteList(door3);
+				rightRoomTwo.addToRoom(door3);
 				Door door4 = new Door(700, 500);
 				door4.setSpawnX(300);
 				door4.setSpawnY(400);
 				door4.setRoom(8);
-				rightRoomTwo.addSpriteList(door4);
+				rightRoomTwo.addToRoom(door4);
 				Door door5 = new Door(700, 500);
 				door5.setSpawnX(300);
 				door5.setSpawnY(400);
 				door5.setRoom(10);
-				rightRoomTwo.addSpriteList(door5);
+				rightRoomTwo.addToRoom(door5);
 			}
 			else {
 				createRoomRightOne(rightRoomThree);
@@ -894,32 +928,32 @@ public class Dungeon {
 				door.setSpawnX(300);
 				door.setSpawnY(400);
 				door.setRoom(2);
-				rightRoomOne.addSpriteList(door);
+				rightRoomOne.addToRoom(door);
 				Door door1 = new Door(700, 500);
 				door1.setSpawnX(300);
 				door1.setSpawnY(400);
 				door1.setRoom(8);
-				rightRoomOne.addSpriteList(door1);
+				rightRoomOne.addToRoom(door1);
 				Door door2 = new Door(700, 500);
 				door2.setSpawnX(300);
 				door2.setSpawnY(400);
 				door2.setRoom(7);
-				rightRoomTwo.addSpriteList(door2);
+				rightRoomTwo.addToRoom(door2);
 				Door door3 = new Door(700, 500);
 				door3.setSpawnX(300);
 				door3.setSpawnY(400);
 				door3.setRoom(9);
-				rightRoomTwo.addSpriteList(door3);
+				rightRoomTwo.addToRoom(door3);
 				Door door4 = new Door(700, 500);
 				door4.setSpawnX(300);
 				door4.setSpawnY(400);
 				door4.setRoom(8);
-				rightRoomTwo.addSpriteList(door4);
+				rightRoomTwo.addToRoom(door4);
 				Door door5 = new Door(700, 500);
 				door5.setSpawnX(300);
 				door5.setSpawnY(400);
 				door5.setRoom(10);
-				rightRoomTwo.addSpriteList(door5);
+				rightRoomTwo.addToRoom(door5);
 			}
 			rooms.add(rightRoomOne);
 			rooms.add(rightRoomTwo);
@@ -961,12 +995,12 @@ public class Dungeon {
 		door.setSpawnX(300);
 		door.setSpawnY(400);
 		door.setRoom(1);
-		roomPuzzle.addSpriteList(door);
+		roomPuzzle.addToRoom(door);
 		Door door1 = new Door(700, 500);
 		door1.setSpawnX(300);
 		door1.setSpawnY(400);
 		door1.setRoom(3);
-		roomPuzzle.addSpriteList(door1);
+		roomPuzzle.addToRoom(door1);
 		rooms.add(roomPuzzle);
 	}
 

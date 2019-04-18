@@ -27,6 +27,7 @@ public class GameController implements ActionListener {
 	private List<Sprite> sprites;
 	private List<Entity> deletedEntities = new ArrayList<Entity>();
 	private List<Entity> entities;
+	boolean loadingRoom = false;
 
 	public GameController(GameModel model, GameView view) {
 		//set game model and game view Jframe to Controller variables
@@ -76,11 +77,12 @@ public class GameController implements ActionListener {
 	}
 
 	public void RoomLoad() {
-		if (sprites.isEmpty()==false || sprites != null) {
-			sprites.clear();
-		}
+		deletedEntities.add(pC);
+		deleteEntities();
 		sprites = gameModel.getCurrentRoom().getSpriteList();
 		sprites.add(pC);
+		entities = gameModel.getCurrentRoom().getEntityList();
+		entities.add(pC);
 	}
 
 	@Override
@@ -100,17 +102,20 @@ public class GameController implements ActionListener {
 
 		for (Entity entity : entities) {
 			if(entity instanceof PC) {
-				updateEntity(entity);
+				updatePlayer(entity);
 			}else if (entity instanceof GiantRat) {
 				checkEntityCollision(entity);
 				entity.update(pC);
-				checkEntityCollision(entity);
-				entity.update();
+				//checkEntityCollision(entity);
+				//entity.update();
 			}
 		}
+		if (getLoadingRoom())
+			RoomLoad();
 		gameView.getGameScreen().setDrawTarget(sprites);
 		gameView.getGameScreen().setDrawUI(pC.getInventory());
 		gameView.getGameScreen().repaint();
+		loadingFalse();
 	}
 
 	//checks collision of an Entity and a Sprite
@@ -125,7 +130,6 @@ public class GameController implements ActionListener {
 		Rectangle r1 = pC.getBoundary();
 		for (Entity e1 : entities) {
 			if(pC.getID() != e1.getID()) {
-
 				if (e1.isCollidable() == true) {
 					if (e1 instanceof Door) {
 						Door door = (Door) e1;
@@ -133,7 +137,7 @@ public class GameController implements ActionListener {
 							gameModel.loadRoom(gameModel.getDungeonIndex(door.getRoom())); 
 							pC.setx_pos(door.getSpawnX());
 							pC.sety_pos(door.getSpawnY());
-							RoomLoad();
+							loadingTrue();
 						}
 					}
 					else if (e1 instanceof Wall) {
@@ -150,10 +154,15 @@ public class GameController implements ActionListener {
 					}
 					else if (e1 instanceof Item) {
 						Item item = (Item) e1;
+						System.out.println("item size " + item.getBounds().getheight());
 						if(pC.getBounds().collisionWith(item.getBounds())) {
+							System.out.println("is colliding with an item");
 							if (pC.isItemPickUp()) {
-								if (pC.getInventory().addItem(item))
+								System.out.println("detected item pickup");
+								if (pC.getInventory().addItem(item)) {
 									deletedEntities.add(e1);
+									System.out.println("item pick up successful!");
+								}
 							}
 						}
 					}
@@ -172,16 +181,16 @@ public class GameController implements ActionListener {
 			}
 		}
 	}
+	
+	private void updatePlayer(Entity entity) {
+		checkPlayerCollision();
+		entity.update();
+	}
+	
 	//updateEntity Location
 	private void updateEntity(Entity x) {
-		if(!(x instanceof PC)) {
 			checkEntityCollision(x);
 			x.update(pC);
-		} else {
-			checkPlayerCollision();
-
-			x.update();
-		}
 	}
 	//update EntityAi Overridden from Entity in each class
 	public void deleteEntities() {
@@ -194,5 +203,17 @@ public class GameController implements ActionListener {
 				}
 		}
 		deletedEntities.clear();
+	}
+	
+	private boolean getLoadingRoom() {
+		return this.loadingRoom;
+	}
+	
+	private void loadingTrue() {
+		this.loadingRoom = true;
+	}
+	
+	private void loadingFalse() {
+		this.loadingRoom = false;
 	}
 }

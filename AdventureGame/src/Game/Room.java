@@ -26,17 +26,21 @@ public class Room {
 	}
 
 	public void createLevel(int[][] floor, int[][] wall, int x, int y) {
+		int k=0;
 		for(int i = 0; i < 18; i++) {
 			for(int j = 0; j < 24; j++) {
-				floors[i][j]= new Floor((32*j)+x, (32*i)+y);
-				floors[i][j].setTexture(floor[i][j]);
-				spriteList.add(floors[i][j]);
-				if (wall[i][j] != 0) {
+				if (floor[i][j] != -1) {
+					floors[i][j]= new Floor((32*j)+x, (32*i)+y);
+					floors[i][j].setTexture(floor[i][j]);
+					spriteList.add(floors[i][j]);
+				}
+				if (wall[i][j] != -1) {
 					walls[i][j]= new Wall((32*j)+x, (32*i)+y);
 					walls[i][j].setTexture(wall[i][j]);
 					spriteList.add(walls[i][j]);
 					entityList.add(walls[i][j]);
 				}
+				k++;
 			}
 		}
 	}
@@ -47,6 +51,11 @@ public class Room {
 
 	public List<Entity> getEntityList(){
 		return this.entityList;
+	}
+	
+	public void addToRoom(Entity entity) {
+		this.addSpriteList(entity);
+		this.addEntityList(entity);
 	}
 
 	public void addEntityList(Entity entity) {

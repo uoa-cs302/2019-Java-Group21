@@ -65,10 +65,8 @@ public class Collision {
 		
 		float ax_pos =	 this.x_pos + this.xOff + (this.width/2);
 		float ay_pos =  this.y_pos + this.yOff + (this.height/2);
-		
 		float bx_pos =  b.getX() + b.getxOff() + (b.getwidth()/2);
 		float by_pos =  b.getY() + b.getyOff() + (b.getheight()/2);
-		
 		if(Math.abs(ax_pos-bx_pos)< (this.width/2) + (b.getwidth()/2)) {
 			if(Math.abs(ay_pos-by_pos)< (this.height/2) + (b.getheight()/2)) {
 				return true;
