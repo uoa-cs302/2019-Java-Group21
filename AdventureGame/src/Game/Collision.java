@@ -54,7 +54,6 @@ public class Collision {
 		this.x_pos = x;
 		this.y_pos =y;
 		this.radius = r;
-		
 		size =r;
 	}
 	
@@ -69,6 +68,7 @@ public class Collision {
 		float by_pos =  b.getY() + b.getyOff() + (b.getheight()/2);
 		if(Math.abs(ax_pos-bx_pos)< (this.width/2) + (b.getwidth()/2)) {
 			if(Math.abs(ay_pos-by_pos)< (this.height/2) + (b.getheight()/2)) {
+				System.out.println("true");
 				return true;
 			}
 		}

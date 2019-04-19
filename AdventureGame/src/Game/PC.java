@@ -16,6 +16,7 @@ public class PC extends Entity {
 	public PC(int x,int y, List<BufferedImage> images) {
 		super(x,y);
 		setImages(images);
+		this.getImageDim();
 		this.health = 6;
 		inventory = new Inventory();
 		System.out.println("setting frames in player class");
@@ -25,8 +26,11 @@ public class PC extends Entity {
 		this.ani.setDelay(-1);
 		
 		//initital base intialisation
-		Bounds = new Collision(this.x_pos,this.y_pos,this.width,this.height);
+		Bounds = new Collision(this.x_pos,this.y_pos,this.width-12,this.height/2);
+		Bounds.setxOff(6);
+		Bounds.setyOff(16);
 		Hitbounds = new Collision(this.x_pos,this.y_pos,this.width,this.height );
+		Hitbounds.setyOff(16);
 		
 	}
 	
@@ -51,6 +55,13 @@ public class PC extends Entity {
 		if (dx ==0 && dy ==0) {
 			this.direction = Direction.IDLE;
 		}
+	}
+	
+	public boolean attack() {
+		if(Attack = true && AttackDuration <= 30) {
+			return true;
+		}
+		return false;
 	}
 	
 	public void keyPressed(KeyEvent e) {
@@ -100,6 +111,9 @@ public class PC extends Entity {
 			Sword sword = new Sword(0,0);
 			inventory.addItem(sword);
 		}
+		if(key == KeyEvent.VK_SPACE) {
+			this.Attack = true;
+		}
 		
 	}
 	public void keyReleased(KeyEvent e) {
@@ -121,6 +135,10 @@ public class PC extends Entity {
 		if (key == KeyEvent.VK_UP) {
 			setItemPickUp(false);
 		}
+		if(key == KeyEvent.VK_SPACE) {
+			this.Attack = false;
+		}
+		
 	}
 	public void setCollided(boolean a) {
 		collision = a;
