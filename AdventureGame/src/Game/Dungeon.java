@@ -84,6 +84,7 @@ public class Dungeon {
 	private static final int RoomSkeletonDoorSpawnX = 496;
 	private static final int RoomSkeletonDoorSpawnY = 452;
 
+	
 	// Difficulty determines the number of rooms in the dungeon
 	public Dungeon(int difficulty, Image assets) {
 		this.difficulty = difficulty;
