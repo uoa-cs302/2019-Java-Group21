@@ -52,10 +52,15 @@ public class GameScreen extends JPanel {
 				if(sprite.isVisible() && sprite.getImage() != null) {
 					g2d.drawImage(sprite.getImage(), sprite.getx_pos(), sprite.gety_pos(),this);
 				}
-				//if(sprite instanceof Entity) {
-				//	Entity x = (Entity) sprite;
-				//	g2d.drawRect(x.getBounds().getX(), x.getBounds().getY(), (int) x.getBounds().getwidth(),(int) x.getBounds().getheight());
-				//}
+				if(sprite instanceof Entity) {
+					Entity x = (Entity) sprite;
+					g2d.setColor(Color.blue);
+					g2d.drawRect(x.getBounds().getX()+ (int) x.getBounds().getxOff(), x.getBounds().getY() + (int) x.getBounds().getyOff(), (int) x.getBounds().getwidth(),(int) x.getBounds().getheight());
+				}if(sprite instanceof PC) {
+					PC pC = (PC) sprite;
+					g2d.setColor(Color.green);
+					g2d.drawRect(pC.getHitBounds().getX() + (int) pC.getHitBounds().getxOff(),(int) pC.getHitBounds().getY()+ (int)pC.getHitBounds().getyOff(), (int)pC.getHitBounds().getwidth(),(int) pC.getHitBounds().getheight());
+				}
 			}
 		}
 		if(inventory != null) {

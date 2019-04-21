@@ -60,8 +60,8 @@ public class Sprite {
 	}
 
 	void getImageDim() {
-		width = image.getWidth();
-		height = image.getHeight();
+		width = 32;
+		height = 32;
 		right = x_pos + width;
 		bottom = y_pos + height;
 	}

@@ -33,7 +33,7 @@ public class Entity extends Sprite {
 	
 	protected boolean Attack;
 	protected int AttackSpeed;
-	protected int AttackDuration;
+	protected int AttackDuration = 30;
 	
 	protected int health;
 	
@@ -83,6 +83,7 @@ public class Entity extends Sprite {
 		curAnim = i;
 		System.out.println("setting up frames");
 		System.out.println(frames.size());
+		this.getImageDim();
 		ani.setFrames(frames);
 		System.out.println("setting up delay");
 		ani.setDelay(delay);
@@ -151,23 +152,29 @@ public class Entity extends Sprite {
 	}
 	
 	public void setHitboxDirection() {
+	
 		switch(this.direction) {
 		case UP:
 			this.Hitbounds.setxOff(0);
-			this.Hitbounds.setyOff(-size);
+			this.Hitbounds.setyOff(-16);
+			break;
 		case DOWN:
 			this.Hitbounds.setxOff(0);
-			this.Hitbounds.setyOff(0);
+			this.Hitbounds.setyOff(16);
+			break;
 		case LEFT:
-			this.Hitbounds.setxOff(-size/2);
-			this.Hitbounds.setyOff(-size/2);
+			this.Hitbounds.setxOff(-16);
+			this.Hitbounds.setyOff(0);
+			break;
 		case RIGHT:
-			this.Hitbounds.setxOff(size/2);
-			this.Hitbounds.setyOff(-size/2);
+			this.Hitbounds.setxOff(16);
+			this.Hitbounds.setyOff(0);
+			break;
 		}
 	}
 	
 	public void wallCollide(Direction direction) {
+
 		switch(direction) {
 			case UP:
 				if (this.getdy() < 0) {
@@ -202,12 +209,12 @@ public void CollisionProcess(int top,int bottom,int left, int right) {
 		switch (this.check_collisiondir_Hoz(left, right)) {
 		case 1:
 			if(dx < 0) {
-				dx = 0;
+				this.setx_pos(this.x_pos - dx);
 			}
 			break;
 		case 2:
 			if(dx > 0) {
-				dx = 0;
+				this.setx_pos(this.x_pos - dx);
 			}
 			break;
 		}
@@ -215,12 +222,12 @@ public void CollisionProcess(int top,int bottom,int left, int right) {
 		case 1:
 			if(dy < 0) {
 				
-				dy = 0;
+				this.sety_pos(this.y_pos - dy);
 			}
 			break;
 		case 2:
 			if(dy > 0) {
-				dy = 0;
+				this.sety_pos(this.y_pos - dy);
 			}
 			break;
 		}
@@ -251,9 +258,9 @@ public void CollisionProcess(int top,int bottom,int left, int right) {
  }
 	protected int check_collisiondir_Hoz(int left2,int right2 ) {
 
-		if (this.x_pos == right2 - 4) {
+		if (this.x_pos == right2 - 2) {
 			return 1;
-		} else if (this.right == left2 + 4) {
+		} else if (this.right == left2 + 2) {
 			return 2;
 		} else {
 			return 0;
@@ -261,9 +268,9 @@ public void CollisionProcess(int top,int bottom,int left, int right) {
 	}
 	protected int check_collisiondir_Vert(int top2,int bottom2 ) {
 
-		if (this.y_pos == bottom2 -4) {
+		if (this.y_pos == bottom2 -2) {
 			return 1;
-		} else if (this.bottom == top2 + 4) {
+		} else if (this.bottom == top2 + 2) {
 			return 2;
 		} else {
 			return 0;
