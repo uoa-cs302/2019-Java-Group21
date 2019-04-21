@@ -13,8 +13,8 @@ public class GameModel {
 	
 	public GameModel() {
 		assets = new Image();
-		dungeon = new Dungeon(0, assets);
-		currentRoom = dungeon.getDungeonIndex(2);
+		dungeon = new Dungeon(2, assets);
+		currentRoom = dungeon.getDungeonIndex(1);
 		System.out.println("GameModel constructor complete");
 	}
 

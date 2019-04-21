@@ -23,6 +23,7 @@ public class Door extends Entity{
 	public int getRoom() {
 		return room;
 	}
+	
 	public void setRoom(int room) {
 		this.room = room;
 	}
@@ -31,12 +32,15 @@ public class Door extends Entity{
 	public int getSpawnY() {
 		return spawnY;
 	}
+	
 	public void setSpawnY(int spawnY) {
 		this.spawnY = spawnY;
 	}
+	
 	public int getSpawnX() {
 		return spawnX;
 	}
+	
 	public void setSpawnX(int spawnX) {
 		this.spawnX = spawnX;
 	}

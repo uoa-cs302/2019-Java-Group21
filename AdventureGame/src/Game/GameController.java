@@ -16,8 +16,8 @@ public class GameController implements ActionListener {
 
 	private Timer timer;
 	private int DELAY = 10;
-	private int Start_X = 240;
-	private int Start_Y = 300;
+	private int Start_X = 496;
+	private int Start_Y = 304;
 	private int AnimCount = 1;
 	private PC pC;
 	private GameView gameView;
@@ -67,9 +67,9 @@ public class GameController implements ActionListener {
 	private void InitGame() {
 		//initialise timer with delay value 10ms
 		this.timer = new Timer(DELAY,this);
-		//pC = new PC(Start_X,Start_Y,gameModel.getPlayerAssets());
-		//sprites.add(pC);
-		//entities.add(pC);
+		pC = new PC(Start_X,Start_Y,gameModel.getPlayerAssets());
+		sprites.add(pC);
+		entities.add(pC);
 		timer.start();
 		// for testing
 
@@ -88,16 +88,16 @@ public class GameController implements ActionListener {
 	//method runs when timer ticks
 	//should include update, and draw.
 	public void actionPerformed(ActionEvent e) {
-//		if (pC.getInventory().droppedItemsSize() != 0) {
-//			for (Item item : pC.getInventory().getDroppedItems()) {
-//				item.setx_pos(pC.getx_pos());
-//				item.sety_pos(pC.gety_pos());
-//				item.getImageDim();
-//				gameModel.getCurrentRoom().addEntityList(item);
-//				gameModel.getCurrentRoom().addSpriteList(item);
-//			}
-//			pC.getInventory().clearDroppedItems();
-//		}
+		if (pC.getInventory().droppedItemsSize() != 0) {
+			for (Item item : pC.getInventory().getDroppedItems()) {
+				item.setx_pos(pC.getx_pos());
+				item.sety_pos(pC.gety_pos());
+				item.getImageDim();
+				gameModel.getCurrentRoom().addEntityList(item);
+				gameModel.getCurrentRoom().addSpriteList(item);
+			}
+			pC.getInventory().clearDroppedItems();
+		}
 
 		for (Entity entity : entities) {
 			if(entity instanceof PC) {
@@ -112,7 +112,7 @@ public class GameController implements ActionListener {
 		if (getLoadingRoom())
 			RoomLoad();
 		gameView.getGameScreen().setDrawTarget(sprites);
-		//gameView.getGameScreen().setDrawUI(pC.getInventory());
+		gameView.getGameScreen().setDrawUI(pC.getInventory());
 		gameView.getGameScreen().repaint();
 		loadingFalse();
 	}

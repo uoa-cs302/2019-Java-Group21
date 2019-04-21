@@ -56,6 +56,8 @@ public class Entity extends Sprite {
 		ani = new Animation();
 		direction = Direction.DOWN;
 		size = 32;
+		width = 32;
+		height = 32;
 	}
 	
 	public int getEntityID() {return this.EntityID;}
