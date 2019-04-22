@@ -1123,7 +1123,7 @@ public class Dungeon {
 				door1.setRoom(6);
 				rightRoomOne.addToRoom(door1);
 			}
-			rooms.set(5+difficulty, rightRoomOne);
+			rooms.set(5, rightRoomOne);
 			break;
 		case 1:// Medium difficulty
 			int m = rand.nextInt(2);
@@ -1173,7 +1173,7 @@ public class Dungeon {
 			}
 			else if (n == 1){
 				setDoorRoomTwo(2, RightRoomTwoLeftDoorSpawnX, RightRoomTwoLeftDoorSpawnY);
-				createRoomLeftTwo(rightRoomOne);
+				createRoomRightTwo(rightRoomOne);
 				Door door = new Door(RightRoomTwoLeftDoorX, RightRoomTwoLeftDoorY);
 				door.setSpawnX(RoomTwoRightDoorSpawnX);
 				door.setSpawnY(RoomTwoRightDoorSpawnY);
@@ -1186,7 +1186,7 @@ public class Dungeon {
 					setDoorRoomPuzzle(RightRoomOneRightDoorSpawnX, RightRoomOneRightDoorSpawnY);
 					door1.setSpawnX(RightRoomOneLeftDoorSpawnX);
 					door1.setSpawnY(RightRoomOneLeftDoorSpawnY);
-					createRoomLeftOne(rightRoomTwo);
+					createRoomRightOne(rightRoomTwo);
 					Door door2 = new Door(RightRoomOneLeftDoorX, RightRoomOneLeftDoorY);
 					door2.setSpawnX(RightRoomTwoRightDoorSpawnX);
 					door2.setSpawnY(RightRoomTwoRightDoorSpawnY);
@@ -1217,7 +1217,7 @@ public class Dungeon {
 			}
 			else{
 				setDoorRoomTwo(2, RightRoomThreeLeftDoorSpawnX, RightRoomThreeLeftDoorSpawnY);
-				createRoomLeftThree(rightRoomOne);
+				createRoomRightThree(rightRoomOne);
 				Door door = new Door(RightRoomThreeLeftDoorX, RightRoomThreeLeftDoorY);
 				door.setSpawnX(RoomTwoRightDoorSpawnX);
 				door.setSpawnY(RoomTwoRightDoorSpawnY);
@@ -1259,8 +1259,8 @@ public class Dungeon {
 					rightRoomTwo.addToRoom(door3);
 				}
 			}
-			rooms.set(5+difficulty, rightRoomOne);
-			rooms.set(6+difficulty, rightRoomTwo);
+			rooms.set(6, rightRoomOne);
+			rooms.set(7, rightRoomTwo);
 			break;
 		case 2:// Hard difficulty
 			n = rand.nextInt(6);
@@ -1294,12 +1294,12 @@ public class Dungeon {
 				door4.setSpawnX(RightRoomTwoRightDoorSpawnX);
 				door4.setSpawnY(RightRoomTwoRightDoorSpawnY);
 				door4.setRoom(8);
-				rightRoomTwo.addToRoom(door4);
+				rightRoomThree.addToRoom(door4);
 				Door door5 = new Door(RightRoomThreeRightDoorX, RightRoomThreeRightDoorY);
 				door5.setSpawnX(RoomPuzzleDoorSpawnX);
 				door5.setSpawnY(RoomPuzzleDoorSpawnY);
 				door5.setRoom(10);
-				rightRoomTwo.addToRoom(door5);
+				rightRoomThree.addToRoom(door5);
 			}
 			else if (n == 1) {
 				setDoorRoomTwo(2, RightRoomOneLeftDoorSpawnX, RightRoomOneLeftDoorSpawnY);
@@ -1331,12 +1331,12 @@ public class Dungeon {
 				door4.setSpawnX(RightRoomThreeRightDoorSpawnX);
 				door4.setSpawnY(RightRoomThreeRightDoorSpawnY);
 				door4.setRoom(8);
-				rightRoomTwo.addToRoom(door4);
+				rightRoomThree.addToRoom(door4);
 				Door door5 = new Door(RightRoomTwoRightDoorX, RightRoomTwoRightDoorY);
 				door5.setSpawnX(RoomPuzzleDoorSpawnX);
 				door5.setSpawnY(RoomPuzzleDoorSpawnY);
 				door5.setRoom(10);
-				rightRoomTwo.addToRoom(door5);
+				rightRoomThree.addToRoom(door5);
 			}
 			else if (n == 2) {
 				setDoorRoomTwo(2, RightRoomTwoLeftDoorSpawnX, RightRoomTwoLeftDoorSpawnY);
@@ -1368,12 +1368,12 @@ public class Dungeon {
 				door4.setSpawnX(RightRoomOneRightDoorSpawnX);
 				door4.setSpawnY(RightRoomOneRightDoorSpawnY);
 				door4.setRoom(8);
-				rightRoomTwo.addToRoom(door4);
+				rightRoomThree.addToRoom(door4);
 				Door door5 = new Door(RightRoomThreeRightDoorX, RightRoomThreeRightDoorY);
 				door5.setSpawnX(RoomPuzzleDoorSpawnX);
 				door5.setSpawnY(RoomPuzzleDoorSpawnY);
 				door5.setRoom(10);
-				rightRoomTwo.addToRoom(door5);
+				rightRoomThree.addToRoom(door5);
 			}
 			else if (n == 3) {
 				setDoorRoomTwo(2, RightRoomThreeLeftDoorSpawnX, RightRoomThreeLeftDoorSpawnY);
@@ -1405,12 +1405,12 @@ public class Dungeon {
 				door4.setSpawnX(RightRoomOneRightDoorSpawnX);
 				door4.setSpawnY(RightRoomOneRightDoorSpawnY);
 				door4.setRoom(8);
-				rightRoomTwo.addToRoom(door4);
+				rightRoomThree.addToRoom(door4);
 				Door door5 = new Door(RightRoomTwoRightDoorX, RightRoomTwoRightDoorY);
 				door5.setSpawnX(RoomPuzzleDoorSpawnX);
 				door5.setSpawnY(RoomPuzzleDoorSpawnY);
 				door5.setRoom(10);
-				rightRoomTwo.addToRoom(door5);
+				rightRoomThree.addToRoom(door5);
 			}
 			else if (n == 4) {
 				setDoorRoomTwo(2, RightRoomTwoLeftDoorSpawnX, RightRoomTwoLeftDoorSpawnY);
@@ -1442,12 +1442,12 @@ public class Dungeon {
 				door4.setSpawnX(RightRoomThreeRightDoorSpawnX);
 				door4.setSpawnY(RightRoomThreeRightDoorSpawnY);
 				door4.setRoom(8);
-				rightRoomTwo.addToRoom(door4);
+				rightRoomThree.addToRoom(door4);
 				Door door5 = new Door(RightRoomOneRightDoorX, RightRoomOneRightDoorY);
 				door5.setSpawnX(RoomPuzzleDoorSpawnX);
 				door5.setSpawnY(RoomPuzzleDoorSpawnY);
 				door5.setRoom(10);
-				rightRoomTwo.addToRoom(door5);
+				rightRoomThree.addToRoom(door5);
 			}
 			else {
 				setDoorRoomTwo(2, RightRoomThreeLeftDoorSpawnX, RightRoomThreeLeftDoorSpawnY);
@@ -1486,9 +1486,9 @@ public class Dungeon {
 				door5.setRoom(10);
 				rightRoomTwo.addToRoom(door5);
 			}
-			rooms.set(5+difficulty, rightRoomOne);
-			rooms.set(6+difficulty, rightRoomTwo);
-			rooms.set(7+difficulty, rightRoomThree);
+			rooms.set(7, rightRoomOne);
+			rooms.set(8, rightRoomTwo);
+			rooms.set(9, rightRoomThree);
 			break;
 		}
 	}
@@ -1800,7 +1800,7 @@ public class Dungeon {
 		Door door1 = new Door(RoomSkeletonDoorX, RoomSkeletonDoorY);
 		door1.setSpawnX(x_pos);
 		door1.setSpawnY(y_pos);
-		door1.setRoom(3+difficulty);
+		door1.setRoom(3 + difficulty);
 		rooms.get(4 + difficulty).addToRoom(door1);
 	}
 	
