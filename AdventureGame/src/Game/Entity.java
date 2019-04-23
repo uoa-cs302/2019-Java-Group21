@@ -135,9 +135,8 @@ public class Entity extends Sprite {
 		image();
 		setHitboxDirection();
 		if(Attack || attackCount != 0) {
-			attack();
+			runAttack();
 		}
-
 		x_pos += dx;
 		Right = x_pos + width;
 		y_pos += dy;
@@ -147,24 +146,27 @@ public class Entity extends Sprite {
 		}
 	
 	public void setAttack(boolean b) {Attack = b;}
-	public void attack() {
+	
+	public void runAttack() {
 		if(attackCount == 0) {
-			Attack =false;
+			Attack = false;
+			attack();
 			attackCount ++;
-			
-		} else if (attackCount < AttackDuration) {
-			attackCount ++;
-			 
-		}else if (attackCount == AttackDuration) {
-			attackCount = 0;
-			
 		}
+		else if (attackCount < AttackDuration)
+			attackCount ++;
+		else if (attackCount == AttackDuration)
+			attackCount = 0;
+	}
+	
+	public void attack() {
 		
 	}
 	
 	public void update(Entity target) {
 		update();
 	};
+	
 	public void move() {}
 	public void image() {
 		this.ani.update();

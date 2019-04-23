@@ -33,7 +33,7 @@ public class GameController implements ActionListener {
 		//set game model and game view Jframe to Controller variables
 		this.gameModel = model;
 		this.gameView = view;
-		
+
 		//Sets the button listener on to check for button press on StartScreen
 		ScreenListener gameControllerScreenListener = new ScreenListener() {
 			@Override
@@ -102,13 +102,17 @@ public class GameController implements ActionListener {
 		}
 
 		for (Entity entity : entities) {
-			if(entity instanceof PC) {
+			if(entity instanceof PC)
 				updatePlayer(entity);
-			}else if (entity instanceof GiantRat) {
+			else if (entity instanceof GiantRat) {
 				checkEntityCollision(entity);
 				entity.update(pC);
 				//checkEntityCollision(entity);
 				//entity.update();
+			}
+			else if (entity instanceof Projectile) {
+				checkEntityCollision(entity);
+				entity.update();
 			}
 		}
 		if (getLoadingRoom())
@@ -144,23 +148,19 @@ public class GameController implements ActionListener {
 					}
 					else if (e1 instanceof Wall) {
 						Wall wall = (Wall) e1;
-						if(pC.getBounds().collisionWith(wall.getBounds(),pC.getdx(),pC.getdy())) {
+						if(pC.getBounds().collisionWith(wall.getBounds(),pC.getdx(),pC.getdy()))
 							pC.CollisionProcess(wall.getBounds());
-						
-					}
 					}
 					else if (e1 instanceof GiantRat) {
 						GiantRat rat = (GiantRat) e1;
-					
-							if (pC.getHitBounds().collisionWith(rat.getBounds())) {
-								if (pC.canAttack()) {
-									rat.hitBy(pC);
-									if (rat.getHealth()<= 0) {
-										deletedEntities.add(rat);
-									}
+						if (pC.getHitBounds().collisionWith(rat.getBounds())) {
+							if (pC.canAttack()) {
+								rat.hitBy(pC);
+								if (rat.getHealth()<= 0) {
+									deletedEntities.add(rat);
 								}
 							}
-						
+						}
 						if(pC.getBounds().collisionWith(rat.getHitBounds())) {
 							pC.hitBy(rat);
 						}
@@ -179,11 +179,19 @@ public class GameController implements ActionListener {
 							}
 						}
 					}
-
+					else if (e1 instanceof Projectile) {
+						Projectile projectile = (Projectile) e1;
+						if (pC.getHitBounds().collisionWith(projectile.getBounds())) {
+							if (pC.canAttack())
+								deletedEntities.add(projectile);
+						}
+						if(pC.getBounds().collisionWith(projectile.getHitBounds()))
+							pC.hitBy(projectile);
+					}
 				}
 			}
 		}
-		
+
 	}
 
 	public void checkEntityCollision(Entity x) {
@@ -193,18 +201,18 @@ public class GameController implements ActionListener {
 			}
 		}
 	}
-	
+
 	private void updatePlayer(Entity entity) {
 		pC.move();
 		checkPlayerCollision();
 		entity.update();
-	
+
 	}
-	
+
 	//updateEntity Location
 	private void updateEntity(Entity x) {
-			checkEntityCollision(x);
-			x.update(pC);
+		checkEntityCollision(x);
+		x.update(pC);
 	}
 	//update EntityAi Overridden from Entity in each class
 	public void deleteEntities() {
@@ -218,15 +226,15 @@ public class GameController implements ActionListener {
 		}
 		deletedEntities.clear();
 	}
-	
+
 	private boolean getLoadingRoom() {
 		return this.loadingRoom;
 	}
-	
+
 	private void loadingTrue() {
 		this.loadingRoom = true;
 	}
-	
+
 	private void loadingFalse() {
 		this.loadingRoom = false;
 	}
