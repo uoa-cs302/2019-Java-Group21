@@ -6,10 +6,7 @@ import java.util.List;
 
 public class PC extends Entity {
 	
-	private boolean up = false;
-	private boolean down = false;
-	private boolean left = false;
-	private boolean right = false;
+	
 	private Inventory inventory;
 	private boolean itemPickUp = false;
 	
