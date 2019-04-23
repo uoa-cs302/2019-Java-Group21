@@ -367,6 +367,8 @@ public class Dungeon {
 		room1.createLevel(floor, wall, decor, 128, 12, assets);
 		//GiantRat rat1 = new GiantRat(240, 300);
 		//room1.addToRoom(rat1);
+		GiantSpider spider = new GiantSpider(300, 400, assets.getSpider());
+		room1.addToRoom(spider);
 		Door door = new Door(RoomTwoBottomDoorX, RoomTwoBottomDoorY);
 		door.setSpawnX(RoomWellTopDoorSpawnX);
 		door.setSpawnY(RoomWellTopDoorSpawnY);

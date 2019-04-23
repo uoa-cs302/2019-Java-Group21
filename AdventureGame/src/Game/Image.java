@@ -14,6 +14,7 @@ public class Image {
 	private List<BufferedImage> rat;
 	private BufferedImage sword0;
 	private BufferedImage sword1;
+	private List<BufferedImage> spider;
 
 	public List<BufferedImage> getPlayer() {
 		return player;
@@ -30,6 +31,10 @@ public class Image {
 		return rat;
 	}
 
+	public List<BufferedImage> getSpider() {
+		return spider;
+	}
+	
 	public BufferedImage getSword0() {
 		return sword0;
 	}
@@ -50,11 +55,14 @@ public class Image {
 	public Image() {
 		assetList = new ArrayList<BufferedImage>();
 		rat = new ArrayList<BufferedImage>();
+		spider = new ArrayList<BufferedImage>();
 		//adds rat sprites
 		rat.add(loadSpecificImage("src/Image/rat_0.png"));
 		rat.add(loadSpecificImage("src/Image/rat_1.png"));
 		rat.add(loadSpecificImage("src/Image/rat_2.png"));
 		rat.add(loadSpecificImage("src/Image/rat_3.png"));
+		spider.add(loadSpecificImage("src/Image/spider0.png"));
+		spider.add(loadSpecificImage("src/Image/projectile0.png"));
 		sword0 = loadSpecificImage("src/Image/swrd0.png");
 		sword1 = loadSpecificImage("src/Image/swrd1.png");
 		setPlayer(getSprites("src/Image/ExampleCharacter.png"));

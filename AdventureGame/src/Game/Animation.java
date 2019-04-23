@@ -36,10 +36,9 @@ public class Animation {
 	public void setFrameNum(int i) {this.numFrame = i;}
 	
 	public void update() {
-		if (DELAY == -1)return;
-		
+		if (DELAY == -1)
+			return;
 		count++;
-		
 		if (count == DELAY) {
 			curFrame++;
 			count = 0;

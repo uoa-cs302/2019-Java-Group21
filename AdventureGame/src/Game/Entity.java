@@ -132,7 +132,8 @@ public class Entity extends Sprite {
 	}
 
 	public void update() {
-
+		if (this instanceof GiantSpider)
+			System.out.println("updating entity");
 		animate();
 		image();
 		setHitboxDirection();
@@ -166,7 +167,6 @@ public class Entity extends Sprite {
 	}
 
 	public void update(Entity target) {
-		update();
 	};
 
 	public void move() {}
@@ -260,31 +260,31 @@ public class Entity extends Sprite {
 		}
 	}
 
-	protected void hitBy(Entity e) {
-		this.health = health - e.getDamage();
-		Attack = false;
-		System.out.println("OOOF");
-		if(health <= 0) {
-			System.out.println("blergh");
-			this.visible = false;
-			this.setCollidable(false);
-		}
-		switch (e.getDirection()){
-		case DOWN:
-			this.y_pos += 48;
-			break;
-		case LEFT:
-			this.x_pos += -48;
-			break;
-		case RIGHT:
-			this.x_pos += 48;
-			break;
-		case UP:
-			this. y_pos += -48;
-			break;
-		default:
-		}
-	}
+ protected void hitBy(Entity e) {
+	 this.health = health - e.getDamage();
+	 Attack = false;
+	 System.out.println("OOOF");
+	 if(health <= 0) {
+		 System.out.println("blergh");
+		 this.visible = false;
+		 this.setCollidable(false);
+	 }
+	 switch (e.getDirection()){
+	 case DOWN:
+		 this.y_pos += 32;
+		 break;
+	 case LEFT:
+		 this.x_pos += -32;
+		 break;
+	 case RIGHT:
+		 this.x_pos += 32;
+		 break;
+	 case UP:
+		this.y_pos += -32;
+		 break;
+		 default:
+	 }
+ }
 	protected int check_collisiondir_Hoz(int left2,int right2 ) {
 
 		if (Bounds.getX()+Bounds.getxOff() == right2) {

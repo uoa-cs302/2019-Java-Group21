@@ -10,8 +10,6 @@ public class GiantRat extends Entity {
 	private int dy_lock;
 	private int dx_lock;
 
-
-	
 	public GiantRat(int x,int y,List <BufferedImage> images){
 		super(x,y);
 		setImages(images);
@@ -20,6 +18,7 @@ public class GiantRat extends Entity {
 		this.ani.setFrames(this.getImages());
 		this.ani.setFrame(1);
 		this.ani.setDelay(-1);
+		this.AttackDuration = 90;
 
 	}
 	private void initRat() {
@@ -34,7 +33,6 @@ public class GiantRat extends Entity {
 	}
 	public void update(Entity target) {
 		AiUpdate(target);
-		super.update();
 	}
 	public void animate() {
 		switch (this.direction) {
@@ -58,6 +56,12 @@ public class GiantRat extends Entity {
 			break;
 		}
 	}
+	public void CollisionProcess(Collision b) {
+		dx = 0;
+		dy = 0;
+		dx_lock = dx;
+		dy_lock = dy;
+	}
 
 	public void AiUpdate(Entity target) {
 		if (target == null) {
@@ -68,27 +72,28 @@ public class GiantRat extends Entity {
 			int xdiff = target.getx_pos() - this.x_pos;
 			int ydiff = target.gety_pos() - this.y_pos;
 			int distance = (int) Math.hypot((double) xdiff/32,(double) ydiff/32);
-			
-			if(ydiff>0 ) {
-				direction = Direction.DOWN;
-				dy = 1;
-			}
-			else if (ydiff<0 ) {
-				direction = Direction.UP;
-				dy = -1;
-			}
-			else {dy =0;}
+			if(count>=200||count == 0) {
+				if(ydiff>0 ) {
+					direction = Direction.DOWN;
+					dy = 1;
+				}
+				else if (ydiff<0 ) {
+					direction = Direction.UP;
+					dy = -1;
+				}
+				else {dy =0;}
 
-			if (xdiff>0) {
-				direction = Direction.RIGHT;
-				dx = 1;
+				if (xdiff>0) {
+					direction = Direction.RIGHT;
+					dx = 1;
+				}
+				else if (xdiff<0) {
+					direction = Direction.LEFT;
+					dx = -1;
+				}
+				else {dx=0;}
 			}
-			else if (xdiff<0) {
-				direction = Direction.LEFT;
-				dx = -1;
-			}
-			else {dx=0;}
-			
+
 			if (distance <= 5 && charging == false) {
 				charging = true;
 				count = 0;
@@ -110,7 +115,11 @@ public class GiantRat extends Entity {
 				charging = false;
 				count = 0;
 			}
-		}	
+
+			if(distance < 2) {
+				Attack = true;
+			}
+		}
 	}
 }
 
