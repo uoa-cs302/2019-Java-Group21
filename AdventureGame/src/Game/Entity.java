@@ -270,16 +270,16 @@ public void CollisionProcess(Collision b) {
 	 }
 	 switch (e.getDirection()){
 	 case DOWN:
-		 this.y_pos += 48;
+		 this.y_pos += 32;
 		 break;
 	 case LEFT:
-		 this.x_pos += -48;
+		 this.x_pos += -32;
 		 break;
 	 case RIGHT:
-		 this.x_pos += 48;
+		 this.x_pos += 32;
 		 break;
 	 case UP:
-		this. y_pos += -48;
+		this.y_pos += -32;
 		 break;
 		 default:
 	 }

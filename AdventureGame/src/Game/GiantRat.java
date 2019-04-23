@@ -20,6 +20,7 @@ public class GiantRat extends Entity {
 		this.ani.setFrames(this.getImages());
 		this.ani.setFrame(1);
 		this.ani.setDelay(-1);
+		this.AttackDuration = 90;
 
 	}
 	private void initRat() {
@@ -116,7 +117,11 @@ public class GiantRat extends Entity {
 				charging = false;
 				count = 0;
 			}
-		}	
+		
+		if(distance < 2) {
+			Attack = true;
+		}
+		}
 	}
 }
 

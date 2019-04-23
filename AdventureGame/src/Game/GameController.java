@@ -163,7 +163,9 @@ public class GameController implements ActionListener {
 							}
 						}
 						if(pC.getBounds().collisionWith(rat.getHitBounds())) {
+							if(rat.canAttack()) {
 							pC.hitBy(rat);
+							}
 						}
 					}
 					else if (e1 instanceof Item) {
