@@ -16,6 +16,7 @@ private boolean charging = false;
 	}
 	private void initRat() {
 		damage = 1;
+		health = 4;
 		
 		//initital base intialisation
 		Bounds = new Collision(this.x_pos,this.y_pos,this.width,this.height/2);

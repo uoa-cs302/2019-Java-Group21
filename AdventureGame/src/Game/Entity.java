@@ -19,6 +19,7 @@ public class Entity extends Sprite {
 	protected int dy;
 	private boolean collidable = false;
 	protected int size;
+	private int attackCount = 0;
 	
 	protected int dx_temp;
 	protected int dy_temp;
@@ -79,17 +80,15 @@ public class Entity extends Sprite {
 	public void setCollidable(boolean collidable) {this.collidable = collidable;}
 	public Collision getBounds() {return Bounds;}
 	public Collision getHitBounds() {return Hitbounds;}
+	public boolean canAttack() {if (Attack && attackCount == 0) {return true;}else{return false;}}
 	
 	//may be obselete
 	public Rectangle getBoundary() {return new Rectangle(x_pos, y_pos, width, height);}
 	
 	public void setAnimation(Direction i,List<BufferedImage> frames, int delay) {
 		curAnim = i;
-		System.out.println("setting up frames");
-		System.out.println(frames.size());
 		this.getImageDim();
 		ani.setFrames(frames);
-		System.out.println("setting up delay");
 		ani.setDelay(delay);
 		ani.setFrame(1);
 	}
@@ -135,7 +134,9 @@ public class Entity extends Sprite {
 		animate();
 		image();
 		setHitboxDirection();
-		
+		if(Attack || attackCount != 0) {
+			attack();
+		}
 
 		x_pos += dx;
 		Right = x_pos + width;
@@ -143,8 +144,23 @@ public class Entity extends Sprite {
 		Bottom = y_pos + height;
 		Bounds.setBox(this.x_pos, this.y_pos, (int)Bounds.getwidth(),(int) Bounds.getheight());
 		Hitbounds.setBox(this.x_pos, this.y_pos, (int) Hitbounds.getwidth(),(int) Hitbounds.getheight());
-
 		}
+	
+	public void setAttack(boolean b) {Attack = b;}
+	public void attack() {
+		if(attackCount == 0) {
+			Attack =false;
+			attackCount ++;
+			
+		} else if (attackCount < AttackDuration) {
+			attackCount ++;
+			 
+		}else if (attackCount == AttackDuration) {
+			attackCount = 0;
+			
+		}
+		
+	}
 	
 	public void update(Entity target) {
 		update();
@@ -244,7 +260,10 @@ public void CollisionProcess(Collision b) {
 
  protected void hitBy(Entity e) {
 	 this.health = health - e.getDamage();
-	 if(health < 0) {
+	 Attack = false;
+	 System.out.println("OOOF");
+	 if(health <= 0) {
+		 System.out.println("blergh");
 		 this.visible = false;
 		 this.setCollidable(false);
 	 }

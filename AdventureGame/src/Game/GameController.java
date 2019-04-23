@@ -88,6 +88,8 @@ public class GameController implements ActionListener {
 	//method runs when timer ticks
 	//should include update, and draw.
 	public void actionPerformed(ActionEvent e) {
+		if (deletedEntities.size() != 0) {
+			deleteEntities();}
 		if (pC.getInventory().droppedItemsSize() != 0) {
 			for (Item item : pC.getInventory().getDroppedItems()) {
 				item.setx_pos(pC.getx_pos());
@@ -149,6 +151,16 @@ public class GameController implements ActionListener {
 					}
 					else if (e1 instanceof GiantRat) {
 						GiantRat rat = (GiantRat) e1;
+					
+							if (pC.getHitBounds().collisionWith(rat.getBounds())) {
+								if (pC.canAttack()) {
+									rat.hitBy(pC);
+									if (rat.getHealth()<= 0) {
+										deletedEntities.add(rat);
+									}
+								}
+							}
+						
 						if(pC.getBounds().collisionWith(rat.getHitBounds())) {
 							pC.hitBy(rat);
 						}
@@ -171,8 +183,7 @@ public class GameController implements ActionListener {
 				}
 			}
 		}
-		if (deletedEntities.size() != 0)
-			deleteEntities();
+		
 	}
 
 	public void checkEntityCollision(Entity x) {
