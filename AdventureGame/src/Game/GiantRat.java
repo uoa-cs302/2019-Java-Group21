@@ -10,20 +10,12 @@ public class GiantRat extends Entity {
 	private int dy_lock;
 	private int dx_lock;
 
-<<<<<<< HEAD
+
 	
 	public GiantRat(int x,int y,List <BufferedImage> images){
-=======
-
-	public GiantRat(int x,int y){
->>>>>>> branch 'master' of https://github.com/uoa-cs302/2019-Java-Group21
 		super(x,y);
-<<<<<<< HEAD
 		setImages(images);
 		this.getImageDim();
-=======
-
->>>>>>> branch 'master' of https://github.com/uoa-cs302/2019-Java-Group21
 		initRat();
 		this.ani.setFrames(this.getImages());
 		this.ani.setFrame(1);
@@ -71,14 +63,7 @@ public class GiantRat extends Entity {
 		if (target == null) {
 			dx = 0;
 			dy = 0;
-		}
-<<<<<<< HEAD
-		
-			}	
-	
-		
-	}
-=======
+		}	
 		else {
 			int xdiff = target.getx_pos() - this.x_pos;
 			int ydiff = target.gety_pos() - this.y_pos;
@@ -93,7 +78,6 @@ public class GiantRat extends Entity {
 				dy = -1;
 			}
 			else {dy =0;}
->>>>>>> branch 'master' of https://github.com/uoa-cs302/2019-Java-Group21
 
 			if (xdiff>0) {
 				direction = Direction.RIGHT;
