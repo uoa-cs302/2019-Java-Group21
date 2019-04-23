@@ -1,7 +1,6 @@
 package Game;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -32,11 +31,11 @@ public class Dungeon {
 	private static final int RoomTwoLeftDoorSpawnX = 208;
 	private static final int RoomTwoLeftDoorSpawnY = 76;
 
-	private static final int RoomTwoRightDoorX = 720;
-	private static final int RoomTwoRightDoorY = 138;
+	private static final int RoomTwoRightDoorX = 864;
+	private static final int RoomTwoRightDoorY = 244;
 
-	private static final int RoomTwoRightDoorSpawnX = 720;
-	private static final int RoomTwoRightDoorSpawnY = 172;
+	private static final int RoomTwoRightDoorSpawnX = 830;
+	private static final int RoomTwoRightDoorSpawnY = 244;
 
 	// Left Room One
 	private static final int LeftRoomOneBottomDoorX = 496;
@@ -84,6 +83,51 @@ public class Dungeon {
 	private static final int RoomSkeletonDoorSpawnX = 496;
 	private static final int RoomSkeletonDoorSpawnY = 452;
 
+	// Right Room One
+	private static final int RightRoomOneLeftDoorX = 160;
+	private static final int RightRoomOneLeftDoorY = 444;
+
+	private static final int RightRoomOneLeftDoorSpawnX = 194;
+	private static final int RightRoomOneLeftDoorSpawnY = 444;
+
+	private static final int RightRoomOneRightDoorX = 704;
+	private static final int RightRoomOneRightDoorY = 444;
+
+	private static final int RightRoomOneRightDoorSpawnX = 670;
+	private static final int RightRoomOneRightDoorSpawnY = 444;
+
+	// Right Room Two
+	private static final int RightRoomTwoLeftDoorX = 128;
+	private static final int RightRoomTwoLeftDoorY = 156;
+
+	private static final int RightRoomTwoLeftDoorSpawnX = 162;
+	private static final int RightRoomTwoLeftDoorSpawnY = 156;
+
+	private static final int RightRoomTwoRightDoorX = 864;
+	private static final int RightRoomTwoRightDoorY = 444;
+
+	private static final int RightRoomTwoRightDoorSpawnX = 830;
+	private static final int RightRoomTwoRightDoorSpawnY = 444;
+
+	// Right Room Three
+	private static final int RightRoomThreeLeftDoorX = 128;
+	private static final int RightRoomThreeLeftDoorY = 268;
+
+	private static final int RightRoomThreeLeftDoorSpawnX = 162;
+	private static final int RightRoomThreeLeftDoorSpawnY = 268;
+
+	private static final int RightRoomThreeRightDoorX = 864;
+	private static final int RightRoomThreeRightDoorY = 276;
+
+	private static final int RightRoomThreeRightDoorSpawnX = 830;
+	private static final int RightRoomThreeRightDoorSpawnY = 276;
+
+	// Skeleton Room
+	private static final int RoomPuzzleDoorX = 224;
+	private static final int RoomPuzzleDoorY = 434;
+
+	private static final int RoomPuzzleDoorSpawnX = 258;
+	private static final int RoomPuzzleDoorSpawnY = 434;
 	
 	// Difficulty determines the number of rooms in the dungeon
 	public Dungeon(int difficulty, Image assets) {
@@ -106,51 +150,52 @@ public class Dungeon {
 		createRoomOne();
 		createRoomSkeleton();
 		createLeftHallway();
-		//createRightHallway();
-		//createRoomPuzzle();
+		createRoomPuzzle();
+		createRightHallway();
 		//createRoomBoss();
 	}
 
 	private void createRoomTutorial(){
+		Room tutorial = new Room(0);
 		int[][] floor = {
-				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
-				{-1,-1,-1,-1,-1,-1,-1,-1,88,88,88,88,88,88,88,88,-1,-1,-1,-1,-1,-1,-1,-1},
-				{-1,-1,-1,-1,-1,-1,-1,-1,88,88,88,88,88,88,88,88,-1,-1,-1,-1,-1,-1,-1,-1},
-				{-1,-1,-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1,-1,-1,-1},
-				{-1,-1,-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1,-1,-1,-1},
-				{-1,-1,-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1,-1,-1,-1},
-				{-1,-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1,-1,-1},
-				{-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1,-1},
-				{-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1,-1},
-				{-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1,-1},
-				{-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1,-1},
-				{-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1,-1},
-				{-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1,-1},
-				{-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1,-1},
-				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,88,88,88,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
-				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,88,88,88,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
-				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
-				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1}
 		};
 		int[][] wall = {
-				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
-				{-1,-1,-1,-1,-1,-1,-1,-1, 3, 4, 4, 4, 4, 4, 4, 5,-1,-1,-1,-1,-1,-1,-1,-1},
-				{-1,-1,-1,-1,-1,-1,-1,-1,19,20,20,20,20,20,20,21,-1,-1,-1,-1,-1,-1,-1,-1},
-				{-1,-1,-1,-1,-1,-1, 3, 4,34,-1,-1,-1,-1,-1,-1,32, 4, 5,-1,-1,-1,-1,-1,-1},
-				{-1,-1,-1,-1,-1,-1,19,20,50,-1,-1,-1,-1,-1,-1,48,20,21,-1,-1,-1,-1,-1,-1},
-				{-1,-1,-1,-1,-1, 3,34,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,32, 5,-1,-1,-1,-1,-1},
-				{-1,-1,-1,-1,-1,19,50,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,48,21,-1,-1,-1,-1,-1},
-				{-1,-1,-1,-1, 3,34,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,32, 5,-1,-1,-1,-1},
-				{-1,-1,-1,-1,19,50,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,48,21,-1,-1,-1,-1},
-				{-1,-1,-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1,-1,-1},
-				{-1,-1,-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1,-1,-1},
-				{-1,-1,-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1,-1,-1},
-				{-1,-1,-1,-1,35,36,36,36,36,36,97,-1,-1,98,36,36,36,36,36,37,-1,-1,-1,-1},
-				{-1,-1,-1,-1,51,52,52,52,52,52,113,-1,-1,114,52,52,52,52,52,53,-1,-1,-1,-1},
+				{64, 4, 4, 4, 4,67,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{19,20,-1,-1,20,21,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{18,-1,-1,-1,-1,16,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{18,-1,-1,-1,-1,16,-1,-1,-1,-1,-1,-1,-1,-1, 3, 4, 4, 4, 4, 4, 4, 5,-1,-1},
+				{35,97,-1,-1,98,37,-1,-1,-1,-1,-1,-1,-1,-1,19,20,20,20,23,24,20,21,-1,-1},
+				{51,113,-1,-1,114,53,-1,-1,-1,-1,-1,-1,-1,-1,18,-1,-1,-1,-1,-1,-1,32, 4, 5},
+				{-1,18,-1,-1,16,-1,-1,-1,-1,-1,-1,-1,-1,-1,18,-1,-1,-1,-1,-1,-1,48,20,21},
+				{-1,18,-1,-1,16,-1,-1,-1,-1,-1,-1,-1,-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{-1,18,-1,-1,32, 4, 4, 4, 4, 4, 4, 4, 4, 4,34,-1,-1,-1,-1,-1,-1,98,36,37},
+				{-1,18,-1,-1,48,20,20,20,20,20,20,20,20,20,50,-1,-1,-1,-1,-1,-1,114,52,53},
+				{-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1},
+				{-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1},
+				{-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1},
+				{-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1},
+				{-1,35,36,36,36,36,36,36,36,36,97,-1,-1,98,36,36,36,36,36,36,36,37,-1,-1},
+				{-1,51,52,52,52,52,52,52,52,52,113,-1,-1,114,52,52,52,52,52,52,52,53,-1,-1},
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,35,-1,-1,37,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
-				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,51,52,52,53,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
-				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
-				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,51,52,52,53,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
 		};
 		int[][] decor = {
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
@@ -167,23 +212,22 @@ public class Dungeon {
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
-				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,36,36,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
 		};
-		Room tutorial = new Room(0);
-		Door door = new Door(240, 36);
+		tutorial.createLevel(floor, wall, decor, 128, 12, assets);
+		Door door = new Door(864,700);
 		door.setSpawnX(496);
 		door.setSpawnY(516);
 		door.setRoom(2);
 		tutorial.addToRoom(door);
-		Door door1 = new Door(496,486);
+		Door door1 = new Door(864,244);
 		door1.setSpawnX(496);
 		door1.setSpawnY(66);
 		door1.setRoom(1);
 		tutorial.addToRoom(door1);
-		tutorial.createLevel(floor, wall, decor, 128, 12, assets);
 		rooms.set(0, tutorial);
 	}
 
@@ -264,19 +308,19 @@ public class Dungeon {
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 				{88,88,72,72,88,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 				{88,88,88,88,88,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
-				{88,88,88,88,88,88,-1,-1,-1,-1,-1,-1,-1,-1,88,88,88,88,-1,-1,88,88,88,88},
-				{88,88,88,88,88,88,-1,-1,-1,-1,-1,-1,-1,-1,88,88,88,88,72,72,88,88,88,88},
+				{88,88,88,88,88,88,-1,-1,-1,-1,-1,-1,-1,-1,88,88,88,88,88,88,88,88,-1,-1},
+				{88,88,88,88,88,88,-1,-1,-1,-1,-1,-1,-1,-1,88,88,88,88,88,88,88,88,-1,-1},
 				{88,88,88,88,88,88,-1,-1,-1,-1,-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88},
 				{-1,88,88,88,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88},
 				{-1,88,88,88,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88},
 				{-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
 				{-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
-				{-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
-				{-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
-				{-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
-				{-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
-				{-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
-				{-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,88,88,88,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,88,88,88,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
 		};
@@ -284,19 +328,19 @@ public class Dungeon {
 				{64, 4, 4, 4, 4,67,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 				{19,20,-1,-1,20,21,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 				{18,-1,-1,-1,-1,16,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
-				{18,-1,-1,-1,-1,16,-1,-1,-1,-1,-1,-1,-1,-1, 3, 4, 4, 4, 4, 4, 4, 4, 4, 5},
-				{35,97,-1,-1,98,37,-1,-1,-1,-1,-1,-1,-1,-1,19,20,20,20,23,24,20,20,20,21},
-				{51,113,-1,-1,114,53,-1,-1,-1,-1,-1,-1,-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{18,-1,-1,-1,-1,16,-1,-1,-1,-1,-1,-1,-1,-1, 3, 4, 4, 4, 4, 4, 4, 5,-1,-1},
+				{35,97,-1,-1,98,37,-1,-1,-1,-1,-1,-1,-1,-1,19,20,20,20,20,20,20,21,-1,-1},
+				{51,113,-1,-1,114,53,-1,-1,-1,-1,-1,-1,-1,-1,18,-1,-1,-1,-1,-1,-1,32, 4, 5},
+				{-1,18,-1,-1,16,-1,-1,-1,-1,-1,-1,-1,-1,-1,18,-1,-1,-1,-1,-1,-1,48,20,21},
 				{-1,18,-1,-1,16,-1,-1,-1,-1,-1,-1,-1,-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,16},
-				{-1,18,-1,-1,16,-1,-1,-1,-1,-1,-1,-1,-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,16},
-				{-1,18,-1,-1,32, 4, 4, 4, 4, 4, 4, 4, 4, 4,34,-1,-1,-1,-1,-1,-1,-1,-1,16},
-				{-1,18,-1,-1,48,20,20,20,20,20,20,20,20,20,50,-1,-1,-1,-1,-1,-1,-1,-1,16},
-				{-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
-				{-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
-				{-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
-				{-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
-				{-1,35,36,36,36,36,36,36,36,36,97,-1,-1,98,36,36,36,36,36,36,36,36,36,37},
-				{-1,51,52,52,52,52,52,52,52,52,113,-1,-1,114,52,52,52,52,52,52,52,52,52,53},
+				{-1,18,-1,-1,32, 4, 4, 4, 4, 4, 4, 4, 4, 4,34,-1,-1,-1,-1,-1,-1,98,36,37},
+				{-1,18,-1,-1,48,20,20,20,20,20,20,20,20,20,50,-1,-1,-1,-1,-1,-1,114,52,53},
+				{-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1},
+				{-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1},
+				{-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1},
+				{-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1},
+				{-1,35,36,36,36,36,36,36,36,36,97,-1,-1,98,36,36,36,36,36,36,36,37,-1,-1},
+				{-1,51,52,52,52,52,52,52,52,52,113,-1,-1,114,52,52,52,52,52,52,52,53,-1,-1},
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,35,-1,-1,37,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,51,52,52,53,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
 		};
@@ -305,7 +349,7 @@ public class Dungeon {
 				{-1,-1,23,24,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
-				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,288,289,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
@@ -337,8 +381,6 @@ public class Dungeon {
 		Room leftRoomThree = new Room(5);
 		Random rand = new Random();
 		int n = rand.nextInt(3);
-		System.out.println("random int = " + n);
-		System.out.println("difficulty = " + difficulty);
 		switch(difficulty) {
 		case 0:// Easy difficulty
 			if (n == 0) {
@@ -1033,428 +1075,696 @@ public class Dungeon {
 		Room rightRoomThree = new Room(7+difficulty);
 		Random rand = new Random();
 		int n = rand.nextInt(3);
+		System.out.println("random = " + n);
 		switch(difficulty) {
 		case 0:// Easy difficulty
 			if (n == 0) {
+				setDoorRoomTwo(2, RightRoomOneLeftDoorSpawnX, RightRoomOneLeftDoorSpawnY);
+				setDoorRoomPuzzle(RightRoomOneRightDoorSpawnX, RightRoomOneRightDoorSpawnY);
 				createRoomRightOne(rightRoomOne);
-				Door door = new Door(700, 500);
-				door.setSpawnX(300);
-				door.setSpawnY(400);
+				Door door = new Door(RightRoomOneLeftDoorX, RightRoomOneLeftDoorY);
+				door.setSpawnX(RoomTwoRightDoorSpawnX);
+				door.setSpawnY(RoomTwoRightDoorSpawnY);
 				door.setRoom(2);
 				rightRoomOne.addToRoom(door);
-				Door door1 = new Door(700, 500);
-				door1.setSpawnX(300);
-				door1.setSpawnY(400);
+				Door door1 = new Door(RightRoomOneRightDoorX, RightRoomOneRightDoorY);
+				door1.setSpawnX(RoomPuzzleDoorSpawnX);
+				door1.setSpawnY(RoomPuzzleDoorSpawnY);
 				door1.setRoom(6);
 				rightRoomOne.addToRoom(door1);
 			}
 			else if (n == 1) {
+				setDoorRoomTwo(2, RightRoomTwoLeftDoorSpawnX, RightRoomTwoLeftDoorSpawnY);
+				setDoorRoomPuzzle(RightRoomTwoRightDoorSpawnX, RightRoomTwoRightDoorSpawnY);
 				createRoomRightTwo(rightRoomOne);
-				Door door = new Door(700, 500);
-				door.setSpawnX(300);
-				door.setSpawnY(400);
+				Door door = new Door(RightRoomTwoLeftDoorX, RightRoomTwoLeftDoorY);
+				door.setSpawnX(RoomTwoRightDoorSpawnX);
+				door.setSpawnY(RoomTwoRightDoorSpawnY);
 				door.setRoom(2);
 				rightRoomOne.addToRoom(door);
-				Door door1 = new Door(700, 500);
-				door1.setSpawnX(300);
-				door1.setSpawnY(400);
+				Door door1 = new Door(RightRoomTwoRightDoorX, RightRoomTwoRightDoorY);
+				door1.setSpawnX(RoomPuzzleDoorSpawnX);
+				door1.setSpawnY(RoomPuzzleDoorSpawnY);
 				door1.setRoom(6);
 				rightRoomOne.addToRoom(door1);
 			}
 			else {
+				setDoorRoomTwo(2, RightRoomThreeLeftDoorSpawnX, RightRoomThreeLeftDoorSpawnY);
+				setDoorRoomPuzzle(RightRoomThreeRightDoorSpawnX, RightRoomThreeRightDoorSpawnY);
 				createRoomRightThree(rightRoomOne);
-				Door door = new Door(700, 500);
-				door.setSpawnX(300);
-				door.setSpawnY(400);
+				Door door = new Door(RightRoomThreeLeftDoorX, RightRoomThreeLeftDoorY);
+				door.setSpawnX(RoomTwoRightDoorSpawnX);
+				door.setSpawnY(RoomTwoRightDoorSpawnY);
 				door.setRoom(2);
 				rightRoomOne.addToRoom(door);
-				Door door1 = new Door(700, 500);
-				door1.setSpawnX(300);
-				door1.setSpawnY(400);
+				Door door1 = new Door(RightRoomThreeRightDoorX, RightRoomThreeRightDoorY);
+				door1.setSpawnX(RoomPuzzleDoorSpawnX);
+				door1.setSpawnY(RoomPuzzleDoorSpawnY);
 				door1.setRoom(6);
 				rightRoomOne.addToRoom(door1);
 			}
-			rooms.set(5+difficulty, rightRoomOne);
+			rooms.set(5, rightRoomOne);
 			break;
 		case 1:// Medium difficulty
 			int m = rand.nextInt(2);
 			if (n == 0) {
+				setDoorRoomTwo(2, RightRoomOneLeftDoorSpawnX, RightRoomOneLeftDoorSpawnY);
 				createRoomRightOne(rightRoomOne);
-				Door door = new Door(700, 500);
-				door.setSpawnX(300);
-				door.setSpawnY(400);
+				Door door = new Door(RightRoomOneLeftDoorX, RightRoomOneLeftDoorY);
+				door.setSpawnX(RoomTwoRightDoorSpawnX);
+				door.setSpawnY(RoomTwoRightDoorSpawnY);
 				door.setRoom(2);
 				rightRoomOne.addToRoom(door);
-				Door door1 = new Door(700, 500);
-				door1.setSpawnX(300);
-				door1.setSpawnY(400);
+				Door door1 = new Door(RightRoomOneRightDoorX, RightRoomOneRightDoorY);
 				door1.setRoom(7);
 				rightRoomOne.addToRoom(door1);
 				if (m == 0) {
+					setDoorRoomPuzzle(RightRoomTwoRightDoorSpawnX, RightRoomTwoRightDoorSpawnY);
+					door1.setSpawnX(RightRoomTwoLeftDoorSpawnX);
+					door1.setSpawnY(RightRoomTwoLeftDoorSpawnY);
 					createRoomRightTwo(rightRoomTwo);
-					Door door2 = new Door(700, 500);
-					door2.setSpawnX(300);
-					door2.setSpawnY(400);
+					Door door2 = new Door(RightRoomTwoLeftDoorX, RightRoomTwoLeftDoorY);
+					door2.setSpawnX(RightRoomOneRightDoorSpawnX);
+					door2.setSpawnY(RightRoomOneRightDoorSpawnY);
 					door2.setRoom(6);
 					rightRoomTwo.addToRoom(door2);
-					Door door3 = new Door(700, 500);
-					door3.setSpawnX(300);
-					door3.setSpawnY(400);
+					Door door3 = new Door(RightRoomTwoRightDoorX, RightRoomTwoRightDoorY);
+					door3.setSpawnX(RoomPuzzleDoorSpawnX);
+					door3.setSpawnY(RoomPuzzleDoorSpawnY);
 					door3.setRoom(8);
 					rightRoomTwo.addToRoom(door3);
 				}
 				else {
+					setDoorRoomPuzzle(RightRoomThreeRightDoorSpawnX, RightRoomThreeRightDoorSpawnY);
+					door1.setSpawnX(RightRoomThreeLeftDoorSpawnX);
+					door1.setSpawnY(RightRoomThreeLeftDoorSpawnY);
 					createRoomRightThree(rightRoomTwo);
-					Door door2 = new Door(700, 500);
-					door2.setSpawnX(300);
-					door2.setSpawnY(400);
+					Door door2 = new Door(RightRoomThreeLeftDoorX, RightRoomThreeLeftDoorY);
+					door2.setSpawnX(RightRoomOneRightDoorSpawnX);
+					door2.setSpawnY(RightRoomOneRightDoorSpawnY);
 					door2.setRoom(6);
 					rightRoomTwo.addToRoom(door2);
-					Door door3 = new Door(700, 500);
-					door3.setSpawnX(300);
-					door3.setSpawnY(400);
+					Door door3 = new Door(RightRoomThreeRightDoorX, RightRoomThreeRightDoorY);
+					door3.setSpawnX(RoomPuzzleDoorSpawnX);
+					door3.setSpawnY(RoomPuzzleDoorSpawnY);
 					door3.setRoom(8);
 					rightRoomTwo.addToRoom(door3);
 				}
 			}
 			else if (n == 1){
-				createRoomLeftTwo(rightRoomOne);
-				Door door = new Door(700, 500);
-				door.setSpawnX(300);
-				door.setSpawnY(400);
+				setDoorRoomTwo(2, RightRoomTwoLeftDoorSpawnX, RightRoomTwoLeftDoorSpawnY);
+				createRoomRightTwo(rightRoomOne);
+				Door door = new Door(RightRoomTwoLeftDoorX, RightRoomTwoLeftDoorY);
+				door.setSpawnX(RoomTwoRightDoorSpawnX);
+				door.setSpawnY(RoomTwoRightDoorSpawnY);
 				door.setRoom(2);
 				rightRoomOne.addToRoom(door);
-				Door door1 = new Door(700, 500);
-				door1.setSpawnX(300);
-				door1.setSpawnY(400);
+				Door door1 = new Door(RightRoomTwoRightDoorX, RightRoomTwoRightDoorY);
 				door1.setRoom(7);
 				rightRoomOne.addToRoom(door1);
 				if (m == 0) {
-					Door door2 = new Door(700, 500);
-					door2.setSpawnX(300);
-					door2.setSpawnY(400);
+					setDoorRoomPuzzle(RightRoomOneRightDoorSpawnX, RightRoomOneRightDoorSpawnY);
+					door1.setSpawnX(RightRoomOneLeftDoorSpawnX);
+					door1.setSpawnY(RightRoomOneLeftDoorSpawnY);
+					createRoomRightOne(rightRoomTwo);
+					Door door2 = new Door(RightRoomOneLeftDoorX, RightRoomOneLeftDoorY);
+					door2.setSpawnX(RightRoomTwoRightDoorSpawnX);
+					door2.setSpawnY(RightRoomTwoRightDoorSpawnY);
 					door2.setRoom(6);
 					rightRoomTwo.addToRoom(door2);
-					Door door3 = new Door(700, 500);
-					door3.setSpawnX(300);
-					door3.setSpawnY(400);
+					Door door3 = new Door(RightRoomOneRightDoorX, RightRoomOneRightDoorY);
+					door3.setSpawnX(RoomPuzzleDoorSpawnX);
+					door3.setSpawnY(RoomPuzzleDoorSpawnY);
 					door3.setRoom(8);
 					rightRoomTwo.addToRoom(door3);
 				}
 				else {
+					setDoorRoomPuzzle(RightRoomThreeRightDoorSpawnX, RightRoomThreeRightDoorSpawnY);
+					door1.setSpawnX(RightRoomThreeLeftDoorSpawnX);
+					door1.setSpawnY(RightRoomThreeLeftDoorSpawnY);
 					createRoomRightThree(rightRoomTwo);
-					Door door2 = new Door(700, 500);
-					door2.setSpawnX(300);
-					door2.setSpawnY(400);
+					Door door2 = new Door(RightRoomThreeLeftDoorX, RightRoomThreeLeftDoorY);
+					door2.setSpawnX(RightRoomTwoRightDoorSpawnX);
+					door2.setSpawnY(RightRoomTwoRightDoorSpawnY);
 					door2.setRoom(6);
 					rightRoomTwo.addToRoom(door2);
-					Door door3 = new Door(700, 500);
-					door3.setSpawnX(300);
-					door3.setSpawnY(400);
+					Door door3 = new Door(RightRoomThreeRightDoorX, RightRoomThreeRightDoorY);
+					door3.setSpawnX(RoomPuzzleDoorSpawnX);
+					door3.setSpawnY(RoomPuzzleDoorSpawnY);
 					door3.setRoom(8);
 					rightRoomTwo.addToRoom(door3);
 				}
 			}
 			else{
-				createRoomLeftThree(rightRoomOne);
-				Door door = new Door(700, 500);
-				door.setSpawnX(300);
-				door.setSpawnY(400);
+				setDoorRoomTwo(2, RightRoomThreeLeftDoorSpawnX, RightRoomThreeLeftDoorSpawnY);
+				createRoomRightThree(rightRoomOne);
+				Door door = new Door(RightRoomThreeLeftDoorX, RightRoomThreeLeftDoorY);
+				door.setSpawnX(RoomTwoRightDoorSpawnX);
+				door.setSpawnY(RoomTwoRightDoorSpawnY);
 				door.setRoom(2);
 				rightRoomOne.addToRoom(door);
-				Door door1 = new Door(700, 500);
-				door1.setSpawnX(300);
-				door1.setSpawnY(400);
+				Door door1 = new Door(RightRoomThreeRightDoorX, RightRoomThreeRightDoorY);
 				door1.setRoom(7);
 				rightRoomOne.addToRoom(door1);
 				if (m == 0) {
+					setDoorRoomPuzzle(RightRoomOneRightDoorSpawnX, RightRoomOneRightDoorSpawnY);
 					createRoomRightOne(rightRoomTwo);
-					Door door2 = new Door(700, 500);
-					door2.setSpawnX(300);
-					door2.setSpawnY(400);
+					door1.setSpawnX(RightRoomThreeLeftDoorSpawnX);
+					door1.setSpawnY(RightRoomThreeLeftDoorSpawnY);
+					Door door2 = new Door(RightRoomOneLeftDoorX, RightRoomOneLeftDoorY);
+					door2.setSpawnX(RightRoomOneLeftDoorSpawnX);
+					door2.setSpawnY(RightRoomOneLeftDoorSpawnY);
 					door2.setRoom(6);
 					rightRoomTwo.addToRoom(door2);
-					Door door3 = new Door(700, 500);
-					door3.setSpawnX(300);
-					door3.setSpawnY(400);
+					Door door3 = new Door(RightRoomOneRightDoorX, RightRoomOneRightDoorY);
+					door3.setSpawnX(RoomPuzzleDoorSpawnX);
+					door3.setSpawnY(RoomPuzzleDoorSpawnY);
 					door3.setRoom(8);
 					rightRoomTwo.addToRoom(door3);
 				}
 				else {
+					setDoorRoomPuzzle(RightRoomTwoRightDoorSpawnX, RightRoomTwoRightDoorSpawnY);
 					createRoomRightTwo(rightRoomTwo);
-					Door door2 = new Door(700, 500);
-					door2.setSpawnX(300);
-					door2.setSpawnY(400);
+					door1.setSpawnX(RightRoomTwoLeftDoorSpawnX);
+					door1.setSpawnY(RightRoomTwoLeftDoorSpawnY);
+					Door door2 = new Door(RightRoomTwoLeftDoorX, RightRoomTwoLeftDoorY);
+					door2.setSpawnX(RightRoomThreeLeftDoorSpawnX);
+					door2.setSpawnY(RightRoomThreeLeftDoorSpawnY);
 					door2.setRoom(6);
 					rightRoomTwo.addToRoom(door2);
-					Door door3 = new Door(700, 500);
-					door3.setSpawnX(300);
-					door3.setSpawnY(400);
+					Door door3 = new Door(RightRoomTwoRightDoorX, RightRoomTwoRightDoorY);
+					door3.setSpawnX(RoomPuzzleDoorSpawnX);
+					door3.setSpawnY(RoomPuzzleDoorSpawnY);
 					door3.setRoom(8);
 					rightRoomTwo.addToRoom(door3);
 				}
 			}
-			rooms.set(5+difficulty, rightRoomOne);
-			rooms.set(6+difficulty, rightRoomTwo);
+			rooms.set(6, rightRoomOne);
+			rooms.set(7, rightRoomTwo);
 			break;
 		case 2:// Hard difficulty
 			n = rand.nextInt(6);
 			if (n == 0) {
+				setDoorRoomTwo(2, RightRoomOneLeftDoorSpawnX, RightRoomOneLeftDoorSpawnY);
+				setDoorRoomPuzzle(RightRoomThreeRightDoorSpawnX, RightRoomThreeRightDoorSpawnY);
 				createRoomRightOne(rightRoomOne);
 				createRoomRightTwo(rightRoomTwo);
 				createRoomRightThree(rightRoomThree);
-				Door door = new Door(700, 500);
-				door.setSpawnX(300);
-				door.setSpawnY(400);
+				Door door = new Door(RightRoomOneLeftDoorX, RightRoomOneLeftDoorY);
+				door.setSpawnX(RoomTwoRightDoorSpawnX);
+				door.setSpawnY(RoomTwoRightDoorSpawnY);
 				door.setRoom(2);
 				rightRoomOne.addToRoom(door);
-				Door door1 = new Door(700, 500);
-				door1.setSpawnX(300);
-				door1.setSpawnY(400);
+				Door door1 = new Door(RightRoomOneRightDoorX, RightRoomOneRightDoorY);
+				door1.setSpawnX(RightRoomTwoLeftDoorSpawnX);
+				door1.setSpawnY(RightRoomTwoLeftDoorSpawnY);
 				door1.setRoom(8);
 				rightRoomOne.addToRoom(door1);
-				Door door2 = new Door(700, 500);
-				door2.setSpawnX(300);
-				door2.setSpawnY(400);
+				Door door2 = new Door(RightRoomTwoLeftDoorX, RightRoomTwoLeftDoorY);
+				door2.setSpawnX(RightRoomOneRightDoorSpawnX);
+				door2.setSpawnY(RightRoomOneRightDoorSpawnY);
 				door2.setRoom(7);
 				rightRoomTwo.addToRoom(door2);
-				Door door3 = new Door(700, 500);
-				door3.setSpawnX(300);
-				door3.setSpawnY(400);
+				Door door3 = new Door(RightRoomTwoRightDoorX, RightRoomTwoRightDoorY);
+				door3.setSpawnX(RightRoomThreeLeftDoorSpawnX);
+				door3.setSpawnY(RightRoomThreeLeftDoorSpawnY);
 				door3.setRoom(9);
 				rightRoomTwo.addToRoom(door3);
-				Door door4 = new Door(700, 500);
-				door4.setSpawnX(300);
-				door4.setSpawnY(400);
+				Door door4 = new Door(RightRoomThreeLeftDoorX, RightRoomThreeLeftDoorY);
+				door4.setSpawnX(RightRoomTwoRightDoorSpawnX);
+				door4.setSpawnY(RightRoomTwoRightDoorSpawnY);
 				door4.setRoom(8);
-				rightRoomTwo.addToRoom(door4);
-				Door door5 = new Door(700, 500);
-				door5.setSpawnX(300);
-				door5.setSpawnY(400);
+				rightRoomThree.addToRoom(door4);
+				Door door5 = new Door(RightRoomThreeRightDoorX, RightRoomThreeRightDoorY);
+				door5.setSpawnX(RoomPuzzleDoorSpawnX);
+				door5.setSpawnY(RoomPuzzleDoorSpawnY);
 				door5.setRoom(10);
-				rightRoomTwo.addToRoom(door5);
+				rightRoomThree.addToRoom(door5);
 			}
 			else if (n == 1) {
+				setDoorRoomTwo(2, RightRoomOneLeftDoorSpawnX, RightRoomOneLeftDoorSpawnY);
+				setDoorRoomPuzzle(RightRoomTwoRightDoorSpawnX, RightRoomTwoRightDoorSpawnY);
 				createRoomRightOne(rightRoomOne);
 				createRoomRightTwo(rightRoomThree);
 				createRoomRightThree(rightRoomTwo);
-				Door door = new Door(700, 500);
-				door.setSpawnX(300);
-				door.setSpawnY(400);
+				Door door = new Door(RightRoomOneLeftDoorX, RightRoomOneLeftDoorY);
+				door.setSpawnX(RoomTwoRightDoorSpawnX);
+				door.setSpawnY(RoomTwoRightDoorSpawnY);
 				door.setRoom(2);
 				rightRoomOne.addToRoom(door);
-				Door door1 = new Door(700, 500);
-				door1.setSpawnX(300);
-				door1.setSpawnY(400);
+				Door door1 = new Door(RightRoomOneRightDoorX, RightRoomOneRightDoorY);
+				door1.setSpawnX(RightRoomThreeLeftDoorSpawnX);
+				door1.setSpawnY(RightRoomThreeLeftDoorSpawnY);
 				door1.setRoom(8);
 				rightRoomOne.addToRoom(door1);
-				Door door2 = new Door(700, 500);
-				door2.setSpawnX(300);
-				door2.setSpawnY(400);
+				Door door2 = new Door(RightRoomThreeLeftDoorX, RightRoomThreeLeftDoorY);
+				door2.setSpawnX(RightRoomOneRightDoorSpawnX);
+				door2.setSpawnY(RightRoomOneRightDoorSpawnY);
 				door2.setRoom(7);
 				rightRoomTwo.addToRoom(door2);
-				Door door3 = new Door(700, 500);
-				door3.setSpawnX(300);
-				door3.setSpawnY(400);
+				Door door3 = new Door(RightRoomThreeRightDoorX, RightRoomThreeRightDoorY);
+				door3.setSpawnX(RightRoomTwoLeftDoorSpawnX);
+				door3.setSpawnY(RightRoomTwoLeftDoorSpawnY);
 				door3.setRoom(9);
 				rightRoomTwo.addToRoom(door3);
-				Door door4 = new Door(700, 500);
-				door4.setSpawnX(300);
-				door4.setSpawnY(400);
+				Door door4 = new Door(RightRoomTwoLeftDoorX, RightRoomTwoLeftDoorY);
+				door4.setSpawnX(RightRoomThreeRightDoorSpawnX);
+				door4.setSpawnY(RightRoomThreeRightDoorSpawnY);
 				door4.setRoom(8);
-				rightRoomTwo.addToRoom(door4);
-				Door door5 = new Door(700, 500);
-				door5.setSpawnX(300);
-				door5.setSpawnY(400);
+				rightRoomThree.addToRoom(door4);
+				Door door5 = new Door(RightRoomTwoRightDoorX, RightRoomTwoRightDoorY);
+				door5.setSpawnX(RoomPuzzleDoorSpawnX);
+				door5.setSpawnY(RoomPuzzleDoorSpawnY);
 				door5.setRoom(10);
-				rightRoomTwo.addToRoom(door5);
+				rightRoomThree.addToRoom(door5);
 			}
 			else if (n == 2) {
+				setDoorRoomTwo(2, RightRoomTwoLeftDoorSpawnX, RightRoomTwoLeftDoorSpawnY);
+				setDoorRoomPuzzle(RightRoomThreeRightDoorSpawnX, RightRoomThreeRightDoorSpawnY);
 				createRoomRightOne(rightRoomTwo);
 				createRoomRightTwo(rightRoomOne);
 				createRoomRightThree(rightRoomThree);
-				Door door = new Door(700, 500);
-				door.setSpawnX(300);
-				door.setSpawnY(400);
+				Door door = new Door(RightRoomTwoLeftDoorX, RightRoomTwoLeftDoorY);
+				door.setSpawnX(RoomTwoRightDoorSpawnX);
+				door.setSpawnY(RoomTwoRightDoorSpawnY);
 				door.setRoom(2);
 				rightRoomOne.addToRoom(door);
-				Door door1 = new Door(700, 500);
-				door1.setSpawnX(300);
-				door1.setSpawnY(400);
+				Door door1 = new Door(RightRoomTwoRightDoorX, RightRoomTwoRightDoorY);
+				door1.setSpawnX(RightRoomOneLeftDoorSpawnX);
+				door1.setSpawnY(RightRoomOneLeftDoorSpawnY);
 				door1.setRoom(8);
 				rightRoomOne.addToRoom(door1);
-				Door door2 = new Door(700, 500);
-				door2.setSpawnX(300);
-				door2.setSpawnY(400);
+				Door door2 = new Door(RightRoomOneLeftDoorX, RightRoomOneLeftDoorY);
+				door2.setSpawnX(RightRoomTwoRightDoorSpawnX);
+				door2.setSpawnY(RightRoomTwoRightDoorSpawnY);
 				door2.setRoom(7);
 				rightRoomTwo.addToRoom(door2);
-				Door door3 = new Door(700, 500);
-				door3.setSpawnX(300);
-				door3.setSpawnY(400);
+				Door door3 = new Door(RightRoomOneRightDoorX, RightRoomOneRightDoorY);
+				door3.setSpawnX(RightRoomThreeLeftDoorSpawnX);
+				door3.setSpawnY(RightRoomThreeLeftDoorSpawnY);
 				door3.setRoom(9);
 				rightRoomTwo.addToRoom(door3);
-				Door door4 = new Door(700, 500);
-				door4.setSpawnX(300);
-				door4.setSpawnY(400);
+				Door door4 = new Door(RightRoomThreeLeftDoorX, RightRoomThreeLeftDoorY);
+				door4.setSpawnX(RightRoomOneRightDoorSpawnX);
+				door4.setSpawnY(RightRoomOneRightDoorSpawnY);
 				door4.setRoom(8);
-				rightRoomTwo.addToRoom(door4);
-				Door door5 = new Door(700, 500);
-				door5.setSpawnX(300);
-				door5.setSpawnY(400);
+				rightRoomThree.addToRoom(door4);
+				Door door5 = new Door(RightRoomThreeRightDoorX, RightRoomThreeRightDoorY);
+				door5.setSpawnX(RoomPuzzleDoorSpawnX);
+				door5.setSpawnY(RoomPuzzleDoorSpawnY);
 				door5.setRoom(10);
-				rightRoomTwo.addToRoom(door5);
+				rightRoomThree.addToRoom(door5);
 			}
 			else if (n == 3) {
+				setDoorRoomTwo(2, RightRoomThreeLeftDoorSpawnX, RightRoomThreeLeftDoorSpawnY);
+				setDoorRoomPuzzle(RightRoomTwoRightDoorSpawnX, RightRoomTwoRightDoorSpawnY);
 				createRoomRightOne(rightRoomTwo);
 				createRoomRightTwo(rightRoomThree);
 				createRoomRightThree(rightRoomOne);
-				Door door = new Door(700, 500);
-				door.setSpawnX(300);
-				door.setSpawnY(400);
+				Door door = new Door(RightRoomThreeLeftDoorX, RightRoomThreeLeftDoorY);
+				door.setSpawnX(RoomTwoRightDoorSpawnX);
+				door.setSpawnY(RoomTwoRightDoorSpawnY);
 				door.setRoom(2);
 				rightRoomOne.addToRoom(door);
-				Door door1 = new Door(700, 500);
-				door1.setSpawnX(300);
-				door1.setSpawnY(400);
+				Door door1 = new Door(RightRoomThreeRightDoorX, RightRoomThreeRightDoorY);
+				door1.setSpawnX(RightRoomOneLeftDoorSpawnX);
+				door1.setSpawnY(RightRoomOneLeftDoorSpawnY);
 				door1.setRoom(8);
 				rightRoomOne.addToRoom(door1);
-				Door door2 = new Door(700, 500);
-				door2.setSpawnX(300);
-				door2.setSpawnY(400);
+				Door door2 = new Door(RightRoomOneLeftDoorX, RightRoomOneLeftDoorY);
+				door2.setSpawnX(RightRoomThreeRightDoorSpawnX);
+				door2.setSpawnY(RightRoomThreeRightDoorSpawnY);
 				door2.setRoom(7);
 				rightRoomTwo.addToRoom(door2);
-				Door door3 = new Door(700, 500);
-				door3.setSpawnX(300);
-				door3.setSpawnY(400);
+				Door door3 = new Door(RightRoomOneRightDoorX, RightRoomOneRightDoorY);
+				door3.setSpawnX(RightRoomTwoLeftDoorSpawnX);
+				door3.setSpawnY(RightRoomTwoLeftDoorSpawnY);
 				door3.setRoom(9);
 				rightRoomTwo.addToRoom(door3);
-				Door door4 = new Door(700, 500);
-				door4.setSpawnX(300);
-				door4.setSpawnY(400);
+				Door door4 = new Door(RightRoomTwoLeftDoorX, RightRoomTwoLeftDoorY);
+				door4.setSpawnX(RightRoomOneRightDoorSpawnX);
+				door4.setSpawnY(RightRoomOneRightDoorSpawnY);
 				door4.setRoom(8);
-				rightRoomTwo.addToRoom(door4);
-				Door door5 = new Door(700, 500);
-				door5.setSpawnX(300);
-				door5.setSpawnY(400);
+				rightRoomThree.addToRoom(door4);
+				Door door5 = new Door(RightRoomTwoRightDoorX, RightRoomTwoRightDoorY);
+				door5.setSpawnX(RoomPuzzleDoorSpawnX);
+				door5.setSpawnY(RoomPuzzleDoorSpawnY);
 				door5.setRoom(10);
-				rightRoomTwo.addToRoom(door5);
+				rightRoomThree.addToRoom(door5);
 			}
 			else if (n == 4) {
+				setDoorRoomTwo(2, RightRoomTwoLeftDoorSpawnX, RightRoomTwoLeftDoorSpawnY);
+				setDoorRoomPuzzle(RightRoomOneRightDoorSpawnX, RightRoomOneRightDoorSpawnY);
 				createRoomRightOne(rightRoomThree);
 				createRoomRightTwo(rightRoomOne);
 				createRoomRightThree(rightRoomTwo);
-				Door door = new Door(700, 500);
-				door.setSpawnX(300);
-				door.setSpawnY(400);
+				Door door = new Door(RightRoomTwoLeftDoorX, RightRoomTwoLeftDoorY);
+				door.setSpawnX(RoomTwoRightDoorSpawnX);
+				door.setSpawnY(RoomTwoRightDoorSpawnY);
 				door.setRoom(2);
 				rightRoomOne.addToRoom(door);
-				Door door1 = new Door(700, 500);
-				door1.setSpawnX(300);
-				door1.setSpawnY(400);
+				Door door1 = new Door(RightRoomTwoRightDoorX, RightRoomTwoRightDoorY);
+				door1.setSpawnX(RightRoomThreeLeftDoorSpawnX);
+				door1.setSpawnY(RightRoomThreeLeftDoorSpawnY);
 				door1.setRoom(8);
 				rightRoomOne.addToRoom(door1);
-				Door door2 = new Door(700, 500);
-				door2.setSpawnX(300);
-				door2.setSpawnY(400);
+				Door door2 = new Door(RightRoomThreeLeftDoorX, RightRoomThreeLeftDoorY);
+				door2.setSpawnX(RightRoomThreeRightDoorSpawnX);
+				door2.setSpawnY(RightRoomThreeRightDoorSpawnY);
 				door2.setRoom(7);
 				rightRoomTwo.addToRoom(door2);
-				Door door3 = new Door(700, 500);
-				door3.setSpawnX(300);
-				door3.setSpawnY(400);
+				Door door3 = new Door(RightRoomThreeRightDoorX, RightRoomThreeRightDoorY);;
+				door3.setSpawnX(RightRoomOneLeftDoorSpawnX);
+				door3.setSpawnY(RightRoomOneLeftDoorSpawnY);
 				door3.setRoom(9);
 				rightRoomTwo.addToRoom(door3);
-				Door door4 = new Door(700, 500);
-				door4.setSpawnX(300);
-				door4.setSpawnY(400);
+				Door door4 = new Door(RightRoomOneLeftDoorX, RightRoomOneLeftDoorY);
+				door4.setSpawnX(RightRoomThreeRightDoorSpawnX);
+				door4.setSpawnY(RightRoomThreeRightDoorSpawnY);
 				door4.setRoom(8);
-				rightRoomTwo.addToRoom(door4);
-				Door door5 = new Door(700, 500);
-				door5.setSpawnX(300);
-				door5.setSpawnY(400);
+				rightRoomThree.addToRoom(door4);
+				Door door5 = new Door(RightRoomOneRightDoorX, RightRoomOneRightDoorY);
+				door5.setSpawnX(RoomPuzzleDoorSpawnX);
+				door5.setSpawnY(RoomPuzzleDoorSpawnY);
 				door5.setRoom(10);
-				rightRoomTwo.addToRoom(door5);
+				rightRoomThree.addToRoom(door5);
 			}
 			else {
+				setDoorRoomTwo(2, RightRoomThreeLeftDoorSpawnX, RightRoomThreeLeftDoorSpawnY);
+				setDoorRoomPuzzle(RightRoomOneRightDoorSpawnX, RightRoomOneRightDoorSpawnY);
 				createRoomRightOne(rightRoomThree);
 				createRoomRightTwo(rightRoomTwo);
 				createRoomRightThree(rightRoomOne);
-				Door door = new Door(700, 500);
-				door.setSpawnX(300);
-				door.setSpawnY(400);
+				Door door = new Door(RightRoomThreeLeftDoorX, RightRoomThreeLeftDoorY);
+				door.setSpawnX(RoomTwoRightDoorSpawnX);
+				door.setSpawnY(RoomTwoRightDoorSpawnY);
 				door.setRoom(2);
 				rightRoomOne.addToRoom(door);
-				Door door1 = new Door(700, 500);
-				door1.setSpawnX(300);
-				door1.setSpawnY(400);
+				Door door1 = new Door(RightRoomThreeRightDoorX, RightRoomThreeRightDoorY);
+				door1.setSpawnX(RightRoomTwoLeftDoorSpawnX);
+				door1.setSpawnY(RightRoomTwoLeftDoorSpawnY);
 				door1.setRoom(8);
 				rightRoomOne.addToRoom(door1);
-				Door door2 = new Door(700, 500);
-				door2.setSpawnX(300);
-				door2.setSpawnY(400);
+				Door door2 = new Door(RightRoomTwoLeftDoorX, RightRoomTwoLeftDoorY);
+				door2.setSpawnX(RightRoomThreeRightDoorSpawnX);
+				door2.setSpawnY(RightRoomThreeRightDoorSpawnY);
 				door2.setRoom(7);
 				rightRoomTwo.addToRoom(door2);
-				Door door3 = new Door(700, 500);
-				door3.setSpawnX(300);
-				door3.setSpawnY(400);
+				Door door3 = new Door(RightRoomTwoRightDoorX, RightRoomTwoRightDoorY);
+				door3.setSpawnX(RightRoomOneLeftDoorSpawnX);
+				door3.setSpawnY(RightRoomOneLeftDoorSpawnY);
 				door3.setRoom(9);
 				rightRoomTwo.addToRoom(door3);
-				Door door4 = new Door(700, 500);
-				door4.setSpawnX(300);
-				door4.setSpawnY(400);
+				Door door4 = new Door(RightRoomOneLeftDoorX, RightRoomOneLeftDoorY);
+				door4.setSpawnX(RightRoomTwoRightDoorSpawnX);
+				door4.setSpawnY(RightRoomTwoRightDoorSpawnY);
 				door4.setRoom(8);
 				rightRoomTwo.addToRoom(door4);
-				Door door5 = new Door(700, 500);
-				door5.setSpawnX(300);
-				door5.setSpawnY(400);
+				Door door5 = new Door(RightRoomOneRightDoorX, RightRoomOneRightDoorY);
+				door5.setSpawnX(RoomPuzzleDoorSpawnX);
+				door5.setSpawnY(RoomPuzzleDoorSpawnY);
 				door5.setRoom(10);
 				rightRoomTwo.addToRoom(door5);
 			}
-			rooms.set(5+difficulty, rightRoomOne);
-			rooms.set(6+difficulty, rightRoomTwo);
-			rooms.set(7+difficulty, rightRoomThree);
+			rooms.set(7, rightRoomOne);
+			rooms.set(8, rightRoomTwo);
+			rooms.set(9, rightRoomThree);
 			break;
 		}
 	}
 
 	private void createRoomRightOne(Room room){
-		GiantRat rat1 = new GiantRat(240, 300);
-		room.addEntityList(rat1);
-		GiantRat rat2 = new GiantRat(240, 300);
-		room.addEntityList(rat2);
-		GiantSpider spider1 = new GiantSpider(300, 400);
-		room.addEntityList(spider1);
+		int[][] floor = {{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,88,88,88,88,88,88,88,-1,-1,-1,-1,88,88,88,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,88,88,88,88,88,88,88,-1,-1,-1,-1,88,88,88,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,88,88,88,88,88,88,88,-1,-1,-1,-1,88,88,88,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,88,88,88,88,88,88,88,-1,-1,-1,-1,88,88,88,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,88,88,88,88,88,88,88,-1,-1,-1,-1,88,88,88,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,88,88,88,88,88,88,88,-1,-1,-1,-1,88,88,88,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,88,88,88,88,88,88,88,-1,-1,-1,-1,88,88,88,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,88,88,88,88,88,88,88,-1,-1,-1,-1,88,88,88,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,88,88,88,88,88,88,88,-1,-1,-1,-1,88,88,88,-1,-1,-1,-1,-1,-1,-1},
+				{-1,88,88,88,88,88,88,88,88,88,-1,-1,-1,-1,88,88,88,88,88,-1,-1,-1,-1,-1},
+				{-1,88,88,88,88,88,88,88,88,88,-1,-1,-1,-1,88,88,88,88,88,-1,-1,-1,-1,-1},
+				{-1,88,88,88,88,88,88,88,88,88,-1,-1,-1,-1,88,88,88,88,88,-1,-1,-1,-1,-1},
+				{-1,-1,-1,88,88,88,88,88,88,88,-1,-1,-1,-1,88,88,88,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,88,88,88,88,88,88,88,-1,-1,-1,-1,88,88,88,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
+		};
+		int[][] wall = {
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,19,20,20,20,20,20,20,128,129,129,132,20,20,21,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,18,-1,-1,-1,-1,-1,-1,144,145,145,148,-1,-1,16,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,18,-1,-1,-1,-1,-1,-1,165,-1,-1,169,-1,-1,16,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,18,-1,-1,-1,-1,-1,-1,165,-1,-1,169,-1,-1,16,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,18,-1,-1,-1,-1,-1,-1,165,-1,-1,169,-1,-1,16,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,18,-1,-1,-1,-1,-1,-1,160,161,161,164,-1,-1,16,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,18,-1,-1,-1,-1,-1,-1,177,178,178,179,-1,-1,16,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,18,-1,-1,-1,-1,-1,-1,165,-1,-1,169,-1,-1,16,-1,-1,-1,-1,-1,-1,-1},
+				{-1, 3, 4,34,-1,-1,-1,-1,-1,-1,165,-1,-1,169,-1,-1,32, 4, 5,-1,-1,-1,-1,-1},
+				{-1,19,20,50,-1,-1,-1,-1,-1,-1,165,-1,-1,169,-1,-1,48,20,21,-1,-1,-1,-1,-1},
+				{-1,18,-1,-1,-1,-1,-1,-1,-1,-1,165,-1,-1,169,-1,-1,-1,-1,16,-1,-1,-1,-1,-1},
+				{-1,35,36,97,-1,-1,-1,-1,-1,-1,165,-1,-1,169,-1,-1,98,36,37,-1,-1,-1,-1,-1},
+				{-1,51,52,113,-1,-1,-1,-1,-1,-1,165,-1,-1,169,-1,-1,114,52,53,-1,-1,-1,-1,-1},
+				{-1,-1,-1,35,36,36,36,36,36,36,165,-1,-1,169,36,36,37,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,51,52,52,52,52,52,52,52,52,52,52,52,52,53,-1,-1,-1,-1,-1,-1,-1}
+		};
+		int[][] decor = {
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,36,36,36,36,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
+		};
+		room.createLevel(floor, wall, decor, 128, 12, assets);
+		//GiantRat rat1 = new GiantRat(240, 300);
+		//room.addEntityList(rat1);
+		//GiantRat rat2 = new GiantRat(240, 300);
+		//room.addEntityList(rat2);
+		//GiantSpider spider1 = new GiantSpider(300, 400);
+		//room.addEntityList(spider1);
 	}
 
 	private void createRoomRightTwo(Room room){
-		GiantSpider spider1 = new GiantSpider(300, 400);
-		room.addEntityList(spider1);
-		GiantSpider spider2 = new GiantSpider(300, 400);
-		room.addEntityList(spider2);
-		GiantSpider spider3 = new GiantSpider(300, 400);
-		room.addEntityList(spider3);
+		int[][] floor = {
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,88,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,88,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{88,88,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,88,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{88,88,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,88,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{88,88,213,-1,-1,-1,-1,-1,-1,-1,-1,-1,88,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,229,-1,-1,-1,-1,-1,-1,-1,-1,-1,88,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,88,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,161,-1,-1,-1,-1,-1,-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
+		};
+		int[][] wall = {
+				{-1,-1, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,19,128,129,129,129,129,129,129,129,132,20,21,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{ 3, 4,34,144,145,145,145,145,145,145,145,148,-1,16,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{19,20,50,165,-1,-1,-1,-1,-1,-1,-1,169,-1,16,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{18,-1,-1,160,161,161,161,161,161,161,161,164,-1,16,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{35,36,97,180,180,180,180,180,180,180,180,217,-1,16,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{51,52,113,196,196,196,196,196,196,196,196,233,-1,16,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,169,-1,32, 4, 4, 4, 4, 4, 4, 4, 5,-1,-1},
+				{-1,-1,18,161,161,161,161,161,161,161,161,164,-1,48,20,20,20,20,20,20,20,21,-1,-1},
+				{-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1},
+				{-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1},
+				{-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,32, 4, 5},
+				{-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,48,20,21},
+				{-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16},
+				{-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,98,36,37},
+				{-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,114,52,53},
+				{-1,-1,35,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,37,-1,-1},
+				{-1,-1,51,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,53,-1,-1}
+		};
+		int[][] decor = {
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
+		};
+		room.createLevel(floor, wall, decor, 128, 12, assets);
+		//GiantSpider spider1 = new GiantSpider(300, 400);
+		//room.addEntityList(spider1);
+		//GiantSpider spider2 = new GiantSpider(300, 400);
+		//room.addEntityList(spider2);
+		//GiantSpider spider3 = new GiantSpider(300, 400);
+		//room.addEntityList(spider3);
 	}
 
 	private void createRoomRightThree(Room room){
-		GiantRat rat1 = new GiantRat(240, 300);
-		room.addEntityList(rat1);
-		GiantRat rat2 = new GiantRat(240, 300);
-		room.addEntityList(rat2);
-		GiantRat rat3 = new GiantRat(240, 300);
-		room.addEntityList(rat3);
+		int[][] floor = {
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,-1,88,88,88,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,88,88,88,88,-1,-1},
+				{88,88,88,88,88,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,88,88,88,88,88,88},
+				{88,88,88,88,88,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,88,88,88,88,88,88},
+				{88,88,88,88,88,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,88,88,88,88,88,88},
+				{88,88,88,88,88,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,88,88,88,88,88,88},
+				{88,88,88,88,88,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,88,88,88,88,88,88},
+				{-1,-1,88,88,88,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,88,88,88,88,-1,-1},
+				{-1,-1,88,88,88,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,88,88,88,88,-1,-1},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1},
+				{-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1}
+		};
+		int[][] wall = {
+				{-1,-1, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5,-1,-1},
+				{-1,-1,19,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,21,-1,-1},
+				{-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1},
+				{-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1},
+				{-1,-1,18,-1,-1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2,-1,-1,16,-1,-1},
+				{-1,-1,18,-1,-1,16,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,18,-1,-1,16,-1,-1},
+				{ 3, 4,34,-1,-1,16,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,18,-1,-1,32, 4, 5},
+				{19,20,50,-1,-1,16,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,18,-1,-1,48,20,21},
+				{18,-1,-1,-1,-1,16,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,18,-1,-1,-1,-1,16},
+				{35,36,97,-1,-1,16,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,18,-1,-1,98,36,37},
+				{51,52,113,-1,-1,16,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,18,-1,-1,114,52,53},
+				{-1,-1,18,-1,-1,16,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,18,-1,-1,16,-1,-1},
+				{-1,-1,18,-1,-1,16,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,18,-1,-1,16,-1,-1},
+				{-1,-1,18,-1,-1,32,33,33,33,33,33,33,33,33,33,33,33,33,34,-1,-1,16,-1,-1},
+				{-1,-1,18,-1,-1,48,49,49,49,49,49,49,49,49,49,49,49,49,50,-1,-1,16,-1,-1},
+				{-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1},
+				{-1,-1,35,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,37,-1,-1},
+				{-1,-1,51,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,53,-1,-1}
+		};
+		int[][] decor = {
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
+		};
+		room.createLevel(floor, wall, decor, 128, 12, assets);
+		//GiantRat rat1 = new GiantRat(240, 300);
+		//room.addEntityList(rat1);
+		//GiantRat rat2 = new GiantRat(240, 300);
+		//room.addEntityList(rat2);
+		//GiantRat rat3 = new GiantRat(240, 300);
+		//room.addEntityList(rat3);
 	}
 
 	private void createRoomPuzzle(){
 		Room roomPuzzle = new Room(6 + 2*difficulty);
-		Door door = new Door(700, 500);
-		door.setSpawnX(300);
-		door.setSpawnY(400);
-		door.setRoom(1);
-		roomPuzzle.addToRoom(door);
-		Door door1 = new Door(700, 500);
-		door1.setSpawnX(300);
-		door1.setSpawnY(400);
-		door1.setRoom(3);
-		roomPuzzle.addToRoom(door1);
+		int[][] floor = {
+				{-1,-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1},
+				{-1,-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1},
+				{-1,-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1},
+				{-1,-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1},
+				{-1,-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1},
+				{-1,-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1},
+				{-1,-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1},
+				{-1,-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1},
+				{-1,-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1},
+				{-1,-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1},
+				{-1,-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1},
+				{-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1},
+				{-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1},
+				{-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1},
+				{-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1},
+				{-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1},
+				{-1,-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1},
+				{-1,-1,-1,-1,-1,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,88,-1,-1,-1}
+		};
+		int[][] wall = {
+				{-1,-1,-1,-1,-1, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5,-1,-1,-1},
+				{-1,-1,-1,-1,-1,19,20,20,20,20,20,20,20,20,20,20,20,20,20,20,21,-1,-1,-1},
+				{-1,-1,-1,-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1,-1},
+				{-1,-1,-1,-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1,-1},
+				{-1,-1,-1,-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1,-1},
+				{-1,-1,-1,-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1,-1},
+				{-1,-1,-1,-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1,-1},
+				{-1,-1,-1,-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1,-1},
+				{-1,-1,-1,-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1,-1},
+				{-1,-1,-1,-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1,-1},
+				{-1,-1,-1,-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1,-1},
+				{-1,-1,-1, 3, 4, 34,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1,-1},
+				{-1,-1,-1,19,20,50,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1,-1},
+				{-1,-1,-1,18,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1,-1},
+				{-1,-1,-1,35,36,97,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1,-1},
+				{-1,-1,-1,51,52,113,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,-1,-1},
+				{-1,-1,-1,-1,-1,35,36,36,36,36,36,36,36,36,36,36,36,36,36,36,37,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,51,52,52,52,52,52,52,52,52,52,52,52,52,52,52,53,-1,-1,-1}
+		};
+		int[][] decor = {
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
+		};
+		roomPuzzle.createLevel(floor, wall, decor, 128, 12, assets);
 		rooms.set(6 + (2*difficulty), roomPuzzle);
 	}
 
@@ -1480,7 +1790,7 @@ public class Dungeon {
 			Door door2 = new Door(RoomTwoRightDoorX, RoomTwoRightDoorY);
 			door2.setSpawnX(x_pos);
 			door2.setSpawnY(y_pos);
-			door2.setRoom(7 + difficulty);
+			door2.setRoom(5 + difficulty);
 			rooms.get(2).addToRoom(door2);
 			break;
 		}
@@ -1490,7 +1800,15 @@ public class Dungeon {
 		Door door1 = new Door(RoomSkeletonDoorX, RoomSkeletonDoorY);
 		door1.setSpawnX(x_pos);
 		door1.setSpawnY(y_pos);
-		door1.setRoom(3+difficulty);
+		door1.setRoom(3 + difficulty);
 		rooms.get(4 + difficulty).addToRoom(door1);
+	}
+	
+	public void setDoorRoomPuzzle(int x_pos, int y_pos) {
+		Door door1 = new Door(RoomPuzzleDoorX, RoomPuzzleDoorY);
+		door1.setSpawnX(x_pos);
+		door1.setSpawnY(y_pos);
+		door1.setRoom(5 + (2*difficulty));
+		rooms.get(6 + (2*difficulty)).addToRoom(door1);
 	}
 }

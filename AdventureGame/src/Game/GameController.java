@@ -133,6 +133,7 @@ public class GameController implements ActionListener {
 					if (e1 instanceof Door) {
 						Door door = (Door) e1;
 						if(pC.getBounds().collisionWith(door.getBounds())) {
+							System.out.println("index is = " + door.getRoom());
 							gameModel.loadRoom(gameModel.getDungeonIndex(door.getRoom())); 
 							pC.setx_pos(door.getSpawnX());
 							pC.sety_pos(door.getSpawnY());
