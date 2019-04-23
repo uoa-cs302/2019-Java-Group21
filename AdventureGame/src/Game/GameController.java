@@ -110,6 +110,15 @@ public class GameController implements ActionListener {
 				//checkEntityCollision(entity);
 				//entity.update();
 			}
+			else if (entity instanceof GiantSpider) {
+				checkEntityCollision(entity);
+				entity.update();
+				for (Projectile projectile : ((GiantSpider) entity).getProjectiles()) {
+					gameModel.getCurrentRoom().addEntityList(projectile);
+					gameModel.getCurrentRoom().addSpriteList(projectile);
+				}
+				((GiantSpider) entity).clearProjectiles();
+			}
 			else if (entity instanceof Projectile) {
 				checkEntityCollision(entity);
 				entity.update();
@@ -126,7 +135,7 @@ public class GameController implements ActionListener {
 	//checks collision of an Entity and a Sprite
 	public void checkCollision(Entity sp1,Entity sp2) {
 		if (sp1.getBounds().collisionWith(sp2.getBounds())) {
-			//sp1.CollisionProcess(sp2.gety_pos(),sp2.getbottom(),sp2.getx_pos(),sp2.getright());
+			sp1.CollisionProcess(sp2.gety_pos(),sp2.getbottom(),sp2.getx_pos(),sp2.getright());
 		} 
 	}
 
