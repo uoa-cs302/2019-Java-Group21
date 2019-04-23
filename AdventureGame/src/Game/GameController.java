@@ -88,6 +88,8 @@ public class GameController implements ActionListener {
 	//method runs when timer ticks
 	//should include update, and draw.
 	public void actionPerformed(ActionEvent e) {
+		if (deletedEntities.size() != 0) {
+			deleteEntities();}
 		if (pC.getInventory().droppedItemsSize() != 0) {
 			for (Item item : pC.getInventory().getDroppedItems()) {
 				item.setx_pos(pC.getx_pos());
@@ -120,7 +122,7 @@ public class GameController implements ActionListener {
 	//checks collision of an Entity and a Sprite
 	public void checkCollision(Entity sp1,Entity sp2) {
 		if (sp1.getBounds().collisionWith(sp2.getBounds())) {
-			sp1.CollisionProcess(sp2.gety_pos(),sp2.getbottom(),sp2.getx_pos(),sp2.getright());
+			//sp1.CollisionProcess(sp2.gety_pos(),sp2.getbottom(),sp2.getx_pos(),sp2.getright());
 		} 
 	}
 
@@ -142,12 +144,23 @@ public class GameController implements ActionListener {
 					}
 					else if (e1 instanceof Wall) {
 						Wall wall = (Wall) e1;
-						if(pC.getBounds().collisionWith(wall.getBounds())) {
-							pC.CollisionProcess(wall.gety_pos(), wall.getbottom(), wall.getx_pos(), wall.getright());
-						}
+						if(pC.getBounds().collisionWith(wall.getBounds(),pC.getdx(),pC.getdy())) {
+							pC.CollisionProcess(wall.getBounds());
+						
+					}
 					}
 					else if (e1 instanceof GiantRat) {
 						GiantRat rat = (GiantRat) e1;
+					
+							if (pC.getHitBounds().collisionWith(rat.getBounds())) {
+								if (pC.canAttack()) {
+									rat.hitBy(pC);
+									if (rat.getHealth()<= 0) {
+										deletedEntities.add(rat);
+									}
+								}
+							}
+						
 						if(pC.getBounds().collisionWith(rat.getHitBounds())) {
 							pC.hitBy(rat);
 						}
@@ -170,8 +183,7 @@ public class GameController implements ActionListener {
 				}
 			}
 		}
-		if (deletedEntities.size() != 0)
-			deleteEntities();
+		
 	}
 
 	public void checkEntityCollision(Entity x) {
@@ -183,8 +195,10 @@ public class GameController implements ActionListener {
 	}
 	
 	private void updatePlayer(Entity entity) {
+		pC.move();
 		checkPlayerCollision();
 		entity.update();
+	
 	}
 	
 	//updateEntity Location

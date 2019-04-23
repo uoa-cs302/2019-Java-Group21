@@ -6,18 +6,17 @@ import java.util.List;
 
 public class PC extends Entity {
 	
-	private boolean up = false;
-	private boolean down = false;
-	private boolean left = false;
-	private boolean right = false;
+	
 	private Inventory inventory;
 	private boolean itemPickUp = false;
+	
 	
 	public PC(int x,int y, List<BufferedImage> images) {
 		super(x,y);
 		setImages(images);
 		this.getImageDim();
 		this.health = 6;
+		this.damage = 1;
 		inventory = new Inventory();
 		System.out.println("setting frames in player class");
 		this.ani.setFrames(this.getImages().subList(0, 3));
@@ -32,6 +31,9 @@ public class PC extends Entity {
 		Hitbounds = new Collision(this.x_pos,this.y_pos,this.width,this.height );
 		Hitbounds.setyOff(16);
 		
+	}
+	public void update() {
+		super.update();
 	}
 	
 	public void move() {
@@ -57,12 +59,7 @@ public class PC extends Entity {
 		}
 	}
 	
-	public boolean attack() {
-		if(Attack = true && AttackDuration <= 30) {
-			return true;
-		}
-		return false;
-	}
+
 	
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
@@ -113,6 +110,7 @@ public class PC extends Entity {
 		}
 		if(key == KeyEvent.VK_SPACE) {
 			this.Attack = true;
+
 		}
 		
 	}
@@ -134,9 +132,6 @@ public class PC extends Entity {
 
 		if (key == KeyEvent.VK_UP) {
 			setItemPickUp(false);
-		}
-		if(key == KeyEvent.VK_SPACE) {
-			this.Attack = false;
 		}
 		
 	}

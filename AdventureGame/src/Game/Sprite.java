@@ -20,8 +20,8 @@ public class Sprite {
 	protected int y_pos;
 	protected int width;//make sure all these have getters
 	protected int height;
-	protected int right;
-	protected int bottom;
+	protected int Right;
+	protected int Bottom;
 	protected boolean visible;
 	private static AtomicInteger ID_GENERATOR = new AtomicInteger(1000);
 	private int ID;
@@ -62,8 +62,8 @@ public class Sprite {
 	void getImageDim() {
 		width = 32;
 		height = 32;
-		right = x_pos + width;
-		bottom = y_pos + height;
+		Right = x_pos + width;
+		Bottom = y_pos + height;
 	}
 
 	public int getx_pos() {
@@ -83,11 +83,11 @@ public class Sprite {
 	}
 
 	public int getright() {
-		return right;
+		return Right;
 	}
 
 	public int getbottom() {
-		return bottom;
+		return Bottom;
 	}
 
 	public boolean isVisible() {

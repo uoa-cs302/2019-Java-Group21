@@ -19,6 +19,7 @@ public class Entity extends Sprite {
 	protected int dy;
 	private boolean collidable = false;
 	protected int size;
+	private int attackCount = 0;
 	
 	protected int dx_temp;
 	protected int dy_temp;
@@ -30,6 +31,10 @@ public class Entity extends Sprite {
 	protected Collision Bounds;
 	protected Collision Hitbounds;
 	protected List<BufferedImage> idlesprites;
+	protected boolean up = false;
+	protected boolean down = false;
+	protected boolean left = false;
+	protected boolean right = false;
 	
 	protected boolean Attack;
 	protected int AttackSpeed;
@@ -75,17 +80,15 @@ public class Entity extends Sprite {
 	public void setCollidable(boolean collidable) {this.collidable = collidable;}
 	public Collision getBounds() {return Bounds;}
 	public Collision getHitBounds() {return Hitbounds;}
+	public boolean canAttack() {if (Attack && attackCount == 0) {return true;}else{return false;}}
 	
 	//may be obselete
 	public Rectangle getBoundary() {return new Rectangle(x_pos, y_pos, width, height);}
 	
 	public void setAnimation(Direction i,List<BufferedImage> frames, int delay) {
 		curAnim = i;
-		System.out.println("setting up frames");
-		System.out.println(frames.size());
 		this.getImageDim();
 		ani.setFrames(frames);
-		System.out.println("setting up delay");
 		ani.setDelay(delay);
 		ani.setFrame(1);
 	}
@@ -131,15 +134,33 @@ public class Entity extends Sprite {
 		animate();
 		image();
 		setHitboxDirection();
+		if(Attack || attackCount != 0) {
+			attack();
+		}
+
+		x_pos += dx;
+		Right = x_pos + width;
+		y_pos += dy;
+		Bottom = y_pos + height;
 		Bounds.setBox(this.x_pos, this.y_pos, (int)Bounds.getwidth(),(int) Bounds.getheight());
 		Hitbounds.setBox(this.x_pos, this.y_pos, (int) Hitbounds.getwidth(),(int) Hitbounds.getheight());
-		x_pos += dx;
-		right = x_pos + width;
-		y_pos += dy;
-		bottom = y_pos + height;
-		move();
-
 		}
+	
+	public void setAttack(boolean b) {Attack = b;}
+	public void attack() {
+		if(attackCount == 0) {
+			Attack =false;
+			attackCount ++;
+			
+		} else if (attackCount < AttackDuration) {
+			attackCount ++;
+			 
+		}else if (attackCount == AttackDuration) {
+			attackCount = 0;
+			
+		}
+		
+	}
 	
 	public void update(Entity target) {
 		update();
@@ -203,39 +224,46 @@ public class Entity extends Sprite {
 		}
 	}
 	
-public void CollisionProcess(int top,int bottom,int left, int right) {
-		System.out.println("collision attempting");
+public void CollisionProcess(Collision b) {
+	
+	
+	
+	int left = (int) (b.getX()+b.getxOff());
+	int right = (int) (left + b.getwidth());
+	int top = (int) (b.getY() + b.getyOff());
+	int bottom = (int) (top + b.getheight());
 		switch (this.check_collisiondir_Hoz(left, right)) {
 		case 1:
 			if(dx < 0) {
-				this.setx_pos(this.x_pos - dx);
+				dx = 0;
 			}
 			break;
 		case 2:
 			if(dx > 0) {
-				this.setx_pos(this.x_pos - dx);
+				dx = 0;
 			}
 			break;
 		}
 		switch(this.check_collisiondir_Vert( top, bottom)) {
 		case 1:
 			if(dy < 0) {
-				
-				this.sety_pos(this.y_pos - dy);
+				dy = 0;
 			}
 			break;
 		case 2:
 			if(dy > 0) {
-				this.sety_pos(this.y_pos - dy);
+				dy = 0;
 			}
 			break;
 		}
-
 	}
 
  protected void hitBy(Entity e) {
 	 this.health = health - e.getDamage();
-	 if(health < 0) {
+	 Attack = false;
+	 System.out.println("OOOF");
+	 if(health <= 0) {
+		 System.out.println("blergh");
 		 this.visible = false;
 		 this.setCollidable(false);
 	 }
@@ -257,9 +285,11 @@ public void CollisionProcess(int top,int bottom,int left, int right) {
  }
 	protected int check_collisiondir_Hoz(int left2,int right2 ) {
 
-		if (this.x_pos == right2 - 2) {
+		if (Bounds.getX()+Bounds.getxOff() == right2) {
+			this.x_pos =(int) (right2 - Bounds.getxOff());
 			return 1;
-		} else if (this.right == left2 + 2) {
+		} else if (Bounds.getX()+Bounds.getxOff()+Bounds.getwidth() == left2) {
+			this.x_pos =(int) (left2 - Bounds.getxOff()-Bounds.getwidth());
 			return 2;
 		} else {
 			return 0;
@@ -267,9 +297,11 @@ public void CollisionProcess(int top,int bottom,int left, int right) {
 	}
 	protected int check_collisiondir_Vert(int top2,int bottom2 ) {
 
-		if (this.y_pos == bottom2 -2) {
+		if (Bounds.getY()+Bounds.getyOff() == bottom2) {
+			this.y_pos = (int) (bottom2 - Bounds.getyOff());
 			return 1;
-		} else if (this.bottom == top2 + 2) {
+		} else if (Bounds.getY()+Bounds.getyOff()+Bounds.getheight()== top2) {
+			this.y_pos =(int) (top2 - Bounds.getyOff() - Bounds.getheight());
 			return 2;
 		} else {
 			return 0;

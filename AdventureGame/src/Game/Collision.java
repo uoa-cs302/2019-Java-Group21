@@ -68,7 +68,20 @@ public class Collision {
 		float by_pos =  b.getY() + b.getyOff() + (b.getheight()/2);
 		if(Math.abs(ax_pos-bx_pos)< (this.width/2) + (b.getwidth()/2)) {
 			if(Math.abs(ay_pos-by_pos)< (this.height/2) + (b.getheight()/2)) {
-				System.out.println("true");
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean collisionWith(Collision b,int dx,int dy) {
+		
+		float ax_pos =	 this.x_pos + this.xOff + (this.width/2)+dx;
+		float ay_pos =  this.y_pos + this.yOff + (this.height/2)+dy;
+		float bx_pos =  b.getX() + b.getxOff() + (b.getwidth()/2);
+		float by_pos =  b.getY() + b.getyOff() + (b.getheight()/2);
+		if(Math.abs(ax_pos-bx_pos)< (this.width/2) + (b.getwidth()/2)) {
+			if(Math.abs(ay_pos-by_pos)< (this.height/2) + (b.getheight()/2)) {
 				return true;
 			}
 		}
@@ -85,6 +98,19 @@ public class Collision {
 		
 		if((dx*dx+dy*dy)< ((this.radius/Math.sqrt(2) * (this.radius/Math.sqrt(2))))) {
 			return true;
+		}
+		return false;
+	}
+	public boolean nextCollision(int dx, int dy, Collision b) {
+		float ax_pos =	 this.x_pos + this.xOff +dx + (this.width/2);
+		float ay_pos =  this.y_pos + this.yOff + dy+ (this.height/2);
+		float bx_pos =  b.getX() + b.getxOff() + (b.getwidth()/2);
+		float by_pos =  b.getY() + b.getyOff() + (b.getheight()/2);
+		if(Math.abs(ax_pos-bx_pos)< (this.width/2) + (b.getwidth()/2)) {
+			if(Math.abs(ay_pos-by_pos)< (this.height/2) + (b.getheight()/2)) {
+				System.out.println("true");
+				return true;
+			}
 		}
 		return false;
 	}

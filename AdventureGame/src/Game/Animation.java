@@ -27,10 +27,8 @@ public class Animation {
 		this.curFrame = 0;
 		this.count = 0;
 		this.DELAY = 5;
-		System.out.println("size = " + frames.size());
 		this.numFrame = frames.size();
 		this.timesPlayed = 0;
-		System.out.println("set up finished!");
 	}
 	
 	public void setDelay(int delay) {this.DELAY = delay;}
