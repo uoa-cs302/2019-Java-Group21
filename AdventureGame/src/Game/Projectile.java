@@ -17,7 +17,7 @@ public class Projectile extends Entity{
 		this.parent = parent;
 		this.distance_x = distance_x;
 		this.distance_y = distance_y;
-		calculateMovement(4);
+		calculateMovement(3);
 		this.images = new ArrayList<BufferedImage>();
 		this.images.add(image);
 		this.images.add(image);
