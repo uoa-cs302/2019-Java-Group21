@@ -105,10 +105,11 @@ public class GameController implements ActionListener {
 			if(entity instanceof PC)
 				updatePlayer(entity);
 			else if (entity instanceof GiantRat) {
-				checkEntityCollision(entity);
+				
 				entity.update(pC);
+				checkEntityCollision(entity);
 				//checkEntityCollision(entity);
-				//entity.update();
+				entity.update();
 			}
 			else if (entity instanceof Projectile) {
 				checkEntityCollision(entity);
@@ -125,8 +126,8 @@ public class GameController implements ActionListener {
 
 	//checks collision of an Entity and a Sprite
 	public void checkCollision(Entity sp1,Entity sp2) {
-		if (sp1.getBounds().collisionWith(sp2.getBounds())) {
-			//sp1.CollisionProcess(sp2.gety_pos(),sp2.getbottom(),sp2.getx_pos(),sp2.getright());
+		if (sp1.getBounds().collisionWith(sp2.getBounds(),sp1.getdx(),sp1.getdy())) {
+			sp1.CollisionProcess(sp2.getBounds());
 		} 
 	}
 
@@ -211,6 +212,7 @@ public class GameController implements ActionListener {
 
 	//updateEntity Location
 	private void updateEntity(Entity x) {
+		
 		checkEntityCollision(x);
 		x.update(pC);
 	}

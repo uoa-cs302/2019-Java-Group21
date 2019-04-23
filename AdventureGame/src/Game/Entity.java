@@ -164,7 +164,6 @@ public class Entity extends Sprite {
 	}
 	
 	public void update(Entity target) {
-		update();
 	};
 	
 	public void move() {}

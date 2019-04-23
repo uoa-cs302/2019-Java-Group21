@@ -34,7 +34,6 @@ public class GiantRat extends Entity {
 	}
 	public void update(Entity target) {
 		AiUpdate(target);
-		super.update();
 	}
 	public void animate() {
 		switch (this.direction) {
@@ -58,6 +57,12 @@ public class GiantRat extends Entity {
 			break;
 		}
 	}
+	public void CollisionProcess(Collision b) {
+		dx = 0;
+		dy = 0;
+		dx_lock = dx;
+		dy_lock = dy;
+	}
 
 	public void AiUpdate(Entity target) {
 		if (target == null) {
@@ -68,7 +73,7 @@ public class GiantRat extends Entity {
 			int xdiff = target.getx_pos() - this.x_pos;
 			int ydiff = target.gety_pos() - this.y_pos;
 			int distance = (int) Math.hypot((double) xdiff/32,(double) ydiff/32);
-			
+			if(count>=200||count == 0) {
 			if(ydiff>0 ) {
 				direction = Direction.DOWN;
 				dy = 1;
@@ -88,6 +93,7 @@ public class GiantRat extends Entity {
 				dx = -1;
 			}
 			else {dx=0;}
+			}
 			
 			if (distance <= 5 && charging == false) {
 				charging = true;
