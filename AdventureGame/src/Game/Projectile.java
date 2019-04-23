@@ -2,15 +2,10 @@ package Game;
 
 public class Projectile extends Entity{
 	
-	private int velocity_x;
-	private int velocity_y;
-	
-	public Projectile(int x, int y) {
+	public Projectile(int x, int y, int dx, int dy) {
 		super(x,y);
+		this.dx = dx;
+		this.dy = dy;
+		damage = 1;
 	}
-	
-	public void move() {
-		this.x
-	}
-	
 }
