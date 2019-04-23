@@ -131,7 +131,6 @@ public class Entity extends Sprite {
 		animate();
 		image();
 		setHitboxDirection();
-		
 		Bounds.setBox(this.x_pos, this.y_pos, (int)Bounds.getwidth(),(int) Bounds.getheight());
 		Hitbounds.setBox(this.x_pos, this.y_pos, (int) Hitbounds.getwidth(),(int) Hitbounds.getheight());
 		x_pos += dx;
