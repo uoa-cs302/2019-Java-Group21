@@ -11,7 +11,7 @@ public class Image {
 
 	// TEMPORARY UNTIL WE PUT EVERYTHING INTO ONE SPRITESHEET
 	private List<BufferedImage> player;
-	private BufferedImage rat;
+	private List<BufferedImage> rat;
 	private BufferedImage sword0;
 	private BufferedImage sword1;
 
@@ -22,8 +22,11 @@ public class Image {
 	public void setPlayer(List<BufferedImage> player) {
 		this.player = player;
 	}
+	public void setRat(List<BufferedImage> rat) {
+		this.rat = rat;
+	}
 
-	public BufferedImage getRat() {
+	public List<BufferedImage> getRat() {
 		return rat;
 	}
 
@@ -46,7 +49,12 @@ public class Image {
 
 	public Image() {
 		assetList = new ArrayList<BufferedImage>();
-		rat = loadSpecificImage("src/Image/rat_0.png");
+		rat = new ArrayList<BufferedImage>();
+		//adds rat sprites
+		rat.add(loadSpecificImage("src/Image/rat_0.png"));
+		rat.add(loadSpecificImage("src/Image/rat_1.png"));
+		rat.add(loadSpecificImage("src/Image/rat_2.png"));
+		rat.add(loadSpecificImage("src/Image/rat_3.png"));
 		sword0 = loadSpecificImage("src/Image/swrd0.png");
 		sword1 = loadSpecificImage("src/Image/swrd1.png");
 		setPlayer(getSprites("src/Image/ExampleCharacter.png"));

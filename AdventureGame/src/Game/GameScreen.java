@@ -60,6 +60,10 @@ public class GameScreen extends JPanel {
 					PC pC = (PC) sprite;
 					g2d.setColor(Color.green);
 					g2d.drawRect(pC.getHitBounds().getX() + (int) pC.getHitBounds().getxOff(),(int) pC.getHitBounds().getY()+ (int)pC.getHitBounds().getyOff(), (int)pC.getHitBounds().getwidth(),(int) pC.getHitBounds().getheight());
+				}if(sprite instanceof GiantRat) {
+					GiantRat rat = (GiantRat) sprite;
+					g2d.setColor(Color.green);
+					g2d.drawRect(rat.getHitBounds().getX() + (int) rat.getHitBounds().getxOff(),(int) rat.getHitBounds().getY()+ (int)rat.getHitBounds().getyOff(), (int)rat.getHitBounds().getwidth(),(int) rat.getHitBounds().getheight());
 				}
 			}
 		}

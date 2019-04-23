@@ -1,5 +1,8 @@
 package Game;
 
+import java.awt.image.BufferedImage;
+import java.util.List;
+
 public class GiantRat extends Entity {
 	
 private boolean charging = false;
@@ -8,10 +11,14 @@ private boolean charging = false;
 	private int dx_lock;
 
 	
-	public GiantRat(int x,int y){
+	public GiantRat(int x,int y,List <BufferedImage> images){
 		super(x,y);
-		
+		setImages(images);
+		this.getImageDim();
 		initRat();
+		this.ani.setFrames(this.getImages());
+		this.ani.setFrame(1);
+		this.ani.setDelay(-1);
 
 	}
 	private void initRat() {
@@ -20,13 +27,36 @@ private boolean charging = false;
 		
 		//initital base intialisation
 		Bounds = new Collision(this.x_pos,this.y_pos,this.width,this.height/2);
-		Bounds.setyOff(32);
+		Bounds.setyOff(16);
 		Hitbounds = new Collision(this.x_pos,this.y_pos +(this.height/2),this.width,this.height );
 		
 	}
 	public void update(Entity target) {
 		
 		AiUpdate(target);
+		super.update();
+	}
+	public void animate() {
+		switch (this.direction) {
+		case UP:
+			this.ani.setFrame(2);
+			break;
+		case DOWN:
+			this.ani.setFrame(3);
+			break;
+		case LEFT:
+			this.ani.setFrame(1);
+			break;
+		case RIGHT:
+			this.ani.setFrame(0);
+			break;
+		case IDLE:
+			this.ani.setFrame(0);
+			break;
+		default:
+			this.ani.setFrame(0);
+			break;
+		}
 	}
 
 
@@ -81,8 +111,9 @@ private boolean charging = false;
 		}
 		
 			}	
-	}
+	
 		
+	}
 
 	}
 
