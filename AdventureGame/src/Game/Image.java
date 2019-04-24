@@ -65,7 +65,8 @@ public class Image {
 		spider.add(loadSpecificImage("src/Image/projectile0.png"));
 		sword0 = loadSpecificImage("src/Image/swrd0.png");
 		sword1 = loadSpecificImage("src/Image/swrd1.png");
-		setPlayer(getSprites("src/Image/ExampleCharacter.png"));
+		setPlayer(getSprites("src/Image/ExampleCharacter.png",4,3));
+		player.addAll(getSprites("src/Image/hitsheet.png",2,5));
 		System.out.println("trying to load character");
 		LoadSprites("src/Image/dungeon0.png");
 		System.out.println("read all sprites success!");
@@ -82,9 +83,9 @@ public class Image {
 		return null;
 	}
 
-	protected List<BufferedImage> getSprites(String sheet) {
+	protected List<BufferedImage> getSprites(String sheet,int h,int w) {
 		BufferedImage image = loadSpecificImage(sheet);
-		return loadSpecificSprites(4,3, image);
+		return loadSpecificSprites(h,w, image);
 	}
 
 	public List<BufferedImage> loadSpecificSprites(int sheetH, int sheetW, BufferedImage image) {

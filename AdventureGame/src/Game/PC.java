@@ -4,23 +4,29 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
+import Game.Sprite.Direction;
+
 public class PC extends Entity {
 	
 	
 	private Inventory inventory;
 	private boolean itemPickUp = false;
+	private Animation slash;
+	private BufferedImage slashim;
 	
 	
 	public PC(int x,int y, List<BufferedImage> images) {
 		super(x,y);
+		setSlash(new Animation());
 		setImages(images);
 		this.getImageDim();
 		this.health = 6;
 		this.damage = 1;
 		inventory = new Inventory();
-		System.out.println("setting frames in player class");
 		this.ani.setFrames(this.getImages().subList(0, 3));
-		System.out.println("setting frame in player class");
+		this.slash.setFrames(this.getImages().subList(12, 21));
+		this.slash.setDelay(-1);
+		this.slash.setFrame(0);
 		this.ani.setFrame(1);
 		this.ani.setDelay(-1);
 		
@@ -34,6 +40,58 @@ public class PC extends Entity {
 	}
 	public void update() {
 		super.update();
+	}
+	public void animate() {
+		switch (this.direction) {
+		case UP:
+			if(attacking) {
+				slash.setDelay(3);
+			} else {slash.setDelay(-1);}
+			if (curAnim != Direction.UP || ani.getDelay() == -1) {
+				System.out.println("loading up animation");
+				setAnimation(Direction.UP,this.getFromImages(9, 11),15);
+			}
+			break;
+		case DOWN:
+			if(attacking) {
+				slash.setDelay(3);
+			}else {slash.setDelay(-1);}
+			if (curAnim != Direction.DOWN || ani.getDelay() == -1) {
+
+				setAnimation(Direction.DOWN,this.getFromImages(0, 2),15);
+			}
+			break;
+		case LEFT:
+			if(attacking) {
+				slash.setDelay(3);
+			}else {slash.setDelay(-1);}
+			if (curAnim != Direction.LEFT || ani.getDelay() == -1) {
+				setAnimation(Direction.LEFT,this.getFromImages(3, 5),15);
+			}
+			break;
+		case RIGHT:
+			if(attacking) {
+				slash.setDelay(3);
+			}else {slash.setDelay(-1);}
+			if (curAnim != Direction.RIGHT || ani.getDelay() == -1) {
+				setAnimation(Direction.RIGHT,this.getFromImages(6, 8),15);
+			}
+			break;
+		case IDLE:
+			if(attacking) {
+				slash.setDelay(3);
+			}
+			setAnimation(curAnim,ani.getframes(),-1);
+
+			break;
+		}
+	}
+	public void image() {
+		this.ani.update();
+		this.slash.update();
+		this.setImage(this.ani.getImage());
+		this.slashim = (this.slash.getImage());
+		
 	}
 	
 	public void move() {
@@ -150,5 +208,17 @@ public class PC extends Entity {
 
 	public void setItemPickUp(boolean itemPickUp) {
 		this.itemPickUp = itemPickUp;
+	}
+	public Animation getSlash() {
+		return slash;
+	}
+	public void setSlash(Animation slash) {
+		this.slash = slash;
+	}
+	public BufferedImage getSlashim() {
+		return slashim;
+	}
+	public void setSlashim(BufferedImage slashim) {
+		this.slashim = slashim;
 	}
 }

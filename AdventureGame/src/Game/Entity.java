@@ -37,6 +37,7 @@ public class Entity extends Sprite {
 	protected boolean right = false;
 
 	protected boolean Attack;
+	protected boolean attacking;
 	protected int AttackSpeed;
 	protected int AttackDuration = 30;
 	
@@ -67,6 +68,7 @@ public class Entity extends Sprite {
 		height = 32;
 	}
 
+	public boolean getattacking() {return this.attacking;}
 	public int getEntityID() {return this.EntityID;}
 	public int getdy() {return dy;}
 	public int getdx() {return dx;}
@@ -102,6 +104,9 @@ public class Entity extends Sprite {
 	public void animate() {
 		switch (this.direction) {
 		case UP:
+			if(attacking) {
+				
+			}
 			if (curAnim != Direction.UP || ani.getDelay() == -1) {
 				System.out.println("loading up animation");
 				setAnimation(Direction.UP,this.getFromImages(9, 11),15);
@@ -138,6 +143,7 @@ public class Entity extends Sprite {
 		image();
 		setHitboxDirection();
 		if(Attack || attackCount != 0) {
+			this.attacking = true;
 			runAttack();
 		}
 		x_pos += dx;
@@ -151,15 +157,18 @@ public class Entity extends Sprite {
 	public void setAttack(boolean b) {Attack = b;}
 
 	public void runAttack() {
+		
 		if(attackCount == 0) {
 			Attack = false;
 			attack();
 			attackCount ++;
 		}
-		else if (attackCount < AttackDuration)
-			attackCount ++;
-		else if (attackCount == AttackDuration)
+		else if (attackCount < AttackDuration) {
+			attackCount ++;}
+		else if (attackCount == AttackDuration) {
 			attackCount = 0;
+		attacking = false;
+		}
 	}
 
 	public void attack() {
