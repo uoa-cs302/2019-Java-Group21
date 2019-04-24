@@ -74,7 +74,11 @@ public class Room {
 	public void addSpritesList(List<Sprite> sprites) {
 		this.spriteList.addAll(sprites);
 	}
-
+	
+	public void addEntitiesList(List<Entity> entities) {
+		this.spriteList.addAll(entities);
+	}
+	
 	public int getRoomNumber() {
 		return roomNumber;
 	}

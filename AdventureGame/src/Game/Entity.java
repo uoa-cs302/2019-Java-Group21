@@ -12,15 +12,15 @@ import javax.swing.ImageIcon;
 import Game.Sprite.Direction;
 
 public class Entity extends Sprite {
-	
-	
+
+
 	protected Direction direction = Direction.IDLE;
 	protected int dx;
 	protected int dy;
 	private boolean collidable = false;
 	protected int size;
 	private int attackCount = 0;
-	
+
 	protected int dx_temp;
 	protected int dy_temp;
 	protected boolean collision;
@@ -35,12 +35,14 @@ public class Entity extends Sprite {
 	protected boolean down = false;
 	protected boolean left = false;
 	protected boolean right = false;
-	
+
 	protected boolean Attack;
 	protected int AttackSpeed;
 	protected int AttackDuration = 30;
 	
 	protected int health;
+
+	protected Entity target;
 	
 	protected int EntityID;
 	/*EntityID values as follows
@@ -53,8 +55,8 @@ public class Entity extends Sprite {
 	 * 5 = Child
 	 * 
 	 * EntityID Values are initialized on the subclass construction 
-	
-	*/
+
+	 */
 	public Entity(int x,int y){
 		super(x,y);
 		setCollidable(true);
@@ -64,7 +66,7 @@ public class Entity extends Sprite {
 		width = 32;
 		height = 32;
 	}
-	
+
 	public int getEntityID() {return this.EntityID;}
 	public int getdy() {return dy;}
 	public int getdx() {return dx;}
@@ -81,10 +83,10 @@ public class Entity extends Sprite {
 	public Collision getBounds() {return Bounds;}
 	public Collision getHitBounds() {return Hitbounds;}
 	public boolean canAttack() {if (Attack && attackCount == 0) {return true;}else{return false;}}
-	
+
 	//may be obselete
 	public Rectangle getBoundary() {return new Rectangle(x_pos, y_pos, width, height);}
-	
+
 	public void setAnimation(Direction i,List<BufferedImage> frames, int delay) {
 		curAnim = i;
 		this.getImageDim();
@@ -92,11 +94,11 @@ public class Entity extends Sprite {
 		ani.setDelay(delay);
 		ani.setFrame(1);
 	}
-	
+
 	public void setBounds(Collision c) {this.Bounds = c;}
-	
+
 	public void setHitBounds(Collision c) {this.Bounds = c;}
-	
+
 	public void animate() {
 		switch (this.direction) {
 		case UP:
@@ -107,7 +109,7 @@ public class Entity extends Sprite {
 			break;
 		case DOWN:
 			if (curAnim != Direction.DOWN || ani.getDelay() == -1) {
-				
+
 				setAnimation(Direction.DOWN,this.getFromImages(0, 2),15);
 			}
 			break;
@@ -122,15 +124,16 @@ public class Entity extends Sprite {
 			}
 			break;
 		case IDLE:
-			
+
 			setAnimation(curAnim,ani.getframes(),-1);
-			
+
 			break;
 		}
 	}
-	
+
 	public void update() {
-	
+		if (this instanceof GiantSpider)
+			System.out.println("updating entity");
 		animate();
 		image();
 		setHitboxDirection();
@@ -143,10 +146,10 @@ public class Entity extends Sprite {
 		Bottom = y_pos + height;
 		Bounds.setBox(this.x_pos, this.y_pos, (int)Bounds.getwidth(),(int) Bounds.getheight());
 		Hitbounds.setBox(this.x_pos, this.y_pos, (int) Hitbounds.getwidth(),(int) Hitbounds.getheight());
-		}
-	
+	}
+
 	public void setAttack(boolean b) {Attack = b;}
-	
+
 	public void runAttack() {
 		if(attackCount == 0) {
 			Attack = false;
@@ -158,22 +161,22 @@ public class Entity extends Sprite {
 		else if (attackCount == AttackDuration)
 			attackCount = 0;
 	}
-	
+
 	public void attack() {
-		
+
 	}
-	
+
 	public void update(Entity target) {
 	};
-	
+
 	public void move() {}
 	public void image() {
 		this.ani.update();
 		this.setImage(this.ani.getImage());
 	}
-	
+
 	public void setHitboxDirection() {
-	
+
 		switch(this.direction) {
 		case UP:
 			this.Hitbounds.setxOff(0);
@@ -193,46 +196,44 @@ public class Entity extends Sprite {
 			break;
 		}
 	}
-	
+
 	public void wallCollide(Direction direction) {
 
 		switch(direction) {
-			case UP:
-				if (this.getdy() < 0) {
-					this.y_pos = y_pos + 4;
-					
-				}
-				break;
-					
-			case DOWN:
-				if (this.getdy() > 0) {
-					this.y_pos = y_pos - 4;
-					
-				}
-				break;
-			case LEFT: 
-				if (this.getdx() < 0) {
-					this.x_pos = x_pos + 4;
-					
-				}
-				break;
-			case RIGHT: 
-				if (this.getdx() > 0) {
-					this.x_pos = x_pos - 4;
-					
-				}
-				break;
+		case UP:
+			if (this.getdy() < 0) {
+				this.y_pos = y_pos + 4;
+
+			}
+			break;
+
+		case DOWN:
+			if (this.getdy() > 0) {
+				this.y_pos = y_pos - 4;
+
+			}
+			break;
+		case LEFT: 
+			if (this.getdx() < 0) {
+				this.x_pos = x_pos + 4;
+
+			}
+			break;
+		case RIGHT: 
+			if (this.getdx() > 0) {
+				this.x_pos = x_pos - 4;
+
+			}
+			break;
 		}
 	}
-	
-public void CollisionProcess(Collision b) {
-	
-	
-	
-	int left = (int) (b.getX()+b.getxOff());
-	int right = (int) (left + b.getwidth());
-	int top = (int) (b.getY() + b.getyOff());
-	int bottom = (int) (top + b.getheight());
+
+	public void CollisionProcess(Collision b) {
+
+		int left = (int) (b.getX()+b.getxOff());
+		int right = (int) (left + b.getwidth());
+		int top = (int) (b.getY() + b.getyOff());
+		int bottom = (int) (top + b.getheight());
 		switch (this.check_collisiondir_Hoz(left, right)) {
 		case 1:
 			if(dx < 0) {
@@ -307,5 +308,13 @@ public void CollisionProcess(Collision b) {
 		} else {
 			return 0;
 		}
+	}
+	
+	public void setTarget(Entity target) {
+		this.target = target;
+	}
+	
+	public Entity getTarget() {
+		return this.target;
 	}
 }

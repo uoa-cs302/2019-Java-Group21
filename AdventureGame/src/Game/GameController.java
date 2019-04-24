@@ -26,6 +26,7 @@ public class GameController implements ActionListener {
 
 	private List<Sprite> sprites;
 	private List<Entity> deletedEntities = new ArrayList<Entity>();
+	private List<Entity> newEntities = new ArrayList<Entity>();
 	private List<Entity> entities;
 	boolean loadingRoom = false;
 
@@ -99,28 +100,36 @@ public class GameController implements ActionListener {
 	//method runs when timer ticks
 	//should include update, and draw.
 	public void actionPerformed(ActionEvent e) {
-		if (deletedEntities.size() != 0) {
-			deleteEntities();}
+		if (deletedEntities.size() != 0)
+			deleteEntities();
+		if (newEntities.size() != 0)
+			addEntities();
 		if (pC.getInventory().droppedItemsSize() != 0) {
 			for (Item item : pC.getInventory().getDroppedItems()) {
 				item.setx_pos(pC.getx_pos());
 				item.sety_pos(pC.gety_pos());
 				item.getImageDim();
-				gameModel.getCurrentRoom().addEntityList(item);
-				gameModel.getCurrentRoom().addSpriteList(item);
+				newEntities.add(item);
 			}
 			pC.getInventory().clearDroppedItems();
 		}
-
 		for (Entity entity : entities) {
 			if(entity instanceof PC)
 				updatePlayer(entity);
 			else if (entity instanceof GiantRat) {
-				
 				entity.update(pC);
 				checkEntityCollision(entity);
 				//checkEntityCollision(entity);
 				entity.update();
+			}
+			else if (entity instanceof GiantSpider) {
+				entity.setTarget(pC);
+				checkEntityCollision(entity);
+				entity.update();
+				for (Projectile projectile : ((GiantSpider) entity).getProjectiles()) {
+					newEntities.add(projectile);
+				}
+				((GiantSpider) entity).clearProjectiles();
 			}
 			else if (entity instanceof Projectile) {
 				checkEntityCollision(entity);
@@ -138,20 +147,21 @@ public class GameController implements ActionListener {
 	//checks collision of an Entity and a Sprite
 	public void checkCollision(Entity sp1,Entity sp2) {
 		if (sp1.getBounds().collisionWith(sp2.getBounds(),sp1.getdx(),sp1.getdy())) {
+			if (sp1 instanceof Projectile)
+				if (sp2 != ((Projectile) sp1).getParent())
+					deletedEntities.add(sp1);
 			sp1.CollisionProcess(sp2.getBounds());
 		} 
 	}
 
 	//checks collision of Player with all Obj
 	public void checkPlayerCollision() {
-		Rectangle r1 = pC.getBoundary();
 		for (Entity e1 : entities) {
 			if(pC.getID() != e1.getID()) {
 				if (e1.isCollidable() == true) {
 					if (e1 instanceof Door) {
 						Door door = (Door) e1;
 						if(pC.getBounds().collisionWith(door.getBounds())) {
-							System.out.println("index is = " + door.getRoom());
 							gameModel.loadRoom(gameModel.getDungeonIndex(door.getRoom())); 
 							pC.setx_pos(door.getSpawnX());
 							pC.sety_pos(door.getSpawnY());
@@ -175,7 +185,18 @@ public class GameController implements ActionListener {
 						}
 						if(pC.getBounds().collisionWith(rat.getHitBounds())) {
 							if(rat.canAttack()) {
-							pC.hitBy(rat);
+								pC.hitBy(rat);
+							}
+						}
+					}
+					else if (e1 instanceof GiantSpider) {
+						GiantSpider spider = (GiantSpider) e1;
+						if (pC.getHitBounds().collisionWith(spider.getBounds())) {
+							if (pC.canAttack()) {
+								spider.hitBy(pC);
+								if (spider.getHealth()<= 0) {
+									deletedEntities.add(spider);
+								}
 							}
 						}
 					}
@@ -196,6 +217,7 @@ public class GameController implements ActionListener {
 					else if (e1 instanceof Projectile) {
 						Projectile projectile = (Projectile) e1;
 						if (pC.getHitBounds().collisionWith(projectile.getBounds())) {
+							System.out.println("collided with = " + e1);
 							if (pC.canAttack())
 								deletedEntities.add(projectile);
 						}
@@ -225,19 +247,24 @@ public class GameController implements ActionListener {
 
 	//updateEntity Location
 	private void updateEntity(Entity x) {
-		
+
 		checkEntityCollision(x);
 		x.update(pC);
 	}
 	//update EntityAi Overridden from Entity in each class
+
+	public void addEntities() {
+		for (Entity add : this.newEntities){
+			entities.add(add);
+			sprites.add(add);
+		}
+		newEntities.clear();
+	}
+
 	public void deleteEntities() {
-		for (int i = 0; i < entities.size(); i++) {
-			for (Entity delete : this.deletedEntities)
-				if (entities.get(i) == delete) {
-					entities.remove(i);
-					sprites.remove(delete);
-					i--;
-				}
+		for (Entity delete : this.deletedEntities){
+			entities.remove(delete);
+			sprites.remove(delete);
 		}
 		deletedEntities.clear();
 	}
