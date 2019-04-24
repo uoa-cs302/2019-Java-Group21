@@ -133,6 +133,7 @@ public class PC extends Entity {
 		if (key == KeyEvent.VK_UP) {
 			setItemPickUp(false);
 		}
+	
 		
 	}
 	public void setCollided(boolean a) {
