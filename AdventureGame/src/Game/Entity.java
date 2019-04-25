@@ -76,6 +76,10 @@ public class Entity extends Sprite {
 	public int getEntityID() {return this.EntityID;}
 	public float getdy() {return dy;}
 	public float getdx() {return dx;}
+	public boolean getUP() {return up;}
+	public boolean getDown() {return down;}
+	public boolean getLeft() {return left;}
+	public boolean getRight() {return right;}
 	public int getsize() {return size;}
 	public void setsize(int s) {this.size = s;}
 	public void setdy(float dy) {this.dy = dy;}
@@ -140,7 +144,8 @@ public class Entity extends Sprite {
 	}
 
 	public void update() {
-
+		animate();
+		image();
 		setHitboxDirection();
 		if (slowed) {
 			if (slowedCounter == 0)
@@ -157,8 +162,7 @@ public class Entity extends Sprite {
 			this.attacking = true;
 			runAttack();
 		}
-		animate();
-		image();
+		
 		x_pos += dx*speed;
 		Right = (int)x_pos + width;
 		y_pos += dy*speed;
@@ -291,21 +295,21 @@ public class Entity extends Sprite {
 		 this.visible = false;
 		 this.setCollidable(false);
 	 }
-	 if (this instanceof GiantRat )
-	 switch (e.getDirection()){
-	 case DOWN:
+	 if (e.getDown()) {
 		 this.y_pos += 32;
-		 break;
-	 case LEFT:
+	 }else
+	 if (e.getLeft()) {
 		 this.x_pos += -32;
-		 break;
-	 case RIGHT:
+	 }else
+	 if (e.getRight()) {
 		 this.x_pos += 32;
-		 break;
-	 case UP:
+	 }else
+	 if(e.getUP()) {
 		this.y_pos += -32;
-		 break;
-		 default:
+	 }
+	 else {
+			 this.y_pos -= 3*dy;
+			 this.x_pos -= 3*dx;
 	 }
  }
 	protected int check_collisiondir_Hoz(int left2,int right2 ) {
