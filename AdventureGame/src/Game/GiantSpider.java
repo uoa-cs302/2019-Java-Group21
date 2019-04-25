@@ -57,27 +57,26 @@ public class GiantSpider extends Entity {
 			Attack = true; 
 		super.update();
 
-		
+		if (movements.size() == 0) {
+			float highestScalar = 0;
+			int optimumx_pos = 0;
+			int optimumy_pos = 0;
 
-		if (movements.size() == 0) {float highestScalar = 0;
-		int optimumx_pos = 0;
-		int optimumy_pos = 0;
-		
-		for (int i = 0; i < 18; i++)
-			for (int j = 0; j < 24; j++) {
-				xdiff = target.getx_pos()-(128+(j*32));
-				ydiff = target.gety_pos()-(12+(i*32));
-				scalar = (float) Math.sqrt((xdiff * xdiff) + (ydiff * ydiff));
-				vx = (float) ((xdiff/scalar));
-				vy = (float) ((ydiff/scalar));
-				if (lineOfSight(j ,i ,xdiff ,ydiff ,vx ,vy) && walls[i][j] == -1) {
-					if(scalar > highestScalar ) {
-						highestScalar = scalar;
-						optimumx_pos = j;
-						optimumy_pos = i;
+			for (int i = 0; i < 18; i++)
+				for (int j = 0; j < 24; j++) {
+					xdiff = target.getx_pos()-(128+(j*32));
+					ydiff = target.gety_pos()-(12+(i*32));
+					scalar = (float) Math.sqrt((xdiff * xdiff) + (ydiff * ydiff));
+					vx = (float) ((xdiff/scalar));
+					vy = (float) ((ydiff/scalar));
+					if (lineOfSight(j ,i ,xdiff ,ydiff ,vx ,vy) && walls[i][j] == -1) {
+						if(scalar > highestScalar ) {
+							highestScalar = scalar;
+							optimumx_pos = j;
+							optimumy_pos = i;
+						}
 					}
 				}
-			}
 			this.movements = calculatePath(optimumx_pos, optimumy_pos);
 		}
 		else {
@@ -132,7 +131,7 @@ public class GiantSpider extends Entity {
 		visited[start.getY()][start.getX()] = true; 
 		while (!path.isEmpty()) { 
 			gridPoint point = path.remove();
-			
+
 			// Path found; 
 			if (point.getX() == xfinal && point.getY() == yfinal) 
 				return point.getPath(); 
