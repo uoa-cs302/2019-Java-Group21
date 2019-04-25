@@ -140,8 +140,7 @@ public class Entity extends Sprite {
 	}
 
 	public void update() {
-		animate();
-		image();
+
 		setHitboxDirection();
 		if (slowed) {
 			if (slowedCounter == 0)
@@ -158,6 +157,8 @@ public class Entity extends Sprite {
 			this.attacking = true;
 			runAttack();
 		}
+		animate();
+		image();
 		x_pos += dx*speed;
 		Right = (int)x_pos + width;
 		y_pos += dy*speed;
