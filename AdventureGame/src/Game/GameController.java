@@ -95,8 +95,8 @@ public class GameController implements ActionListener {
 			addEntities();
 		if (pC.getInventory().droppedItemsSize() != 0) {
 			for (Item item : pC.getInventory().getDroppedItems()) {
-				item.setx_pos(pC.getx_pos());
-				item.sety_pos(pC.gety_pos());
+				item.setx_pos((int)pC.getx_pos());
+				item.sety_pos((int)pC.gety_pos());
 				item.getImageDim();
 				newEntities.add(item);
 			}
@@ -135,11 +135,17 @@ public class GameController implements ActionListener {
 
 	//checks collision of an Entity and a Sprite
 	public void checkCollision(Entity sp1,Entity sp2) {
-		if (sp1.getBounds().collisionWith(sp2.getBounds(),sp1.getdx(),sp1.getdy())) {
-			if (sp1 instanceof Projectile)
-				if (sp2 != ((Projectile) sp1).getParent())
+		if (sp1.getBounds().collisionWith(sp2.getBounds(),(int)sp1.getdx(),(int)sp1.getdy())) {
+			if (sp1 instanceof Projectile) {
+				if (sp2 != ((Projectile) sp1).getParent()) {
 					deletedEntities.add(sp1);
-			sp1.CollisionProcess(sp2.getBounds());
+					sp2.hitBy(sp1);
+					sp2.resetSlowedCounter();
+					sp2.setSlowed();
+				}
+			}
+			else
+				sp1.CollisionProcess(sp2.getBounds());
 		} 
 	}
 
@@ -159,7 +165,7 @@ public class GameController implements ActionListener {
 					}
 					else if (e1 instanceof Wall) {
 						Wall wall = (Wall) e1;
-						if(pC.getBounds().collisionWith(wall.getBounds(),pC.getdx(),pC.getdy()))
+						if(pC.getBounds().collisionWith(wall.getBounds(),(int)pC.getdx(),(int)pC.getdy()))
 							pC.CollisionProcess(wall.getBounds());
 					}
 					else if (e1 instanceof GiantRat) {
@@ -205,13 +211,8 @@ public class GameController implements ActionListener {
 					}
 					else if (e1 instanceof Projectile) {
 						Projectile projectile = (Projectile) e1;
-						if (pC.getHitBounds().collisionWith(projectile.getBounds())) {
-							System.out.println("collided with = " + e1);
-							if (pC.canAttack())
-								deletedEntities.add(projectile);
-						}
-						if(pC.getBounds().collisionWith(projectile.getHitBounds()))
-							pC.hitBy(projectile);
+						if (pC.getHitBounds().collisionWith(projectile.getBounds()) && pC.canAttack())
+							deletedEntities.add(projectile);
 					}
 				}
 			}

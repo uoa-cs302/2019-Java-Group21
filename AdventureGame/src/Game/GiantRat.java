@@ -26,9 +26,9 @@ public class GiantRat extends Entity {
 		health = 4;
 
 		//initital base intialisation
-		Bounds = new Collision(this.x_pos,this.y_pos,this.width,this.height/2);
+		Bounds = new Collision((int)this.x_pos,(int)this.y_pos,this.width,this.height/2);
 		Bounds.setyOff(16);
-		Hitbounds = new Collision(this.x_pos,this.y_pos +(this.height/2),this.width,this.height );
+		Hitbounds = new Collision((int)this.x_pos,(int)this.y_pos +(this.height/2),this.width,this.height );
 
 	}
 	public void update(Entity target) {
@@ -59,8 +59,8 @@ public class GiantRat extends Entity {
 	public void CollisionProcess(Collision b) {
 		dx = 0;
 		dy = 0;
-		dx_lock = dx;
-		dy_lock = dy;
+		dx_lock = (int)dx;
+		dy_lock = (int)dy;
 	}
 
 	public void AiUpdate(Entity target) {
@@ -69,9 +69,9 @@ public class GiantRat extends Entity {
 			dy = 0;
 		}	
 		else {
-			int xdiff = target.getx_pos() - this.x_pos;
-			int ydiff = target.gety_pos() - this.y_pos;
-			int distance = (int) Math.hypot((double) xdiff/32,(double) ydiff/32);
+			float xdiff = target.getx_pos() - this.x_pos;
+			float ydiff = target.gety_pos() - this.y_pos;
+			float distance = (int) Math.hypot((double) xdiff/32,(double) ydiff/32);
 			if(count>=200||count == 0) {
 				if(ydiff>0 ) {
 					direction = Direction.DOWN;
@@ -99,8 +99,8 @@ public class GiantRat extends Entity {
 				count = 0;
 				dx = dx*3;
 				dy = dy*3;
-				dx_lock = dx;
-				dy_lock = dy;
+				dx_lock = (int)dx;
+				dy_lock = (int)dy;
 
 			}
 			else if(charging && count <80) {

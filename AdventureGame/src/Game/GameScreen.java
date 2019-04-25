@@ -50,7 +50,7 @@ public class GameScreen extends JPanel {
 		for (Sprite sprite : sprites) {
 			
 				if(sprite.isVisible() && sprite.getImage() != null) {
-					g2d.drawImage(sprite.getImage(), sprite.getx_pos(), sprite.gety_pos(),this);
+					g2d.drawImage(sprite.getImage(), (int)sprite.getx_pos(), (int)sprite.gety_pos(),this);
 				}
 				if(sprite instanceof Entity) {
 					Entity x = (Entity) sprite;

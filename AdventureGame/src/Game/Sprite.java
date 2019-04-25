@@ -16,8 +16,8 @@ public class Sprite {
 		UP, DOWN, LEFT, RIGHT, IDLE
 	};
 
-	protected int x_pos;
-	protected int y_pos;
+	protected float x_pos;
+	protected float y_pos;
 	protected int width;//make sure all these have getters
 	protected int height;
 	protected int Right;
@@ -28,7 +28,7 @@ public class Sprite {
 	protected List<BufferedImage> images;
 	private BufferedImage image;
 
-	public Sprite(int x, int y) {
+	public Sprite(float x, float y) {
 		this.x_pos = x;
 		this.y_pos = y;
 		visible = true;
@@ -62,11 +62,11 @@ public class Sprite {
 	void getImageDim() {
 		width = 32;
 		height = 32;
-		Right = x_pos + width;
-		Bottom = y_pos + height;
+		Right = (int)x_pos + width;
+		Bottom = (int)y_pos + height;
 	}
 
-	public int getx_pos() {
+	public float getx_pos() {
 		return x_pos;
 	}
 
@@ -74,7 +74,7 @@ public class Sprite {
 		this.x_pos = x_pos;
 	}
 
-	public int gety_pos() {
+	public float gety_pos() {
 		return y_pos;
 	}
 
@@ -100,5 +100,13 @@ public class Sprite {
 
 	public int getID() {
 		return ID;
+	}
+	
+	public int getGridXPosition() {
+		return (int)(x_pos-128)/32;
+	}
+	
+	public int getGridYPosition() {
+		return (int)(y_pos-12)/32;
 	}
 }
