@@ -56,11 +56,22 @@ public class GameController implements ActionListener {
 		gameView.addKeyListener(new KeyAdapter() {
 
 			public void keyReleased(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_T) {
+					timer.stop();
+					gameView.getGameScreen().drawMessage("block");
+				} else
+				if (!gameView.getMessage().isVisible()) {
 				pC.keyReleased(e);
+				} else {
+					timer.restart();
+					gameView.HideMessage();
+				}
 			}
 
 			public void keyPressed(KeyEvent e){
+				if (!gameView.getMessage().isVisible()) {
 				pC.keyPressed(e);
+				}
 			}
 		});
 	}
