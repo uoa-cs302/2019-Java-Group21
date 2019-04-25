@@ -1,6 +1,7 @@
 package Game;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -13,28 +14,31 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 public class GameScreen extends JPanel {
 	//sprite can be changed into ArrayList or other later
 	private List<Sprite> sprites;
+	private ImageIcon ii = new ImageIcon();
 	private Inventory inventory;
 	@SuppressWarnings("unused")
 	private KeyAdapter key;
 	private FocusListener f;
 	private JTextField message = new JTextField();
-	
 	public GameScreen() {
 		Color color = new Color(47,47,48);
 		setBackground(color);
 		setLayout(null);
 		this.add(message);
-		message.setBackground(Color.WHITE);
+		message.setBackground(Color.BLACK);
 		message.setVisible(false);
 		message.setEditable(false);
 		message.setBounds(0, 100, 400, 40);
+		message.setFont(new Font("Helvetica",Font.BOLD,16));
 			
 		
 		
@@ -74,6 +78,7 @@ public class GameScreen extends JPanel {
 					g2d.drawRect(rat.getHitBounds().getX() + (int) rat.getHitBounds().getxOff(),(int) rat.getHitBounds().getY()+ (int)rat.getHitBounds().getyOff(), (int)rat.getHitBounds().getwidth(),(int) rat.getHitBounds().getheight());
 				}
 			}
+	
 		}
 		if(inventory != null) {
 			g2d.drawImage(inventory.getImage(), 128, 600, this);

@@ -66,7 +66,10 @@ public class Image {
 		sword0 = loadSpecificImage("src/Image/swrd0.png");
 		sword1 = loadSpecificImage("src/Image/swrd1.png");
 		setPlayer(getSprites("src/Image/ExampleCharacter.png",4,3));
-		player.addAll(getSprites("src/Image/hitsheet.png",2,5));
+		player.addAll(getSprites("src/Image/SLASHLEFT.png",1,5));
+		player.addAll(getSprites("src/Image/SLASHRIGHT.png",1,5));
+		player.addAll(getSprites("src/Image/SLASHUP.png",5,1));
+		player.addAll(getSprites("src/Image/SLASHDOWN.png",5,1));
 		System.out.println("trying to load character");
 		LoadSprites("src/Image/dungeon0.png");
 		System.out.println("read all sprites success!");

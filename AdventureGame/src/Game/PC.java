@@ -24,7 +24,7 @@ public class PC extends Entity {
 		this.damage = 1;
 		inventory = new Inventory();
 		this.ani.setFrames(this.getImages().subList(0, 3));
-		this.slash.setFrames(this.getImages().subList(12, 21));
+		this.slash.setFrames(this.getImages().subList(26, 31));
 		this.slash.setDelay(-1);
 		this.slash.setFrame(0);
 		this.ani.setFrame(1);
@@ -44,8 +44,10 @@ public class PC extends Entity {
 	public void animate() {
 		switch (this.direction) {
 		case UP:
+			this.slash.setFrames(this.getImages().subList(22, 27));
 			if(attacking) {
-				slash.setDelay(3);
+				
+				slash.setDelay(6);
 			} else {slash.setDelay(-1);}
 			if (curAnim != Direction.UP || ani.getDelay() == -1) {
 				System.out.println("loading up animation");
@@ -53,8 +55,10 @@ public class PC extends Entity {
 			}
 			break;
 		case DOWN:
+			this.slash.setFrames(this.getImages().subList(27, 32));
 			if(attacking) {
-				slash.setDelay(3);
+				
+				slash.setDelay(6);
 			}else {slash.setDelay(-1);}
 			if (curAnim != Direction.DOWN || ani.getDelay() == -1) {
 
@@ -62,16 +66,20 @@ public class PC extends Entity {
 			}
 			break;
 		case LEFT:
+			this.slash.setFrames(this.getImages().subList(12, 17));
 			if(attacking) {
-				slash.setDelay(3);
+			
+				slash.setDelay(6);
 			}else {slash.setDelay(-1);}
 			if (curAnim != Direction.LEFT || ani.getDelay() == -1) {
 				setAnimation(Direction.LEFT,this.getFromImages(3, 5),15);
 			}
 			break;
 		case RIGHT:
+			this.slash.setFrames(this.getImages().subList(17,22 ));
 			if(attacking) {
-				slash.setDelay(3);
+				
+				slash.setDelay(6);
 			}else {slash.setDelay(-1);}
 			if (curAnim != Direction.RIGHT || ani.getDelay() == -1) {
 				setAnimation(Direction.RIGHT,this.getFromImages(6, 8),15);
@@ -79,7 +87,7 @@ public class PC extends Entity {
 			break;
 		case IDLE:
 			if(attacking) {
-				slash.setDelay(3);
+				slash.setDelay(6);
 			}
 			setAnimation(curAnim,ani.getframes(),-1);
 
@@ -97,18 +105,25 @@ public class PC extends Entity {
 	public void move() {
 		if(up) {
 			dy = -2;
+			direction = Direction.UP;
 		}else {
 			if (dy < 0) {dy =0;}
-		}if(left) {
-			dx = -2;
-		}else {
-			if (dx < 0) {dx =0;}
 		}if(down) {
 			dy = 2;
+			direction = Direction.DOWN;
 		}else {
 			if (dy > 0) { dy =0;}
-		}if(right) {
+		}
+		if(left) {
+			dx = -2;
+			direction = Direction.LEFT;
+		}else {
+			if (dx < 0) {dx =0;}
+		}
+		
+		if(right) {
 			dx = 2;
+			direction = Direction.RIGHT;
 		}else {
 			if (dx > 0) {dx =0;}
 		}
@@ -190,9 +205,7 @@ public class PC extends Entity {
 
 		if (key == KeyEvent.VK_UP) {
 			setItemPickUp(false);
-		}
-	
-		
+		}	
 	}
 	public void setCollided(boolean a) {
 		collision = a;
