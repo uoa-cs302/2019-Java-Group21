@@ -57,7 +57,9 @@ public class GiantSpider extends Entity {
 			Attack = true; 
 		super.update();
 
-		float highestScalar = 0;
+		
+
+		if (movements.size() == 0) {float highestScalar = 0;
 		int optimumx_pos = 0;
 		int optimumy_pos = 0;
 		
@@ -76,9 +78,8 @@ public class GiantSpider extends Entity {
 					}
 				}
 			}
-
-		if (movements.size() == 0)
 			this.movements = calculatePath(optimumx_pos, optimumy_pos);
+		}
 		else {
 			this.dx = (float) movements.get(0).getX();
 			this.dy = (float) movements.get(0).getY();
