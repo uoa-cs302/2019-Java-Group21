@@ -18,18 +18,14 @@ public class PressurePlate extends Entity {
 			//setanimation/frame to not pressed
 		}
 	}
-	public void CollisionProcess(Collision b) {
-		if (enabled == false) {
-			Toggle();
-		}
-	}
+
 	
 	public boolean isEnabled() {
 		return enabled;
 	}
 
-	public void Toggle() {
-		this.enabled = !enabled;
+	public void setEnabled(boolean b) {
+		this.enabled = b;
 	}
 
 	public int getPadNumber() {

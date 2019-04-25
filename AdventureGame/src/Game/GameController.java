@@ -23,6 +23,8 @@ public class GameController implements ActionListener {
 	private GameView gameView;
 	private GameModel gameModel;
 	private Graphics g;
+	private int game_time = 0;
+	private int gamecount = 0;
 
 	private List<Sprite> sprites;
 	private List<Entity> deletedEntities = new ArrayList<Entity>();
@@ -100,6 +102,8 @@ public class GameController implements ActionListener {
 	//method runs when timer ticks
 	//should include update, and draw.
 	public void actionPerformed(ActionEvent e) {
+		this.gamecount++;
+		if (gamecount == 100) { gamecount = 0; this.game_time ++; }
 		if (deletedEntities.size() != 0)
 			deleteEntities();
 		if (newEntities.size() != 0)
