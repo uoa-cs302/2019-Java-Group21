@@ -278,6 +278,7 @@ public class Entity extends Sprite {
 		 this.visible = false;
 		 this.setCollidable(false);
 	 }
+	 if (this instanceof GiantRat )
 	 switch (e.getDirection()){
 	 case DOWN:
 		 this.y_pos += 32;

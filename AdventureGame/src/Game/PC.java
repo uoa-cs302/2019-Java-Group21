@@ -24,7 +24,7 @@ public class PC extends Entity {
 		this.damage = 1;
 		inventory = new Inventory();
 		this.ani.setFrames(this.getImages().subList(0, 3));
-		this.slash.setFrames(this.getImages().subList(26, 31));
+		this.slash.setFrames(this.getImages().subList(27, 32));
 		this.slash.setDelay(-1);
 		this.slash.setFrame(0);
 		this.ani.setFrame(1);
@@ -44,56 +44,66 @@ public class PC extends Entity {
 	public void animate() {
 		switch (this.direction) {
 		case UP:
-			this.slash.setFrames(this.getImages().subList(22, 27));
-			if(attacking) {
-				
-				slash.setDelay(6);
-			} else {slash.setDelay(-1);}
+			
 			if (curAnim != Direction.UP || ani.getDelay() == -1) {
 				System.out.println("loading up animation");
 				setAnimation(Direction.UP,this.getFromImages(9, 11),15);
+				this.slash.setFrames(this.getImages().subList(22, 27));
+		
 			}
+			if(attacking) {
+				if (attacking && !slash.PlayedOnce()) {slash.setDelay(7);}
+				else { this.slash.setFrames(this.getImages().subList(22, 27)); slash.setDelay(-1);}
+			} else {slash.setDelay(-1); slash.setFrame(0); }
 			break;
 		case DOWN:
-			this.slash.setFrames(this.getImages().subList(27, 32));
-			if(attacking) {
-				
-				slash.setDelay(6);
-			}else {slash.setDelay(-1);}
+			
 			if (curAnim != Direction.DOWN || ani.getDelay() == -1) {
 
 				setAnimation(Direction.DOWN,this.getFromImages(0, 2),15);
+				this.slash.setFrames(this.getImages().subList(27, 32));
+				this.slash.setDelay(-1);
 			}
+
+			if (attacking && !slash.PlayedOnce()) {slash.setDelay(7);}	
+		else {slash.setDelay(-1); slash.setFrame(0);}
 			break;
 		case LEFT:
-			this.slash.setFrames(this.getImages().subList(12, 17));
-			if(attacking) {
 			
-				slash.setDelay(6);
-			}else {slash.setDelay(-1);}
+			
 			if (curAnim != Direction.LEFT || ani.getDelay() == -1) {
 				setAnimation(Direction.LEFT,this.getFromImages(3, 5),15);
+				this.slash.setFrames(this.getImages().subList(12, 17));
+				this.slash.setDelay(-1);
 			}
+			if (attacking && !slash.PlayedOnce()) {slash.setDelay(7);}	
+			else {slash.setDelay(-1); slash.setFrame(0);}
 			break;
 		case RIGHT:
-			this.slash.setFrames(this.getImages().subList(17,22 ));
-			if(attacking) {
+			
 				
-				slash.setDelay(6);
-			}else {slash.setDelay(-1);}
 			if (curAnim != Direction.RIGHT || ani.getDelay() == -1) {
 				setAnimation(Direction.RIGHT,this.getFromImages(6, 8),15);
+				this.slash.setFrames(this.getImages().subList(17,22 ));
+				this.slash.setDelay(-1);
+			
 			}
+			if (attacking && !slash.PlayedOnce()) {slash.setDelay(7);}	
+			else {slash.setDelay(-1); slash.setFrame(0);}
 			break;
 		case IDLE:
-			if(attacking) {
-				slash.setDelay(6);
-			}
+			if (ani.getDelay() == -1) {
+			slash.setFrames(slash.getframes());
+			this.slash.setDelay(-1);}
+			if (attacking ) {slash.setDelay(7);}			
 			setAnimation(curAnim,ani.getframes(),-1);
 
 			break;
-		}
+	
 	}
+}
+	
+	
 	public void image() {
 		this.ani.update();
 		this.slash.update();
@@ -182,7 +192,9 @@ public class PC extends Entity {
 			inventory.addItem(sword);
 		}
 		if(key == KeyEvent.VK_SPACE) {
+			if (this.Attack == false) {
 			this.Attack = true;
+			}
 
 		}
 		

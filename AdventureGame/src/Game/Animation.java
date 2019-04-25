@@ -48,7 +48,7 @@ public class Animation {
 			timesPlayed++;
 		}
 		
-		
+	
 	}
 	
 	public int getDelay() {return DELAY;}
