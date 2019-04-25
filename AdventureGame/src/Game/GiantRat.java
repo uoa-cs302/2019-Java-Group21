@@ -64,6 +64,7 @@ public class GiantRat extends Entity {
 	}
 
 	public void AiUpdate(Entity target) {
+		Attack =true;
 		if (target == null) {
 			dx = 0;
 			dy = 0;
@@ -114,10 +115,6 @@ public class GiantRat extends Entity {
 			else if (charging && count == 600) {
 				charging = false;
 				count = 0;
-			}
-
-			if(distance < 2) {
-				Attack = true;
 			}
 		}
 	}

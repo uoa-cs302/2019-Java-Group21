@@ -49,7 +49,7 @@ public class PC extends Entity {
 				System.out.println("loading up animation");
 				setAnimation(Direction.UP,this.getFromImages(9, 11),15);
 			}
-			if (curAnim == Direction.UP ||slash.getDelay() == -1) {
+			if (curAnim != Direction.UP ||slash.getDelay() == -1) {
 				this.slash.setFrames(this.getImages().subList(22, 27));
 			}
 				if (attacking && !slash.PlayedOnce()) {slash.setDelay(7);}
@@ -62,7 +62,7 @@ public class PC extends Entity {
 				setAnimation(Direction.DOWN,this.getFromImages(0, 2),15);
 	
 			}
-			if (curAnim == Direction.DOWN ||slash.getDelay()==-1) {
+			if (curAnim != Direction.DOWN ||slash.getDelay()==-1) {
 				this.slash.setFrames(this.getImages().subList(27, 32));
 			}
 
@@ -76,7 +76,7 @@ public class PC extends Entity {
 				setAnimation(Direction.LEFT,this.getFromImages(3, 5),15);
 
 			}
-			if (curAnim == Direction.LEFT ||slash.getDelay()==-1) {
+			if (curAnim != Direction.LEFT ||slash.getDelay()==-1) {
 				this.slash.setFrames(this.getImages().subList(12, 17));
 			}
 			if (attacking && !slash.PlayedOnce()) {slash.setDelay(7);}	
@@ -88,7 +88,7 @@ public class PC extends Entity {
 			if (curAnim != Direction.RIGHT || ani.getDelay() == -1) {
 				setAnimation(Direction.RIGHT,this.getFromImages(6, 8),15);			
 			}
-			if (curAnim == Direction.RIGHT ||slash.getDelay()==-1) {
+			if (curAnim != Direction.RIGHT ||slash.getDelay()==-1) {
 				this.slash.setFrames(this.getImages().subList(17,22 ));	
 			}
 			if (attacking && !slash.PlayedOnce()) {slash.setDelay(7);}	
