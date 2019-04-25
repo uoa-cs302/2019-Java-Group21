@@ -31,10 +31,10 @@ public class Dungeon {
 	private static final int RoomTwoLeftDoorSpawnX = 208;
 	private static final int RoomTwoLeftDoorSpawnY = 76;
 
-	private static final int RoomTwoRightDoorX = 864;
+	private static final int RoomTwoRightDoorX = 862;
 	private static final int RoomTwoRightDoorY = 244;
 
-	private static final int RoomTwoRightDoorSpawnX = 830;
+	private static final int RoomTwoRightDoorSpawnX = 828;
 	private static final int RoomTwoRightDoorSpawnY = 244;
 
 	// Left Room One
@@ -84,42 +84,42 @@ public class Dungeon {
 	private static final int RoomSkeletonDoorSpawnY = 452;
 
 	// Right Room One
-	private static final int RightRoomOneLeftDoorX = 160;
+	private static final int RightRoomOneLeftDoorX = 162;
 	private static final int RightRoomOneLeftDoorY = 444;
 
-	private static final int RightRoomOneLeftDoorSpawnX = 194;
+	private static final int RightRoomOneLeftDoorSpawnX = 196;
 	private static final int RightRoomOneLeftDoorSpawnY = 444;
 
-	private static final int RightRoomOneRightDoorX = 704;
+	private static final int RightRoomOneRightDoorX = 702;
 	private static final int RightRoomOneRightDoorY = 444;
 
-	private static final int RightRoomOneRightDoorSpawnX = 670;
+	private static final int RightRoomOneRightDoorSpawnX = 668;
 	private static final int RightRoomOneRightDoorSpawnY = 444;
 
 	// Right Room Two
-	private static final int RightRoomTwoLeftDoorX = 128;
+	private static final int RightRoomTwoLeftDoorX = 130;
 	private static final int RightRoomTwoLeftDoorY = 156;
 
-	private static final int RightRoomTwoLeftDoorSpawnX = 162;
+	private static final int RightRoomTwoLeftDoorSpawnX = 164;
 	private static final int RightRoomTwoLeftDoorSpawnY = 156;
 
-	private static final int RightRoomTwoRightDoorX = 864;
+	private static final int RightRoomTwoRightDoorX = 862;
 	private static final int RightRoomTwoRightDoorY = 444;
 
-	private static final int RightRoomTwoRightDoorSpawnX = 830;
+	private static final int RightRoomTwoRightDoorSpawnX = 828;
 	private static final int RightRoomTwoRightDoorSpawnY = 444;
 
 	// Right Room Three
-	private static final int RightRoomThreeLeftDoorX = 128;
-	private static final int RightRoomThreeLeftDoorY = 268;
+	private static final int RightRoomThreeLeftDoorX = 130;
+	private static final int RightRoomThreeLeftDoorY = 276;
 
-	private static final int RightRoomThreeLeftDoorSpawnX = 162;
-	private static final int RightRoomThreeLeftDoorSpawnY = 268;
+	private static final int RightRoomThreeLeftDoorSpawnX = 164;
+	private static final int RightRoomThreeLeftDoorSpawnY = 276;
 
-	private static final int RightRoomThreeRightDoorX = 864;
+	private static final int RightRoomThreeRightDoorX = 862;
 	private static final int RightRoomThreeRightDoorY = 276;
 
-	private static final int RightRoomThreeRightDoorSpawnX = 830;
+	private static final int RightRoomThreeRightDoorSpawnX = 828;
 	private static final int RightRoomThreeRightDoorSpawnY = 276;
 
 	// Skeleton Room
@@ -217,7 +217,10 @@ public class Dungeon {
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
 		};
-		tutorial.createLevel(floor, wall, decor, 128, 12, assets);
+		tutorial.setFloorGrid(floor);
+		tutorial.setWallGrid(wall);
+		tutorial.setDecorGrid(decor);
+		tutorial.createLevel(128, 12, assets);
 		Door door = new Door(864,700);
 		door.setSpawnX(496);
 		door.setSpawnY(516);
@@ -293,7 +296,10 @@ public class Dungeon {
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
 		};
-		well.createLevel(floor, wall, decor, 128, 12, assets);
+		well.setFloorGrid(floor);
+		well.setWallGrid(wall);
+		well.setDecorGrid(decor);
+		well.createLevel(128, 12, assets);
 		Door door = new Door(RoomWellTopDoorX, RoomWellTopDoorY);
 		door.setSpawnX(RoomTwoBottomDoorSpawnX);
 		door.setSpawnY(RoomTwoBottomDoorSpawnY);
@@ -364,10 +370,14 @@ public class Dungeon {
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,36,36,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
 		};
-		room1.createLevel(floor, wall, decor, 128, 12, assets);
+		room1.setFloorGrid(floor);
+		room1.setWallGrid(wall);
+		room1.setDecorGrid(decor);
+		room1.createLevel(128, 12, assets);
 		//GiantRat rat1 = new GiantRat(240, 300);
 		//room1.addToRoom(rat1);
 		GiantSpider spider = new GiantSpider(300, 400, assets.getSpider());
+		spider.setWalls(wall);
 		room1.addToRoom(spider);
 		Door door = new Door(RoomTwoBottomDoorX, RoomTwoBottomDoorY);
 		door.setSpawnX(RoomWellTopDoorSpawnX);
@@ -861,7 +871,10 @@ public class Dungeon {
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,36,36,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
 		};
-		room.createLevel(floor, wall, decor, 128, 12, assets);
+		room.setFloorGrid(floor);
+		room.setWallGrid(wall);
+		room.setDecorGrid(decor);
+		room.createLevel(128, 12, assets);
 		//GiantSpider spider1 = new GiantSpider(300, 400);
 		//room.addEntityList(spider1);
 	}
@@ -927,7 +940,10 @@ public class Dungeon {
 				{-1,-1,-1,36,36,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
 		};
-		room.createLevel(floor, wall, decor, 128, 12, assets);
+		room.setFloorGrid(floor);
+		room.setWallGrid(wall);
+		room.setDecorGrid(decor);
+		room.createLevel(128, 12, assets);
 		//GiantRat rat1 = new GiantRat(240, 300);
 		//room.addEntityList(rat1);
 		//GiantSpider spider1 = new GiantSpider(300, 400);
@@ -995,7 +1011,10 @@ public class Dungeon {
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,36,36,-1,-1,-1,-1},
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
 		};
-		room.createLevel(floor, wall, decor, 128, 12, assets);
+		room.setFloorGrid(floor);
+		room.setWallGrid(wall);
+		room.setDecorGrid(decor);
+		room.createLevel(128, 12, assets);
 		//GiantRat rat1 = new GiantRat(240, 300);
 		//room.addEntityList(rat1);
 		//GiantRat rat2 = new GiantRat(240, 300);
@@ -1066,7 +1085,10 @@ public class Dungeon {
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
 		};
-		roomSkeleton.createLevel(floor, wall, decor, 128, 12, assets);
+		roomSkeleton.setFloorGrid(floor);
+		roomSkeleton.setWallGrid(wall);
+		roomSkeleton.setDecorGrid(decor);
+		roomSkeleton.createLevel(128, 12, assets);
 		//Skeleton skeleton = new Skeleton(300, 300);
 		//roomSkeleton.addToRoom(skeleton);
 		rooms.set(4 + difficulty, roomSkeleton);
@@ -1481,12 +1503,12 @@ public class Dungeon {
 				door4.setSpawnX(RightRoomTwoRightDoorSpawnX);
 				door4.setSpawnY(RightRoomTwoRightDoorSpawnY);
 				door4.setRoom(8);
-				rightRoomTwo.addToRoom(door4);
+				rightRoomThree.addToRoom(door4);
 				Door door5 = new Door(RightRoomOneRightDoorX, RightRoomOneRightDoorY);
 				door5.setSpawnX(RoomPuzzleDoorSpawnX);
 				door5.setSpawnY(RoomPuzzleDoorSpawnY);
 				door5.setRoom(10);
-				rightRoomTwo.addToRoom(door5);
+				rightRoomThree.addToRoom(door5);
 			}
 			rooms.set(7, rightRoomOne);
 			rooms.set(8, rightRoomTwo);
@@ -1555,7 +1577,10 @@ public class Dungeon {
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,36,36,36,36,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
 		};
-		room.createLevel(floor, wall, decor, 128, 12, assets);
+		room.setFloorGrid(floor);
+		room.setWallGrid(wall);
+		room.setDecorGrid(decor);
+		room.createLevel(128, 12, assets);
 		//GiantRat rat1 = new GiantRat(240, 300);
 		//room.addEntityList(rat1);
 		//GiantRat rat2 = new GiantRat(240, 300);
@@ -1625,7 +1650,10 @@ public class Dungeon {
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
 		};
-		room.createLevel(floor, wall, decor, 128, 12, assets);
+		room.setFloorGrid(floor);
+		room.setWallGrid(wall);
+		room.setDecorGrid(decor);
+		room.createLevel(128, 12, assets);
 		//GiantSpider spider1 = new GiantSpider(300, 400);
 		//room.addEntityList(spider1);
 		//GiantSpider spider2 = new GiantSpider(300, 400);
@@ -1695,7 +1723,10 @@ public class Dungeon {
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
 		};
-		room.createLevel(floor, wall, decor, 128, 12, assets);
+		room.setFloorGrid(floor);
+		room.setWallGrid(wall);
+		room.setDecorGrid(decor);
+		room.createLevel(128, 12, assets);
 		//GiantRat rat1 = new GiantRat(240, 300);
 		//room.addEntityList(rat1);
 		//GiantRat rat2 = new GiantRat(240, 300);
@@ -1766,7 +1797,10 @@ public class Dungeon {
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
 		};
-		roomPuzzle.createLevel(floor, wall, decor, 128, 12, assets);
+		roomPuzzle.setFloorGrid(floor);
+		roomPuzzle.setWallGrid(wall);
+		roomPuzzle.setDecorGrid(decor);
+		roomPuzzle.createLevel(128, 12, assets);
 		rooms.set(6 + (2*difficulty), roomPuzzle);
 	}
 

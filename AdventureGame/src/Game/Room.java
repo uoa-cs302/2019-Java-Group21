@@ -8,9 +8,12 @@ public class Room {
 	private int roomNumber;
 	private List<Entity> entityList= new ArrayList<Entity>();
 	private List<Sprite> spriteList= new ArrayList<Sprite>();
-	Sprite[][] floors;
-	Wall[][] walls;
-	Sprite[][] decor;
+	private Sprite[][] floors;
+	private Wall[][] walls;
+	private Sprite[][] decor;
+	private int[][] floorGrid;
+	private int[][] wallGrid;
+	private int[][] decorGrid;
 
 	public Room(int number) {
 		this.roomNumber = number;
@@ -23,27 +26,30 @@ public class Room {
 		return floors;
 	}
 
+	
+
 	public void setFloor(Sprite[][] floor) {
 		this.floors = floor;
 	}
 
-	public void createLevel(int[][] floor, int[][] wall, int[][] decor, int x, int y, Image assets) {
+	public void createLevel(int x, int y, Image assets) {
 		int k=0;
 		for(int i = 0; i < 18; i++) {
 			for(int j = 0; j < 24; j++) {
-				if (floor[i][j] != -1) {
+				if (floorGrid[i][j] != -1) {
 					this.floors[i][j]= new Sprite((32*j)+x, (32*i)+y);
-					this.floors[i][j].setImage(assets.getFromList(floor[i][j]));
+					this.floors[i][j].setImage(assets.getFromList(floorGrid[i][j]));
 					addSpriteList(floors[i][j]);
 				}
-				if (wall[i][j] != -1) {
+				if (wallGrid[i][j] != -1) {
 					this.walls[i][j]= new Wall((32*j)+x, (32*i)+y);
-					this.walls[i][j].setImage(assets.getFromList(wall[i][j]));
+					this.walls[i][j].setUpWall(wallGrid[i][j]);
+					this.walls[i][j].setImage(assets.getFromList(wallGrid[i][j]));
 					addToRoom(walls[i][j]);
 				}
-				if (decor[i][j] != -1) {
+				if (decorGrid[i][j] != -1) {
 					this.decor[i][j]= new Sprite((32*j)+x, (32*i)+y);
-					this.decor[i][j].setImage(assets.getFromList(decor[i][j]));
+					this.decor[i][j].setImage(assets.getFromList(decorGrid[i][j]));
 					addSpriteList(this.decor[i][j]);
 				}
 			}
@@ -83,4 +89,27 @@ public class Room {
 		return roomNumber;
 	}
 
+	public int[][] getFloorGrid() {
+		return floorGrid;
+	}
+
+	public void setFloorGrid(int[][] floorGrid) {
+		this.floorGrid = floorGrid;
+	}
+
+	public int[][] getWallGrid() {
+		return wallGrid;
+	}
+
+	public void setWallGrid(int[][] wallGrid) {
+		this.wallGrid = wallGrid;
+	}
+
+	public int[][] getDecorGrid() {
+		return decorGrid;
+	}
+
+	public void setDecorGrid(int[][] decorGrid) {
+		this.decorGrid = decorGrid;
+	}
 }

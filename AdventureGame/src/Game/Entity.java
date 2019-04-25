@@ -15,8 +15,8 @@ public class Entity extends Sprite {
 
 
 	protected Direction direction = Direction.IDLE;
-	protected int dx;
-	protected int dy;
+	protected float dx;
+	protected float dy;
 	private boolean collidable = false;
 	protected int size;
 	private int attackCount = 0;
@@ -35,11 +35,15 @@ public class Entity extends Sprite {
 	protected boolean down = false;
 	protected boolean left = false;
 	protected boolean right = false;
+	protected double speed = 1;
 
 	protected boolean Attack;
 	protected boolean attacking;
 	protected int AttackSpeed;
 	protected int AttackDuration = 30;
+	
+	protected boolean slowed = false;
+	protected int slowedCounter;
 	
 	protected int health;
 
@@ -58,7 +62,7 @@ public class Entity extends Sprite {
 	 * EntityID Values are initialized on the subclass construction 
 
 	 */
-	public Entity(int x,int y){
+	public Entity(float x,float y){
 		super(x,y);
 		setCollidable(true);
 		ani = new Animation();
@@ -70,12 +74,12 @@ public class Entity extends Sprite {
 
 	public boolean getattacking() {return this.attacking;}
 	public int getEntityID() {return this.EntityID;}
-	public int getdy() {return dy;}
-	public int getdx() {return dx;}
+	public float getdy() {return dy;}
+	public float getdx() {return dx;}
 	public int getsize() {return size;}
 	public void setsize(int s) {this.size = s;}
-	public void setdy(int dy) {this.dy = dy;}
-	public void setdx(int dx) {this.dx = dx;}	
+	public void setdy(float dy) {this.dy = dy;}
+	public void setdx(float dx) {this.dx = dx;}	
 	public int getHealth() {return health;}
 	public int getDamage() {return damage;}
 	public Direction getDirection() {return direction;}
@@ -87,7 +91,7 @@ public class Entity extends Sprite {
 	public boolean canAttack() {if (Attack && attackCount == 0) {return true;}else{return false;}}
 
 	//may be obselete
-	public Rectangle getBoundary() {return new Rectangle(x_pos, y_pos, width, height);}
+	public Rectangle getBoundary() {return new Rectangle((int)x_pos, (int)y_pos, width, height);}
 
 	public void setAnimation(Direction i,List<BufferedImage> frames, int delay) {
 		curAnim = i;
@@ -108,7 +112,6 @@ public class Entity extends Sprite {
 				
 			}
 			if (curAnim != Direction.UP || ani.getDelay() == -1) {
-				System.out.println("loading up animation");
 				setAnimation(Direction.UP,this.getFromImages(9, 11),15);
 			}
 			break;
@@ -137,21 +140,30 @@ public class Entity extends Sprite {
 	}
 
 	public void update() {
-		if (this instanceof GiantSpider)
-			System.out.println("updating entity");
 		animate();
 		image();
 		setHitboxDirection();
+		if (slowed) {
+			if (slowedCounter == 0)
+				speed = 0.25;
+			if (slowedCounter < 100)
+				slowedCounter++;
+			else {
+				slowed = false;
+				slowedCounter = 0;
+				speed = 1;
+			}
+		}
 		if(Attack || attackCount != 0) {
 			this.attacking = true;
 			runAttack();
 		}
-		x_pos += dx;
-		Right = x_pos + width;
-		y_pos += dy;
-		Bottom = y_pos + height;
-		Bounds.setBox(this.x_pos, this.y_pos, (int)Bounds.getwidth(),(int) Bounds.getheight());
-		Hitbounds.setBox(this.x_pos, this.y_pos, (int) Hitbounds.getwidth(),(int) Hitbounds.getheight());
+		x_pos += dx*speed;
+		Right = (int)x_pos + width;
+		y_pos += dy*speed;
+		Bottom = (int)y_pos + height;
+		Bounds.setBox((int)this.x_pos, (int)this.y_pos, (int)Bounds.getwidth(), (int)Bounds.getheight());
+		Hitbounds.setBox((int)this.x_pos, (int)this.y_pos, (int)Hitbounds.getwidth(), (int)Hitbounds.getheight());
 	}
 
 	public void setAttack(boolean b) {Attack = b;}
@@ -326,5 +338,13 @@ public class Entity extends Sprite {
 	
 	public Entity getTarget() {
 		return this.target;
+	}
+	
+	public void setSlowed() {
+		this.slowed = true;
+	}
+	
+	public void resetSlowedCounter() {
+		this.slowedCounter = 0;
 	}
 }
