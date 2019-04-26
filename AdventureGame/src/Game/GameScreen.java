@@ -30,33 +30,19 @@ public class GameScreen extends JPanel {
 	private KeyAdapter key;
 	private FocusListener f;
 	private JLabel message = new JLabel();
-	/*private JPanel pauseMenu = new JPanel(); {
-		 int sel = 0;
-		this.setBackground(Color.BLACK);
-		this.setVisible(false);
-		this.setLayout(null);
-		this.setBounds(412, 284,200, 200);
-		JLabel Resume = new JLabel();
-		JLabel Quit = new JLabel();
-		Resume.setVisible(true);
-		Quit.setVisible(true);
-		
-		Resume.setText("Resume");
-		Quit.setText("Quit");
-		Resume.setFont(new Font("Helvetica",Font.BOLD,12));
-		Quit.setFont(new Font("Helvetica",Font.BOLD,12));
-		
-	}*/
+	private PauseMenu pause = new PauseMenu();
+	
 	public GameScreen() {
 		Color color = new Color(47,47,48);
 		setBackground(color);
 		setLayout(null);
 		this.add(message);
-		//this.add(pauseMenu);
+		this.add(pause);
 		message.setBackground(Color.BLACK);
 		message.setVisible(false);
 		message.setBounds(0, 100, 400, 40);
 		message.setFont(new Font("Helvetica",Font.BOLD,16));
+		message.setForeground(Color.white);
 
 
 
@@ -113,7 +99,9 @@ public class GameScreen extends JPanel {
 		}
 		if (this.message.isVisible()) {
 			g2d.drawString(message.getText(), 0, 0);
-		} 
+		}
+		System.out.println("Pause visible is: "+ pause.isVisible());
+		
 	}
 
 public void setDrawUI(HeadsUpDisplay hud) {
@@ -131,9 +119,7 @@ public void updateScreen() {
 public JLabel getMessage() {
 	return this.message;
 }
-//public JPanel PauseMenu() {
-	//return pauseMenu;
-//}
+
 public void drawMessage(String s) {
 	switch (s) {
 	case "block":
@@ -144,6 +130,13 @@ public void drawMessage(String s) {
 		break;
 	}
 
+}
+public PauseMenu getpause() {
+	return pause;
+}
+public void drawPauseMenu() {
+	pause.setVisible(true);
+	pause.repaint();
 }
 
 

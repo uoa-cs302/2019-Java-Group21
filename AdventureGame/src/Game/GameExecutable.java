@@ -6,6 +6,9 @@ import javax.swing.JFrame;
 
 
 public class GameExecutable {
+	
+	private GameView view;
+	private GameModel model;
 
     public GameExecutable() {
 
@@ -17,12 +20,15 @@ public class GameExecutable {
     private void initGame() {
     	
     	//create Gameview Obj
-    	GameView view = new GameView();
+    	view = new GameView();
     	//Creat Game model obj
-    	GameModel model = new GameModel();
+    	 model = new GameModel();
     	//Create Controller
-    	GameController controller = new GameController(model, view);
+    	GameController controller = new GameController(model, view,this);
     	System.out.println("GameController exists: " + controller);
+    }
+    public void newGame() {
+    	initGame();
     }
 
     public static void main(String[] args) {
