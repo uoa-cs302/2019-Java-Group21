@@ -48,6 +48,7 @@ public class PC extends Entity {
 			if (curAnim != Direction.UP || ani.getDelay() == -1) {
 				System.out.println("loading up animation");
 				setAnimation(Direction.UP,this.getFromImages(9, 11),15);
+				this.slash.setFrames(this.getImages().subList(22, 27));
 			}
 			if (curAnim != Direction.UP ||slash.getDelay() == -1) {
 				this.slash.setFrames(this.getImages().subList(22, 27));
@@ -58,7 +59,7 @@ public class PC extends Entity {
 		case DOWN:
 			
 			if (curAnim != Direction.DOWN || ani.getDelay() == -1) {
-
+				this.slash.setFrames(this.getImages().subList(27, 32));
 				setAnimation(Direction.DOWN,this.getFromImages(0, 2),15);
 	
 			}
@@ -74,6 +75,7 @@ public class PC extends Entity {
 			
 			if (curAnim != Direction.LEFT || ani.getDelay() == -1) {
 				setAnimation(Direction.LEFT,this.getFromImages(3, 5),15);
+				this.slash.setFrames(this.getImages().subList(12, 17));
 
 			}
 			if (curAnim != Direction.LEFT ||slash.getDelay()==-1) {
@@ -86,7 +88,8 @@ public class PC extends Entity {
 			
 				
 			if (curAnim != Direction.RIGHT || ani.getDelay() == -1) {
-				setAnimation(Direction.RIGHT,this.getFromImages(6, 8),15);			
+				setAnimation(Direction.RIGHT,this.getFromImages(6, 8),15);
+				this.slash.setFrames(this.getImages().subList(17, 22));
 			}
 			if (curAnim != Direction.RIGHT ||slash.getDelay()==-1) {
 				this.slash.setFrames(this.getImages().subList(17,22 ));	

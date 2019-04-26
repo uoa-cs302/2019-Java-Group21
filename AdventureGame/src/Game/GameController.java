@@ -103,7 +103,7 @@ public class GameController implements ActionListener {
 	//should include update, and draw.
 	public void actionPerformed(ActionEvent e) {
 		this.gamecount++;
-		if (gamecount == 100) { gamecount = 0; this.game_time ++; }
+		if (gamecount == 100) { gamecount = 0; this.game_time ++; System.out.println(game_time); }
 		if (deletedEntities.size() != 0)
 			deleteEntities();
 		if (newEntities.size() != 0)
