@@ -22,6 +22,7 @@ public class GameController implements ActionListener {
 	private PC pC;
 	private GameView gameView;
 	private GameModel gameModel;
+	private GameExecutable ex;
 	private Graphics g;
 	private int game_time = 0;
 	private int gamecount = 0;
@@ -34,10 +35,11 @@ public class GameController implements ActionListener {
 	private List<Entity> entities;
 	boolean loadingRoom = false;
 
-	public GameController(GameModel model, GameView view) {
+	public GameController(GameModel model, GameView view, GameExecutable ex) {
 		//set game model and game view Jframe to Controller variables
 		this.gameModel = model;
 		this.gameView = view;
+		this.ex = ex;
 
 		//Sets the button listener on to check for button press on StartScreen
 		ScreenListener gameControllerScreenListener = new ScreenListener() {
@@ -63,16 +65,33 @@ public class GameController implements ActionListener {
 				if(e.getKeyCode() == KeyEvent.VK_T) {
 					timer.stop();
 					gameView.getGameScreen().drawMessage("block");
-				} else {
+				} else 
 					if (!gameView.getMessage().isVisible()) {
 						pC.keyReleased(e);
 					} else {
 						timer.restart();
 						gameView.HideMessage();
 					}
-				} if (e.getKeyCode() == KeyEvent.VK_P) {
-					//timer.stop();
-					//gameView.getGameScreen().drawPauseMenu();
+				 if (e.getKeyCode() == KeyEvent.VK_P && !gameView.getGameScreen().getpause().isVisible() ) {
+					timer.stop();
+					gameView.getGameScreen().drawPauseMenu();
+				} else if (e.getKeyCode() == KeyEvent.VK_P && gameView.getGameScreen().getpause().isVisible()) {
+				gameView.HidePause();
+				timer.restart();
+				} else if (gameView.getGameScreen().getpause().isVisible()) {
+					if (e.getKeyCode() == KeyEvent.VK_W) {
+						gameView.getGameScreen().getpause().setSel(0);
+					} else if (e.getKeyCode() == KeyEvent.VK_S) {
+						gameView.getGameScreen().getpause().setSel(1);
+					} else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+						if (gameView.getGameScreen().getpause().getSel()==0) {
+							gameView.HidePause();
+							timer.restart();
+						}else {}
+						//need to incorporate gameover screen yet
+							
+					}
+					
 				}
 			}
 
@@ -169,7 +188,9 @@ public class GameController implements ActionListener {
 			if (sp1 instanceof Projectile) {
 				if (sp2 != ((Projectile) sp1).getParent() && !(sp2 instanceof Projectile)) {
 					deletedEntities.add(sp1);
+					if(!(sp2 instanceof Door)) {
 					sp2.hitBy(sp1);
+					}
 					sp2.resetSlowedCounter();
 					sp2.setSlowed();
 				}

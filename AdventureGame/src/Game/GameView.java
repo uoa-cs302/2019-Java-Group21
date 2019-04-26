@@ -53,6 +53,10 @@ public class GameView extends JFrame {
 	public void HideMessage() {
 		gameScreen.getMessage().setVisible(false);
 	}
+	public void HidePause() {
+		gameScreen.getpause().setVisible(false);
+		gameScreen.getpause().setSel(0);
+	}
 	
 	public JLabel getMessage() {
 		return gameScreen.getMessage();
