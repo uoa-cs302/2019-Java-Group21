@@ -139,8 +139,8 @@ public void updateTimer(int Count) {
 	Timer.setText("Timer elapsed: " +min10 + min + " : "+sec10 + sec);
 }
 public void updateScore(int time, int kills) {
-	int score = (kills*5)+(300-time)*10;
-	Score.setText("Score: " + score);
+	int score = (kills*5);
+	Score.setText("Score: " + score +" + time bonus!");
 }
 
 public void setDrawTarget(List<Sprite> sprites) {
