@@ -25,6 +25,7 @@ public class GameController implements ActionListener {
 	private Graphics g;
 	private int game_time = 0;
 	private int gamecount = 0;
+	private HeadsUpDisplay hud;
 
 	private List<Sprite> sprites;
 	private List<Entity> deletedEntities = new ArrayList<Entity>();
@@ -81,7 +82,10 @@ public class GameController implements ActionListener {
 	private void InitGame() {
 		//initialise timer with delay value 10ms
 		this.timer = new Timer(DELAY,this);
+		hud = new HeadsUpDisplay();
 		pC = new PC(Start_X,Start_Y,gameModel.getPlayerAssets());
+		hud.setHealthAssets(gameModel.getHealthAssets());
+		hud.setInventory(pC.getInventory());
 		sprites.add(pC);
 		entities.add(pC);
 		timer.start();
@@ -104,6 +108,7 @@ public class GameController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		this.gamecount++;
 		if (gamecount == 100) { gamecount = 0; this.game_time ++; }
+		hud.setHealth(pC.getHealth());
 		if (deletedEntities.size() != 0)
 			deleteEntities();
 		if (newEntities.size() != 0)
@@ -118,8 +123,10 @@ public class GameController implements ActionListener {
 			pC.getInventory().clearDroppedItems();
 		}
 		for (Entity entity : entities) {
-			if(entity instanceof PC)
+			if(entity instanceof PC) {
 				updatePlayer(entity);
+				System.out.println("attempting player collision");
+			}
 			else if (entity instanceof GiantRat) {
 				entity.update(pC);
 				checkEntityCollision(entity);
@@ -143,7 +150,7 @@ public class GameController implements ActionListener {
 		if (getLoadingRoom())
 			RoomLoad();
 		gameView.getGameScreen().setDrawTarget(sprites);
-		gameView.getGameScreen().setDrawUI(pC.getInventory());
+		gameView.getGameScreen().setDrawUI(getHUD());
 		gameView.getGameScreen().repaint();
 		loadingFalse();
 	}
@@ -284,5 +291,9 @@ public class GameController implements ActionListener {
 
 	private void loadingFalse() {
 		this.loadingRoom = false;
+	}
+	
+	public HeadsUpDisplay getHUD() {
+		return this.hud;
 	}
 }

@@ -14,7 +14,6 @@ public class PC extends Entity {
 	private Animation slash;
 	private BufferedImage slashim;
 	
-	
 	public PC(int x,int y, List<BufferedImage> images) {
 		super(x,y);
 		setSlash(new Animation());

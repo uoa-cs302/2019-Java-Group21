@@ -15,6 +15,7 @@ public class Image {
 	private BufferedImage sword0;
 	private BufferedImage sword1;
 	private List<BufferedImage> spider;
+	private List<BufferedImage> health;
 
 	public List<BufferedImage> getPlayer() {
 		return player;
@@ -42,6 +43,10 @@ public class Image {
 	public BufferedImage getSword1() {
 		return sword1;
 	}
+	
+	public List<BufferedImage> getHealth(){
+		return health;
+	}
 
 	// FINAL VARIABLES
 	List<BufferedImage> assetList;
@@ -56,6 +61,7 @@ public class Image {
 		assetList = new ArrayList<BufferedImage>();
 		rat = new ArrayList<BufferedImage>();
 		spider = new ArrayList<BufferedImage>();
+		health = new ArrayList<BufferedImage>();
 		//adds rat sprites
 		rat.add(loadSpecificImage("src/Image/rat_0.png"));
 		rat.add(loadSpecificImage("src/Image/rat_1.png"));
@@ -73,6 +79,9 @@ public class Image {
 		System.out.println("trying to load character");
 		LoadSprites("src/Image/dungeon0.png");
 		System.out.println("read all sprites success!");
+		health.add(loadSpecificImage("src/Image/heart0.png"));
+		health.add(loadSpecificImage("src/Image/heart1.png"));
+		health.add(loadSpecificImage("src/Image/heart2.png"));
 	}
 
 	protected BufferedImage loadSpecificImage(String address) {

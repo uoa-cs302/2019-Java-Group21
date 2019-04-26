@@ -23,6 +23,10 @@ public class GameModel {
 		return assets.getPlayer();
 	}
 	
+	public List<BufferedImage> getHealthAssets(){
+		return assets.getHealth();
+	}
+	
 	public Room getCurrentRoom() {
 		return currentRoom;
 	}

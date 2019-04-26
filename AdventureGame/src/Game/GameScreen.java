@@ -24,7 +24,7 @@ public class GameScreen extends JPanel {
 	//sprite can be changed into ArrayList or other later
 	private List<Sprite> sprites;
 	private ImageIcon ii = new ImageIcon();
-	private Inventory inventory;
+	private HeadsUpDisplay hud;
 	@SuppressWarnings("unused")
 	private KeyAdapter key;
 	private FocusListener f;
@@ -39,9 +39,9 @@ public class GameScreen extends JPanel {
 		message.setEditable(false);
 		message.setBounds(0, 100, 400, 40);
 		message.setFont(new Font("Helvetica",Font.BOLD,16));
-			
-		
-		
+
+
+
 	}
 	//paints Sprites
 	@Override
@@ -56,8 +56,8 @@ public class GameScreen extends JPanel {
 	public void doEntityDrawing(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		if (sprites != null) {
-		for (Sprite sprite : sprites) {
-			
+			for (Sprite sprite : sprites) {
+
 				if(sprite.isVisible() && sprite.getImage() != null) {
 					g2d.drawImage(sprite.getImage(), (int)sprite.getx_pos(), (int)sprite.gety_pos(),this);
 				}
@@ -78,46 +78,53 @@ public class GameScreen extends JPanel {
 					g2d.drawRect(rat.getHitBounds().getX() + (int) rat.getHitBounds().getxOff(),(int) rat.getHitBounds().getY()+ (int)rat.getHitBounds().getyOff(), (int)rat.getHitBounds().getwidth(),(int) rat.getHitBounds().getheight());
 				}
 			}
-	
+
 		}
-		if(inventory != null) {
-			g2d.drawImage(inventory.getImage(), 128, 600, this);
-			for(int i = 0; i < inventory.inventorySize(); i++) {
-				g2d.drawImage(inventory.seeItem(i).getInventoryImage(), 138 + (96*i), 613, this);
+		if(hud != null) {
+			g2d.drawImage(hud.getInventory().getImage(), HeadsUpDisplay.getInventoryxPos(), HeadsUpDisplay.getInventoryyPos(), this);
+			for(int i = 0; i < hud.getInventory().inventorySize(); i++) {
+				g2d.drawImage(hud.getInventory().seeItem(i).getInventoryImage(), HeadsUpDisplay.getItemxPos0() + (HeadsUpDisplay.getItemxConst()*i), HeadsUpDisplay.getItemyPos(), this);
 			}
+			for (int i = 0; i < 6; i++) {
+				if (i <= hud.getHealth())
+					g2d.drawImage(hud.getHealthAssets(0), HeadsUpDisplay.getHeartxPos0() + (HeadsUpDisplay.getHeartxConst()*i), HeadsUpDisplay.getHeartyPos(), this);
+				else
+					g2d.drawImage(hud.getHealthAssets(2), HeadsUpDisplay.getHeartxPos0() + (HeadsUpDisplay.getHeartxConst()*i), HeadsUpDisplay.getHeartyPos(), this);
+			}
+			
 		}
 		if (this.message.isVisible()) {
 			g2d.drawString(message.getText(), 0, 0);
 		}
 	}
-	
-	public void setDrawUI(Inventory inventory) {
-		this.inventory = inventory;
+
+public void setDrawUI(HeadsUpDisplay hud) {
+	this.hud = hud;
+}
+
+public void setDrawTarget(List<Sprite> sprites) {
+	this.sprites = sprites;
+}
+//may not be used atm
+public void updateScreen() {
+	repaint();
+}
+
+public JTextField getMessage() {
+	return this.message;
+}
+
+public void drawMessage(String s) {
+	switch (s) {
+	case "block":
+		message.setVisible(true);
+		message.setText("Looks like you could break this");
+		System.out.println(message.isVisible());
+		message.repaint();
+		break;
 	}
-	
-	public void setDrawTarget(List<Sprite> sprites) {
-		this.sprites = sprites;
-	}
-	//may not be used atm
-	public void updateScreen() {
-		repaint();
-	}
-	
-	public JTextField getMessage() {
-		return this.message;
-	}
-	
-	public void drawMessage(String s) {
-		switch (s) {
-		case "block":
-			message.setVisible(true);
-			message.setText("Looks like you could break this");
-			System.out.println(message.isVisible());
-			message.repaint();
-			break;
-		}
-		
-	}
+
+}
 
 
 }
