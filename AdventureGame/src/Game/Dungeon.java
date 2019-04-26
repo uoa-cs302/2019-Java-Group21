@@ -1088,8 +1088,8 @@ public class Dungeon {
 		roomSkeleton.setWallGrid(wall);
 		roomSkeleton.setDecorGrid(decor);
 		roomSkeleton.createLevel(128, 12, assets);
-		//Skeleton skeleton = new Skeleton(300, 300);
-		//roomSkeleton.addToRoom(skeleton);
+		Skeleton skeleton = new Skeleton(496, 172, assets.getSkeleton());
+		roomSkeleton.addToRoom(skeleton);
 		rooms.set(4 + difficulty, roomSkeleton);
 	}
 	private void createRightHallway(){
@@ -1800,6 +1800,17 @@ public class Dungeon {
 		roomPuzzle.setWallGrid(wall);
 		roomPuzzle.setDecorGrid(decor);
 		roomPuzzle.createLevel(128, 12, assets);
+		PressurePlate plate = new PressurePlate(384,396);
+		PressurePlate plate1 = new PressurePlate(384,400);
+		PressurePlate plate2 = new PressurePlate(384,392);
+		plate.setImage(assets.getSword0());
+		plate1.setImage(assets.getSword0());
+		plate2.setImage(assets.getSword0());
+		Door door = new Door(512, 108, plate, plate1, plate2);
+		roomPuzzle.addToRoom(plate);
+		roomPuzzle.addToRoom(plate1);
+		roomPuzzle.addToRoom(plate2);
+		roomPuzzle.addToRoom(door);
 		rooms.set(6 + (2*difficulty), roomPuzzle);
 	}
 

@@ -7,6 +7,8 @@ public class PressurePlate extends Entity {
 	
 	PressurePlate(int x, int y){
 		super(x,y);
+		super.setCollidable(true);
+		Bounds = new Collision((int)this.x_pos,(int)this.y_pos,this.width,this.height);
 		//add animation/frames
 		
 	}
@@ -18,7 +20,6 @@ public class PressurePlate extends Entity {
 			//setanimation/frame to not pressed
 		}
 	}
-
 	
 	public boolean isEnabled() {
 		return enabled;

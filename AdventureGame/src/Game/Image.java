@@ -16,6 +16,7 @@ public class Image {
 	private BufferedImage sword1;
 	private List<BufferedImage> spider;
 	private List<BufferedImage> health;
+	private BufferedImage skeleton;
 
 	public List<BufferedImage> getPlayer() {
 		return player;
@@ -42,6 +43,10 @@ public class Image {
 
 	public BufferedImage getSword1() {
 		return sword1;
+	}
+	
+	public BufferedImage getSkeleton() {
+		return skeleton;
 	}
 	
 	public List<BufferedImage> getHealth(){
@@ -82,6 +87,7 @@ public class Image {
 		health.add(loadSpecificImage("src/Image/heart0.png"));
 		health.add(loadSpecificImage("src/Image/heart1.png"));
 		health.add(loadSpecificImage("src/Image/heart2.png"));
+		skeleton = loadSpecificImage("src/Image/skeleton0.png");
 	}
 
 	protected BufferedImage loadSpecificImage(String address) {

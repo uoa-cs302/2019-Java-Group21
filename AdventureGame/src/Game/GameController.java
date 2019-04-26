@@ -124,7 +124,6 @@ public class GameController implements ActionListener {
 		for (Entity entity : entities) {
 			if(entity instanceof PC) {
 				updatePlayer(entity);
-				System.out.println("attempting player collision");
 			}
 			else if (entity instanceof GiantRat) {
 				entity.update(pC);
@@ -142,6 +141,11 @@ public class GameController implements ActionListener {
 				((GiantSpider) entity).clearProjectiles();
 			}
 			else if (entity instanceof Projectile) {
+				checkEntityCollision(entity);
+				entity.update();
+			}
+			else if (entity instanceof Skeleton) {
+				entity.setTarget(pC);
 				checkEntityCollision(entity);
 				entity.update();
 			}
@@ -177,7 +181,7 @@ public class GameController implements ActionListener {
 				if (e1.isCollidable() == true) {
 					if (e1 instanceof Door) {
 						Door door = (Door) e1;
-						if(pC.getBounds().collisionWith(door.getBounds())) {
+						if(pC.getBounds().collisionWith(door.getBounds()) && door.isOpen()) {
 							gameModel.loadRoom(gameModel.getDungeonIndex(door.getRoom())); 
 							pC.setx_pos(door.getSpawnX());
 							pC.sety_pos(door.getSpawnY());
@@ -234,6 +238,22 @@ public class GameController implements ActionListener {
 						Projectile projectile = (Projectile) e1;
 						if (pC.getHitBounds().collisionWith(projectile.getBounds()) && pC.canAttack())
 							deletedEntities.add(projectile);
+					}
+					else if (e1 instanceof Skeleton) {
+						Skeleton skeleton = (Skeleton) e1;
+						if (pC.getHitBounds().collisionWith(skeleton.getBounds())) {
+							if (pC.canAttack()) {
+								skeleton.hitBy(pC);
+								if (skeleton.getHealth()<= 0) {
+									deletedEntities.add(skeleton);
+								}
+							}
+						}
+						if(pC.getBounds().collisionWith(skeleton.getHitBounds())) {
+							if(skeleton.canAttack()) {
+								pC.hitBy(skeleton);
+							}
+						}
 					}
 				}
 			}

@@ -37,6 +37,7 @@ public class PC extends Entity {
 		Hitbounds.setyOff(16);
 		
 	}
+	
 	public void update() {
 		super.update();
 	}

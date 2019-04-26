@@ -14,6 +14,7 @@ public class Inventory {
 	private List<Item> droppedItems = new ArrayList<Item>();
 	private List<BufferedImage> images = new ArrayList<BufferedImage>();
 	private Item placeholder = new Item(0,0);
+	private List<BufferedImage> itemImages = new ArrayList<BufferedImage>();
 
 	public Inventory(){
 		File f;
@@ -45,6 +46,14 @@ public class Inventory {
 
 	public Item getItem() {
 		return this.items.get(this.index);
+	}
+	
+	public void addItemImage(BufferedImage image) {
+		this.itemImages.add(image);
+	}
+	
+	public BufferedImage getItemImage(int index) {
+		return this.itemImages.get(index);
 	}
 
 	public boolean addItem(Item item) {
