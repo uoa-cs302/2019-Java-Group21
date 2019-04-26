@@ -30,7 +30,7 @@ public class GameScreen extends JPanel {
 	private KeyAdapter key;
 	private FocusListener f;
 	private JLabel message = new JLabel();
-	private JPanel pauseMenu = new JPanel(); {
+	/*private JPanel pauseMenu = new JPanel(); {
 		 int sel = 0;
 		this.setBackground(Color.BLACK);
 		this.setVisible(false);
@@ -46,13 +46,13 @@ public class GameScreen extends JPanel {
 		Resume.setFont(new Font("Helvetica",Font.BOLD,12));
 		Quit.setFont(new Font("Helvetica",Font.BOLD,12));
 		
-	}
+	}*/
 	public GameScreen() {
 		Color color = new Color(47,47,48);
 		setBackground(color);
 		setLayout(null);
 		this.add(message);
-		this.add(pauseMenu);
+		//this.add(pauseMenu);
 		message.setBackground(Color.BLACK);
 		message.setVisible(false);
 		message.setBounds(0, 100, 400, 40);
@@ -131,9 +131,9 @@ public void updateScreen() {
 public JLabel getMessage() {
 	return this.message;
 }
-public JPanel PauseMenu() {
-	return pauseMenu;
-}
+//public JPanel PauseMenu() {
+	//return pauseMenu;
+//}
 public void drawMessage(String s) {
 	switch (s) {
 	case "block":
