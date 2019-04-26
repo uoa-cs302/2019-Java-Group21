@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Timer;
@@ -102,7 +103,12 @@ public class GameController implements ActionListener {
 							System.out.println("Restarting");
 							if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 								System.out.println("Restarting");
-								
+							//	try {
+									//gameView.getGameover().saveScore();
+								//} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									
+								//}
 								restart();
 							}
 						}else {

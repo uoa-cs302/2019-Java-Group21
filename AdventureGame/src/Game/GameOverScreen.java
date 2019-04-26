@@ -6,9 +6,15 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Label;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.IO;
 
 public class GameOverScreen extends JPanel {
 	
@@ -21,6 +27,7 @@ public class GameOverScreen extends JPanel {
 	private JLabel Score= new JLabel();
 	private JLabel Title = new JLabel();
 	private JLabel Exit = new JLabel();
+	private JTextField name = new JTextField();
 	
 	public GameOverScreen() {
 		this.setBackground(Color.BLACK);
@@ -33,7 +40,6 @@ public class GameOverScreen extends JPanel {
 		Kills.setBounds(512,100,512,75);
 		Kills.setVisible(true);
 		Kills.setAlignmentX(Label.CENTER);
-		
 		
 		Time.setForeground(Color.white);
 		Time.setFont(new Font("Helvetica",Font.BOLD,22));
@@ -67,6 +73,7 @@ public class GameOverScreen extends JPanel {
 		this.add(Time);
 		this.add(Score);
 		this.add(Exit);
+		this.add(name);
 		
 		
 		
@@ -82,6 +89,7 @@ public class GameOverScreen extends JPanel {
 		g2d.drawString(Time.getText(), 0, 0);
 		g2d.drawString(Score.getText(), 0, 0);
 		g2d.drawString(Exit.getText(), 0, 0);
+		g2d.drawString(name.getText(), 0, 0);
 		Toolkit.getDefaultToolkit().sync();
 
 	}
@@ -93,6 +101,12 @@ public class GameOverScreen extends JPanel {
 		Kills.setText("You defeated "+kill+" enemies!");
 		Time.setText("This time took you only "+ time +" seconds");
 		Score.setText("Your score is " + score + " Congratulations!");
+		
+	}
+	public void saveScore() throws IOException {
+		FileWriter fw = new FileWriter(new File("src/HighScores"));
+		fw.append(name.getText()+"  "+ this.score);
+		fw.close();
 		
 	}
 
