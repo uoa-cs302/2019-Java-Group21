@@ -152,6 +152,9 @@ public class GameController implements ActionListener {
 	//should include update, and draw.
 	public void actionPerformed(ActionEvent e) {
 		if (gamecount == 100) { gamecount = 0; this.game_time ++;}
+		gamecount++;
+		gameView.getGameScreen().updateTimer(game_time);
+		gameView.getGameScreen().updateScore(game_time, enemykillcount);
 		hud.setHealth(pC.getHealth());
 		if (deletedEntities.size() != 0)
 			deleteEntities();
