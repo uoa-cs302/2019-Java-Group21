@@ -49,8 +49,6 @@ public class GameView extends JFrame {
 		
 	public void drawGameMenu() {
 		cardLayout.show(this.getContentPane(), "gamescr");
-
-		
 	}
 	public void HideMessage() {
 		gameScreen.getMessage().setVisible(false);
