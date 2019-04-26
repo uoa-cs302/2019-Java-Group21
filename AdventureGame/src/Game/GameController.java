@@ -248,8 +248,9 @@ public class GameController implements ActionListener {
 					}
 					else if (e1 instanceof Skeleton) {
 						Skeleton skeleton = (Skeleton) e1;
-						if (pC.getHitBounds().collisionWith(skeleton.getBounds())) {
+						if(pC.getBounds().collisionWith(skeleton.getBounds(),(int)pC.getdx(),(int)pC.getdy()))
 							pC.CollisionProcess(skeleton.getBounds());
+						if (pC.getHitBounds().collisionWith(skeleton.getBounds())) {
 							if (pC.canAttack()) {
 								skeleton.hitBy(pC);
 								if (skeleton.getHealth()<= 0) {
