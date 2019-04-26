@@ -942,10 +942,11 @@ public class Dungeon {
 		room.setWallGrid(wall);
 		room.setDecorGrid(decor);
 		room.createLevel(128, 12, assets);
-		//GiantRat rat1 = new GiantRat(240, 300);
-		//room.addEntityList(rat1);
-		//GiantSpider spider1 = new GiantSpider(300, 400);
-		//room.addEntityList(spider1);
+		GiantRat rat1 = new GiantRat(240, 300, assets.getRat());
+		room.addEntityList(rat1);
+		GiantSpider spider = new GiantSpider(528, 172, assets.getSpider());
+		spider.setWalls(wall);
+		room.addToRoom(spider);
 	}
 
 	private void createRoomLeftThree(Room room){
