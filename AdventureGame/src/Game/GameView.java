@@ -54,7 +54,7 @@ public class GameView extends JFrame {
 		gameScreen.getMessage().setVisible(false);
 	}
 	
-	public JTextField getMessage() {
+	public JLabel getMessage() {
 		return gameScreen.getMessage();
 	}
 

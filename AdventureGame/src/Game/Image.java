@@ -67,7 +67,7 @@ public class Image {
 		rat.add(loadSpecificImage("src/Image/rat_1.png"));
 		rat.add(loadSpecificImage("src/Image/rat_2.png"));
 		rat.add(loadSpecificImage("src/Image/rat_3.png"));
-		spider.add(loadSpecificImage("src/Image/spider0.png"));
+		spider.addAll(getSprites("src/Image/spidersheet.png",1,12));
 		spider.add(loadSpecificImage("src/Image/projectile0.png"));
 		sword0 = loadSpecificImage("src/Image/swrd0.png");
 		sword1 = loadSpecificImage("src/Image/swrd1.png");

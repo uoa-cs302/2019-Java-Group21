@@ -63,12 +63,16 @@ public class GameController implements ActionListener {
 				if(e.getKeyCode() == KeyEvent.VK_T) {
 					timer.stop();
 					gameView.getGameScreen().drawMessage("block");
-				} else
+				} else {
 				if (!gameView.getMessage().isVisible()) {
 				pC.keyReleased(e);
 				} else {
 					timer.restart();
 					gameView.HideMessage();
+				}
+				} if (e.getKeyCode() == KeyEvent.VK_P) {
+					//timer.stop();
+					//gameView.getGameScreen().drawPauseMenu();
 				}
 			}
 
@@ -125,7 +129,6 @@ public class GameController implements ActionListener {
 		for (Entity entity : entities) {
 			if(entity instanceof PC) {
 				updatePlayer(entity);
-				System.out.println("attempting player collision");
 			}
 			else if (entity instanceof GiantRat) {
 				entity.update(pC);
