@@ -163,9 +163,9 @@ public class Entity extends Sprite {
 			runAttack();
 		}
 		
-		x_pos += dx*speed;
+		x_pos += (int) dx*speed;
 		Right = (int)x_pos + width;
-		y_pos += dy*speed;
+		y_pos += (int) dy*speed;
 		Bottom = (int)y_pos + height;
 		Bounds.setBox((int)this.x_pos, (int)this.y_pos, (int)Bounds.getwidth(), (int)Bounds.getheight());
 		Hitbounds.setBox((int)this.x_pos, (int)this.y_pos, (int)Hitbounds.getwidth(), (int)Hitbounds.getheight());
@@ -296,20 +296,20 @@ public class Entity extends Sprite {
 		 this.setCollidable(false);
 	 }
 	 if (e.getDown()) {
-		 this.y_pos += 32;
+		 this.dy = 32;
 	 }else
 	 if (e.getLeft()) {
-		 this.x_pos += -32;
+		 this.dx = -32;
 	 }else
 	 if (e.getRight()) {
-		 this.x_pos += 32;
+		 this.dx = 32;
 	 }else
 	 if(e.getUP()) {
-		this.y_pos += -32;
+		this.dy = -32;
 	 }
 	 else {
-			 this.y_pos -= 3*dy;
-			 this.x_pos -= 3*dx;
+			 this.dy -= 3*dy;
+			 this.dx -= 3*dx;
 	 }
  }
 	protected int check_collisiondir_Hoz(int left2,int right2 ) {

@@ -106,8 +106,7 @@ public class GameController implements ActionListener {
 	//method runs when timer ticks
 	//should include update, and draw.
 	public void actionPerformed(ActionEvent e) {
-		this.gamecount++;
-		if (gamecount == 100) { gamecount = 0; this.game_time ++; }
+		if (gamecount == 100) { gamecount = 0; this.game_time ++; System.out.println(game_time); }
 		hud.setHealth(pC.getHealth());
 		if (deletedEntities.size() != 0)
 			deleteEntities();
@@ -168,7 +167,7 @@ public class GameController implements ActionListener {
 			}
 			else
 				sp1.CollisionProcess(sp2.getBounds());
-		} 
+		}
 	}
 
 	//checks collision of Player with all Obj
@@ -243,10 +242,23 @@ public class GameController implements ActionListener {
 	}
 
 	public void checkEntityCollision(Entity x) {
+		boolean steppedon = false;
 		for (Entity e1 : entities) {
 			if (x.getID() != e1.getID()) {
+				if (x instanceof PressurePlate) {
+					
+					PressurePlate pp = (PressurePlate) x;
+					if (pp.getBounds().collisionWith(e1.getBounds())) {
+						pp.CollisionProcess(e1.getBounds());
+						steppedon = true;
+					}
+				}
 				checkCollision(x,e1);
 			}
+		}
+		if (!steppedon && x instanceof PressurePlate) {
+			PressurePlate pp = (PressurePlate) x;
+			pp.setEnabled(false);
 		}
 	}
 
