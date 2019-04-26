@@ -64,12 +64,12 @@ public class GameController implements ActionListener {
 					timer.stop();
 					gameView.getGameScreen().drawMessage("block");
 				} else {
-				if (!gameView.getMessage().isVisible()) {
-				pC.keyReleased(e);
-				} else {
-					timer.restart();
-					gameView.HideMessage();
-				}
+					if (!gameView.getMessage().isVisible()) {
+						pC.keyReleased(e);
+					} else {
+						timer.restart();
+						gameView.HideMessage();
+					}
 				} if (e.getKeyCode() == KeyEvent.VK_P) {
 					//timer.stop();
 					//gameView.getGameScreen().drawPauseMenu();
@@ -78,7 +78,7 @@ public class GameController implements ActionListener {
 
 			public void keyPressed(KeyEvent e){
 				if (!gameView.getMessage().isVisible()) {
-				pC.keyPressed(e);
+					pC.keyPressed(e);
 				}
 			}
 		});
@@ -249,6 +249,7 @@ public class GameController implements ActionListener {
 					else if (e1 instanceof Skeleton) {
 						Skeleton skeleton = (Skeleton) e1;
 						if (pC.getHitBounds().collisionWith(skeleton.getBounds())) {
+							pC.CollisionProcess(skeleton.getBounds());
 							if (pC.canAttack()) {
 								skeleton.hitBy(pC);
 								if (skeleton.getHealth()<= 0) {
@@ -272,7 +273,7 @@ public class GameController implements ActionListener {
 		for (Entity e1 : entities) {
 			if (x.getID() != e1.getID()) {
 				if (x instanceof PressurePlate) {
-					
+
 					PressurePlate pp = (PressurePlate) x;
 					if (pp.getBounds().collisionWith(e1.getBounds())) {
 						pp.CollisionProcess(e1.getBounds());
@@ -330,7 +331,7 @@ public class GameController implements ActionListener {
 	private void loadingFalse() {
 		this.loadingRoom = false;
 	}
-	
+
 	public HeadsUpDisplay getHUD() {
 		return this.hud;
 	}

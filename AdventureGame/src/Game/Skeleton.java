@@ -18,8 +18,7 @@ public class Skeleton extends Entity {
 		Hitbounds = new Collision((int)this.x_pos,(int)this.y_pos,this.width,this.height );
 		this.direction = Direction.IDLE;
 		this.ani.setFrames(this.getImages());
-		this.ani.setFrame(0);
-		this.ani.setDelay(-1);
+		this.ani.setFrame(0); ani.setDelay(-1);
 		health = 4;
 		this.AttackDuration = 80;
 	}
@@ -38,6 +37,9 @@ public class Skeleton extends Entity {
 		dx = (vx*2);
 		dy = (vy*2);
 		super.update();
+		if (xdiff < 40 && ydiff < 40) {
+			Attack = true;
+		}
 	}
 	
 }
