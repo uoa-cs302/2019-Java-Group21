@@ -376,9 +376,6 @@ public class Dungeon {
 		room1.createLevel(128, 12, assets);
 		//GiantRat rat1 = new GiantRat(240, 300);
 		//room1.addToRoom(rat1);
-		GiantSpider spider = new GiantSpider(300, 400, assets.getSpider());
-		spider.setWalls(wall);
-		room1.addToRoom(spider);
 		Door door = new Door(RoomTwoBottomDoorX, RoomTwoBottomDoorY);
 		door.setSpawnX(RoomWellTopDoorSpawnX);
 		door.setSpawnY(RoomWellTopDoorSpawnY);
@@ -875,8 +872,9 @@ public class Dungeon {
 		room.setWallGrid(wall);
 		room.setDecorGrid(decor);
 		room.createLevel(128, 12, assets);
-		//GiantSpider spider1 = new GiantSpider(300, 400);
-		//room.addEntityList(spider1);
+		GiantSpider spider = new GiantSpider(528, 172, assets.getSpider());
+		spider.setWalls(wall);
+		room.addToRoom(spider);
 	}
 
 	private void createRoomLeftTwo(Room room){

@@ -152,7 +152,7 @@ public class GameController implements ActionListener {
 	public void checkCollision(Entity sp1,Entity sp2) {
 		if (sp1.getBounds().collisionWith(sp2.getBounds(),(int)sp1.getdx(),(int)sp1.getdy())) {
 			if (sp1 instanceof Projectile) {
-				if (sp2 != ((Projectile) sp1).getParent()) {
+				if (sp2 != ((Projectile) sp1).getParent() && !(sp2 instanceof Projectile)) {
 					deletedEntities.add(sp1);
 					sp2.hitBy(sp1);
 					sp2.resetSlowedCounter();
