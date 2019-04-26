@@ -24,10 +24,15 @@ public class GameView extends JFrame {
 	
 	private GameScreen gameScreen;
 	private StartScreen startScreen;
+	private GameOverScreen gameover;
+	
 	private CardLayout cardLayout;
 	protected Graphics g;
 	
 	public GameView() {
+		InitGameView();
+	}
+	public void InitGameView() {
 		super.setTitle("A Well of Opportunity");
 		super.setSize(1024,768);
 		super.setResizable(false);
@@ -39,16 +44,25 @@ public class GameView extends JFrame {
 		cardLayout = new CardLayout();
 		gameScreen = new GameScreen();
 		startScreen = new StartScreen();
+		gameover = new GameOverScreen();
+		
 		setLayout(cardLayout);
 		
 		add(startScreen, "start");
 		add(gameScreen,"gamescr");
+		add(gameover,"over");
 		
 			cardLayout.show(this.getContentPane(),"start");
 	}
 		
 	public void drawGameMenu() {
 		cardLayout.show(this.getContentPane(), "gamescr");
+	}
+	public void drawMainMenu() {
+		remove(startScreen);
+		remove(gameScreen);
+		remove(gameover);
+		InitGameView();
 	}
 	public void HideMessage() {
 		gameScreen.getMessage().setVisible(false);
@@ -71,6 +85,12 @@ public class GameView extends JFrame {
 	}
 	public CardLayout getcardLayout() {
 		return cardLayout;
+	}
+	public GameOverScreen getGameover() {
+		return gameover;
+	}
+	public void drawGameOver() {
+		cardLayout.show(this.getContentPane(), "over");
 	}
 
 

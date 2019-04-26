@@ -28,6 +28,8 @@ public class GameController implements ActionListener {
 	private int gamecount = 0;
 	private int enemykillcount = 0;
 	private HeadsUpDisplay hud;
+	private boolean restart = false;
+	private KeyAdapter v;
 
 	private List<Sprite> sprites;
 	private List<Entity> deletedEntities = new ArrayList<Entity>();
@@ -40,6 +42,9 @@ public class GameController implements ActionListener {
 		this.gameModel = model;
 		this.gameView = view;
 		this.ex = ex;
+		InitControl();
+	}
+	public void InitControl() {
 
 		//Sets the button listener on to check for button press on StartScreen
 		ScreenListener gameControllerScreenListener = new ScreenListener() {
@@ -56,10 +61,16 @@ public class GameController implements ActionListener {
 		};
 		gameView.getStartScreen().setButtonListener(gameControllerScreenListener);
 	}
+	public void restart() {
+		gameView.removeKeyListener(v);
+		gameView.drawMainMenu();
+		this.gameModel = new GameModel();
+		InitControl();
+	}
 
 	private void addKeyListen() {
 		//sets a key listener for player movement and interaction
-		gameView.addKeyListener(new KeyAdapter() {
+		gameView.addKeyListener(v = new KeyAdapter() {
 
 			public void keyReleased(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_T) {
@@ -87,12 +98,22 @@ public class GameController implements ActionListener {
 						if (gameView.getGameScreen().getpause().getSel()==0) {
 							gameView.HidePause();
 							timer.restart();
-						}else {}
-						//need to incorporate gameover screen yet
-							
+						}else if (gameView.getGameover().isVisible()) {
+							System.out.println("Restarting");
+							if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+								System.out.println("Restarting");
+								
+								restart();
+							}
+						}else {
+						gameView.getGameover().calculateScore(enemykillcount, game_time);
+						gameView.drawGameOver();
+						System.out.println("drawn");
+						}
 					}
 					
 				}
+				
 			}
 
 			public void keyPressed(KeyEvent e){
@@ -130,7 +151,7 @@ public class GameController implements ActionListener {
 	//method runs when timer ticks
 	//should include update, and draw.
 	public void actionPerformed(ActionEvent e) {
-		if (gamecount == 100) { gamecount = 0; this.game_time ++; System.out.println(game_time); }
+		if (gamecount == 100) { gamecount = 0; this.game_time ++;}
 		hud.setHealth(pC.getHealth());
 		if (deletedEntities.size() != 0)
 			deleteEntities();

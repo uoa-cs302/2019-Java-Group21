@@ -45,9 +45,9 @@ public class StartScreen extends JPanel {
 		ActionListener startButtonActionListener = new ActionListener() {
 			@Override 
 			public void actionPerformed(ActionEvent e) {
-				//if(ButtonListener != null) {
+				if(ButtonListener != null) {
 					ButtonListener.actionPerformed();
-				//}
+				}
 			}
 		};
 		start.addActionListener(startButtonActionListener);
