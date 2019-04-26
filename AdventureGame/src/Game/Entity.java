@@ -147,7 +147,7 @@ public class Entity extends Sprite {
 		animate();
 		image();
 		setHitboxDirection();
-		if (slowed) {
+		/*if (slowed) {
 			if (slowedCounter == 0)
 				speed = 0.25;
 			if (slowedCounter < 100)
@@ -157,7 +157,7 @@ public class Entity extends Sprite {
 				slowedCounter = 0;
 				speed = 1;
 			}
-		}
+		}*/
 		if(Attack || attackCount != 0) {
 			this.attacking = true;
 			runAttack();

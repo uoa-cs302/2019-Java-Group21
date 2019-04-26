@@ -25,6 +25,7 @@ public class GameController implements ActionListener {
 	private Graphics g;
 	private int game_time = 0;
 	private int gamecount = 0;
+	private int enemykillcount = 0;
 
 	private List<Sprite> sprites;
 	private List<Entity> deletedEntities = new ArrayList<Entity>();
@@ -190,6 +191,7 @@ public class GameController implements ActionListener {
 								rat.hitBy(pC);
 								if (rat.getHealth()<= 0) {
 									deletedEntities.add(rat);
+									enemykillcount++;
 								}
 							}
 						}
@@ -206,6 +208,7 @@ public class GameController implements ActionListener {
 								spider.hitBy(pC);
 								if (spider.getHealth()<= 0) {
 									deletedEntities.add(spider);
+									enemykillcount++;
 								}
 							}
 						}
@@ -232,7 +235,6 @@ public class GameController implements ActionListener {
 				}
 			}
 		}
-
 	}
 
 	public void checkEntityCollision(Entity x) {
