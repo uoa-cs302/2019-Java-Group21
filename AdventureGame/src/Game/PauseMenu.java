@@ -59,8 +59,12 @@ public class PauseMenu extends JPanel implements ActionListener {
 		super.paintComponent(g);
 		if (this.isVisible()) {
 			timer.restart();
-			if(sel == 0) {Resume.setFont(new Font("Helvetica",Font.BOLD,36)); Quit.setFont(new Font("Helvetica",Font.PLAIN,36));}
-			else {Resume.setFont(new Font("Helvetica",Font.PLAIN,36)); Quit.setFont(new Font("Helvetica",Font.BOLD,36));}
+			if(sel == 0) {Resume.setFont(new Font("Helvetica",Font.BOLD,36));
+			Quit.setFont(new Font("Helvetica",Font.PLAIN,36));
+			Resume.setText(">RESUME<"); Quit.setText("Quit");}
+			else {Resume.setFont(new Font("Helvetica",Font.PLAIN,36));
+			Quit.setFont(new Font("Helvetica",Font.BOLD,36));
+			Resume.setText("Resume"); Quit.setText(">QUIT<");}
 			g.drawString(Resume.getText(), 0, 0);
 			g.drawString(Quit.getText(),0,0);
 		}else {timer.stop();}
