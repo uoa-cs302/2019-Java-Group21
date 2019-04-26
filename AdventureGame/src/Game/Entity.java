@@ -6,9 +6,7 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.List;
 import java.util.ArrayList;
-
 import javax.swing.ImageIcon;
-
 import Game.Sprite.Direction;
 
 public class Entity extends Sprite {
@@ -147,7 +145,7 @@ public class Entity extends Sprite {
 		animate();
 		image();
 		setHitboxDirection();
-		if (slowed) {
+		/*if (slowed) {
 			if (slowedCounter == 0)
 				speed = 0.25;
 			if (slowedCounter < 100)
@@ -157,7 +155,7 @@ public class Entity extends Sprite {
 				slowedCounter = 0;
 				speed = 1;
 			}
-		}
+		}*/
 		if(Attack || attackCount != 0) {
 			this.attacking = true;
 			runAttack();
@@ -168,7 +166,9 @@ public class Entity extends Sprite {
 		y_pos += (int) dy*speed;
 		Bottom = (int)y_pos + height;
 		Bounds.setBox((int)this.x_pos, (int)this.y_pos, (int)Bounds.getwidth(), (int)Bounds.getheight());
+		if (Hitbounds != null) {
 		Hitbounds.setBox((int)this.x_pos, (int)this.y_pos, (int)Hitbounds.getwidth(), (int)Hitbounds.getheight());
+		}
 	}
 
 	public void setAttack(boolean b) {Attack = b;}
@@ -290,7 +290,7 @@ public class Entity extends Sprite {
 	 this.health = health - e.getDamage();
 	 Attack = false;
 	 System.out.println("OOOF");
-	 if(health <= 0) {
+	 if(health < 0) {
 		 System.out.println("blergh");
 		 this.visible = false;
 		 this.setCollidable(false);

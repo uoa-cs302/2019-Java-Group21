@@ -20,15 +20,13 @@ public class GiantSpider extends Entity {
 	GiantSpider(int x, int y, List<BufferedImage> images){
 		super(x,y);
 		this.images = new ArrayList<BufferedImage>();
-		this.images.add(images.get(0));
-		this.images.add(images.get(0));
 		setImage(images.get(0));
 		this.getImageDim();
-		projectileImage=images.get(1);
+		projectileImage=images.get(12);
 		Bounds = new Collision((int)this.x_pos,(int)this.y_pos,this.width,this.height);
-		Hitbounds = new Collision((int)this.x_pos,(int)this.y_pos +this.height,this.width,this.height );
+		//Hitbounds = new Collision((int)this.x_pos,(int)this.y_pos +this.height,this.width,this.height );
 		this.direction = Direction.IDLE;
-		this.ani.setFrames(this.getImages());
+		this.ani.setFrames(images.subList(0, 6));
 		this.ani.setFrame(0);
 		this.ani.setDelay(-1);
 		health = 4;
@@ -83,6 +81,25 @@ public class GiantSpider extends Entity {
 			this.dx = (float) movements.get(0).getX();
 			this.dy = (float) movements.get(0).getY();
 			movements.remove(0);
+		}
+		image();
+	}
+	
+	public void animate() {
+		switch (this.direction) {
+		
+		
+		case LEFT:
+			if (dx != 0 && ani.getDelay()== -1) {
+			this.ani.setFrames(images.subList(0, 6));
+			} else if (dx == 0) { ani.setDelay(-1);}
+			break;
+		case RIGHT:
+			if (dx != 0 && ani.getDelay()== -1) {
+			this.ani.setFrames(images.subList(6, 12));
+			}else if (dx == 0) { ani.setDelay(-1);}
+			break;
+		default:
 		}
 	}
 

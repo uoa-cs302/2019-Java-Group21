@@ -25,6 +25,7 @@ public class GameController implements ActionListener {
 	private Graphics g;
 	private int game_time = 0;
 	private int gamecount = 0;
+	private int enemykillcount = 0;
 	private HeadsUpDisplay hud;
 
 	private List<Sprite> sprites;
@@ -62,12 +63,16 @@ public class GameController implements ActionListener {
 				if(e.getKeyCode() == KeyEvent.VK_T) {
 					timer.stop();
 					gameView.getGameScreen().drawMessage("block");
-				} else
+				} else {
 				if (!gameView.getMessage().isVisible()) {
 				pC.keyReleased(e);
 				} else {
 					timer.restart();
 					gameView.HideMessage();
+				}
+				} if (e.getKeyCode() == KeyEvent.VK_P) {
+					//timer.stop();
+					//gameView.getGameScreen().drawPauseMenu();
 				}
 			}
 
@@ -200,6 +205,7 @@ public class GameController implements ActionListener {
 								rat.hitBy(pC);
 								if (rat.getHealth()<= 0) {
 									deletedEntities.add(rat);
+									enemykillcount++;
 								}
 							}
 						}
@@ -216,6 +222,7 @@ public class GameController implements ActionListener {
 								spider.hitBy(pC);
 								if (spider.getHealth()<= 0) {
 									deletedEntities.add(spider);
+									enemykillcount++;
 								}
 							}
 						}
@@ -258,7 +265,6 @@ public class GameController implements ActionListener {
 				}
 			}
 		}
-
 	}
 
 	public void checkEntityCollision(Entity x) {
