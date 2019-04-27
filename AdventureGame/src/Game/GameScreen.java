@@ -82,7 +82,8 @@ public class GameScreen extends JPanel {
 				if(sprite instanceof Entity) {
 					Entity x = (Entity) sprite;
 					g2d.setColor(Color.blue);
-					g2d.drawRect(x.getBounds().getX()+ (int) x.getBounds().getxOff(), x.getBounds().getY() + (int) x.getBounds().getyOff(), (int) x.getBounds().getwidth(),(int) x.getBounds().getheight());
+					if (x.getBounds()!=null)
+						g2d.drawRect(x.getBounds().getX()+ (int) x.getBounds().getxOff(), x.getBounds().getY() + (int) x.getBounds().getyOff(), (int) x.getBounds().getwidth(),(int) x.getBounds().getheight());
 					if (x.getHitBounds()!=null) {
 						g2d.setColor(Color.green);
 						g2d.drawRect(x.getHitBounds().getX() + (int) x.getHitBounds().getxOff(),(int) x.getHitBounds().getY()+ (int)x.getHitBounds().getyOff(), (int)x.getHitBounds().getwidth(),(int) x.getHitBounds().getheight());

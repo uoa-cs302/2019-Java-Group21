@@ -25,11 +25,9 @@ public class PressurePlate extends Entity {
 	
 	public void update() {
 		if (enabled) {
-			System.out.println("enabled");
 			this.setImage(this.images.get(1));
 			//setanimation/frame to pressed
 		} else {
-			System.out.println("not enabled");
 			this.setImage(this.images.get(0));
 			//setanimation/frame to not pressed
 		}

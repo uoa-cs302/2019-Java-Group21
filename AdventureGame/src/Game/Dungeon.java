@@ -1807,13 +1807,19 @@ public class Dungeon {
 		PressurePlate plate = new PressurePlate(416,332,assets.getFromList(22),assets.getFromList(6));
 		PressurePlate plate1 = new PressurePlate(448,332,assets.getFromList(22),assets.getFromList(6));
 		PressurePlate plate2 = new PressurePlate(480,332,assets.getFromList(22),assets.getFromList(6));
+		Light light = new Light(416, 44, plate, assets.getFromList(38), assets.getFromList(54));
+		Light light1 = new Light(480, 44, plate1, assets.getFromList(38), assets.getFromList(54));
+		Light light2 = new Light(544, 44, plate2, assets.getFromList(38), assets.getFromList(54));
 		Door door = new Door(512, 108, plate);
-		//door.addPlate(plate1);
-		//door.addPlate(plate2);
+		door.addPlate(plate1);
+		door.addPlate(plate2);
 		roomPuzzle.addToRoom(plate);
 		roomPuzzle.addToRoom(plate1);
 		roomPuzzle.addToRoom(plate2);
 		roomPuzzle.addToRoom(door);
+		roomPuzzle.addToRoom(light);
+		roomPuzzle.addToRoom(light1);
+		roomPuzzle.addToRoom(light2);
 		rooms.set(6 + (2*difficulty), roomPuzzle);
 	}
 
