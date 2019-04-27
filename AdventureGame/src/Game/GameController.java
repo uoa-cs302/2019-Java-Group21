@@ -55,8 +55,8 @@ public class GameController implements ActionListener {
 				sprites = gameModel.getCurrentRoom().getSpriteList();
 				entities = gameModel.getCurrentRoom().getEntityList();
 				//draw the gamescreen
-				gameView.drawGameMenu();
-				InitGame();
+				//gameView.drawGameMenu();
+				gameView.DrawIntro();
 				addKeyListen();
 			}
 		};
@@ -74,16 +74,27 @@ public class GameController implements ActionListener {
 		gameView.addKeyListener(v = new KeyAdapter() {
 
 			public void keyReleased(KeyEvent e) {
+				if (gameView.getIntro().isVisible()) {
+					if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+						gameView.drawGameMenu();
+						InitGame();
+					}
+				}
+//-------------------------------------------------------------------					
+				
 				if(e.getKeyCode() == KeyEvent.VK_T) {
 					timer.stop();
 					gameView.getGameScreen().drawMessage("block");
 				} else 
 					if (!gameView.getMessage().isVisible()) {
+						if(pC != null) {
 						pC.keyReleased(e);
+						}
 					} else {
 						timer.restart();
 						gameView.HideMessage();
 					}
+//------------------------------------------------------------				
 				 if (e.getKeyCode() == KeyEvent.VK_P && !gameView.getGameScreen().getpause().isVisible() ) {
 					timer.stop();
 					gameView.getGameScreen().drawPauseMenu();
@@ -124,7 +135,9 @@ public class GameController implements ActionListener {
 
 			public void keyPressed(KeyEvent e){
 				if (!gameView.getMessage().isVisible()) {
+					if (pC != null) {
 					pC.keyPressed(e);
+				}
 				}
 			}
 		});
