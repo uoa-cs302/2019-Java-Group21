@@ -148,6 +148,8 @@ public class GameController implements ActionListener {
 		this.timer = new Timer(DELAY,this);
 		hud = new HeadsUpDisplay();
 		pC = new PC(Start_X,Start_Y,gameModel.getPlayerAssets(), gameModel.getInventoryAssets());
+		Dog dog = new Dog(0,0);
+		pC.getInventory().addItem(dog);
 		hud.setHealthAssets(gameModel.getHealthAssets());
 		hud.setInventory(pC.getInventory());
 		sprites.add(pC);
@@ -187,7 +189,17 @@ public class GameController implements ActionListener {
 				item.sety_pos((int)pC.gety_pos());
 				item.getImageDim();
 				item.setBounds(new Collision((int)item.getx_pos(),(int)item.gety_pos(),item.width,item.height));
-				newEntities.add(item);
+				if (item instanceof Dog) {
+					Dog dog = (Dog) item;
+					for (Entity entity : entities)
+						if (entity instanceof Skeleton) {
+							dog.setTarget(entity);
+							dog.setDropped(true);
+							newEntities.add(dog);
+						}
+				}
+				else
+					newEntities.add(item);
 			}
 			pC.getInventory().clearDroppedItems();
 		}
@@ -216,6 +228,10 @@ public class GameController implements ActionListener {
 			}
 			else if (entity instanceof Skeleton) {
 				entity.setTarget(pC);
+				checkEntityCollision(entity);
+				entity.update();
+			}
+			else if (entity instanceof Dog) {
 				checkEntityCollision(entity);
 				entity.update();
 			}
@@ -376,6 +392,8 @@ public class GameController implements ActionListener {
 						pp.setEnabled(true);
 					}
 				}
+				else if (x instanceof Skeleton && e1 instanceof Dog)
+					x.hitBy(e1);
 			}
 		}
 	}

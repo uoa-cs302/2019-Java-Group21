@@ -24,7 +24,6 @@ public class Skeleton extends Entity {
 		damage = 1;
 		this.AttackDuration = 80;
 	}
-
 	
 	public void attack() {
 		

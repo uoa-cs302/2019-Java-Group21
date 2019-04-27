@@ -78,6 +78,8 @@ public class Image {
 		}
 		inventory.add(sword0);
 		inventory.add(sword1);
+		inventory.add(loadSpecificImage("src/Image/dog0.png"));
+		inventory.add(loadSpecificImage("src/Image/dog1.png"));
 	}
 	
 	// FINAL VARIABLES

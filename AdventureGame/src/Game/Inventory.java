@@ -55,6 +55,14 @@ public class Inventory {
 			item.setInventoryImage(getItemImage(0));
 			item.setImage(getItemImage(1));
 		}
+		else if (item instanceof Dog) {
+			Dog dog = (Dog) item;
+			dog.setDropped(false);
+			item.setInventoryImage(getItemImage(3));
+			item.setImage(getItemImage(2));
+			item.images.add(getItemImage(2));
+			item.images.add(getItemImage(2));
+		}
 		for (int i = 0; i < inventorySize(); i++)
 			if (items.get(i) == placeholder) {
 				items.set(i, item);
