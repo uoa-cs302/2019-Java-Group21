@@ -1020,6 +1020,8 @@ public class Dungeon {
 		//room.addEntityList(rat2);
 		//GiantRat rat3 = new GiantRat(240, 300);
 		//room.addEntityList(rat3);
+		Skeleton skeleton = new Skeleton(296, 172, assets.getSkeleton());
+		room.addToRoom(skeleton);
 	}
 
 	private void createRoomSkeleton(){
@@ -1800,13 +1802,12 @@ public class Dungeon {
 		roomPuzzle.setWallGrid(wall);
 		roomPuzzle.setDecorGrid(decor);
 		roomPuzzle.createLevel(128, 12, assets);
-		PressurePlate plate = new PressurePlate(384,396);
-		PressurePlate plate1 = new PressurePlate(384,400);
-		PressurePlate plate2 = new PressurePlate(384,392);
-		plate.setImage(assets.getSword0());
-		plate1.setImage(assets.getSword0());
-		plate2.setImage(assets.getSword0());
-		Door door = new Door(512, 108, plate, plate1, plate2);
+		PressurePlate plate = new PressurePlate(416,332,assets.getFromList(22),assets.getFromList(6));
+		PressurePlate plate1 = new PressurePlate(448,332,assets.getFromList(22),assets.getFromList(6));
+		PressurePlate plate2 = new PressurePlate(480,332,assets.getFromList(22),assets.getFromList(6));
+		Door door = new Door(512, 108, plate);
+		//door.addPlate(plate1);
+		//door.addPlate(plate2);
 		roomPuzzle.addToRoom(plate);
 		roomPuzzle.addToRoom(plate1);
 		roomPuzzle.addToRoom(plate2);

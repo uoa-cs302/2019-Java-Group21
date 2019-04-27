@@ -40,8 +40,8 @@ public class Entity extends Sprite {
 	protected int AttackSpeed;
 	protected int AttackDuration = 30;
 	
-	protected boolean slowed = false;
-	protected int slowedCounter;
+	protected boolean knockedBack = false;
+	protected int knockBackCounter;
 	
 	protected int health;
 
@@ -145,25 +145,24 @@ public class Entity extends Sprite {
 		animate();
 		image();
 		setHitboxDirection();
-		/*if (slowed) {
-			if (slowedCounter == 0)
-				speed = 0.25;
-			if (slowedCounter < 100)
-				slowedCounter++;
+		if (knockedBack) {
+			dx = dx*2;
+			dy = dy*2;
+			if (knockBackCounter < 10)
+				knockBackCounter++;
 			else {
-				slowed = false;
-				slowedCounter = 0;
-				speed = 1;
+				knockedBack = false;
+				this.resetKnockBackCounter();
 			}
-		}*/
+		}
 		if(Attack || attackCount != 0) {
 			this.attacking = true;
 			runAttack();
 		}
 		
-		x_pos += (int) dx*speed;
+		x_pos += (int) dx;
 		Right = (int)x_pos + width;
-		y_pos += (int) dy*speed;
+		y_pos += (int) dy;
 		Bottom = (int)y_pos + height;
 		Bounds.setBox((int)this.x_pos, (int)this.y_pos, (int)Bounds.getwidth(), (int)Bounds.getheight());
 		if (Hitbounds != null) {
@@ -193,7 +192,8 @@ public class Entity extends Sprite {
 	}
 
 	public void update(Entity target) {
-	};
+		
+	}
 
 	public void move() {}
 	public void image() {
@@ -290,21 +290,18 @@ public class Entity extends Sprite {
 	 this.health = health - e.getDamage();
 	 Attack = false;
 	 System.out.println("OOOF");
-	 if(health < 0) {
+	 if(health <= 0) {
 		 System.out.println("blergh");
 		 this.visible = false;
 		 this.setCollidable(false);
 	 }
 	 if (e.getDown()) {
 		 this.dy = 32;
-	 }else
-	 if (e.getLeft()) {
+	 }else if (e.getLeft()) {
 		 this.dx = -32;
-	 }else
-	 if (e.getRight()) {
+	 }else if (e.getRight()) {
 		 this.dx = 32;
-	 }else
-	 if(e.getUP()) {
+	 }else if(e.getUP()) {
 		this.dy = -32;
 	 }
 	 else {
@@ -345,11 +342,11 @@ public class Entity extends Sprite {
 		return this.target;
 	}
 	
-	public void setSlowed() {
-		this.slowed = true;
+	public void setKockedBack() {
+		this.knockedBack = true;
 	}
 	
-	public void resetSlowedCounter() {
-		this.slowedCounter = 0;
+	public void resetKnockBackCounter() {
+		this.knockBackCounter = 0;
 	}
 }

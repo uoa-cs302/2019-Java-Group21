@@ -4,16 +4,16 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 
 public class Animation {
-	
+
 	private List<BufferedImage> frames;
 	private int count;
 	private int DELAY;
-	
+
 	private int curFrame;
 	private int numFrame;
-	
+
 	private int timesPlayed;
-	
+
 	public Animation(List<BufferedImage> frames) {
 		timesPlayed = 0;
 		setFrames(frames);
@@ -21,7 +21,7 @@ public class Animation {
 	public Animation() {
 		timesPlayed=0;
 	}
-	
+
 	public void setFrames(List<BufferedImage> frames) {
 		this.frames = frames;
 		this.curFrame = 0;
@@ -30,11 +30,11 @@ public class Animation {
 		this.numFrame = frames.size();
 		this.timesPlayed = 0;
 	}
-	
+
 	public void setDelay(int delay) {this.DELAY = delay;}
 	public void setFrame(int i) {this.curFrame = i;}
 	public void setFrameNum(int i) {this.numFrame = i;}
-	
+
 	public void update() {
 		if (DELAY == -1)
 			return;
@@ -47,10 +47,10 @@ public class Animation {
 			curFrame = 0;
 			timesPlayed++;
 		}
-		
-	
+
+
 	}
-	
+
 	public int getDelay() {return DELAY;}
 	public int getFrame() {return curFrame;}
 	public int getCount() {return count;}

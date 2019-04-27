@@ -72,12 +72,12 @@ public class GameController implements ActionListener {
 						timer.restart();
 						gameView.HideMessage();
 					}
-				 if (e.getKeyCode() == KeyEvent.VK_P && !gameView.getGameScreen().getpause().isVisible() ) {
+				if (e.getKeyCode() == KeyEvent.VK_P && !gameView.getGameScreen().getpause().isVisible() ) {
 					timer.stop();
 					gameView.getGameScreen().drawPauseMenu();
 				} else if (e.getKeyCode() == KeyEvent.VK_P && gameView.getGameScreen().getpause().isVisible()) {
-				gameView.HidePause();
-				timer.restart();
+					gameView.HidePause();
+					timer.restart();
 				} else if (gameView.getGameScreen().getpause().isVisible()) {
 					if (e.getKeyCode() == KeyEvent.VK_W) {
 						gameView.getGameScreen().getpause().setSel(0);
@@ -89,9 +89,9 @@ public class GameController implements ActionListener {
 							timer.restart();
 						}else {}
 						//need to incorporate gameover screen yet
-							
+
 					}
-					
+
 				}
 			}
 
@@ -173,6 +173,13 @@ public class GameController implements ActionListener {
 				checkEntityCollision(entity);
 				entity.update();
 			}
+			else if (entity instanceof PressurePlate) {
+				checkEntityCollision(entity);
+				entity.update();
+			}
+			else if (entity instanceof Door) {
+				entity.update();
+			}
 		}
 		if (getLoadingRoom())
 			RoomLoad();
@@ -189,16 +196,15 @@ public class GameController implements ActionListener {
 				if (sp2 != ((Projectile) sp1).getParent() && !(sp2 instanceof Projectile)) {
 					deletedEntities.add(sp1);
 					if(!(sp2 instanceof Door)) {
-					sp2.hitBy(sp1);
+						sp2.hitBy(sp1);
 					}
-					sp2.resetSlowedCounter();
-					sp2.setSlowed();
 				}
 			}
 			else
 				sp1.CollisionProcess(sp2.getBounds());
 		}
 	}
+
 
 	//checks collision of Player with all Obj
 	public void checkPlayerCollision() {
@@ -269,8 +275,6 @@ public class GameController implements ActionListener {
 					}
 					else if (e1 instanceof Skeleton) {
 						Skeleton skeleton = (Skeleton) e1;
-						if(pC.getBounds().collisionWith(skeleton.getBounds(),(int)pC.getdx(),(int)pC.getdy()))
-							pC.CollisionProcess(skeleton.getBounds());
 						if (pC.getHitBounds().collisionWith(skeleton.getBounds())) {
 							if (pC.canAttack()) {
 								skeleton.hitBy(pC);
@@ -291,23 +295,20 @@ public class GameController implements ActionListener {
 	}
 
 	public void checkEntityCollision(Entity x) {
-		boolean steppedon = false;
-		for (Entity e1 : entities) {
-			if (x.getID() != e1.getID()) {
-				if (x instanceof PressurePlate) {
-
-					PressurePlate pp = (PressurePlate) x;
-					if (pp.getBounds().collisionWith(e1.getBounds())) {
-						pp.CollisionProcess(e1.getBounds());
-						steppedon = true;
-					}
-				}
-				checkCollision(x,e1);
-			}
-		}
-		if (!steppedon && x instanceof PressurePlate) {
+		if (x instanceof PressurePlate) {
 			PressurePlate pp = (PressurePlate) x;
 			pp.setEnabled(false);
+		}
+		for (Entity e1 : entities) {
+			if (x.getID() != e1.getID()) {
+				checkCollision(x,e1);
+				if (x instanceof PressurePlate) {
+					PressurePlate pp = (PressurePlate) x;
+					if (pp.getBounds().collisionWith(e1.getBounds())) {
+						pp.setEnabled(true);
+					}
+				}
+			}
 		}
 	}
 
@@ -320,7 +321,6 @@ public class GameController implements ActionListener {
 
 	//updateEntity Location
 	private void updateEntity(Entity x) {
-
 		checkEntityCollision(x);
 		x.update(pC);
 	}

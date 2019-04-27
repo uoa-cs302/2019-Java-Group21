@@ -24,20 +24,22 @@ public class Door extends Entity{
 		open = true;
 	}
 
-	public Door (int x, int y, PressurePlate p0, PressurePlate p1, PressurePlate p2) {
+	public Door (int x, int y, PressurePlate p0) {
 		super(x,y);
 		super.setCollidable(true);
 		Bounds = new Collision((int)this.x_pos,(int)this.y_pos,this.width,this.height);
 		plates = new ArrayList<PressurePlate>();
 		plates.add(p0);
-		plates.add(p1);
-		plates.add(p2);
 		open = false;
 	}
 
 	public void update() {
 		if (plates != null)
 			checkOpen();
+	}
+	
+	public void addPlate(PressurePlate p) {
+		plates.add(p);
 	}
 
 	// Getter and setter for the room variable
@@ -72,8 +74,10 @@ public class Door extends Entity{
 
 	public void checkOpen() {
 		for (PressurePlate plate : plates)
-			if(!plate.isEnabled())
+			if(!plate.isEnabled()) {
 				this.open = false;
+				return;
+			}
 		this.open = true;
 	}
 

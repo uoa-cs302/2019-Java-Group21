@@ -31,7 +31,7 @@ public class GameScreen extends JPanel {
 	private FocusListener f;
 	private JLabel message = new JLabel();
 	private PauseMenu pause = new PauseMenu();
-	
+
 	public GameScreen() {
 		Color color = new Color(47,47,48);
 		setBackground(color);
@@ -90,54 +90,53 @@ public class GameScreen extends JPanel {
 				g2d.drawImage(hud.getInventory().seeItem(i).getInventoryImage(), HeadsUpDisplay.getItemxPos0() + (HeadsUpDisplay.getItemxConst()*i), HeadsUpDisplay.getItemyPos(), this);
 			}
 			for (int i = 0; i < 6; i++) {
-				if (i <= hud.getHealth())
+				if (i  < hud.getHealth())
 					g2d.drawImage(hud.getHealthAssets(0), HeadsUpDisplay.getHeartxPos0() + (HeadsUpDisplay.getHeartxConst()*i), HeadsUpDisplay.getHeartyPos(), this);
 				else
 					g2d.drawImage(hud.getHealthAssets(2), HeadsUpDisplay.getHeartxPos0() + (HeadsUpDisplay.getHeartxConst()*i), HeadsUpDisplay.getHeartyPos(), this);
 			}
-			
+
 		}
 		if (this.message.isVisible()) {
 			g2d.drawString(message.getText(), 0, 0);
 		}
-		System.out.println("Pause visible is: "+ pause.isVisible());
-		
+
 	}
 
-public void setDrawUI(HeadsUpDisplay hud) {
-	this.hud = hud;
-}
-
-public void setDrawTarget(List<Sprite> sprites) {
-	this.sprites = sprites;
-}
-//may not be used atm
-public void updateScreen() {
-	repaint();
-}
-
-public JLabel getMessage() {
-	return this.message;
-}
-
-public void drawMessage(String s) {
-	switch (s) {
-	case "block":
-		message.setVisible(true);
-		message.setText("Looks like you could break this");
-		System.out.println(message.isVisible());
-		message.repaint();
-		break;
+	public void setDrawUI(HeadsUpDisplay hud) {
+		this.hud = hud;
 	}
 
-}
-public PauseMenu getpause() {
-	return pause;
-}
-public void drawPauseMenu() {
-	pause.setVisible(true);
-	pause.repaint();
-}
+	public void setDrawTarget(List<Sprite> sprites) {
+		this.sprites = sprites;
+	}
+	//may not be used atm
+	public void updateScreen() {
+		repaint();
+	}
+
+	public JLabel getMessage() {
+		return this.message;
+	}
+
+	public void drawMessage(String s) {
+		switch (s) {
+		case "block":
+			message.setVisible(true);
+			message.setText("Looks like you could break this");
+			System.out.println(message.isVisible());
+			message.repaint();
+			break;
+		}
+
+	}
+	public PauseMenu getpause() {
+		return pause;
+	}
+	public void drawPauseMenu() {
+		pause.setVisible(true);
+		pause.repaint();
+	}
 
 
 }

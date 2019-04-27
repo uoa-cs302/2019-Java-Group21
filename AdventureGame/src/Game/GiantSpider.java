@@ -25,6 +25,7 @@ public class GiantSpider extends Entity {
 		projectileImage=images.get(12);
 		Bounds = new Collision((int)this.x_pos,(int)this.y_pos,this.width,this.height);
 		//Hitbounds = new Collision((int)this.x_pos,(int)this.y_pos +this.height,this.width,this.height );
+		super.setCollidable(true);
 		this.direction = Direction.IDLE;
 		this.ani.setFrames(images.subList(0, 6));
 		this.ani.setFrame(0);

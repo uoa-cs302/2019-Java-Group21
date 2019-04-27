@@ -19,7 +19,6 @@ public class GiantRat extends Entity {
 		this.ani.setFrame(1);
 		this.ani.setDelay(-1);
 		this.AttackDuration = 90;
-
 	}
 	private void initRat() {
 		damage = 1;
@@ -29,6 +28,7 @@ public class GiantRat extends Entity {
 		Bounds = new Collision((int)this.x_pos,(int)this.y_pos,this.width,this.height/2);
 		Bounds.setyOff(16);
 		Hitbounds = new Collision((int)this.x_pos,(int)this.y_pos +(this.height/2),this.width,this.height );
+		super.setCollidable(true);
 
 	}
 	public void update(Entity target) {
