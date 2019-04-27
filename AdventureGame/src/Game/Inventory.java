@@ -57,6 +57,8 @@ public class Inventory {
 	}
 
 	public boolean addItem(Item item) {
+		if (item == null)
+			return false;
 		for (int i = 0; i < inventorySize(); i++)
 			if (items.get(i) == placeholder) {
 				items.set(i, item);

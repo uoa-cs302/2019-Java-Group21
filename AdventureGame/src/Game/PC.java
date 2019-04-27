@@ -10,7 +10,8 @@ public class PC extends Entity {
 	
 	
 	private Inventory inventory;
-	private boolean itemPickUp = false;
+	private boolean itemPickUp = false; 
+	private boolean interact = false;
 	private Animation slash;
 	private BufferedImage slashim;
 	
@@ -216,11 +217,12 @@ public class PC extends Entity {
 		}
 		if(key == KeyEvent.VK_SPACE) {
 			this.Attack = true;
-			
-
 		}
-		
+		if (key == KeyEvent.VK_E) {
+			setInteract(true);
+		}
 	}
+	
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
 		
@@ -236,10 +238,12 @@ public class PC extends Entity {
 		if (key == KeyEvent.VK_D) {
 			right = false;
 		}
-
 		if (key == KeyEvent.VK_UP) {
 			setItemPickUp(false);
 		}	
+		if (key == KeyEvent.VK_E) {
+			setInteract(false);
+		}
 	}
 	public void setCollided(boolean a) {
 		collision = a;
@@ -267,5 +271,13 @@ public class PC extends Entity {
 	}
 	public void setSlashim(BufferedImage slashim) {
 		this.slashim = slashim;
+	}
+	
+	public boolean isInteract() {
+		return interact;
+	}
+
+	public void setInteract(boolean interact) {
+		this.interact = interact;
 	}
 }

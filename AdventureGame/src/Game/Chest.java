@@ -36,7 +36,10 @@ public class Chest extends Entity{
 	}
 	
 	public Item getItem() {
-		return contents.pop();
+		if (contents.empty())
+			return null;
+		else
+			return contents.pop();
 	}
 
 	

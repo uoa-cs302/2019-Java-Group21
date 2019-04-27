@@ -344,10 +344,13 @@ public class GameController implements ActionListener {
 						Chest chest = (Chest) e1;
 						if(pC.getBounds().collisionWith(chest.getBounds(),(int)pC.getdx(),(int)pC.getdy())) {
 							pC.CollisionProcess(chest.getBounds());
-							chest.setOpen(true);
 						}
-						else if (pC.getBounds().collisionWith(chest.getHitBounds()))
+						else if (pC.getBounds().collisionWith(chest.getHitBounds())) {
 							chest.setOpen(true);
+							if (pC.isInteract()) {
+								pC.getInventory().addItem(chest.getItem());
+							}
+						}
 						else
 							chest.setOpen(false);
 					}
