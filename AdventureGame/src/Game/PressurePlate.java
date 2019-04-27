@@ -19,8 +19,6 @@ public class PressurePlate extends Entity {
 		images.add(deactive);
 		images.add(active);
 		setImage(images.get(0));
-		//add animation/frames
-		
 	}
 	
 	public void update() {
