@@ -1093,6 +1093,8 @@ public class Dungeon {
 		Skeleton skeleton = new Skeleton(496, 172, assets.getSkeleton());
 		roomSkeleton.addToRoom(skeleton);
 		Chest chest = new Chest(496, 102, assets.getChest());
+		Sword sword = new Sword(0,0);
+		chest.addItem(sword);
 		roomSkeleton.addToRoom(chest);
 		rooms.set(4 + difficulty, roomSkeleton);
 	}

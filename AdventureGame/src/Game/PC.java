@@ -213,8 +213,6 @@ public class PC extends Entity {
 		// Used to add sword to inventory for testing
 		if (key == KeyEvent.VK_L) {
 			Sword sword = new Sword(0,0);
-			sword.setImage(inventory.getItemImage(1));
-			sword.setInventoryImage(inventory.getItemImage(0));
 			inventory.addItem(sword);
 		}
 		if(key == KeyEvent.VK_SPACE) {
