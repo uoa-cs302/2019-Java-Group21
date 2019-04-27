@@ -27,6 +27,10 @@ public class GameModel {
 		return assets.getHealth();
 	}
 	
+	public List<BufferedImage> getInventoryAssets(){
+		return assets.getInventory();
+	}
+	
 	public Room getCurrentRoom() {
 		return currentRoom;
 	}

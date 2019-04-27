@@ -15,14 +15,14 @@ public class PC extends Entity {
 	private Animation slash;
 	private BufferedImage slashim;
 	
-	public PC(int x,int y, List<BufferedImage> images) {
+	public PC(int x,int y, List<BufferedImage> images, List<BufferedImage> inventoryImages) {
 		super(x,y);
 		setSlash(new Animation());
 		setImages(images);
 		this.getImageDim();
 		this.health = 6;
 		this.damage = 1;
-		inventory = new Inventory();
+		inventory = new Inventory(inventoryImages);
 		this.ani.setFrames(this.getImages().subList(0, 3));
 		this.slash.setFrames(this.getImages().subList(27, 32));
 		this.slash.setDelay(-1);
@@ -213,6 +213,8 @@ public class PC extends Entity {
 		// Used to add sword to inventory for testing
 		if (key == KeyEvent.VK_L) {
 			Sword sword = new Sword(0,0);
+			sword.setImage(inventory.getItemImage(1));
+			sword.setInventoryImage(inventory.getItemImage(0));
 			inventory.addItem(sword);
 		}
 		if(key == KeyEvent.VK_SPACE) {

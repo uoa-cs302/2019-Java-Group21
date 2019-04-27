@@ -11,7 +11,7 @@ public class HeadsUpDisplay {
 	private static final int inventoryy_pos = 630;
 	private static final int itemx_pos0 = 138;
 	private static final int itemx_const = 96;
-	private static final int itemy_pos = 613;
+	private static final int itemy_pos = 642;
 	private static final int heartx_pos0 = 138;
 	private static final int heartx_const = 20;
 	private static final int hearty_pos = 600;

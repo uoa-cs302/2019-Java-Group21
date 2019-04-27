@@ -18,6 +18,7 @@ public class Image {
 	private List<BufferedImage> health;
 	private List<BufferedImage> chest;
 	private BufferedImage skeleton;
+	private List<BufferedImage> inventory;
 
 	public List<BufferedImage> getPlayer() {
 		return player;
@@ -58,6 +59,27 @@ public class Image {
 		return chest;
 	}
 	
+	public List<BufferedImage> getInventory(){
+		return inventory;
+	}
+	
+	public void loadInventory() {
+		File f;
+		for (int i = 0; i < 8; i++) {
+			f = new File("src/Image/inv" + i + ".png");
+			try {
+				inventory.add(ImageIO.read(f));
+				System.out.println("read inv" + i + ".png");
+			} catch (IOException e) {
+				System.out.println("inventory failed :(");
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		inventory.add(sword0);
+		inventory.add(sword1);
+	}
+	
 	// FINAL VARIABLES
 	List<BufferedImage> assetList;
 
@@ -73,6 +95,7 @@ public class Image {
 		spider = new ArrayList<BufferedImage>();
 		health = new ArrayList<BufferedImage>();
 		chest = new ArrayList<BufferedImage>();
+		inventory = new ArrayList<BufferedImage>();
 		
 		//adds rat sprites
 		rat.add(loadSpecificImage("src/Image/rat_0.png"));
@@ -96,6 +119,7 @@ public class Image {
 		health.add(loadSpecificImage("src/Image/heart2.png"));
 		skeleton = loadSpecificImage("src/Image/skeleton0.png");
 		chest.addAll(getSprites("src/Image/chest0.png",1,2));
+		loadInventory();
 	}
 
 	protected BufferedImage loadSpecificImage(String address) {

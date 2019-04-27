@@ -16,20 +16,12 @@ public class Inventory {
 	private Item placeholder = new Item(0,0);
 	private List<BufferedImage> itemImages = new ArrayList<BufferedImage>();
 
-	public Inventory(){
-		File f;
-		for (int i = 0; i < 8; i++) {
-			f = new File("src/Image/inv" + i + ".png");
-			try {
-				this.images.add(ImageIO.read(f));
-				System.out.println("read inv" + i + ".png");
-			} catch (IOException e) {
-
-				System.out.println("inventory failed :(");
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+	public Inventory(List<BufferedImage> inventoryImages){
+		 for (int i = 0; i < 8; i++) {
+			 images.add(inventoryImages.get(0));
+			 inventoryImages.remove(0);
+		 }
+		 this.itemImages = inventoryImages;
 	}
 
 	public BufferedImage getImage() {

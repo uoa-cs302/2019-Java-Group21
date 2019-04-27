@@ -17,9 +17,9 @@ public class Chest extends Entity{
 		super.setCollidable(true);
 		open = false;
 		contents = new Stack<Item>();
-		setBounds(new Collision((int)this.x_pos,(int)this.y_pos,this.width-2,this.height));
+		setBounds(new Collision((int)this.x_pos,(int)this.y_pos,this.width,this.height));
 		//Bounds.setxOff(1);
-		setHitBounds(new Collision((int)this.x_pos,(int)this.y_pos,this.width-2,this.height-24));
+		setHitBounds(new Collision((int)this.x_pos,(int)this.y_pos,this.width,this.height-16));
 		//Hitbounds.setxOff(1);
 		this.Hitbounds.setyOff(32);
 	}

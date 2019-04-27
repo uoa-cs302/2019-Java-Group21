@@ -147,7 +147,7 @@ public class GameController implements ActionListener {
 		//initialise timer with delay value 10ms
 		this.timer = new Timer(DELAY,this);
 		hud = new HeadsUpDisplay();
-		pC = new PC(Start_X,Start_Y,gameModel.getPlayerAssets());
+		pC = new PC(Start_X,Start_Y,gameModel.getPlayerAssets(), gameModel.getInventoryAssets());
 		hud.setHealthAssets(gameModel.getHealthAssets());
 		hud.setInventory(pC.getInventory());
 		sprites.add(pC);
@@ -175,6 +175,8 @@ public class GameController implements ActionListener {
 		gameView.getGameScreen().updateTimer(game_time);
 		gameView.getGameScreen().updateScore(game_time, enemykillcount);
 		hud.setHealth(pC.getHealth());
+		sprites.remove(pC);
+		sprites.add(pC);
 		if (deletedEntities.size() != 0)
 			deleteEntities();
 		if (newEntities.size() != 0)
@@ -184,6 +186,7 @@ public class GameController implements ActionListener {
 				item.setx_pos((int)pC.getx_pos());
 				item.sety_pos((int)pC.gety_pos());
 				item.getImageDim();
+				item.setBounds(new Collision((int)item.getx_pos(),(int)item.gety_pos(),item.width,item.height));
 				newEntities.add(item);
 			}
 			pC.getInventory().clearDroppedItems();
