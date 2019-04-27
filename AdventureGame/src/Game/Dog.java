@@ -20,7 +20,7 @@ public class Dog extends Item {
 	Dog(int x, int y){
 		super(x,y);
 		this.images = new ArrayList<BufferedImage>();
-		Bounds = new Collision((int)this.x_pos,(int)this.y_pos,this.width,this.height);
+		Bounds = new Collision((int)this.x_pos,(int)this.y_pos,this.width/2,this.height/2);
 		Hitbounds = new Collision((int)this.x_pos,(int)this.y_pos,this.width,this.height );
 		super.setCollidable(true);
 		this.direction = Direction.IDLE;

@@ -80,22 +80,22 @@ public class GameController implements ActionListener {
 						InitGame();
 					}
 				}
-//-------------------------------------------------------------------					
-				
+				//-------------------------------------------------------------------					
+
 				if(e.getKeyCode() == KeyEvent.VK_T) {
 					timer.stop();
 					gameView.getGameScreen().drawMessage("block");
 				} else 
 					if (!gameView.getMessage().isVisible()) {
 						if(pC != null) {
-						pC.keyReleased(e);
+							pC.keyReleased(e);
 						}
 					} else {
 						timer.restart();
 						gameView.HideMessage();
 					}
-//------------------------------------------------------------				
-				 if (e.getKeyCode() == KeyEvent.VK_P && !gameView.getGameScreen().getpause().isVisible() ) {
+				//------------------------------------------------------------				
+				if (e.getKeyCode() == KeyEvent.VK_P && !gameView.getGameScreen().getpause().isVisible() ) {
 					timer.stop();
 					gameView.getGameScreen().drawPauseMenu();
 				} else if (e.getKeyCode() == KeyEvent.VK_P && gameView.getGameScreen().getpause().isVisible()) {
@@ -136,8 +136,8 @@ public class GameController implements ActionListener {
 			public void keyPressed(KeyEvent e){
 				if (!gameView.getMessage().isVisible()) {
 					if (pC != null) {
-					pC.keyPressed(e);
-				}
+						pC.keyPressed(e);
+					}
 				}
 			}
 		});
@@ -252,7 +252,7 @@ public class GameController implements ActionListener {
 		}
 		if (getLoadingRoom())
 			RoomLoad();
-		
+
 		gameView.getGameScreen().setDrawTarget(sprites);
 		gameView.getGameScreen().setDrawUI(getHUD());
 		gameView.getGameScreen().repaint();
@@ -345,14 +345,6 @@ public class GameController implements ActionListener {
 					}
 					else if (e1 instanceof Skeleton) {
 						Skeleton skeleton = (Skeleton) e1;
-						if (pC.getHitBounds().collisionWith(skeleton.getBounds())) {
-							if (pC.canAttack()) {
-								skeleton.hitBy(pC);
-								if (skeleton.getHealth()<= 0) {
-									deletedEntities.add(skeleton);
-								}
-							}
-						}
 						if(pC.getBounds().collisionWith(skeleton.getHitBounds())) {
 							if(skeleton.canAttack()) {
 								pC.hitBy(skeleton);
@@ -393,7 +385,15 @@ public class GameController implements ActionListener {
 					}
 				}
 				else if (x instanceof Skeleton && e1 instanceof Dog)
-					x.hitBy(e1);
+					if (x.getHitBounds().collisionWith(e1.getBounds())) {
+						if (e1.canAttack()) {
+							x.hitBy(e1);
+							if (x.getHealth()<= 0) {
+								deletedEntities.add(x);
+							}
+
+						}
+					}
 			}
 		}
 	}
