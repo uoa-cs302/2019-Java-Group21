@@ -1092,6 +1092,8 @@ public class Dungeon {
 		roomSkeleton.createLevel(128, 12, assets);
 		Skeleton skeleton = new Skeleton(496, 172, assets.getSkeleton());
 		roomSkeleton.addToRoom(skeleton);
+		Chest chest = new Chest(496, 108, assets.getChest());
+		roomSkeleton.addToRoom(chest);
 		rooms.set(4 + difficulty, roomSkeleton);
 	}
 	private void createRightHallway(){

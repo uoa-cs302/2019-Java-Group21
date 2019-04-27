@@ -105,7 +105,7 @@ public class Entity extends Sprite {
 
 	public void setBounds(Collision c) {this.Bounds = c;}
 
-	public void setHitBounds(Collision c) {this.Bounds = c;}
+	public void setHitBounds(Collision c) {this.Hitbounds = c;}
 
 	public void animate() {
 		switch (this.direction) {

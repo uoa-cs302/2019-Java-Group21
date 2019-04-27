@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Timer;
@@ -28,6 +29,8 @@ public class GameController implements ActionListener {
 	private int gamecount = 0;
 	private int enemykillcount = 0;
 	private HeadsUpDisplay hud;
+	private boolean restart = false;
+	private KeyAdapter v;
 
 	private List<Sprite> sprites;
 	private List<Entity> deletedEntities = new ArrayList<Entity>();
@@ -40,6 +43,9 @@ public class GameController implements ActionListener {
 		this.gameModel = model;
 		this.gameView = view;
 		this.ex = ex;
+		InitControl();
+	}
+	public void InitControl() {
 
 		//Sets the button listener on to check for button press on StartScreen
 		ScreenListener gameControllerScreenListener = new ScreenListener() {
@@ -56,10 +62,16 @@ public class GameController implements ActionListener {
 		};
 		gameView.getStartScreen().setButtonListener(gameControllerScreenListener);
 	}
+	public void restart() {
+		gameView.removeKeyListener(v);
+		gameView.drawMainMenu();
+		this.gameModel = new GameModel();
+		InitControl();
+	}
 
 	private void addKeyListen() {
 		//sets a key listener for player movement and interaction
-		gameView.addKeyListener(new KeyAdapter() {
+		gameView.addKeyListener(v = new KeyAdapter() {
 
 			public void keyReleased(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_T) {
@@ -87,12 +99,27 @@ public class GameController implements ActionListener {
 						if (gameView.getGameScreen().getpause().getSel()==0) {
 							gameView.HidePause();
 							timer.restart();
-						}else {}
-						//need to incorporate gameover screen yet
+						}else if (gameView.getGameover().isVisible()) {
+							System.out.println("Restarting");
+							if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+								System.out.println("Restarting");
+								//	try {
+								//gameView.getGameover().saveScore();
+								//} catch (IOException e1) {
+								// TODO Auto-generated catch block
 
+								//}
+								restart();
+							}
+						}else {
+							gameView.getGameover().calculateScore(enemykillcount, game_time);
+							gameView.drawGameOver();
+							System.out.println("drawn");
+						}
 					}
 
 				}
+
 			}
 
 			public void keyPressed(KeyEvent e){
@@ -130,7 +157,10 @@ public class GameController implements ActionListener {
 	//method runs when timer ticks
 	//should include update, and draw.
 	public void actionPerformed(ActionEvent e) {
-		if (gamecount == 100) { gamecount = 0; this.game_time ++; System.out.println(game_time); }
+		if (gamecount == 100) { gamecount = 0; this.game_time ++;}
+		gamecount++;
+		gameView.getGameScreen().updateTimer(game_time);
+		gameView.getGameScreen().updateScore(game_time, enemykillcount);
 		hud.setHealth(pC.getHealth());
 		if (deletedEntities.size() != 0)
 			deleteEntities();
@@ -177,12 +207,17 @@ public class GameController implements ActionListener {
 				checkEntityCollision(entity);
 				entity.update();
 			}
+			else if (entity instanceof Chest) {
+				checkEntityCollision(entity);
+				entity.update();
+			}
 			else if (entity instanceof Door) {
 				entity.update();
 			}
 		}
 		if (getLoadingRoom())
 			RoomLoad();
+		
 		gameView.getGameScreen().setDrawTarget(sprites);
 		gameView.getGameScreen().setDrawUI(getHUD());
 		gameView.getGameScreen().repaint();
@@ -288,6 +323,17 @@ public class GameController implements ActionListener {
 								pC.hitBy(skeleton);
 							}
 						}
+					}
+					else if (e1 instanceof Chest) {
+						Chest chest = (Chest) e1;
+						if(pC.getBounds().collisionWith(chest.getBounds(),(int)pC.getdx(),(int)pC.getdy())) {
+							pC.CollisionProcess(chest.getBounds());
+							chest.setOpen(true);
+						}
+						else if (pC.getBounds().collisionWith(chest.getHitBounds()))
+							chest.setOpen(true);
+						else
+							chest.setOpen(false);
 					}
 				}
 			}

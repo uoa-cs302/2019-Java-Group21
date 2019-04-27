@@ -31,6 +31,8 @@ public class GameScreen extends JPanel {
 	private FocusListener f;
 	private JLabel message = new JLabel();
 	private PauseMenu pause = new PauseMenu();
+	private JLabel Timer = new JLabel();
+	private JLabel Score = new JLabel();
 
 	public GameScreen() {
 		Color color = new Color(47,47,48);
@@ -38,11 +40,23 @@ public class GameScreen extends JPanel {
 		setLayout(null);
 		this.add(message);
 		this.add(pause);
+		this.add(Timer);
+		this.add(Score);
 		message.setBackground(Color.BLACK);
 		message.setVisible(false);
 		message.setBounds(0, 100, 400, 40);
 		message.setFont(new Font("Helvetica",Font.BOLD,16));
 		message.setForeground(Color.white);
+
+		Timer.setVisible(true);
+		Timer.setBounds(800,15 , 200, 35);
+		Timer.setFont(new Font("Helvetica",Font.BOLD,16));
+		Timer.setForeground(Color.WHITE);
+
+		Score.setVisible(true);
+		Score.setBounds(800,50 , 200, 35);
+		Score.setFont(new Font("Helvetica",Font.BOLD,16));
+		Score.setForeground(Color.WHITE);
 
 
 
@@ -69,7 +83,11 @@ public class GameScreen extends JPanel {
 					Entity x = (Entity) sprite;
 					g2d.setColor(Color.blue);
 					g2d.drawRect(x.getBounds().getX()+ (int) x.getBounds().getxOff(), x.getBounds().getY() + (int) x.getBounds().getyOff(), (int) x.getBounds().getwidth(),(int) x.getBounds().getheight());
-				}if(sprite instanceof PC) {
+					if (x.getHitBounds()!=null) {
+						g2d.setColor(Color.green);
+						g2d.drawRect(x.getHitBounds().getX() + (int) x.getHitBounds().getxOff(),(int) x.getHitBounds().getY()+ (int)x.getHitBounds().getyOff(), (int)x.getHitBounds().getwidth(),(int) x.getHitBounds().getheight());
+					}
+					}if(sprite instanceof PC) {
 					PC pC = (PC) sprite;
 					if(pC.getattacking()) {
 						g2d.drawImage(pC.getSlashim(), (int)( pC.getHitBounds().getX() + pC.getHitBounds().getxOff()), (int) (pC.getHitBounds().getY()+pC.getHitBounds().getyOff()),this);
@@ -100,11 +118,32 @@ public class GameScreen extends JPanel {
 		if (this.message.isVisible()) {
 			g2d.drawString(message.getText(), 0, 0);
 		}
-
+		if (Timer.isVisible()) {
+			g2d.drawString(Timer.getText(), 0,0);
+		}
+		if (Score.isVisible()) {
+			g2d.drawString(Score.getText(), 0, 0);
+		}
 	}
 
 	public void setDrawUI(HeadsUpDisplay hud) {
 		this.hud = hud;
+	}
+	public void updateTimer(int Count) {
+		int min10;
+		int sec10;
+		int min;
+		int sec;
+		min = Count / 60;
+		min10 = Count / 600;
+		sec10 = (Count / 10)% 6;
+		sec = Count % 10;
+
+		Timer.setText("Timer elapsed: " +min10 + min + " : "+sec10 + sec);
+	}
+	public void updateScore(int time, int kills) {
+		int score = (kills*5);
+		Score.setText("Score: " + score +" + time bonus!");
 	}
 
 	public void setDrawTarget(List<Sprite> sprites) {
