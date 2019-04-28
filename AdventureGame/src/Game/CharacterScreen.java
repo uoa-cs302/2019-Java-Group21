@@ -31,9 +31,7 @@ public class CharacterScreen extends JPanel implements ActionListener {
 	private List<BufferedImage> arms;
 	private List<BufferedImage> legs;
 	private List<BufferedImage> feet;
-
 	private int action;
-
 	private int hairIndex = 80;
 	private int headIndex = 5;
 	private int bodyIndex = 6;

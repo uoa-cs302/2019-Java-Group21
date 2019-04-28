@@ -69,6 +69,12 @@ public class Inventory {
 			item.images.add(getItemImage(4));
 			item.images.add(getItemImage(4));
 		}
+		else if (item instanceof HeavyStone) {
+			item.setInventoryImage(getItemImage(7));
+			item.setImage(getItemImage(6));
+			item.images.add(getItemImage(6));
+			item.images.add(getItemImage(6));
+		}
 		for (int i = 0; i < inventorySize(); i++)
 			if (items.get(i) == placeholder) {
 				items.set(i, item);

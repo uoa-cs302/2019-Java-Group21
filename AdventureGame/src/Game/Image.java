@@ -15,6 +15,8 @@ public class Image {
 	private BufferedImage sword1;
 	private BufferedImage ball0;
 	private BufferedImage ball1;
+	private BufferedImage stone0;
+	private BufferedImage stone1;
 	private List<BufferedImage> spider;
 	private List<BufferedImage> health;
 	private List<BufferedImage> chest;
@@ -62,6 +64,14 @@ public class Image {
 		return ball1;
 	}
 	
+	public BufferedImage getStone0() {
+		return stone0;
+	}
+
+	public BufferedImage getStone1() {
+		return stone1;
+	}
+	
 	public List<BufferedImage> getSkeleton() {
 		return skeleton;
 	}
@@ -96,6 +106,8 @@ public class Image {
 		inventory.add(loadSpecificImage("src/Image/dog1.png"));
 		inventory.add(ball0);
 		inventory.add(ball1);
+		inventory.add(stone0);
+		inventory.add(stone1);
 	}
 
 	public List<BufferedImage> getHair() {
@@ -159,9 +171,9 @@ public class Image {
 		sword1 = loadSpecificImage("src/Image/swrd1.png");
 		ball0 = loadSpecificImage("src/Image/ball0.png");
 		ball1 = loadSpecificImage("src/Image/ball1.png");
-		System.out.println("trying to load character");
+		stone0 = loadSpecificImage("src/Image/stone0.png");
+		stone1 = loadSpecificImage("src/Image/stone1.png");
 		LoadSprites("src/Image/dungeon0.png");
-		System.out.println("read all sprites success!");
 		health.add(loadSpecificImage("src/Image/heart0.png"));
 		health.add(loadSpecificImage("src/Image/heart1.png"));
 		health.add(loadSpecificImage("src/Image/heart2.png"));
@@ -186,7 +198,6 @@ public class Image {
 	}
 
 	protected BufferedImage loadSpecificImage(String address) {
-		System.out.println(address);
 		File f = new File(address);
 		try {
 			return ImageIO.read(f);
@@ -218,17 +229,13 @@ public class Image {
 
 	protected void LoadSprites(String sheet) {
 		fullSheet = loadSheet(sheet);
-		System.out.println("1!");
 		sheetW = this.fullSheet.getWidth() / TILE_SIZE;
 		sheetH = this.fullSheet.getHeight() / TILE_SIZE;
-		System.out.println("2!");
 		loadSprites();
 	}
 
 	private BufferedImage loadSheet(String sheet) {
-		System.out.println("3!");
 		BufferedImage sheetIm = null;
-		System.out.println("4!");
 		File f = new File(sheet);
 		try {
 			// sheetIm = ImageIO.read(getClass().getResourceAsStream(sheet));

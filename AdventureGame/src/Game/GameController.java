@@ -8,6 +8,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Timer;
+<<<<<<< HEAD
+=======
+import java.io.*;
+import sun.audio.*;
+import Game.AudioObject.Sound;
+>>>>>>> branch 'master' of https://github.com/uoa-cs302/2019-Java-Group21
 
 
 public class GameController implements ActionListener {
@@ -191,7 +197,6 @@ public class GameController implements ActionListener {
 						}else if (gameView.getGameover().isVisible()||pC.isDead()) {
 							System.out.println("Restarting");
 							if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-								System.out.println("Restarting");
 								//	try {
 								//gameView.getGameover().saveScore();
 								//} catch (IOException e1) {
@@ -297,7 +302,6 @@ public class GameController implements ActionListener {
 					dog.setDropped(false);
 					for (Entity entity : entities) {
 						if (entity instanceof Skeleton) {
-							System.out.println("hi");
 							dog.setTarget(entity);
 							dog.setDropped(true);
 							newEntities.add(dog);
@@ -446,7 +450,6 @@ public class GameController implements ActionListener {
 					}
 					else if (e1 instanceof Item) {
 						Item item = (Item) e1;
-						System.out.println("item size " + item.getBounds().getheight());
 						if(pC.getBounds().collisionWith(item.getBounds())) {
 							if (pC.isItemPickUp()) {
 								if (pC.getInventory().addItem(item)) {
