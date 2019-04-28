@@ -1,19 +1,13 @@
 package Game;
 
-import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Timer;
-
-import Game.AudioObject.Sound;
-import javafx.scene.input.KeyCode;
 
 
 public class GameController implements ActionListener {
@@ -22,17 +16,14 @@ public class GameController implements ActionListener {
 	private int DELAY = 10;
 	private int Start_X = 496;
 	private int Start_Y = 304;
-	private int AnimCount = 1;
 	private PC pC;
 	private GameView gameView;
 	private GameModel gameModel;
 	private GameExecutable ex;
-	private Graphics g;
 	private int game_time = 0;
 	private int gamecount = 0;
 	private int enemykillcount = 0;
 	private HeadsUpDisplay hud;
-	private boolean restart = false;
 	private KeyAdapter v;
 
 	private List<Sprite> sprites;
@@ -40,10 +31,6 @@ public class GameController implements ActionListener {
 	private List<Entity> newEntities = new ArrayList<Entity>();
 	private List<Entity> entities;
 	boolean loadingRoom = false;
-
-	private Sound Intro;
-	private Sound Rat;
-	private Sound Attck;
 
 	public GameController(GameModel model, GameView view, GameExecutable ex) {
 
@@ -125,6 +112,9 @@ public class GameController implements ActionListener {
 						case 1:
 							gameView.drawCharacterScreen();
 							break;
+						case 2:
+							gameView.drawScores();
+							break;
 						case 3:
 							gameView.dispose();
 							break;
@@ -143,6 +133,11 @@ public class GameController implements ActionListener {
 							gameModel.getAssets().loadCharacter();
 							gameView.drawStartMenu();
 						}
+					}
+				}
+				if(gameView.getHighScores().isVisible()) {
+					if(e.getKeyCode()==KeyEvent.VK_ENTER) {
+						gameView.drawStartMenu();
 					}
 				}
 			}
@@ -171,18 +166,12 @@ public class GameController implements ActionListener {
 					}
 				}
 				//-------------------------------------------------------------------					
-				if(e.getKeyCode() == KeyEvent.VK_T) {
-					timer.stop();
-					gameView.getGameScreen().drawMessage("block");
-				} else 
-					if (!gameView.getMessage().isVisible()) {
+		
+					
 						if(pC != null) {
 							pC.keyReleased(e);
 						}
-					} else {
-						timer.restart();
-						gameView.HideMessage();
-					}
+					
 				//------------------------------------------------------------				
 				if ((e.getKeyCode() == KeyEvent.VK_P || e.getKeyCode() == KeyEvent.VK_ESCAPE)&& !gameView.getGameScreen().getpause().isVisible() ) {
 					timer.stop();
@@ -222,6 +211,14 @@ public class GameController implements ActionListener {
 					System.out.println("Restarting");
 					if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 						System.out.println("Restarting");
+						
+							try {
+								gameView.getHighScores().saveScore(gameView.getGameover().getScore());
+							} catch (IOException e1) {
+								System.out.println("We fucked");
+								e1.printStackTrace();
+							}
+											
 						//	try {
 						//gameView.getGameover().saveScore();
 						//} catch (IOException e1) {
@@ -229,9 +226,10 @@ public class GameController implements ActionListener {
 
 						//}
 						restart();
+				}
 					}
 				}
-				}
+				
 
 			}
 
@@ -307,6 +305,9 @@ public class GameController implements ActionListener {
 					}
 					if (dog.isDropped() == false)
 						pC.getInventory().addItem(dog);
+				}else if (item instanceof Sword) {
+					pC.getInventory().addItem(item);
+					pC.setDamage(2);
 				}
 				else
 					newEntities.add(item);

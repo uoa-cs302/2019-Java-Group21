@@ -4,31 +4,20 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.util.List;
 import java.awt.Toolkit;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.border.Border;
+
 
 public class GameScreen extends JPanel {
 	//sprite can be changed into ArrayList or other later
 	private List<Sprite> sprites;
-	private ImageIcon ii = new ImageIcon();
 	private HeadsUpDisplay hud;
 	@SuppressWarnings("unused")
 	private KeyAdapter key;
-	private FocusListener f;
 	private JLabel message = new JLabel();
 	private PauseMenu pause = new PauseMenu();
 	private JLabel Timer = new JLabel();
@@ -78,31 +67,13 @@ public class GameScreen extends JPanel {
 
 				if(sprite.isVisible() && sprite.getImage() != null) {
 					g2d.drawImage(sprite.getImage(), (int)sprite.getx_pos(), (int)sprite.gety_pos(),this);
-				}
-				if(sprite instanceof Entity) {
-					Entity x = (Entity) sprite;
-					g2d.setColor(Color.blue);
-					if (x.getBounds()!=null) {
-						g2d.drawRect(x.getBounds().getX()+ (int) x.getBounds().getxOff(), x.getBounds().getY() + (int) x.getBounds().getyOff(), (int) x.getBounds().getwidth(),(int) x.getBounds().getheight());
-						if (x instanceof Item)
-							System.out.println(x.getBounds() + "is bounds");
-					}
-					if (x.getHitBounds()!=null) {
-						g2d.setColor(Color.green);
-						g2d.drawRect(x.getHitBounds().getX() + (int) x.getHitBounds().getxOff(),(int) x.getHitBounds().getY()+ (int)x.getHitBounds().getyOff(), (int)x.getHitBounds().getwidth(),(int) x.getHitBounds().getheight());
-					}
+				
 				}if(sprite instanceof PC) {
 					PC pC = (PC) sprite;
 					if(pC.getattacking()) {
 						g2d.drawImage(pC.getSlashim(), (int)( pC.getHitBounds().getX() + pC.getHitBounds().getxOff()), (int) (pC.getHitBounds().getY()+pC.getHitBounds().getyOff()),this);
 					}
-					g2d.setColor(Color.green);
-					g2d.drawRect(pC.getHitBounds().getX() + (int) pC.getHitBounds().getxOff(),(int) pC.getHitBounds().getY()+ (int)pC.getHitBounds().getyOff(), (int)pC.getHitBounds().getwidth(),(int) pC.getHitBounds().getheight());
-				}if(sprite instanceof GiantRat) {
-					GiantRat rat = (GiantRat) sprite;
-					g2d.setColor(Color.green);
-					g2d.drawRect(rat.getHitBounds().getX() + (int) rat.getHitBounds().getxOff(),(int) rat.getHitBounds().getY()+ (int)rat.getHitBounds().getyOff(), (int)rat.getHitBounds().getwidth(),(int) rat.getHitBounds().getheight());
-				}
+					
 			}
 
 		}
@@ -128,6 +99,7 @@ public class GameScreen extends JPanel {
 		if (Score.isVisible()) {
 			g2d.drawString(Score.getText(), 0, 0);
 		}
+	}
 	}
 
 	public void setDrawUI(HeadsUpDisplay hud) {

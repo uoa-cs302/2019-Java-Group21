@@ -1,22 +1,9 @@
 package Game;
 
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GridBagLayout;
-import java.awt.LayoutManager;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 
 
@@ -28,6 +15,7 @@ public class GameView extends JFrame {
 	private GameIntro gameIntro;
 	private CharacterScreen characterScreen;
 	private DifficultyScreen difficultyScreen;
+	private ScoreScreen HighScores;
 	
 	private CardLayout cardLayout;
 	protected Graphics g;
@@ -51,6 +39,7 @@ public class GameView extends JFrame {
 		gameIntro = new GameIntro();
 		characterScreen = new CharacterScreen();
 		difficultyScreen = new DifficultyScreen();
+		HighScores = new ScoreScreen();
 		
 		setLayout(cardLayout);
 		
@@ -60,6 +49,7 @@ public class GameView extends JFrame {
 		add(gameIntro,"Intro");
 		add(characterScreen, "Character");
 		add(difficultyScreen, "Difficulty");
+		add(HighScores,"Score");
 		
 		cardLayout.show(this.getContentPane(),"Difficulty");
 	}
@@ -79,6 +69,7 @@ public class GameView extends JFrame {
 		remove(gameover);
 		remove(gameIntro);
 		remove(characterScreen);
+		remove(HighScores);
 		InitGameView();
 	}
 	
@@ -128,6 +119,12 @@ public class GameView extends JFrame {
 	}
 	public GameIntro getIntro() {
 		return gameIntro;
+	}
+	public ScoreScreen getHighScores() {
+		return HighScores;
+	}
+	public void drawScores() {
+		cardLayout.show(this.getContentPane(),"Score");
 	}
 
 

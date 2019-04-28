@@ -108,15 +108,12 @@ public class GameOverScreen extends JPanel {
 		Score.setText("Your score is " + score + " Congratulations!");
 		
 	}
-	public void saveScore() throws IOException {
-		FileWriter fw = new FileWriter(new File("src/HighScores"));
-		fw.append(name.getText()+"  "+ this.score);
-		fw.close();
-		
-	}
 
 	public void setCompleted(boolean completed) {
 		this.completed = completed;
+	}
+	public int getScore() {
+		return this.score;
 	}
 
 }

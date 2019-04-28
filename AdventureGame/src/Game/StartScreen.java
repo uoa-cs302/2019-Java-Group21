@@ -1,38 +1,27 @@
 package Game;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Label;
-import java.awt.TextField;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
-import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class StartScreen extends JPanel implements ActionListener {
 	
-	private ScreenListener ButtonListener;
 	private java.awt.Image background;
 	private JLabel Title;
 	private JLabel start;
 	private JLabel character;
-	private JLabel credit;
 	private JLabel Exit;
 	private JLabel Control;
+	private JLabel HighScores;
 	
 	private	 int sel = 0;
 	private Timer timer = new Timer(15,this);
@@ -57,17 +46,18 @@ public class StartScreen extends JPanel implements ActionListener {
 		start.setAlignmentX(Label.CENTER);
 		start.setText("Start");
 		
+		HighScores = new JLabel();
+		HighScores.setFont(new Font("Helvetica",Font.PLAIN,22));
+		HighScores.setBounds(800, 480,200 , 40);
+		HighScores.setAlignmentX(Label.CENTER);
+		HighScores.setText("HighScores");
+		
 		character = new JLabel();
 		character.setFont(new Font("Helvetica",Font.PLAIN,22));
 		character.setBounds(800, 420,200 , 40);
 		character.setAlignmentX(Label.CENTER);
 		character.setText("Character");
 		
-		credit = new JLabel();
-		credit.setFont(new Font("Helvetica",Font.PLAIN,22));
-		credit.setBounds(800, 480,200 , 40);
-		credit.setAlignmentX(Label.CENTER);
-		credit.setText("Credits");
 		
 		Exit = new JLabel();
 		Exit.setFont(new Font("Helvetica",Font.PLAIN,22));
@@ -84,12 +74,9 @@ public class StartScreen extends JPanel implements ActionListener {
 		this.add(start);
 		this.add(Control);
 		this.add(character);
-		this.add(credit);
 		this.add(Exit);
+		this.add(HighScores);
 		}
-	public void setButtonListener(ScreenListener sl) {
-		this.ButtonListener = sl;
-	}
 	public java.awt.Image getbackground() {
 		return background;
 	}
@@ -107,29 +94,28 @@ public class StartScreen extends JPanel implements ActionListener {
 		case 0:
 			start.setFont(new Font("Helvetica",Font.BOLD,22));
 			character.setFont(new Font("Helvetica",Font.PLAIN,22));
-			credit.setFont(new Font("Helvetica",Font.PLAIN,22));
+			HighScores.setFont(new Font("Helvetica",Font.PLAIN,22));
 			Exit.setFont(new Font("Helvetica",Font.PLAIN,22));
 			break;
 		case 1:
 			start.setFont(new Font("Helvetica",Font.PLAIN,22));
 			character.setFont(new Font("Helvetica",Font.BOLD,22));
-			credit.setFont(new Font("Helvetica",Font.PLAIN,22));
+			HighScores.setFont(new Font("Helvetica",Font.PLAIN,22));
 			Exit.setFont(new Font("Helvetica",Font.PLAIN,22));
 			break;
 		case 2:
 			start.setFont(new Font("Helvetica",Font.PLAIN,22));
 			character.setFont(new Font("Helvetica",Font.PLAIN,22));
-			credit.setFont(new Font("Helvetica",Font.BOLD,22));
+			HighScores.setFont(new Font("Helvetica",Font.BOLD,22));
 			Exit.setFont(new Font("Helvetica",Font.PLAIN,22));
 			break;
 		case 3:
 			start.setFont(new Font("Helvetica",Font.PLAIN,22));
 			character.setFont(new Font("Helvetica",Font.PLAIN,22));
-			credit.setFont(new Font("Helvetica",Font.PLAIN,22));
+			HighScores.setFont(new Font("Helvetica",Font.PLAIN,22));
 			Exit.setFont(new Font("Helvetica",Font.BOLD,22));
 			break;
 		default:
-			System.out.println("big oof");
 		}
 	}
 	public void actionPerformed(ActionEvent e) {
@@ -145,7 +131,7 @@ public class StartScreen extends JPanel implements ActionListener {
 		g2d.drawString(Title.getText(), 0, 0);
 		g2d.drawString(start.getText(), 0, 0);
 		g2d.drawString(character.getText(), 0, 0);
-		g2d.drawString(credit.getText(), 0, 0);
+		g2d.drawString(HighScores.getText(), 0, 0);
 		g2d.drawString(Exit.getText(), 0, 0);
 		g2d.drawString(Title.getText(), 0, 0);
 		Toolkit.getDefaultToolkit().sync();
