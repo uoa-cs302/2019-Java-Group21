@@ -32,12 +32,17 @@ public class CharacterScreen extends JPanel implements ActionListener {
 	private int legsIndex;
 	private int feetIndex;
 	
-	private int select;
+	private int select = 0;
+	
+	
 	
 	public CharacterScreen() {
 		this.setBackground(Color.black);
 		this.setVisible(false);
 		this.setLayout(null);
+		
+		Title = new JLabel();
+		Title.setForeground(Color.WHITE);
 	}
 
 	@Override
