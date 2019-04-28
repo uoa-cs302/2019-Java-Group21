@@ -18,6 +18,10 @@ public class GameModel {
 		currentRoom.addToRoom(new GiantRat(280,400,assets.getRat()));
 		System.out.println("GameModel constructor complete");
 	}
+	
+	public Image getAssets(){
+		return assets;
+	}
 
 	public List<BufferedImage> getPlayerAssets(){
 		return assets.getPlayer();

@@ -101,6 +101,7 @@ public class GameView extends JFrame {
 	public GameScreen getGameScreen() {
 		return gameScreen;
 	}
+	
 	public CardLayout getcardLayout() {
 		return cardLayout;
 	}
