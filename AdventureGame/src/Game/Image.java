@@ -19,7 +19,6 @@ public class Image {
 	private List<BufferedImage> chest;
 	private BufferedImage skeleton;
 	private List<BufferedImage> inventory;
-	private List<BufferedImage> hat;
 	private List<BufferedImage> hair;
 	private List<BufferedImage> head;
 	private List<BufferedImage> body;
@@ -88,11 +87,6 @@ public class Image {
 		inventory.add(loadSpecificImage("src/Image/dog0.png"));
 		inventory.add(loadSpecificImage("src/Image/dog1.png"));
 	}
-	
-	
-	public List<BufferedImage> getHat() {
-		return hat;
-	}
 
 	public List<BufferedImage> getHair() {
 		return hair;
@@ -136,7 +130,6 @@ public class Image {
 		health = new ArrayList<BufferedImage>();
 		chest = new ArrayList<BufferedImage>();
 		inventory = new ArrayList<BufferedImage>();
-		hat = new ArrayList<BufferedImage>();
 		hair = new ArrayList<BufferedImage>();
 		head = new ArrayList<BufferedImage>();
 		body = new ArrayList<BufferedImage>();
@@ -153,11 +146,6 @@ public class Image {
 		spider.add(loadSpecificImage("src/Image/projectile0.png"));
 		sword0 = loadSpecificImage("src/Image/swrd0.png");
 		sword1 = loadSpecificImage("src/Image/swrd1.png");
-		setPlayer(getSprites("src/Image/ExampleCharacter.png",4,3,32));
-		player.addAll(getSprites("src/Image/SLASHLEFT.png",1,5,32));
-		player.addAll(getSprites("src/Image/SLASHRIGHT.png",1,5,32));
-		player.addAll(getSprites("src/Image/SLASHUP.png",5,1,32));
-		player.addAll(getSprites("src/Image/SLASHDOWN.png",5,1,32));
 		System.out.println("trying to load character");
 		LoadSprites("src/Image/dungeon0.png");
 		System.out.println("read all sprites success!");
@@ -166,7 +154,6 @@ public class Image {
 		health.add(loadSpecificImage("src/Image/heart2.png"));
 		skeleton = loadSpecificImage("src/Image/skeleton0.png");
 		chest.addAll(getSprites("src/Image/chest0.png",1,2,32));
-		hat.addAll(getSprites("src/Image/hat0.png",1,18,40));
 		hair.addAll(getSprites("src/Image/hair0.png",1,240,40));
 		head.addAll(getSprites("src/Image/head0.png",1,15,40));
 		body.addAll(getSprites("src/Image/body0.png",1,18,40));
@@ -174,6 +161,14 @@ public class Image {
 		legs.addAll(getSprites("src/Image/legs0.png",1,54,40));
 		feet.addAll(getSprites("src/Image/feet0.png",1,54,40));
 		loadInventory();
+	}
+	
+	public void loadCharacter() {
+		setPlayer(getSprites("src/Image/player.png",4,3,40));
+		player.addAll(getSprites("src/Image/SLASHLEFT.png",1,5,32));
+		player.addAll(getSprites("src/Image/SLASHRIGHT.png",1,5,32));
+		player.addAll(getSprites("src/Image/SLASHUP.png",5,1,32));
+		player.addAll(getSprites("src/Image/SLASHDOWN.png",5,1,32));
 	}
 
 	protected BufferedImage loadSpecificImage(String address) {
@@ -203,7 +198,7 @@ public class Image {
 	}
 
 	protected BufferedImage extractSpecificSprites(int x, int y, BufferedImage image, int tileSize) {
-		BufferedImage targ_sprite = image.getSubimage(y * TILE_SIZE, x * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+		BufferedImage targ_sprite = image.getSubimage(y * tileSize, x * tileSize, tileSize, tileSize);
 		return targ_sprite;
 	}
 

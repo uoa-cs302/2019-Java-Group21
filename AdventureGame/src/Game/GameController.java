@@ -46,6 +46,8 @@ public class GameController implements ActionListener {
 		this.gameView = view;
 		this.ex = ex;
 		InitControl();
+		Image assets = gameModel.getAssets();
+		gameView.getCharacterScreen().setImages(assets.getHair(), assets.getHead(), assets.getBody(), assets.getArms(), assets.getLegs(), assets.getFeet());
 	}
 	public void InitControl() {
 
@@ -54,40 +56,49 @@ public class GameController implements ActionListener {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				//Initialise Game on button press
+				if (gameView.getStartScreen().isVisible()) {
+					if (e.getKeyCode() == KeyEvent.VK_W)
+					{
+						gameView.getStartScreen().changeSel(e);}
+					if(e.getKeyCode() == KeyEvent.VK_S) {
+						gameView.getStartScreen().changeSel(e);
+					}
+					if(e.getKeyCode()== KeyEvent.VK_ENTER) {
+						switch (gameView.getStartScreen().getSel()) {
+						case 0:
+							if (gameView.getCharacterScreen().isFinished() == false) {
+								gameView.getCharacterScreen().randomise();
+								gameView.getCharacterScreen().createCharacter();
+								gameModel.getAssets().loadCharacter();
+							}
+							sprites = gameModel.getCurrentRoom().getSpriteList();
+							entities = gameModel.getCurrentRoom().getEntityList();
+							gameView.DrawIntro();
+							addKeyListen();
+							gameView.removeKeyListener(this);
+							break;
 
-				if (e.getKeyCode() == KeyEvent.VK_W)
-				{
-					gameView.getStartScreen().changeSel(e);}
-				if(e.getKeyCode() == KeyEvent.VK_S) {
-					gameView.getStartScreen().changeSel(e);
-				}
-				System.out.println("index = " + gameView.getStartScreen().getSel());
-				if(e.getKeyCode()== KeyEvent.VK_ENTER) {
-				switch (gameView.getStartScreen().getSel()) {
-				case 0:
-				
-				sprites = gameModel.getCurrentRoom().getSpriteList();
-				entities = gameModel.getCurrentRoom().getEntityList();
-				gameView.DrawIntro();
-				addKeyListen();
-				gameView.removeKeyListener(this);
-				break;
-				
-					case 1:
-						gameView.drawCharacterScreen();
-						Image assets = gameModel.getAssets();
-						gameView.getCharacterScreen().setImages(assets.getHat(), assets.getHair(), assets.getHead(), assets.getBody(), assets.getArms(), assets.getLegs(), assets.getFeet());
-						break;
-					case 3:
-						gameView.dispose();
-						break;
+						case 1:
+							gameView.drawCharacterScreen();
+							break;
+						case 3:
+							gameView.dispose();
+							break;
+						}
 					}
 				}
 				if(gameView.getCharacterScreen().isVisible()) {
-					if (e.getKeyCode() == KeyEvent.VK_W) {gameView.getCharacterScreen().changeSel(e);
-					if (e.getKeyCode() == KeyEvent.VK_S) {gameView.getCharacterScreen().changeSel(e);}
-					if(e.getKeyCode() == KeyEvent.VK_ENTER) {gameView.drawMainMenu();}
-
+					if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_D ||e.getKeyCode() == KeyEvent.VK_ENTER) 
+						gameView.getCharacterScreen().changeSel(e);
+					if(e.getKeyCode() == KeyEvent.VK_ENTER ) {
+						if (gameView.getCharacterScreen().getSelect() == 6)
+							gameView.getCharacterScreen().randomise();
+						else if (gameView.getCharacterScreen().getSelect() == 7) {
+							gameView.getCharacterScreen().setFinished(true);
+							gameView.getCharacterScreen().createCharacter();
+							gameModel.getAssets().loadCharacter();
+							gameView.drawStartMenu();
+						}
 					}
 				}
 			}
