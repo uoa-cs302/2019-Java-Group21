@@ -75,9 +75,8 @@ public class Image {
 			f = new File("src/Image/inv" + i + ".png");
 			try {
 				inventory.add(ImageIO.read(f));
-				System.out.println("read inv" + i + ".png");
 			} catch (IOException e) {
-				System.out.println("inventory failed :(");
+
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -216,14 +215,10 @@ public class Image {
 		BufferedImage sheetIm = null;
 		System.out.println("4!");
 		File f = new File(sheet);
-
-		System.out.println("file equals success!");
 		try {
 			// sheetIm = ImageIO.read(getClass().getResourceAsStream(sheet));
 			sheetIm = ImageIO.read(f);
-			System.out.println("5!");
 		} catch (IOException e) {
-			System.out.println("6!");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -233,7 +228,6 @@ public class Image {
 	public void loadSprites() {
 		for (int i = 0; i < sheetH; i++) {
 			for (int j = 0; j < sheetW; j++) {
-				System.out.println(i + "   " +  j);
 				addAssetList(extractSprites(i, j));
 			}
 		}
