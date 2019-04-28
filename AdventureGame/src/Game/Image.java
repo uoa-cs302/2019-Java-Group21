@@ -17,7 +17,7 @@ public class Image {
 	private List<BufferedImage> spider;
 	private List<BufferedImage> health;
 	private List<BufferedImage> chest;
-	private BufferedImage skeleton;
+	private List<BufferedImage> skeleton;
 	private List<BufferedImage> inventory;
 	private List<BufferedImage> hair;
 	private List<BufferedImage> head;
@@ -53,7 +53,7 @@ public class Image {
 		return sword1;
 	}
 	
-	public BufferedImage getSkeleton() {
+	public List<BufferedImage> getSkeleton() {
 		return skeleton;
 	}
 	
@@ -126,6 +126,7 @@ public class Image {
 		assetList = new ArrayList<BufferedImage>();
 		rat = new ArrayList<BufferedImage>();
 		spider = new ArrayList<BufferedImage>();
+		skeleton = new ArrayList<BufferedImage>();
 		health = new ArrayList<BufferedImage>();
 		chest = new ArrayList<BufferedImage>();
 		inventory = new ArrayList<BufferedImage>();
@@ -151,7 +152,7 @@ public class Image {
 		health.add(loadSpecificImage("src/Image/heart0.png"));
 		health.add(loadSpecificImage("src/Image/heart1.png"));
 		health.add(loadSpecificImage("src/Image/heart2.png"));
-		skeleton = loadSpecificImage("src/Image/skeleton0.png");
+		skeleton.addAll(getSprites("src/Image/zombie_n_skeleton2.png", 4, 3, 48));
 		chest.addAll(getSprites("src/Image/chest0.png",1,2,32));
 		hair.addAll(getSprites("src/Image/hair0.png",1,240,40));
 		head.addAll(getSprites("src/Image/head0.png",1,15,40));
@@ -159,6 +160,7 @@ public class Image {
 		arms.addAll(getSprites("src/Image/arms0.png",1,30,40));
 		legs.addAll(getSprites("src/Image/legs0.png",1,54,40));
 		feet.addAll(getSprites("src/Image/feet0.png",1,54,40));
+		
 		loadInventory();
 	}
 	
