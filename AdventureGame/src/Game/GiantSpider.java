@@ -55,7 +55,7 @@ public class GiantSpider extends Entity {
 		if (lineOfSight(this.getGridXPosition(), this.getGridYPosition(), xdiff, ydiff, vx, vy) && Attack == false)
 			Attack = true; 
 		super.update();
-
+		if (!knockedBack) {
 		if (movements.size() == 0) {
 			float highestScalar = 0;
 			int optimumx_pos = 0;
@@ -82,6 +82,17 @@ public class GiantSpider extends Entity {
 			this.dx = (float) movements.get(0).getX();
 			this.dy = (float) movements.get(0).getY();
 			movements.remove(0);
+		}
+		} else if (knockedBack && this.knockBackCounter == 20) {
+			knockBackCounter = 0;
+			knockedBack = false;
+		} else if (knockedBack && this.knockBackCounter < 20) {
+			if (knockBackCounter > 0) {
+			dx = 0;
+			dy = 0;
+			
+			}
+			knockBackCounter ++;
 		}
 		image();
 	}

@@ -20,13 +20,14 @@ public class Dog extends Item {
 	Dog(int x, int y){
 		super(x,y);
 		this.images = new ArrayList<BufferedImage>();
+		this.getImageDim();
 		Bounds = new Collision((int)this.x_pos,(int)this.y_pos,this.width/2,this.height/2);
 		Hitbounds = new Collision((int)this.x_pos,(int)this.y_pos,this.width,this.height );
 		super.setCollidable(true);
 		this.direction = Direction.IDLE;
 		this.ani.setFrames(this.getImages());
 		this.ani.setFrame(0); ani.setDelay(-1);
-		health = 4;
+		health = 999;
 		damage = 1;
 		this.AttackDuration = 80;
 		dropped = false;
@@ -43,6 +44,10 @@ public class Dog extends Item {
 
 	public void update() {
 		if (dropped) {
+			if (target == null) {
+				dx = 0;
+				dy = 0;
+			} else {
 			float xdiff = this.target.getx_pos() - this.x_pos;
 			float ydiff = this.target.gety_pos() - this.y_pos;
 			float scalar = (float) Math.sqrt((xdiff * xdiff) + (ydiff * ydiff));
@@ -54,6 +59,7 @@ public class Dog extends Item {
 			if (xdiff < 40 && ydiff < 40) {
 				Attack = true;
 			}
+		}
 		}
 	}
 }

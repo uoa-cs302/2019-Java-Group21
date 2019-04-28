@@ -79,6 +79,7 @@ public class Entity extends Sprite {
 	public boolean getDown() {return down;}
 	public boolean getLeft() {return left;}
 	public boolean getRight() {return right;}
+	public boolean getAttack() {return Attack;}
 	public int getsize() {return size;}
 	public void setsize(int s) {this.size = s;}
 	public void setdy(float dy) {this.dy = dy;}
@@ -91,7 +92,7 @@ public class Entity extends Sprite {
 	public void setCollidable(boolean collidable) {this.collidable = collidable;}
 	public Collision getBounds() {return Bounds;}
 	public Collision getHitBounds() {return Hitbounds;}
-	public boolean canAttack() {if (Attack && attackCount == 0) {return true;}else{return false;}}
+	public boolean canAttack() {if (attackCount == 0) {return true;}else{return false;}}
 	public Direction getLooking() {return looking;}
 
 	//may be obselete
@@ -138,7 +139,6 @@ public class Entity extends Sprite {
 		case IDLE:
 
 			setAnimation(curAnim,ani.getframes(),-1);
-
 			break;
 		}
 	}
@@ -297,17 +297,15 @@ public class Entity extends Sprite {
 		 this.setCollidable(false);
 	 }
 	 if (e.getLooking() == Direction.DOWN) {
-		 this.dy = 64;
+		 this.dy = 40;
 	 }else if (e.getLooking() == Direction.LEFT) {
-		 this.dx = -64;
+		 this.dx = -40;
 	 }else if (e.getLooking() == Direction.RIGHT) {
-		 this.dx = 64;
+		 this.dx = 40;
 	 }else if(e.getLooking() == Direction.UP) {
-		this.dy = -64;
+		this.dy = -40;
 	 }
 	 else {
-			 this.dy -= 3*dy;
-			 this.dx -= 3*dx;
 	 }
  }
 	protected int check_collisiondir_Hoz(int left2,int right2 ) {

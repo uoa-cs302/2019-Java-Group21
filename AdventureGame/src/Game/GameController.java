@@ -83,13 +83,13 @@ public class GameController implements ActionListener {
 					}
 				}
 				if(gameView.getCharacterScreen().isVisible()) {
-					if (e.getKeyCode() == KeyEvent.VK_W) {gameView.getCharacterScreen().changeSel(e);
+					if (e.getKeyCode() == KeyEvent.VK_W) {gameView.getCharacterScreen().changeSel(e);}
 					if (e.getKeyCode() == KeyEvent.VK_S) {gameView.getCharacterScreen().changeSel(e);}
 					if(e.getKeyCode() == KeyEvent.VK_ENTER) {gameView.drawMainMenu();}
 
 					}
 				}
-			}
+			
 		};
 		System.out.println("x");
 		gameView.addKeyListener(k);
@@ -222,19 +222,21 @@ public class GameController implements ActionListener {
 				item.setx_pos((int)pC.getx_pos());
 				item.sety_pos((int)pC.gety_pos());
 				item.getImageDim();
-				item.setBounds(new Collision((int)item.getx_pos(),(int)item.gety_pos(),item.width,item.height));
+				item.setBounds(new Collision((int)item.getx_pos(),(int)item.gety_pos(),item.width/2,item.height/2));
+				item.getBounds().setyOff(item.height/2);
+				item.getBounds().setxOff(item.width/4);
+				item.setHitBounds(new Collision((int)item.getx_pos(),(int)item.gety_pos(),item.width,item.height));
 				if (item instanceof Dog) {
-
 					Dog dog = (Dog) item;
-					for (Entity entity : entities)
+					dog.setDropped(false);
+					for (Entity entity : entities) {
 						if (entity instanceof Skeleton) {
+							System.out.println(entity);
 							dog.setTarget(entity);
 							dog.setDropped(true);
 							newEntities.add(dog);
-							break;
 						}
-					dog.setDropped(false);
-					pC.getInventory().addItem(dog);
+					}
 				}
 				else
 					newEntities.add(item);
@@ -336,7 +338,7 @@ public class GameController implements ActionListener {
 					else if (e1 instanceof GiantRat) {
 						GiantRat rat = (GiantRat) e1;
 						if (pC.getHitBounds().collisionWith(rat.getBounds())) {
-							if (pC.canAttack()) {
+							if (pC.canAttack() && pC.getAttack()) {
 								rat.hitBy(pC);
 								if (rat.getHealth()<= 0) {
 									deletedEntities.add(rat);
@@ -347,13 +349,14 @@ public class GameController implements ActionListener {
 						if(pC.getBounds().collisionWith(rat.getHitBounds())) {
 							if(rat.canAttack()) {
 								pC.hitBy(rat);
+								rat.setAttack(true);
 							}
 						}
 					}
 					else if (e1 instanceof GiantSpider) {
 						GiantSpider spider = (GiantSpider) e1;
 						if (pC.getHitBounds().collisionWith(spider.getBounds())) {
-							if (pC.canAttack()) {
+							if (pC.canAttack() && pC.getAttack()) {
 								spider.hitBy(pC);
 								if (spider.getHealth()<= 0) {
 									deletedEntities.add(spider);
@@ -378,7 +381,7 @@ public class GameController implements ActionListener {
 					}
 					else if (e1 instanceof Projectile) {
 						Projectile projectile = (Projectile) e1;
-						if (pC.getHitBounds().collisionWith(projectile.getBounds()) && pC.canAttack())
+						if (pC.getHitBounds().collisionWith(projectile.getBounds()) && pC.canAttack() && pC.getAttack())
 							deletedEntities.add(projectile);
 					}
 					else if (e1 instanceof Skeleton) {
@@ -386,6 +389,7 @@ public class GameController implements ActionListener {
 						if(pC.getBounds().collisionWith(skeleton.getHitBounds())) {
 							if(skeleton.canAttack()) {
 								pC.hitBy(skeleton);
+								skeleton.setAttack(true);
 							}
 						}
 					}
@@ -415,6 +419,7 @@ public class GameController implements ActionListener {
 		}
 		for (Entity e1 : entities) {
 			if (x.getID() != e1.getID()) {
+				if (!(x instanceof Item)) {
 				checkCollision(x,e1);
 				if (x instanceof PressurePlate) {
 					PressurePlate pp = (PressurePlate) x;
@@ -422,16 +427,19 @@ public class GameController implements ActionListener {
 						pp.setEnabled(true);
 					}
 				}
-				else if (x instanceof Skeleton && e1 instanceof Dog)
-					if (x.getHitBounds().collisionWith(e1.getBounds())) {
+				else if (x instanceof Skeleton && e1 instanceof Dog) {
+					if (x.getHitBounds().collisionWith(e1.getHitBounds())) {
 						if (e1.canAttack()) {
 							x.hitBy(e1);
+							e1.setAttack(true);
 							if (x.getHealth()<= 0) {
 								deletedEntities.add(x);
 							}
 
 						}
 					}
+				}
+				}
 			}
 		}
 	}
