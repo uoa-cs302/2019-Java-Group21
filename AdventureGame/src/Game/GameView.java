@@ -73,7 +73,7 @@ public class GameView extends JFrame {
 	}
 	
 	public void drawCharacterScreen() {
-		cardLayout.show(this.getContentPane(), "Intro");
+		cardLayout.show(this.getContentPane(), "Character");
 	}
 	public CharacterScreen getCharacterScreen() {
 		return this.characterScreen;
