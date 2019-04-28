@@ -19,6 +19,13 @@ public class Image {
 	private List<BufferedImage> chest;
 	private BufferedImage skeleton;
 	private List<BufferedImage> inventory;
+	private List<BufferedImage> hat;
+	private List<BufferedImage> hair;
+	private List<BufferedImage> head;
+	private List<BufferedImage> body;
+	private List<BufferedImage> arms;
+	private List<BufferedImage> legs;
+	private List<BufferedImage> feet;
 
 	public List<BufferedImage> getPlayer() {
 		return player;
@@ -82,6 +89,37 @@ public class Image {
 		inventory.add(loadSpecificImage("src/Image/dog1.png"));
 	}
 	
+	
+	public List<BufferedImage> getHat() {
+		return hat;
+	}
+
+	public List<BufferedImage> getHair() {
+		return hair;
+	}
+
+	public List<BufferedImage> getHead() {
+		return head;
+	}
+
+	public List<BufferedImage> getBody() {
+		return body;
+	}
+	
+	public List<BufferedImage> getArms() {
+		return arms;
+	}
+
+	public List<BufferedImage> getLegs() {
+		return legs;
+	}
+
+
+	public List<BufferedImage> getFeet() {
+		return feet;
+	}
+
+	
 	// FINAL VARIABLES
 	List<BufferedImage> assetList;
 
@@ -98,6 +136,13 @@ public class Image {
 		health = new ArrayList<BufferedImage>();
 		chest = new ArrayList<BufferedImage>();
 		inventory = new ArrayList<BufferedImage>();
+		hat = new ArrayList<BufferedImage>();
+		hair = new ArrayList<BufferedImage>();
+		head = new ArrayList<BufferedImage>();
+		body = new ArrayList<BufferedImage>();
+		arms = new ArrayList<BufferedImage>();
+		legs = new ArrayList<BufferedImage>();
+		feet = new ArrayList<BufferedImage>();
 		
 		//adds rat sprites
 		rat.add(loadSpecificImage("src/Image/rat_0.png"));
@@ -121,6 +166,13 @@ public class Image {
 		health.add(loadSpecificImage("src/Image/heart2.png"));
 		skeleton = loadSpecificImage("src/Image/skeleton0.png");
 		chest.addAll(getSprites("src/Image/chest0.png",1,2));
+		hat.addAll(getSprites("src/Image/hat0.png",1,18));
+		hair.addAll(getSprites("src/Image/hair0.png",1,240));
+		head.addAll(getSprites("src/Image/head0.png",1,15));
+		body.addAll(getSprites("src/Image/body0.png",1,18));
+		arms.addAll(getSprites("src/Image/arms0.png",1,30));
+		legs.addAll(getSprites("src/Image/legs0.png",1,54));
+		feet.addAll(getSprites("src/Image/feet0.png",1,54));
 		loadInventory();
 	}
 

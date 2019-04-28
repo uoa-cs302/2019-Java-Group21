@@ -151,7 +151,6 @@ public class StartScreen extends JPanel implements ActionListener {
 		Toolkit.getDefaultToolkit().sync();
 		timer.stop();
 		}
-
 	}
 	public int getSel() {return sel;}
 }
