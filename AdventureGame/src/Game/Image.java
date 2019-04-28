@@ -9,11 +9,12 @@ import javax.imageio.ImageIO;
 
 public class Image {
 
-	// TEMPORARY UNTIL WE PUT EVERYTHING INTO ONE SPRITESHEET
 	private List<BufferedImage> player;
 	private List<BufferedImage> rat;
 	private BufferedImage sword0;
 	private BufferedImage sword1;
+	private BufferedImage ball0;
+	private BufferedImage ball1;
 	private List<BufferedImage> spider;
 	private List<BufferedImage> health;
 	private List<BufferedImage> chest;
@@ -53,6 +54,14 @@ public class Image {
 		return sword1;
 	}
 	
+	public BufferedImage getBall0() {
+		return ball0;
+	}
+
+	public BufferedImage getBall1() {
+		return ball1;
+	}
+	
 	public BufferedImage getSkeleton() {
 		return skeleton;
 	}
@@ -85,6 +94,8 @@ public class Image {
 		inventory.add(sword1);
 		inventory.add(loadSpecificImage("src/Image/dog0.png"));
 		inventory.add(loadSpecificImage("src/Image/dog1.png"));
+		inventory.add(ball0);
+		inventory.add(ball1);
 	}
 
 	public List<BufferedImage> getHair() {
@@ -145,6 +156,8 @@ public class Image {
 		spider.add(loadSpecificImage("src/Image/projectile0.png"));
 		sword0 = loadSpecificImage("src/Image/swrd0.png");
 		sword1 = loadSpecificImage("src/Image/swrd1.png");
+		ball0 = loadSpecificImage("src/Image/ball0.png");
+		ball1 = loadSpecificImage("src/Image/ball1.png");
 		System.out.println("trying to load character");
 		LoadSprites("src/Image/dungeon0.png");
 		System.out.println("read all sprites success!");

@@ -63,6 +63,12 @@ public class Inventory {
 			item.images.add(getItemImage(2));
 			item.images.add(getItemImage(2));
 		}
+		else if (item instanceof Ball) {
+			item.setInventoryImage(getItemImage(5));
+			item.setImage(getItemImage(4));
+			item.images.add(getItemImage(4));
+			item.images.add(getItemImage(4));
+		}
 		for (int i = 0; i < inventorySize(); i++)
 			if (items.get(i) == placeholder) {
 				items.set(i, item);
@@ -78,6 +84,8 @@ public class Inventory {
 
 	public void dropItem() {
 		if (index < inventorySize()) {
+			//if (items.get(index) instanceof Dog)
+				//return;
 			if (items.get(index) != placeholder) {
 				if (index == inventorySize()-1) {
 					droppedItems.add(getItem());
@@ -119,5 +127,12 @@ public class Inventory {
 
 	public void clearDroppedItems() {
 		droppedItems.clear();
+	}
+	
+	public boolean inventoryContainsBall() {
+		for (Item item : items)
+			if (item instanceof Ball)
+				return true;
+		return false;
 	}
 }

@@ -14,7 +14,7 @@ public class PC extends Entity {
 	private boolean interact = false;
 	private Animation slash;
 	private BufferedImage slashim;
-	
+	private boolean dead = false;
 	
 	public PC(int x,int y, List<BufferedImage> images, List<BufferedImage> inventoryImages) {
 		super(x,y);
@@ -286,4 +286,14 @@ public class PC extends Entity {
 	public void setInteract(boolean interact) {
 		this.interact = interact;
 	}
+	
+	public boolean isDead() {
+		return dead;
+	}
+
+	public void setDead(boolean dead) {
+		this.dead = dead;
+	}
+
+
 }

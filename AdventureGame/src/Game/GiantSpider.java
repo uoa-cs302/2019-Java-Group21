@@ -52,63 +52,63 @@ public class GiantSpider extends Entity {
 		float vx = (float) ((xdiff/scalar));
 		float vy = (float) ((ydiff/scalar));
 
-		if (lineOfSight(this.getGridXPosition(), this.getGridYPosition(), xdiff, ydiff, vx, vy) && Attack == false)
+		if (lineOfSight(this.getGridXPosition(), this.getGridYPosition(), xdiff, ydiff, vx, vy, true) && Attack == false)
 			Attack = true; 
 		super.update();
 		if (!knockedBack) {
-		if (movements.size() == 0) {
-			float highestScalar = 0;
-			int optimumx_pos = 0;
-			int optimumy_pos = 0;
+			if (movements.size() == 0) {
+				float highestScalar = 0;
+				int optimumx_pos = 0;
+				int optimumy_pos = 0;
 
-			for (int i = 0; i < 18; i++)
-				for (int j = 0; j < 24; j++) {
-					xdiff = target.getx_pos()-(128+(j*32));
-					ydiff = target.gety_pos()-(12+(i*32));
-					scalar = (float) Math.sqrt((xdiff * xdiff) + (ydiff * ydiff));
-					vx = (float) ((xdiff/scalar));
-					vy = (float) ((ydiff/scalar));
-					if (lineOfSight(j ,i ,xdiff ,ydiff ,vx ,vy) && walls[i][j] == -1) {
-						if(scalar > highestScalar ) {
-							highestScalar = scalar;
-							optimumx_pos = j;
-							optimumy_pos = i;
+				for (int i = 0; i < 18; i++)
+					for (int j = 0; j < 24; j++) {
+						xdiff = target.getx_pos()-(128+(j*32));
+						ydiff = target.gety_pos()-(12+(i*32));
+						scalar = (float) Math.sqrt((xdiff * xdiff) + (ydiff * ydiff));
+						vx = (float) ((xdiff/scalar));
+						vy = (float) ((ydiff/scalar));
+						if (lineOfSight(j ,i ,xdiff ,ydiff ,vx ,vy, false) && walls[i][j] == -1) {
+							if(scalar > highestScalar ) {
+								highestScalar = scalar;
+								optimumx_pos = j;
+								optimumy_pos = i;
+							}
 						}
 					}
-				}
-			this.movements = calculatePath(optimumx_pos, optimumy_pos);
-		}
-		else {
-			this.dx = (float) movements.get(0).getX();
-			this.dy = (float) movements.get(0).getY();
-			movements.remove(0);
-		}
+				this.movements = calculatePath(optimumx_pos, optimumy_pos);
+			}
+			else {
+				this.dx = (float) movements.get(0).getX();
+				this.dy = (float) movements.get(0).getY();
+				movements.remove(0);
+			}
 		} else if (knockedBack && this.knockBackCounter == 20) {
 			knockBackCounter = 0;
 			knockedBack = false;
 		} else if (knockedBack && this.knockBackCounter < 20) {
 			if (knockBackCounter > 0) {
-			dx = 0;
-			dy = 0;
-			
+				dx = 0;
+				dy = 0;
+
 			}
 			knockBackCounter ++;
 		}
 		image();
 	}
-	
+
 	public void animate() {
 		switch (this.direction) {
-		
-		
+
+
 		case LEFT:
 			if (dx != 0 && ani.getDelay()== -1) {
-			this.ani.setFrames(images.subList(0, 6));
+				this.ani.setFrames(images.subList(0, 6));
 			} else if (dx == 0) { ani.setDelay(-1);}
 			break;
 		case RIGHT:
 			if (dx != 0 && ani.getDelay()== -1) {
-			this.ani.setFrames(images.subList(6, 12));
+				this.ani.setFrames(images.subList(6, 12));
 			}else if (dx == 0) { ani.setDelay(-1);}
 			break;
 		default:
@@ -119,7 +119,7 @@ public class GiantSpider extends Entity {
 		return this.projectiles;
 	}
 
-	public boolean lineOfSight(int gridx_pos, int gridy_pos, float xdiff, float ydiff, float vx, float vy) {
+	public boolean lineOfSight(int gridx_pos, int gridy_pos, float xdiff, float ydiff, float vx, float vy, boolean projectile) {
 		float x, x_end, y, y_end;
 		x = gridx_pos;
 		x_end = this.target.getGridXPosition();
@@ -127,9 +127,15 @@ public class GiantSpider extends Entity {
 		y_end = this.target.getGridYPosition();
 		boolean latch = true;
 		while (((int)x != x_end) || ((int)y != y_end))  {
-			if (walls[(int)y][(int)x] != -1 ) {
-				return false;
+			if (projectile) {
+				if (checkProjectilePath(walls[(int)y][(int)x])) 
+					return false;
 			}
+			else
+				if (walls[(int)y][(int)x] != -1 ) {
+					return false;
+				}
+
 			if (latch) {
 				x += vx;
 				latch = false;
@@ -234,6 +240,10 @@ public class GiantSpider extends Entity {
 		public void setPath(List<Point> path) {
 			this.path = path;
 		}
+	}
+	
+	public boolean checkProjectilePath(int wall) {
+		return (wall != -1 && wall != 160 && wall != 161 && wall != 164 && wall != 180 && wall != 217 && wall != 196 && wall != 233 && wall != 177 && wall != 178 && wall != 179 && wall != 165 && wall != 169);
 	}
 
 	public void clearProjectiles() {

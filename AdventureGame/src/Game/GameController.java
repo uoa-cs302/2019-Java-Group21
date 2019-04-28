@@ -40,21 +40,59 @@ public class GameController implements ActionListener {
 	private List<Entity> newEntities = new ArrayList<Entity>();
 	private List<Entity> entities;
 	boolean loadingRoom = false;
-	
+
 	private Sound Intro;
 	private Sound Rat;
 	private Sound Attck;
 
 	public GameController(GameModel model, GameView view, GameExecutable ex) {
-		
+
 		//set game model and game view Jframe to Controller variables
 		this.gameModel = model;
 		this.gameView = view;
 		this.ex = ex;
-		InitControl();
+		InitDifficulty();
 		Image assets = gameModel.getAssets();
 		gameView.getCharacterScreen().setImages(assets.getHair(), assets.getHead(), assets.getBody(), assets.getArms(), assets.getLegs(), assets.getFeet());
 	}
+
+	public void InitDifficulty() {
+		KeyAdapter k = new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (gameView.getDifficultyScreen().isVisible()) {
+					if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_A)
+					{
+						gameView.getDifficultyScreen().changeSel(e);}
+					if(e.getKeyCode() == KeyEvent.VK_S  || e.getKeyCode() == KeyEvent.VK_D) {
+						gameView.getDifficultyScreen().changeSel(e);
+					}
+					if(e.getKeyCode()== KeyEvent.VK_ENTER) {
+						switch (gameView.getDifficultyScreen().getSel()) {
+						case 0:
+							gameModel.generateDungeon(0);
+							InitControl();
+							gameView.drawStartMenu();
+							break;
+
+						case 1:
+							gameModel.generateDungeon(1);
+							InitControl();
+							gameView.drawStartMenu();
+							break;
+						case 2:
+							gameModel.generateDungeon(2);
+							InitControl();
+							gameView.drawStartMenu();
+							break;
+						}
+					}
+				}
+			}
+		};
+		gameView.addKeyListener(k);
+	}
+
 	public void InitControl() {
 
 		//Sets the button listener on to check for button press on StartScreen
@@ -109,9 +147,9 @@ public class GameController implements ActionListener {
 				}
 			}
 		};
-		System.out.println("x");
 		gameView.addKeyListener(k);
 	}
+
 	public void restart() {
 		gameView.removeKeyListener(v);
 		gameView.drawMainMenu();
@@ -133,7 +171,6 @@ public class GameController implements ActionListener {
 					}
 				}
 				//-------------------------------------------------------------------					
-
 				if(e.getKeyCode() == KeyEvent.VK_T) {
 					timer.stop();
 					gameView.getGameScreen().drawMessage("block");
@@ -147,10 +184,10 @@ public class GameController implements ActionListener {
 						gameView.HideMessage();
 					}
 				//------------------------------------------------------------				
-				if (e.getKeyCode() == KeyEvent.VK_P && !gameView.getGameScreen().getpause().isVisible() ) {
+				if ((e.getKeyCode() == KeyEvent.VK_P || e.getKeyCode() == KeyEvent.VK_ESCAPE)&& !gameView.getGameScreen().getpause().isVisible() ) {
 					timer.stop();
 					gameView.getGameScreen().drawPauseMenu();
-				} else if (e.getKeyCode() == KeyEvent.VK_P && gameView.getGameScreen().getpause().isVisible()) {
+				} else if ((e.getKeyCode() == KeyEvent.VK_P || e.getKeyCode() == KeyEvent.VK_ESCAPE) && gameView.getGameScreen().getpause().isVisible()) {
 					gameView.HidePause();
 					timer.restart();
 				} else if (gameView.getGameScreen().getpause().isVisible()) {
@@ -177,7 +214,6 @@ public class GameController implements ActionListener {
 						}else {
 							gameView.getGameover().calculateScore(enemykillcount, game_time);
 							gameView.drawGameOver();
-							System.out.println("drawn");
 						}
 					}
 
@@ -249,12 +285,14 @@ public class GameController implements ActionListener {
 					dog.setDropped(false);
 					for (Entity entity : entities) {
 						if (entity instanceof Skeleton) {
-							System.out.println(entity);
+							System.out.println("hi");
 							dog.setTarget(entity);
 							dog.setDropped(true);
 							newEntities.add(dog);
 						}
 					}
+					if (dog.isDropped() == false)
+						pC.getInventory().addItem(dog);
 				}
 				else
 					newEntities.add(item);
@@ -322,7 +360,8 @@ public class GameController implements ActionListener {
 		if (sp1.getBounds().collisionWith(sp2.getBounds(),(int)sp1.getdx(),(int)sp1.getdy())) {
 			if (sp1 instanceof Projectile) {
 				if (sp2 != ((Projectile) sp1).getParent() && !(sp2 instanceof Projectile)) {
-					deletedEntities.add(sp1);
+					if (sp2.isInvisibleToProjectile() == false)
+						deletedEntities.add(sp1);
 					if(!(sp2 instanceof Door)) {
 						sp2.hitBy(sp1);
 					}
@@ -342,10 +381,16 @@ public class GameController implements ActionListener {
 					if (e1 instanceof Door) {
 						Door door = (Door) e1;
 						if(pC.getBounds().collisionWith(door.getBounds()) && door.isOpen()) {
-							gameModel.loadRoom(gameModel.getDungeonIndex(door.getRoom())); 
-							pC.setx_pos(door.getSpawnX());
-							pC.sety_pos(door.getSpawnY());
-							loadingTrue();
+							if (door.isEndDoor()) {
+								gameView.getGameover().calculateScore(enemykillcount, game_time);
+								gameView.drawGameOver();
+							}
+							else {
+								gameModel.loadRoom(gameModel.getDungeonIndex(door.getRoom())); 
+								pC.setx_pos(door.getSpawnX());
+								pC.sety_pos(door.getSpawnY());
+								loadingTrue();
+							}
 						}
 					}
 					else if (e1 instanceof Wall) {
@@ -425,6 +470,11 @@ public class GameController implements ActionListener {
 				}
 			}
 		}
+		if (pC.getHealth() <= 0 && pC.isDead() == false) {
+			pC.setDead(true);
+			gameView.getGameover().calculateScore(enemykillcount, game_time);
+			gameView.drawGameOver();
+		}
 	}
 
 	public void checkEntityCollision(Entity x) {
@@ -435,25 +485,25 @@ public class GameController implements ActionListener {
 		for (Entity e1 : entities) {
 			if (x.getID() != e1.getID()) {
 				if (!(x instanceof Item)) {
-				checkCollision(x,e1);
-				if (x instanceof PressurePlate) {
-					PressurePlate pp = (PressurePlate) x;
-					if (pp.getBounds().collisionWith(e1.getBounds())) {
-						pp.setEnabled(true);
-					}
-				}
-				else if (x instanceof Skeleton && e1 instanceof Dog) {
-					if (x.getHitBounds().collisionWith(e1.getHitBounds())) {
-						if (e1.canAttack()) {
-							x.hitBy(e1);
-							e1.setAttack(true);
-							if (x.getHealth()<= 0) {
-								deletedEntities.add(x);
-							}
-
+					checkCollision(x,e1);
+					if (x instanceof PressurePlate) {
+						PressurePlate pp = (PressurePlate) x;
+						if (pp.getBounds().collisionWith(e1.getBounds())) {
+							pp.setEnabled(true);
 						}
 					}
-				}
+					else if (x instanceof Skeleton && e1 instanceof Dog) {
+						if (x.getHitBounds().collisionWith(e1.getHitBounds())) {
+							if (e1.canAttack()) {
+								x.hitBy(e1);
+								e1.setAttack(true);
+								if (x.getHealth()<= 0) {
+									deletedEntities.add(x);
+								}
+
+							}
+						}
+					}
 				}
 			}
 		}

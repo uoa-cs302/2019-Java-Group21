@@ -13,9 +13,12 @@ public class GameModel {
 	
 	public GameModel() {
 		assets = new Image();
-		dungeon = new Dungeon(2, assets);
+		dungeon = new Dungeon(assets);
+	}
+	
+	public void generateDungeon(int difficulty) {
+		dungeon.generateDungeon(difficulty);
 		currentRoom = dungeon.getDungeonIndex(1);
-		currentRoom.addToRoom(new GiantRat(280,400,assets.getRat()));
 	}
 	
 	public Image getAssets(){

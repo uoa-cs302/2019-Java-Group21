@@ -12,6 +12,7 @@ public class Door extends Entity{
 	private int spawnY;
 	private List<PressurePlate> plates;
 	private boolean open;
+	private boolean endDoor = false;
 
 	// Provides the index to the next room that should load
 	// Index of the List<Room> in the Dungeon class
@@ -81,4 +82,11 @@ public class Door extends Entity{
 		this.open = true;
 	}
 
+	public boolean isEndDoor() {
+		return endDoor;
+	}
+
+	public void setEndDoor(boolean endDoor) {
+		this.endDoor = endDoor;
+	}
 }

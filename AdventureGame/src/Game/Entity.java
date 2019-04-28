@@ -18,7 +18,7 @@ public class Entity extends Sprite {
 	private boolean collidable = false;
 	protected int size;
 	private int attackCount = 0;
-
+	private boolean invisibleToProjectile = false;
 	protected int dx_temp;
 	protected int dy_temp;
 	protected boolean collision;
@@ -316,5 +316,13 @@ public class Entity extends Sprite {
 	
 	public void resetKnockBackCounter() {
 		this.knockBackCounter = 0;
+	}
+	
+	public boolean isInvisibleToProjectile() {
+		return invisibleToProjectile;
+	}
+
+	public void setInvisibleToProjectile() {
+		this.invisibleToProjectile = true;
 	}
 }

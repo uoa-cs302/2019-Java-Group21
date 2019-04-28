@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -56,14 +57,13 @@ public class CharacterScreen extends JPanel implements ActionListener {
 	private Timer timer = new Timer(15,this);
 
 	public CharacterScreen() {
-		this.setBackground(Color.black);
 		this.setVisible(false);
 		this.setLayout(null);
 	
 		finished = false;
 		
 		hairLabel = new JLabel();
-		hairLabel.setFont(new Font("Helvetica",Font.PLAIN,22));
+		hairLabel.setFont(new Font("Helvetica",Font.BOLD,22));
 		hairLabel.setBounds(450, 240, 200, 40);
 		hairLabel.setAlignmentX(Label.CENTER);
 		hairLabel.setText("Hair");
@@ -376,6 +376,7 @@ public class CharacterScreen extends JPanel implements ActionListener {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		select = 0;
 	}
 	
 	public void randomise() {

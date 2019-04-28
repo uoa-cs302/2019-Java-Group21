@@ -27,6 +27,7 @@ public class GameView extends JFrame {
 	private GameOverScreen gameover;
 	private GameIntro gameIntro;
 	private CharacterScreen characterScreen;
+	private DifficultyScreen difficultyScreen;
 	
 	private CardLayout cardLayout;
 	protected Graphics g;
@@ -49,6 +50,7 @@ public class GameView extends JFrame {
 		gameover = new GameOverScreen();
 		gameIntro = new GameIntro();
 		characterScreen = new CharacterScreen();
+		difficultyScreen = new DifficultyScreen();
 		
 		setLayout(cardLayout);
 		
@@ -57,8 +59,9 @@ public class GameView extends JFrame {
 		add(gameover,"over");
 		add(gameIntro,"Intro");
 		add(characterScreen, "Character");
+		add(difficultyScreen, "Difficulty");
 		
-		cardLayout.show(this.getContentPane(),"start");
+		cardLayout.show(this.getContentPane(),"Difficulty");
 	}
 		
 	public void drawGameMenu() {
@@ -70,6 +73,7 @@ public class GameView extends JFrame {
 	}
 	
 	public void drawMainMenu() {
+		remove(difficultyScreen);
 		remove(startScreen);
 		remove(gameScreen);
 		remove(gameover);
@@ -81,6 +85,11 @@ public class GameView extends JFrame {
 	public void drawCharacterScreen() {
 		cardLayout.show(this.getContentPane(), "Character");
 	}
+	
+	public DifficultyScreen getDifficultyScreen() {
+		return this.difficultyScreen;
+	}
+	
 	public CharacterScreen getCharacterScreen() {
 		return this.characterScreen;
 	}
