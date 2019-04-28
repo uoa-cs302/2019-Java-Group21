@@ -67,8 +67,8 @@ public class GameController implements ActionListener {
 						sprites = gameModel.getCurrentRoom().getSpriteList();
 						entities = gameModel.getCurrentRoom().getEntityList();
 						gameView.DrawIntro();
-						addKeyListen();
 						gameView.removeKeyListener(this);
+						addKeyListen();
 						break;
 					case 1:
 						gameView.drawCharacterScreen();
@@ -79,6 +79,13 @@ public class GameController implements ActionListener {
 					case 3:
 						gameView.dispose();
 						break;
+					}
+				}
+				if(gameView.getCharacterScreen().isVisible()) {
+					if (e.getKeyCode() == KeyEvent.VK_W) {gameView.getCharacterScreen().changeSel(e);
+					if (e.getKeyCode() == KeyEvent.VK_S) {gameView.getCharacterScreen().changeSel(e);}
+					if(e.getKeyCode() == KeyEvent.VK_ENTER) {gameView.drawMainMenu();}
+
 					}
 				}
 			}
@@ -95,6 +102,7 @@ public class GameController implements ActionListener {
 
 	private void addKeyListen() {
 		//sets a key listener for player movement and interaction
+
 		gameView.addKeyListener(v = new KeyAdapter() {
 
 			public void keyReleased(KeyEvent e) {

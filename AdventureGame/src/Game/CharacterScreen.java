@@ -35,7 +35,7 @@ public class CharacterScreen extends JPanel implements ActionListener {
 	private int legsIndex = 0;
 	private int feetIndex = 0;
 
-	private int select;
+	private int select;	
 	
 	private Timer timer = new Timer(15,this);
 

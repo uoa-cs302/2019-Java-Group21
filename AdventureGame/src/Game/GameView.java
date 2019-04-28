@@ -75,6 +75,9 @@ public class GameView extends JFrame {
 	public void drawCharacterScreen() {
 		cardLayout.show(this.getContentPane(), "Intro");
 	}
+	public CharacterScreen getCharacterScreen() {
+		return this.characterScreen;
+	}
 	
 	public void HideMessage() {
 		gameScreen.getMessage().setVisible(false);
@@ -97,10 +100,6 @@ public class GameView extends JFrame {
 
 	public GameScreen getGameScreen() {
 		return gameScreen;
-	}
-	
-	public CharacterScreen getCharacterScreen() {
-		return characterScreen;
 	}
 	
 	public CardLayout getcardLayout() {

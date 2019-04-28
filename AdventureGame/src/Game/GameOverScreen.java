@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -28,11 +29,15 @@ public class GameOverScreen extends JPanel {
 	private JLabel Title = new JLabel();
 	private JLabel Exit = new JLabel();
 	private JTextField name = new JTextField();
+	private java.awt.Image background;
 	
 	public GameOverScreen() {
 		this.setBackground(Color.BLACK);
 		this.setVisible(false);
 		this.setLayout(null);
+		
+		ImageIcon ii = new ImageIcon("src/Image/INTRO.png");
+		background = ii.getImage();
 		
 		
 		Kills.setForeground(Color.white);
@@ -83,7 +88,7 @@ public class GameOverScreen extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-		//g2d.drawImage(background, 512-400 , 400 - 300, this);
+		g2d.drawImage(background, 0 ,0, this);
 		g2d.drawString(Title.getText(), 0, 0);
 		g2d.drawString(Kills.getText(), 0, 0);
 		g2d.drawString(Time.getText(), 0, 0);
