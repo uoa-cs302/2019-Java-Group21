@@ -69,11 +69,12 @@ public class GameView extends JFrame {
 		remove(gameScreen);
 		remove(gameover);
 		remove(gameIntro);
+		remove(characterScreen);
 		InitGameView();
 	}
 	
 	public void drawCharacterScreen() {
-		cardLayout.show(this.getContentPane(), "Intro");
+		cardLayout.show(this.getContentPane(), "Character");
 	}
 	public CharacterScreen getCharacterScreen() {
 		return this.characterScreen;
