@@ -34,7 +34,7 @@ public class PC extends Entity {
 		//initital base intialisation
 		Bounds = new Collision((int)this.x_pos,(int)this.y_pos,this.width-8,this.height/2);
 		Bounds.setxOff(6);
-		Bounds.setyOff(24);
+		Bounds.setyOff(20);
 		Hitbounds = new Collision((int)this.x_pos,(int)this.y_pos,this.width,this.height );
 		Hitbounds.setyOff(16);
 		

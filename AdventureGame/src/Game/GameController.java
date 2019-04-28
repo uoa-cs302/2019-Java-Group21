@@ -13,7 +13,6 @@ import java.util.List;
 import javax.swing.Timer;
 
 import Game.AudioObject.Sound;
-import javafx.scene.input.KeyCode;
 
 
 public class GameController implements ActionListener {
