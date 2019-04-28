@@ -54,7 +54,7 @@ public class GameController implements ActionListener {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				//Initialise Game on button press
-			
+
 				if (e.getKeyCode() == KeyEvent.VK_W)
 				{
 					gameView.getStartScreen().changeSel(e);}
@@ -62,15 +62,18 @@ public class GameController implements ActionListener {
 					gameView.getStartScreen().changeSel(e);
 				}
 				if(e.getKeyCode()== KeyEvent.VK_ENTER) {
-					
-				switch (gameView.getStartScreen().getSel()) {
-				case 0:
-				sprites = gameModel.getCurrentRoom().getSpriteList();
-				entities = gameModel.getCurrentRoom().getEntityList();
-				gameView.DrawIntro();
-				addKeyListen();
-				gameView.removeKeyListener(this);
-				break;
+					switch (gameView.getStartScreen().getSel()) {
+					case 0:
+						sprites = gameModel.getCurrentRoom().getSpriteList();
+						entities = gameModel.getCurrentRoom().getEntityList();
+						gameView.DrawIntro();
+						addKeyListen();
+						gameView.removeKeyListener(this);
+						break;
+					case 1:
+						gameView.drawCharacterScreen();
+						addKeyListen();
+						break;
 					}
 				}
 			}
@@ -207,7 +210,7 @@ public class GameController implements ActionListener {
 				item.getImageDim();
 				item.setBounds(new Collision((int)item.getx_pos(),(int)item.gety_pos(),item.width,item.height));
 				if (item instanceof Dog) {
-					
+
 					Dog dog = (Dog) item;
 					for (Entity entity : entities)
 						if (entity instanceof Skeleton) {
