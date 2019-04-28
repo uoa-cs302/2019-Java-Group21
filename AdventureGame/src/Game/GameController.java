@@ -68,8 +68,8 @@ public class GameController implements ActionListener {
 				sprites = gameModel.getCurrentRoom().getSpriteList();
 				entities = gameModel.getCurrentRoom().getEntityList();
 				gameView.DrawIntro();
-				gameView.removeKeyListener(this);
 				addKeyListen();
+				gameView.removeKeyListener(this);
 				break;
 				
 
