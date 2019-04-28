@@ -15,6 +15,8 @@ public class Image {
 	private BufferedImage sword1;
 	private BufferedImage ball0;
 	private BufferedImage ball1;
+	private BufferedImage stone0;
+	private BufferedImage stone1;
 	private List<BufferedImage> spider;
 	private List<BufferedImage> health;
 	private List<BufferedImage> chest;
@@ -62,6 +64,14 @@ public class Image {
 		return ball1;
 	}
 	
+	public BufferedImage getStone0() {
+		return stone0;
+	}
+
+	public BufferedImage getStone1() {
+		return stone1;
+	}
+	
 	public List<BufferedImage> getSkeleton() {
 		return skeleton;
 	}
@@ -96,6 +106,8 @@ public class Image {
 		inventory.add(loadSpecificImage("src/Image/dog1.png"));
 		inventory.add(ball0);
 		inventory.add(ball1);
+		inventory.add(stone0);
+		inventory.add(stone1);
 	}
 
 	public List<BufferedImage> getHair() {
@@ -159,6 +171,8 @@ public class Image {
 		sword1 = loadSpecificImage("src/Image/swrd1.png");
 		ball0 = loadSpecificImage("src/Image/ball0.png");
 		ball1 = loadSpecificImage("src/Image/ball1.png");
+		stone0 = loadSpecificImage("src/Image/stone0.png");
+		stone1 = loadSpecificImage("src/Image/stone1.png");
 		System.out.println("trying to load character");
 		LoadSprites("src/Image/dungeon0.png");
 		System.out.println("read all sprites success!");

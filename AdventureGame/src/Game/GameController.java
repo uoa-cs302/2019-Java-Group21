@@ -200,9 +200,7 @@ public class GameController implements ActionListener {
 							gameView.HidePause();
 							timer.restart();
 						}else if (gameView.getGameover().isVisible()) {
-							System.out.println("Restarting");
 							if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-								System.out.println("Restarting");
 								//	try {
 								//gameView.getGameover().saveScore();
 								//} catch (IOException e1) {
@@ -285,7 +283,6 @@ public class GameController implements ActionListener {
 					dog.setDropped(false);
 					for (Entity entity : entities) {
 						if (entity instanceof Skeleton) {
-							System.out.println("hi");
 							dog.setTarget(entity);
 							dog.setDropped(true);
 							newEntities.add(dog);
@@ -430,7 +427,6 @@ public class GameController implements ActionListener {
 					}
 					else if (e1 instanceof Item) {
 						Item item = (Item) e1;
-						System.out.println("item size " + item.getBounds().getheight());
 						if(pC.getBounds().collisionWith(item.getBounds())) {
 							if (pC.isItemPickUp()) {
 								if (pC.getInventory().addItem(item)) {
