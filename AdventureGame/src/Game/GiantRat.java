@@ -27,7 +27,7 @@ public class GiantRat extends Entity {
 		//initital base intialisation
 		Bounds = new Collision((int)this.x_pos,(int)this.y_pos,this.width,this.height/2);
 		Bounds.setyOff(16);
-		Hitbounds = new Collision((int)this.x_pos,(int)this.y_pos +(this.height/2),this.width,this.height );
+		Hitbounds = new Collision((int)this.x_pos,(int)this.y_pos,this.width/2,this.height/2 );
 		super.setCollidable(true);
 
 	}
@@ -61,6 +61,28 @@ public class GiantRat extends Entity {
 		dy = 0;
 		dx_lock = (int)dx;
 		dy_lock = (int)dy;
+	}
+	
+	public void setHitboxDirection() {
+
+		switch(this.direction) {
+		case UP:
+			this.Hitbounds.setxOff(8);
+			this.Hitbounds.setyOff(-10);
+			break;
+		case DOWN:
+			this.Hitbounds.setxOff(8);
+			this.Hitbounds.setyOff(26);
+			break;
+		case LEFT:
+			this.Hitbounds.setxOff(-10);
+			this.Hitbounds.setyOff(8);
+			break;
+		case RIGHT:
+			this.Hitbounds.setxOff(26);
+			this.Hitbounds.setyOff(8);
+			break;
+		}
 	}
 
 	public void AiUpdate(Entity target) {

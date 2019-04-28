@@ -16,7 +16,6 @@ public class GameModel {
 		dungeon = new Dungeon(2, assets);
 		currentRoom = dungeon.getDungeonIndex(1);
 		currentRoom.addToRoom(new GiantRat(280,400,assets.getRat()));
-		System.out.println("GameModel constructor complete");
 	}
 	
 	public Image getAssets(){

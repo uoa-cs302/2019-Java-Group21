@@ -369,12 +369,9 @@ public class GameController implements ActionListener {
 						Item item = (Item) e1;
 						System.out.println("item size " + item.getBounds().getheight());
 						if(pC.getBounds().collisionWith(item.getBounds())) {
-							System.out.println("is colliding with an item");
 							if (pC.isItemPickUp()) {
-								System.out.println("detected item pickup");
 								if (pC.getInventory().addItem(item)) {
 									deletedEntities.add(e1);
-									System.out.println("item pick up successful!");
 								}
 							}
 						}
@@ -449,12 +446,6 @@ public class GameController implements ActionListener {
 		checkPlayerCollision();
 		entity.update();
 
-	}
-
-	//updateEntity Location
-	private void updateEntity(Entity x) {
-		checkEntityCollision(x);
-		x.update(pC);
 	}
 	//update EntityAi Overridden from Entity in each class
 

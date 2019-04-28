@@ -45,7 +45,6 @@ public class Sprite {
 	
 	public void setImages(List<BufferedImage> images) {
 		this.images = images;
-		System.out.println("setting image!" + images.size());
 	}
 	
 	public List<BufferedImage> getImages(){

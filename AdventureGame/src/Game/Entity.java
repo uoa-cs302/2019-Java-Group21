@@ -215,37 +215,6 @@ public class Entity extends Sprite {
 		}
 	}
 
-	public void wallCollide(Direction direction) {
-
-		switch(direction) {
-		case UP:
-			if (this.getdy() < 0) {
-				this.y_pos = y_pos + 4;
-
-			}
-			break;
-
-		case DOWN:
-			if (this.getdy() > 0) {
-				this.y_pos = y_pos - 4;
-
-			}
-			break;
-		case LEFT: 
-			if (this.getdx() < 0) {
-				this.x_pos = x_pos + 4;
-
-			}
-			break;
-		case RIGHT: 
-			if (this.getdx() > 0) {
-				this.x_pos = x_pos - 4;
-
-			}
-			break;
-		}
-	}
-
 	public void CollisionProcess(Collision b) {
 
 		int left = (int) (b.getX()+b.getxOff());
