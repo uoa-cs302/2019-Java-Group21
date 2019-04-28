@@ -190,13 +190,17 @@ public class GameController implements ActionListener {
 				item.getImageDim();
 				item.setBounds(new Collision((int)item.getx_pos(),(int)item.gety_pos(),item.width,item.height));
 				if (item instanceof Dog) {
+					
 					Dog dog = (Dog) item;
 					for (Entity entity : entities)
 						if (entity instanceof Skeleton) {
 							dog.setTarget(entity);
 							dog.setDropped(true);
 							newEntities.add(dog);
+							break;
 						}
+					dog.setDropped(false);
+					pC.getInventory().addItem(dog);
 				}
 				else
 					newEntities.add(item);
