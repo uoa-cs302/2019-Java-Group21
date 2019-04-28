@@ -32,9 +32,9 @@ public class PC extends Entity {
 		this.ani.setDelay(-1);
 		
 		//initital base intialisation
-		Bounds = new Collision((int)this.x_pos,(int)this.y_pos,this.width-12,this.height/2);
+		Bounds = new Collision((int)this.x_pos,(int)this.y_pos,this.width-8,this.height/2);
 		Bounds.setxOff(6);
-		Bounds.setyOff(16);
+		Bounds.setyOff(24);
 		Hitbounds = new Collision((int)this.x_pos,(int)this.y_pos,this.width,this.height );
 		Hitbounds.setyOff(16);
 		

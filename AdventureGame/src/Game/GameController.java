@@ -199,7 +199,8 @@ public class GameController implements ActionListener {
 						if (gameView.getGameScreen().getpause().getSel()==0) {
 							gameView.HidePause();
 							timer.restart();
-						}else if (gameView.getGameover().isVisible()) {
+						}else if (gameView.getGameover().isVisible()||pC.isDead()) {
+							System.out.println("Restarting");
 							if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 								//	try {
 								//gameView.getGameover().saveScore();
@@ -215,6 +216,20 @@ public class GameController implements ActionListener {
 						}
 					}
 
+				} else if (pC != null) {
+				if(gameView.getGameover().isVisible()||pC.isDead()) {
+					System.out.println("Restarting");
+					if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+						System.out.println("Restarting");
+						//	try {
+						//gameView.getGameover().saveScore();
+						//} catch (IOException e1) {
+						// TODO Auto-generated catch block
+
+						//}
+						restart();
+					}
+				}
 				}
 
 			}
@@ -379,6 +394,7 @@ public class GameController implements ActionListener {
 						Door door = (Door) e1;
 						if(pC.getBounds().collisionWith(door.getBounds()) && door.isOpen()) {
 							if (door.isEndDoor()) {
+								timer.stop();
 								gameView.getGameover().calculateScore(enemykillcount, game_time);
 								gameView.drawGameOver();
 							}
@@ -468,6 +484,7 @@ public class GameController implements ActionListener {
 		}
 		if (pC.getHealth() <= 0 && pC.isDead() == false) {
 			pC.setDead(true);
+			timer.stop();
 			gameView.getGameover().calculateScore(enemykillcount, game_time);
 			gameView.drawGameOver();
 		}
