@@ -25,7 +25,6 @@ public class GameExecutable {
     	 model = new GameModel();
     	//Create Controller
     	GameController controller = new GameController(model, view,this);
-    	System.out.println("GameController exists: " + controller);
     }
     public void newGame() {
     	initGame();
@@ -33,11 +32,8 @@ public class GameExecutable {
 
     public static void main(String[] args) {
         
-       // EventQueue.invokeLater(() -> {
-    	System.out.println("Hi I'm the thing that exists first! :-)");
+
         GameExecutable ex = new GameExecutable();
-        System.out.println("Hi I'm the thing that exists second! :-)");
-      //  });
         
         
     }

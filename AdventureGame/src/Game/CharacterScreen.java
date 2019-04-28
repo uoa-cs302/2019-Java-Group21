@@ -125,9 +125,6 @@ public class CharacterScreen extends JPanel implements ActionListener {
 	}
 
 	public void changeSel(KeyEvent e) {
-		System.out.println("index = " + select);
-		System.out.println(legs.size());
-		System.out.println(feet.size());
 		if(e.getKeyCode() == KeyEvent.VK_W) {select--;}
 		if(e.getKeyCode() == KeyEvent.VK_S)	{select++;}
 		if(e.getKeyCode() == KeyEvent.VK_D) {action = 1;}
@@ -250,7 +247,6 @@ public class CharacterScreen extends JPanel implements ActionListener {
 			done.setFont(new Font("Helvetica",Font.BOLD,22));
 			break;
 		default:
-			System.out.println("big oof");
 		}	
 		action = 0;
 	}
@@ -270,7 +266,7 @@ public class CharacterScreen extends JPanel implements ActionListener {
 			g2d.drawImage(head.get(headIndex), 512, 300, this);
 			g2d.drawImage(hair.get(hairIndex), 512, 300, this);
 			Toolkit.getDefaultToolkit().sync();
-			System.out.println("repainting");
+			
 		}else {
 			this.timer.stop();
 		}
@@ -293,7 +289,6 @@ public class CharacterScreen extends JPanel implements ActionListener {
 		BufferedImage player = new BufferedImage(120, 160, BufferedImage.TYPE_INT_ARGB);
 		Graphics g = player.getGraphics();
 		if (feet == null)
-			System.out.println("null");
 		g.drawImage(feet.get(feetIndex + 6), 0, 0, null);
 		g.drawImage(legs.get(legsIndex + 6), 0, 0, null);
 		g.drawImage(arms.get(armsIndex), 0, 0, null);

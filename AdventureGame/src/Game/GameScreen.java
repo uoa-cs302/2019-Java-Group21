@@ -139,7 +139,6 @@ public class GameScreen extends JPanel {
 		case "block":
 			message.setVisible(true);
 			message.setText("Looks like you could break this");
-			System.out.println(message.isVisible());
 			message.repaint();
 			break;
 		}

@@ -259,9 +259,7 @@ public class Entity extends Sprite {
 	 this.health = health - e.getDamage();
 	 this.knockedBack = true;
 	 Attack = false;
-	 System.out.println("OOOF");
 	 if(health <= 0) {
-		 System.out.println("blergh");
 		 this.visible = false;
 		 this.setCollidable(false);
 	 }

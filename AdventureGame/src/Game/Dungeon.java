@@ -1662,12 +1662,12 @@ public class Dungeon {
 		room.setWallGrid(wall);
 		room.setDecorGrid(decor);
 		room.createLevel(128, 12, assets);
-		//GiantRat rat1 = new GiantRat(240, 300);
-		//room.addEntityList(rat1);
-		//GiantRat rat2 = new GiantRat(240, 300);
-		//room.addEntityList(rat2);
-		//GiantRat rat3 = new GiantRat(240, 300);
-		//room.addEntityList(rat3);
+		GiantRat rat1 = new GiantRat(384, 108,assets.getRat());
+		room.addToRoom(rat1);
+		GiantRat rat2 = new GiantRat(500, 108,assets.getRat());
+		room.addToRoom(rat2);
+		GiantRat rat3 = new GiantRat(736,300 ,assets.getRat());
+		room.addToRoom(rat3);
 	}
 
 	private void createRoomPuzzle(){

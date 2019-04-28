@@ -49,7 +49,6 @@ public class PC extends Entity {
 		case UP:
 			
 			if (curAnim != Direction.UP || ani.getDelay() == -1) {
-				System.out.println("loading up animation");
 				setAnimation(Direction.UP,this.getFromImages(9, 11),15);
 				this.slash.setFrames(this.getImages().subList(22, 27));
 			}

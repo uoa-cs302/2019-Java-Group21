@@ -8,12 +8,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Timer;
-<<<<<<< HEAD
-=======
-import java.io.*;
-import sun.audio.*;
-import Game.AudioObject.Sound;
->>>>>>> branch 'master' of https://github.com/uoa-cs302/2019-Java-Group21
 
 
 public class GameController implements ActionListener {
@@ -195,14 +189,7 @@ public class GameController implements ActionListener {
 							gameView.HidePause();
 							timer.restart();
 						}else if (gameView.getGameover().isVisible()||pC.isDead()) {
-							System.out.println("Restarting");
 							if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-								//	try {
-								//gameView.getGameover().saveScore();
-								//} catch (IOException e1) {
-								// TODO Auto-generated catch block
-
-								//}
 								restart();
 							}
 						}else {
@@ -213,14 +200,11 @@ public class GameController implements ActionListener {
 
 				} else if (pC != null) {
 				if(gameView.getGameover().isVisible()||pC.isDead()) {
-					System.out.println("Restarting");
 					if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-						System.out.println("Restarting");
 						
 							try {
 								gameView.getHighScores().saveScore(gameView.getGameover().getScore());
 							} catch (IOException e1) {
-								System.out.println("We fucked");
 								e1.printStackTrace();
 							}
 											

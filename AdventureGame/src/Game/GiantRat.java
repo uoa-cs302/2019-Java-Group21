@@ -144,7 +144,6 @@ public class GiantRat extends Entity {
 			knockBackCounter = 0;
 			knockedBack = false;
 		} else if (knockedBack && this.knockBackCounter < 20) {
-			System.out.println("y");
 			if (knockBackCounter > 0) {
 			dx = 0;
 			dy = 0;
