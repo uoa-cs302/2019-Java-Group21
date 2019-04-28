@@ -70,6 +70,8 @@ public class GameController implements ActionListener {
 				gameView.DrawIntro();
 				addKeyListen();
 				gameView.removeKeyListener(this);
+				case 3:
+					gameView.dispose();
 				break;
 					}
 				}

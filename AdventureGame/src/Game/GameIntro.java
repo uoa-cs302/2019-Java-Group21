@@ -4,9 +4,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Label;
 import java.awt.Toolkit;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -21,11 +23,14 @@ public class GameIntro extends JPanel {
 		this.setVisible(false);
 		this.setLayout(null);
 		
+		ImageIcon ii = new ImageIcon("src/Image/INTRO.png");
+		background = ii.getImage();
+		
 		Title.setText("The Story so far...");
 		Title.setFont(new Font("Helvetica",Font.BOLD,34));
 		Title.setVisible(true);
 		Title.setAlignmentX(Label.CENTER);
-		Title.setBounds(312, 15, 400, 40);
+		Title.setBounds(412, 15, 400, 40);
 		Title.setForeground(Color.white);
 		
 		story.setText("<html><p> You are an adventurer exploring the country side. After wandering about a forest you came across an old"
@@ -48,7 +53,7 @@ public class GameIntro extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-		//g2d.drawImage(background, 512-400 , 400 - 300, this);
+		g2d.drawImage(background, 0,0, this);
 		g2d.drawString(story.getText(),0,0);
 		Toolkit.getDefaultToolkit().sync();
 
