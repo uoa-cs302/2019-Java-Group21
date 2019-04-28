@@ -15,6 +15,7 @@ public class PC extends Entity {
 	private Animation slash;
 	private BufferedImage slashim;
 	
+	
 	public PC(int x,int y, List<BufferedImage> images, List<BufferedImage> inventoryImages) {
 		super(x,y);
 		setSlash(new Animation());
@@ -38,6 +39,7 @@ public class PC extends Entity {
 		Hitbounds.setyOff(16);
 		
 	}
+
 	
 	public void update() {
 		super.update();
@@ -140,17 +142,20 @@ public class PC extends Entity {
 		if(up) {
 			dy = -2;
 			direction = Direction.UP;
+			looking = Direction.UP;
 		}else {
 			if (dy < 0) {dy =0;}
 		}if(down) {
 			dy = 2;
 			direction = Direction.DOWN;
+			looking = Direction.DOWN;
 		}else {
 			if (dy > 0) { dy =0;}
 		}
 		if(left) {
 			dx = -2;
 			direction = Direction.LEFT;
+			looking = Direction.LEFT;
 		}else {
 			if (dx < 0) {dx =0;}
 		}
@@ -158,6 +163,7 @@ public class PC extends Entity {
 		if(right) {
 			dx = 2;
 			direction = Direction.RIGHT;
+			looking = Direction.RIGHT;
 		}else {
 			if (dx > 0) {dx =0;}
 		}

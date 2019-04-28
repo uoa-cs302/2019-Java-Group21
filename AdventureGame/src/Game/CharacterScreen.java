@@ -67,23 +67,11 @@ public class CharacterScreen extends JPanel implements ActionListener {
 			hatIndex++;
 			break;
 		case 1:
-			start.setFont(new Font("Helvetica",Font.PLAIN,22));
-			character.setFont(new Font("Helvetica",Font.BOLD,22));
-			credit.setFont(new Font("Helvetica",Font.PLAIN,22));
-			Exit.setFont(new Font("Helvetica",Font.PLAIN,22));
+			
 			break;
 		case 2:
-			start.setFont(new Font("Helvetica",Font.PLAIN,22));
-			character.setFont(new Font("Helvetica",Font.PLAIN,22));
-			credit.setFont(new Font("Helvetica",Font.BOLD,22));
-			Exit.setFont(new Font("Helvetica",Font.PLAIN,22));
-			break;
+		
 		case 3:
-			start.setFont(new Font("Helvetica",Font.PLAIN,22));
-			character.setFont(new Font("Helvetica",Font.PLAIN,22));
-			credit.setFont(new Font("Helvetica",Font.PLAIN,22));
-			Exit.setFont(new Font("Helvetica",Font.BOLD,22));
-			break;
 		default:
 			System.out.println("big oof");
 		}

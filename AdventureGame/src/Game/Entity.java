@@ -41,7 +41,8 @@ public class Entity extends Sprite {
 	protected int AttackDuration = 30;
 	
 	protected boolean knockedBack = false;
-	protected int knockBackCounter;
+	protected int knockBackCounter = 0;
+	protected Direction looking;
 	
 	protected int health;
 
@@ -91,6 +92,7 @@ public class Entity extends Sprite {
 	public Collision getBounds() {return Bounds;}
 	public Collision getHitBounds() {return Hitbounds;}
 	public boolean canAttack() {if (Attack && attackCount == 0) {return true;}else{return false;}}
+	public Direction getLooking() {return looking;}
 
 	//may be obselete
 	public Rectangle getBoundary() {return new Rectangle((int)x_pos, (int)y_pos, width, height);}
@@ -145,16 +147,6 @@ public class Entity extends Sprite {
 		animate();
 		image();
 		setHitboxDirection();
-		if (knockedBack) {
-			dx = dx*2;
-			dy = dy*2;
-			if (knockBackCounter < 10)
-				knockBackCounter++;
-			else {
-				knockedBack = false;
-				this.resetKnockBackCounter();
-			}
-		}
 		if(Attack || attackCount != 0) {
 			this.attacking = true;
 			runAttack();
@@ -296,6 +288,7 @@ public class Entity extends Sprite {
 
  protected void hitBy(Entity e) {
 	 this.health = health - e.getDamage();
+	 this.knockedBack = true;
 	 Attack = false;
 	 System.out.println("OOOF");
 	 if(health <= 0) {
@@ -303,14 +296,14 @@ public class Entity extends Sprite {
 		 this.visible = false;
 		 this.setCollidable(false);
 	 }
-	 if (e.getDown()) {
-		 this.dy = 32;
-	 }else if (e.getLeft()) {
-		 this.dx = -32;
-	 }else if (e.getRight()) {
-		 this.dx = 32;
-	 }else if(e.getUP()) {
-		this.dy = -32;
+	 if (e.getLooking() == Direction.DOWN) {
+		 this.dy = 64;
+	 }else if (e.getLooking() == Direction.LEFT) {
+		 this.dx = -64;
+	 }else if (e.getLooking() == Direction.RIGHT) {
+		 this.dx = 64;
+	 }else if(e.getLooking() == Direction.UP) {
+		this.dy = -64;
 	 }
 	 else {
 			 this.dy -= 3*dy;
