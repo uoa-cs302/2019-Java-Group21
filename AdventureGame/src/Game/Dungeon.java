@@ -23,7 +23,7 @@ public class Dungeon {
 	private static final int RoomTwoBottomDoorY = 550;
 
 	private static final int RoomTwoBottomDoorSpawnX = 496;
-	private static final int RoomTwoBottomDoorSpawnY = 516;
+	private static final int RoomTwoBottomDoorSpawnY = 514;
 
 	private static final int RoomTwoLeftDoorX = 208;
 	private static final int RoomTwoLeftDoorY = 42;

@@ -173,9 +173,7 @@ public class Image {
 		ball1 = loadSpecificImage("src/Image/ball1.png");
 		stone0 = loadSpecificImage("src/Image/stone0.png");
 		stone1 = loadSpecificImage("src/Image/stone1.png");
-		System.out.println("trying to load character");
 		LoadSprites("src/Image/dungeon0.png");
-		System.out.println("read all sprites success!");
 		health.add(loadSpecificImage("src/Image/heart0.png"));
 		health.add(loadSpecificImage("src/Image/heart1.png"));
 		health.add(loadSpecificImage("src/Image/heart2.png"));
@@ -200,7 +198,6 @@ public class Image {
 	}
 
 	protected BufferedImage loadSpecificImage(String address) {
-		System.out.println(address);
 		File f = new File(address);
 		try {
 			return ImageIO.read(f);
@@ -232,17 +229,13 @@ public class Image {
 
 	protected void LoadSprites(String sheet) {
 		fullSheet = loadSheet(sheet);
-		System.out.println("1!");
 		sheetW = this.fullSheet.getWidth() / TILE_SIZE;
 		sheetH = this.fullSheet.getHeight() / TILE_SIZE;
-		System.out.println("2!");
 		loadSprites();
 	}
 
 	private BufferedImage loadSheet(String sheet) {
-		System.out.println("3!");
 		BufferedImage sheetIm = null;
-		System.out.println("4!");
 		File f = new File(sheet);
 		try {
 			// sheetIm = ImageIO.read(getClass().getResourceAsStream(sheet));

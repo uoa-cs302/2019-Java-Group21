@@ -11,7 +11,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Timer;
-
+import java.io.*;
+import sun.audio.*;
 import Game.AudioObject.Sound;
 import javafx.scene.input.KeyCode;
 
@@ -40,10 +41,6 @@ public class GameController implements ActionListener {
 	private List<Entity> newEntities = new ArrayList<Entity>();
 	private List<Entity> entities;
 	boolean loadingRoom = false;
-
-	private Sound Intro;
-	private Sound Rat;
-	private Sound Attck;
 
 	public GameController(GameModel model, GameView view, GameExecutable ex) {
 
