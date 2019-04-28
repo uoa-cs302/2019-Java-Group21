@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Timer;
 
+import javafx.scene.input.KeyCode;
+
 
 public class GameController implements ActionListener {
 
@@ -48,19 +50,33 @@ public class GameController implements ActionListener {
 	public void InitControl() {
 
 		//Sets the button listener on to check for button press on StartScreen
-		ScreenListener gameControllerScreenListener = new ScreenListener() {
+		KeyAdapter k = new KeyAdapter() {
 			@Override
-			public void actionPerformed() {
+			public void keyReleased(KeyEvent e) {
 				//Initialise Game on button press
+			
+				if (e.getKeyCode() == KeyEvent.VK_W)
+				{
+					gameView.getStartScreen().changeSel(e);}
+				if(e.getKeyCode() == KeyEvent.VK_S) {
+					gameView.getStartScreen().changeSel(e);
+				}
+				if(e.getKeyCode()== KeyEvent.VK_ENTER) {
+					
+				switch (gameView.getStartScreen().getSel()) {
+				
+				case 0:
 				sprites = gameModel.getCurrentRoom().getSpriteList();
 				entities = gameModel.getCurrentRoom().getEntityList();
-				//draw the gamescreen
-				//gameView.drawGameMenu();
 				gameView.DrawIntro();
 				addKeyListen();
+				break;
+					}
+				}
 			}
 		};
-		gameView.getStartScreen().setButtonListener(gameControllerScreenListener);
+		System.out.println("x");
+		gameView.addKeyListener(k);
 	}
 	public void restart() {
 		gameView.removeKeyListener(v);
@@ -78,6 +94,7 @@ public class GameController implements ActionListener {
 					if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 						gameView.drawGameMenu();
 						InitGame();
+						gameView.getIntro().setVisible(false);
 					}
 				}
 				//-------------------------------------------------------------------					
