@@ -62,18 +62,19 @@ public class GameController implements ActionListener {
 					gameView.getStartScreen().changeSel(e);
 				}
 				if(e.getKeyCode()== KeyEvent.VK_ENTER) {
-					switch (gameView.getStartScreen().getSel()) {
-					case 0:
-						sprites = gameModel.getCurrentRoom().getSpriteList();
-						entities = gameModel.getCurrentRoom().getEntityList();
-						gameView.DrawIntro();
-						addKeyListen();
-						gameView.removeKeyListener(this);
-						break;
-					case 1:
-						gameView.drawCharacterScreen();
-						addKeyListen();
-						break;
+				switch (gameView.getStartScreen().getSel()) {
+				case 0:
+				sprites = gameModel.getCurrentRoom().getSpriteList();
+				entities = gameModel.getCurrentRoom().getEntityList();
+				gameView.DrawIntro();
+				addKeyListen();
+				gameView.removeKeyListener(this);
+				case 1:
+					gameView.drawCharacterScreen();
+					addKeyListen();
+				case 3:
+					gameView.dispose();
+				break;
 					}
 				}
 			}
