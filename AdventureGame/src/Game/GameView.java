@@ -69,6 +69,7 @@ public class GameView extends JFrame {
 		remove(gameScreen);
 		remove(gameover);
 		remove(gameIntro);
+		remove(characterScreen);
 		InitGameView();
 	}
 	

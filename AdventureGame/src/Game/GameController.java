@@ -76,7 +76,6 @@ public class GameController implements ActionListener {
 						gameView.drawCharacterScreen();
 						Image assets = gameModel.getAssets();
 						gameView.getCharacterScreen().setImages(assets.getHat(), assets.getHair(), assets.getHead(), assets.getBody(), assets.getArms(), assets.getLegs(), assets.getFeet());
-						addKeyListen();
 						break;
 					case 3:
 						gameView.dispose();
