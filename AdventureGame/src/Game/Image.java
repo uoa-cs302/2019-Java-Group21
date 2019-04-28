@@ -149,15 +149,15 @@ public class Image {
 		rat.add(loadSpecificImage("src/Image/rat_1.png"));
 		rat.add(loadSpecificImage("src/Image/rat_2.png"));
 		rat.add(loadSpecificImage("src/Image/rat_3.png"));
-		spider.addAll(getSprites("src/Image/spidersheet.png",1,12));
+		spider.addAll(getSprites("src/Image/spidersheet.png",1,12,32));
 		spider.add(loadSpecificImage("src/Image/projectile0.png"));
 		sword0 = loadSpecificImage("src/Image/swrd0.png");
 		sword1 = loadSpecificImage("src/Image/swrd1.png");
-		setPlayer(getSprites("src/Image/ExampleCharacter.png",4,3));
-		player.addAll(getSprites("src/Image/SLASHLEFT.png",1,5));
-		player.addAll(getSprites("src/Image/SLASHRIGHT.png",1,5));
-		player.addAll(getSprites("src/Image/SLASHUP.png",5,1));
-		player.addAll(getSprites("src/Image/SLASHDOWN.png",5,1));
+		setPlayer(getSprites("src/Image/ExampleCharacter.png",4,3,32));
+		player.addAll(getSprites("src/Image/SLASHLEFT.png",1,5,32));
+		player.addAll(getSprites("src/Image/SLASHRIGHT.png",1,5,32));
+		player.addAll(getSprites("src/Image/SLASHUP.png",5,1,32));
+		player.addAll(getSprites("src/Image/SLASHDOWN.png",5,1,32));
 		System.out.println("trying to load character");
 		LoadSprites("src/Image/dungeon0.png");
 		System.out.println("read all sprites success!");
@@ -165,14 +165,14 @@ public class Image {
 		health.add(loadSpecificImage("src/Image/heart1.png"));
 		health.add(loadSpecificImage("src/Image/heart2.png"));
 		skeleton = loadSpecificImage("src/Image/skeleton0.png");
-		chest.addAll(getSprites("src/Image/chest0.png",1,2));
-		hat.addAll(getSprites("src/Image/hat0.png",1,18));
-		hair.addAll(getSprites("src/Image/hair0.png",1,240));
-		head.addAll(getSprites("src/Image/head0.png",1,15));
-		body.addAll(getSprites("src/Image/body0.png",1,18));
-		arms.addAll(getSprites("src/Image/arms0.png",1,30));
-		legs.addAll(getSprites("src/Image/legs0.png",1,54));
-		feet.addAll(getSprites("src/Image/feet0.png",1,54));
+		chest.addAll(getSprites("src/Image/chest0.png",1,2,32));
+		hat.addAll(getSprites("src/Image/hat0.png",1,18,40));
+		hair.addAll(getSprites("src/Image/hair0.png",1,240,40));
+		head.addAll(getSprites("src/Image/head0.png",1,15,40));
+		body.addAll(getSprites("src/Image/body0.png",1,18,40));
+		arms.addAll(getSprites("src/Image/arms0.png",1,30,40));
+		legs.addAll(getSprites("src/Image/legs0.png",1,54,40));
+		feet.addAll(getSprites("src/Image/feet0.png",1,54,40));
 		loadInventory();
 	}
 
@@ -187,22 +187,22 @@ public class Image {
 		return null;
 	}
 
-	protected List<BufferedImage> getSprites(String sheet,int h,int w) {
+	protected List<BufferedImage> getSprites(String sheet,int h,int w, int tileSize) {
 		BufferedImage image = loadSpecificImage(sheet);
-		return loadSpecificSprites(h,w, image);
+		return loadSpecificSprites(h,w, image, tileSize);
 	}
 
-	public List<BufferedImage> loadSpecificSprites(int sheetH, int sheetW, BufferedImage image) {
+	public List<BufferedImage> loadSpecificSprites(int sheetH, int sheetW, BufferedImage image, int tileSize) {
 		List<BufferedImage> sprites = new ArrayList<BufferedImage>();
 		for (int i = 0; i < sheetH; i++) {
 			for (int j = 0; j < sheetW; j++) {
-				sprites.add(extractSpecificSprites(i, j, image));
+				sprites.add(extractSpecificSprites(i, j, image, tileSize));
 			}
 		}
 		return sprites;
 	}
 
-	protected BufferedImage extractSpecificSprites(int x, int y, BufferedImage image) {
+	protected BufferedImage extractSpecificSprites(int x, int y, BufferedImage image, int tileSize) {
 		BufferedImage targ_sprite = image.getSubimage(y * TILE_SIZE, x * TILE_SIZE, TILE_SIZE, TILE_SIZE);
 		return targ_sprite;
 	}

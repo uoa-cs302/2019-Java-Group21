@@ -61,6 +61,7 @@ public class GameController implements ActionListener {
 				if(e.getKeyCode() == KeyEvent.VK_S) {
 					gameView.getStartScreen().changeSel(e);
 				}
+				System.out.println("index = " + gameView.getStartScreen().getSel());
 				if(e.getKeyCode()== KeyEvent.VK_ENTER) {
 					switch (gameView.getStartScreen().getSel()) {
 					case 0:
