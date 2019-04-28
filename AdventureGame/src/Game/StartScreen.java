@@ -29,7 +29,7 @@ public class StartScreen extends JPanel implements ActionListener {
 	private java.awt.Image background;
 	private JLabel Title;
 	private JLabel start;
-	private JLabel options;
+	private JLabel character;
 	private JLabel credit;
 	private JLabel Exit;
 	private JLabel Control;
@@ -57,11 +57,11 @@ public class StartScreen extends JPanel implements ActionListener {
 		start.setAlignmentX(Label.CENTER);
 		start.setText("Start");
 		
-		options = new JLabel();
-		options.setFont(new Font("Helvetica",Font.PLAIN,22));
-		options.setBounds(800, 420,200 , 40);
-		options.setAlignmentX(Label.CENTER);
-		options.setText("Options");
+		character = new JLabel();
+		character.setFont(new Font("Helvetica",Font.PLAIN,22));
+		character.setBounds(800, 420,200 , 40);
+		character.setAlignmentX(Label.CENTER);
+		character.setText("Character");
 		
 		credit = new JLabel();
 		credit.setFont(new Font("Helvetica",Font.PLAIN,22));
@@ -83,7 +83,7 @@ public class StartScreen extends JPanel implements ActionListener {
 		this.add(Title);
 		this.add(start);
 		this.add(Control);
-		this.add(options);
+		this.add(character);
 		this.add(credit);
 		this.add(Exit);
 		}
@@ -106,25 +106,25 @@ public class StartScreen extends JPanel implements ActionListener {
 		switch (sel) {
 		case 0:
 			start.setFont(new Font("Helvetica",Font.BOLD,22));
-			options.setFont(new Font("Helvetica",Font.PLAIN,22));
+			character.setFont(new Font("Helvetica",Font.PLAIN,22));
 			credit.setFont(new Font("Helvetica",Font.PLAIN,22));
 			Exit.setFont(new Font("Helvetica",Font.PLAIN,22));
 			break;
 		case 1:
 			start.setFont(new Font("Helvetica",Font.PLAIN,22));
-			options.setFont(new Font("Helvetica",Font.BOLD,22));
+			character.setFont(new Font("Helvetica",Font.BOLD,22));
 			credit.setFont(new Font("Helvetica",Font.PLAIN,22));
 			Exit.setFont(new Font("Helvetica",Font.PLAIN,22));
 			break;
 		case 2:
 			start.setFont(new Font("Helvetica",Font.PLAIN,22));
-			options.setFont(new Font("Helvetica",Font.PLAIN,22));
+			character.setFont(new Font("Helvetica",Font.PLAIN,22));
 			credit.setFont(new Font("Helvetica",Font.BOLD,22));
 			Exit.setFont(new Font("Helvetica",Font.PLAIN,22));
 			break;
 		case 3:
 			start.setFont(new Font("Helvetica",Font.PLAIN,22));
-			options.setFont(new Font("Helvetica",Font.PLAIN,22));
+			character.setFont(new Font("Helvetica",Font.PLAIN,22));
 			credit.setFont(new Font("Helvetica",Font.PLAIN,22));
 			Exit.setFont(new Font("Helvetica",Font.BOLD,22));
 			break;
@@ -144,7 +144,7 @@ public class StartScreen extends JPanel implements ActionListener {
 		g2d.drawImage(background, 512-400 , 400 - 300, this);
 		g2d.drawString(Title.getText(), 0, 0);
 		g2d.drawString(start.getText(), 0, 0);
-		g2d.drawString(options.getText(), 0, 0);
+		g2d.drawString(character.getText(), 0, 0);
 		g2d.drawString(credit.getText(), 0, 0);
 		g2d.drawString(Exit.getText(), 0, 0);
 		g2d.drawString(Title.getText(), 0, 0);

@@ -64,12 +64,12 @@ public class GameController implements ActionListener {
 				if(e.getKeyCode()== KeyEvent.VK_ENTER) {
 					
 				switch (gameView.getStartScreen().getSel()) {
-				
 				case 0:
 				sprites = gameModel.getCurrentRoom().getSpriteList();
 				entities = gameModel.getCurrentRoom().getEntityList();
 				gameView.DrawIntro();
 				addKeyListen();
+				gameView.removeKeyListener(this);
 				break;
 					}
 				}
