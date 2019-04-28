@@ -297,13 +297,13 @@ public class Entity extends Sprite {
 		 this.setCollidable(false);
 	 }
 	 if (e.getLooking() == Direction.DOWN) {
-		 this.dy = 40;
+		 this.dy = 32;
 	 }else if (e.getLooking() == Direction.LEFT) {
-		 this.dx = -40;
+		 this.dx = -32;
 	 }else if (e.getLooking() == Direction.RIGHT) {
-		 this.dx = 40;
+		 this.dx = 32;
 	 }else if(e.getLooking() == Direction.UP) {
-		this.dy = -40;
+		this.dy = -32;
 	 }
 	 else {
 	 }
