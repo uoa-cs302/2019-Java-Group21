@@ -262,25 +262,33 @@ public class Entity extends Sprite {
 		int bottom = (int) (top + b.getheight());
 		switch (this.check_collisiondir_Hoz(left, right)) {
 		case 1:
-			if(dx < 0) {
+			if(dx < 0 ) {
+				if (top < Bounds.getY() + (int) (Bounds.getyOff()+Bounds.getheight())|| bottom > Bounds.getY() + (int) Bounds.getyOff()) {
 				dx = 0;
+				}
 			}
 			break;
 		case 2:
 			if(dx > 0) {
+				if (top < Bounds.getY() + (int) (Bounds.getyOff()+Bounds.getheight())|| bottom > Bounds.getY() + (int) Bounds.getyOff()) {
 				dx = 0;
+				}
 			}
 			break;
 		}
 		switch(this.check_collisiondir_Vert( top, bottom)) {
 		case 1:
 			if(dy < 0) {
+				if (left < Bounds.getX() + (int) (Bounds.getxOff()+Bounds.getwidth())|| right > Bounds.getY() + (int) Bounds.getyOff()) {
 				dy = 0;
+				}
 			}
 			break;
 		case 2:
 			if(dy > 0) {
+				if (left < Bounds.getX() + (int) (Bounds.getxOff()+Bounds.getwidth())|| right > Bounds.getY() + (int) Bounds.getyOff()) {
 				dy = 0;
+				}
 			}
 			break;
 		}
